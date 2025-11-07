@@ -4,7 +4,7 @@ import xhr from "axios";
 import {API_URL} from "../../../constants";
 import { AddressLink} from "../../common/Links";
 import {FormattedNumber, injectIntl} from "react-intl";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { ContractInvocationChart } from "../../common/LineCharts";
 import { upperFirst } from 'lodash'
 import SmartTable from "../../common/SmartTable.js"
@@ -169,11 +169,11 @@ class Energy extends React.Component {
 
     return (
         <main className="mt-5 p-0">
-            {loading? <div className="loading-style" style={{marginTop: '-20px'}}><TronLoader/></div>:
+            {loading? <div className="loading-style" style={{marginTop: '-20px'}}><LindaLoader/></div>:
               <div>
               <div className="pb-4">
               {
-                ContractInvocation === null ? <TronLoader/> :
+                ContractInvocation === null ? <LindaLoader/> :
                 <ContractInvocationChart 
                   source='singleChart'
                   style={{height: 500}}

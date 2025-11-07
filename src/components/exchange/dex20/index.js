@@ -7,7 +7,7 @@ import ExchangeContent from "./components/ExchangeContent/index";
 import ExchangeRecord from "./components/ExchangeRecord/index";
 import { tu } from "../../../utils/i18n";
 import { parallelLoadScripts } from "../../../utils/ga";
-// import {TronLoader} from "../../../common/loaders";
+// import {LindaLoader} from "../../../common/loaders";
 
 class Exchange extends React.Component {
   constructor() {
@@ -32,7 +32,7 @@ class Exchange extends React.Component {
   render() {
     return (
       <main className="exchange exchange20 exchange-revised">
-        {/* <div style={{position: 'absolute'}}><TronLoader/></div> */}
+        {/* <div style={{position: 'absolute'}}><LindaLoader/></div> */}
         <div className="exchange-box mb-2">
           {/* 左侧 交易list */}
           <div className="exchange-box-left">

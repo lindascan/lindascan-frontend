@@ -18,11 +18,11 @@ $color-grey: #d2d1d1;
 @import "utilities/text-colors";
 @import "utilities/general";
 @import "wallet";
-@import "./themes/tron-light.scss";
-@import "./themes/tron-dark.scss";
+@import "./themes/linda-light.scss";
+@import "./themes/linda-dark.scss";
 @import "./themes/light.scss";
 @import "./themes/dark.scss";
-@import "./themes/tron.scss";
+@import "./themes/linda.scss";
 @import "representative";
 //@import "animations";
 //@import "node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.scss";
@@ -511,13 +511,13 @@ tr a {
 }
 
 // Buttons
-.btn-tron {
+.btn-linda {
   color: #fff;
   background-color: $dark-red;
   border-color: $light-red;
 }
 
-.btn-tron:hover {
+.btn-linda:hover {
   color: #fff;
   background-color: $light-red;
   border-color: $dark-red;
@@ -2580,7 +2580,7 @@ h5 {
   text-decoration: underline;
 }
 
-.contract_trx_count {
+.contract_lind_count {
   color: #333333 !important;
 }
 
@@ -2595,16 +2595,16 @@ h5 {
   }
 }
 
-.tronics_plan_link {
+.lindaics_plan_link {
   text-decoration: none !important;
 }
 
-.tronics_plan_dec {
+.lindaics_plan_dec {
   text-decoration: underline;
 }
 
-.tronics_plan_link:hover {
-  .tronics_plan_dec {
+.lindaics_plan_link:hover {
+  .lindaics_plan_dec {
     & {
       color: #c23631 !important;
 
@@ -2897,7 +2897,7 @@ h5 {
     }
   }
 
-  .tron-ad {
+  .linda-ad {
     display: flex;
     position: absolute;
     font-size: 12px;
@@ -2916,7 +2916,7 @@ h5 {
     }
   }
 
-  .tron-announcement {
+  .linda-announcement {
     display: flex;
     position: absolute;
     font-size: 12px;
@@ -2951,7 +2951,7 @@ h5 {
       }
     }
 
-    .tron-ad {
+    .linda-ad {
       display: flex;
       position: absolute;
       font-size: 12px;
@@ -2977,7 +2977,7 @@ h5 {
       }
     }
 
-    .tron-announcement {
+    .linda-announcement {
       display: flex;
       position: absolute;
       font-size: 12px;
@@ -3030,7 +3030,7 @@ h5 {
   display: flex;
   margin-bottom: 6px;
 
-  .dex-tab-TRC20 {
+  .dex-tab-LRC20 {
     width: 7.525rem;
     height: 2rem;
     font-size: 14px;
@@ -3155,7 +3155,7 @@ h5 {
   margin-left: 20px;
 }
 
-.freeze-trx-premessage {
+.freeze-lind-premessage {
   max-width: 82%;
 
   @media only screen and (max-width: 768px) {
@@ -3254,7 +3254,7 @@ h5 {
   bottom: 0;
 
   .login-import,
-  .login-tronlink {
+  .login-lindalink {
     width: 400px;
     border: none;
     background: #ffffff;
@@ -3275,7 +3275,7 @@ h5 {
     background-clip: padding-box;
   }
 
-  .tronlink-pic {
+  .lindalink-pic {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3299,7 +3299,7 @@ h5 {
     }
   }
 
-  .install-TRONlink {
+  .install-LINDAlink {
     a {
       color: #c23631;
 
@@ -3318,7 +3318,7 @@ h5 {
 
   @media only screen and (max-width: 768px) {
     .login-import,
-    .login-tronlink {
+    .login-lindalink {
       width: 340px;
       top: 40%;
     }
@@ -3467,12 +3467,12 @@ h5 {
   }
 }
 
-.tron-light .token_black .sweet-alert .check_my_token {
+.linda-light .token_black .sweet-alert .check_my_token {
   color: #c23631 !important;
   font-size: 12px;
 }
 
-.tron-light .token_black .sweet-alert .token_wait_few_minutes {
+.linda-light .token_black .sweet-alert .token_wait_few_minutes {
   color: #999999 !important;
   font-size: 12px;
   transform: scale(0.9);
@@ -3866,7 +3866,7 @@ h5 {
   }
 }
 
-.date-range-box-trc20 {
+.date-range-box-lrc20 {
   display: flex;
   position: absolute;
   right: 0px;
@@ -3917,7 +3917,7 @@ h5 {
   }
 }
 
-.date-range-box-TRC20token {
+.date-range-box-LRC20token {
   display: flex;
   position: absolute;
   right: 36px;
@@ -4022,8 +4022,8 @@ h5 {
   }
 }
 
-.trc20-ad-bg {
-  .ant-table-tbody tr.trc20-star-ad {
+.lrc20-ad-bg {
+  .ant-table-tbody tr.lrc20-star-ad {
     background-color: rgb(234, 240, 255);
     cursor: pointer;
 
@@ -5020,7 +5020,7 @@ h5 {
   }
 }
 
-.tron-ecosystem-tokens {
+.linda-ecosystem-tokens {
   margin-top: -15px;
 }
 
@@ -5257,7 +5257,7 @@ h5 {
   flex: 1;
   margin-right: 45px;
 }
-.trxsupply-tip {
+.lindsupply-tip {
   min-width: 200px;
   .tooltip-inner {
     max-width: 500px;

@@ -4,7 +4,7 @@ import {injectIntl} from "react-intl";
 import CountUp from 'react-countup';
 import {Client} from "../services/api";
 import {withTimers} from "../utils/timing";
-import {TronLoader} from "./common/loaders";
+import {LindaLoader} from "./common/loaders";
 import {LineReactAdd, LineReactTx} from "./common/LineChartTx";
 import xhr from "axios/index";
 import {FormattedDate, FormattedNumber, FormattedRelative, FormattedTime} from "react-intl";
@@ -130,7 +130,7 @@ class Demo extends Component {
                         marginLeft: '10px'
                       }}/>
                       <div>
-                        <strong style={{whiteSpace: 'nowrap'}}>TRON Transactions Last Day</strong>
+                        <strong style={{whiteSpace: 'nowrap'}}>LINDA Transactions Last Day</strong>
                         <h1 className="text-danger">
                           <FormattedNumber value={transactionLastDay}/>
                         </h1>
@@ -194,7 +194,7 @@ class Demo extends Component {
                       <div style={{height: height}}>
                         {
                           txOverviewStats === null ?
-                              <TronLoader/> :
+                              <LindaLoader/> :
                               <LineReactTx style={{height: height}} data={txOverviewStats} intl={intl} source='home'/>
                         }
                       </div>

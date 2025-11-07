@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Icon } from "antd";
 import { setQuickSelect, setRegister } from "../../../../../actions/exchange";
-import { TronLoader } from "../../../../common/loaders";
+import { LindaLoader } from "../../../../common/loaders";
 import Column from "antd/lib/table/Column";
 
 class Register extends Component {
@@ -80,17 +80,17 @@ class Register extends Component {
      * 根据当前选择货币换算单位
      */
     // let price_convert = 0
-    // if(price && price[pairs.sShortName == 'TRX' ? 'trxToOther' : 'usdtToOther']){
-    //   price_convert =(price[pairs.sShortName == 'TRX' ? 'trxToOther' : 'usdtToOther'][activeCurrency && activeCurrency.toLocaleLowerCase()] * pairs.price).toFixed(activeCurrency == 'trx' ? 6 : 8)
+    // if(price && price[pairs.sShortName == 'LIND' ? 'lindToOther' : 'usdtToOther']){
+    //   price_convert =(price[pairs.sShortName == 'LIND' ? 'lindToOther' : 'usdtToOther'][activeCurrency && activeCurrency.toLocaleLowerCase()] * pairs.price).toFixed(activeCurrency == 'lind' ? 6 : 8)
     // }
 
     let price_convert = 0;
     if (
       price &&
-      price[pairs.sShortName == "TRX" ? "trxToOther" : "usdtToOther"]
+      price[pairs.sShortName == "LIND" ? "lindToOther" : "usdtToOther"]
     ) {
       price_convert = (
-        price[pairs.sShortName == "TRX" ? "trxToOther" : "usdtToOther"]["usd"] *
+        price[pairs.sShortName == "LIND" ? "lindToOther" : "usdtToOther"]["usd"] *
         pairs.price
       ).toFixed(8);
     }
@@ -98,10 +98,10 @@ class Register extends Component {
     let first_token = pairs.fShortName ? "(" + pairs.fShortName + ")" : "";
     let second_token = pairs.sShortName ? "(" + pairs.sShortName + ")" : "";
 
-    let trc20_price = intl.formatMessage({ id: "trc20_price" }) + second_token;
-    let trc20_amount = intl.formatMessage({ id: "trc20_amount" }) + first_token;
-    let trc20_accumulative =
-      intl.formatMessage({ id: "trc20_accumulative" }) + second_token;
+    let lrc20_price = intl.formatMessage({ id: "lrc20_price" }) + second_token;
+    let lrc20_amount = intl.formatMessage({ id: "lrc20_amount" }) + first_token;
+    let lrc20_accumulative =
+      intl.formatMessage({ id: "lrc20_accumulative" }) + second_token;
 
     const sell_columns = [
       // {
@@ -110,19 +110,19 @@ class Register extends Component {
       //   render: (text, record, index) => {
       //     return (
       //       <div className="col-red">
-      //         {intl.formatMessage({ id: "trc20_sell" })}
+      //         {intl.formatMessage({ id: "lrc20_sell" })}
       //         {sellList.length < 8 ? sellList.length - index : limit - index}
       //       </div>
       //     );
       //   }
       // },
       {
-        title: trc20_price,
+        title: lrc20_price,
         dataIndex: "price",
         key: "price"
       },
       {
-        title: trc20_amount,
+        title: lrc20_amount,
         dataIndex: "amount",
         key: "amount",
         align: "right",
@@ -131,7 +131,7 @@ class Register extends Component {
         }
       },
       {
-        title: trc20_accumulative,
+        title: lrc20_accumulative,
         dataIndex: "cje",
         key: "cje",
         align: "right"
@@ -145,7 +145,7 @@ class Register extends Component {
       //   render: (text, record, index) => {
       //     return (
       //       <div className="col-green">
-      //         {intl.formatMessage({ id: "trc20_buy" })}
+      //         {intl.formatMessage({ id: "lrc20_buy" })}
       //         {index + 1}
       //       </div>
       //     );
@@ -177,7 +177,7 @@ class Register extends Component {
     return (
       <div className="ant-table-content register">
         {isLoading ? (
-          <TronLoader />
+          <LindaLoader />
         ) : (
           <Fragment>
             {/* <Table
@@ -206,9 +206,9 @@ class Register extends Component {
               }}
             /> */}
             <div className="register-list-header">
-              <span>{trc20_price}</span>
-              <span>{trc20_amount}</span>
-              <span>{trc20_accumulative}</span>
+              <span>{lrc20_price}</span>
+              <span>{lrc20_amount}</span>
+              <span>{lrc20_accumulative}</span>
             </div>
             <RegisterList
               data={sellList}
@@ -217,7 +217,7 @@ class Register extends Component {
               setQuickSelect={setQuickSelect}
             />
             <div className="new_price">
-              {/* {tu('trc20_new_price')}:  */}
+              {/* {tu('lrc20_new_price')}:  */}
               {lastPrice.type === 0 ? (
                 <span>
                   <span className="col-green up">

@@ -3,7 +3,7 @@ import {injectIntl} from "react-intl";
 import React from "react";
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import {tu} from "../../utils/i18n";
-import {ONE_TRX} from "../../constants";
+import {ONE_LIND} from "../../constants";
 import {reloadWallet} from "../../actions/wallet";
 import _ from "lodash";
 
@@ -26,7 +26,7 @@ class OperateTxnPairModal extends React.PureComponent{
         const tokenBalances = currentWallet.balance/1000000;
         if (!inject && tokenQuant >= tokenBalances) {
             return [false, tu("withdraw_all")]
-        }else if(this.props.dealPairTrxLimit && tokenQuant < this.props.dealPairTrxLimit){
+        }else if(this.props.dealPairLindLimit && tokenQuant < this.props.dealPairLindLimit){
             return [false, tu("pool_revert")]
         }
         if(!/^([1-9][0-9]+|[1-9])$/.test(tokenQuant)){
@@ -45,21 +45,21 @@ class OperateTxnPairModal extends React.PureComponent{
         let {onInject, exchange} = this.props;
         let {tokenQuant} = this.state;
         const tokenId = "_";
-        const quant = parseFloat(tokenQuant * ONE_TRX);
+        const quant = parseFloat(tokenQuant * ONE_LIND);
         onInject && onInject(exchange.exchange_id, tokenId, quant);
         this.setState({disabled: true});
     };
     withdraw = async () => {
         let {onWithdraw, exchange} = this.props;
         let {tokenQuant} = this.state;
-        // if(tokenId == "TRX"){
+        // if(tokenId == "LIND"){
         //     tokenId = "_";
-        //     tokenQuant = parseFloat(tokenQuant * ONE_TRX);
+        //     tokenQuant = parseFloat(tokenQuant * ONE_LIND);
         // }else{
         //     tokenQuant = parseFloat(tokenQuant)
         // }
         const tokenId = "_";
-        const quant = parseFloat(tokenQuant * ONE_TRX);
+        const quant = parseFloat(tokenQuant * ONE_LIND);
         onWithdraw && onWithdraw(exchange.exchange_id, tokenId, quant);
         this.setState({disabled: true});
     };
@@ -84,10 +84,10 @@ class OperateTxnPairModal extends React.PureComponent{
 
 
     render() {
-        let {exchange,inject,intl,dealPairTrxLimit} = this.props;
+        let {exchange,inject,intl,dealPairLindLimit} = this.props;
         let exchangeToken = [];
-        let firstTokenId = exchange.first_token_id == "_"? "TRX":exchange.first_token_id;
-        let secondTokenId = exchange.second_token_id == "_"? "TRX":exchange.second_token_id
+        let firstTokenId = exchange.first_token_id == "_"? "LIND":exchange.first_token_id;
+        let secondTokenId = exchange.second_token_id == "_"? "LIND":exchange.second_token_id
         exchangeToken.push(firstTokenId)
         exchangeToken.push(secondTokenId)
         let {modal, tokenId,tokenQuant, disabled,tokenBalances} = this.state;
@@ -107,7 +107,7 @@ class OperateTxnPairModal extends React.PureComponent{
                             <div className="col-md-12">
                                 {inject? <label>{tu("choose_a_Token_for_capital_injection")}</label>:<label>{tu("choose_a_Token_for_capital_withdrawal")}</label>}
                                 <select className="custom-select"
-                                        defaultValue="TRX"
+                                        defaultValue="LIND"
                                         onChange={(e) => {this.tokenIdChange(e.target.value)}}
                                 >
                                     {
@@ -119,7 +119,7 @@ class OperateTxnPairModal extends React.PureComponent{
                                         //         <option key={index} value={token}>{token}</option>
                                         //     )
                                         // })
-                                        <option value="TRX">TRX</option>
+                                        <option value="LIND">LIND</option>
                                     }
                                 </select>
                             </div>
@@ -147,7 +147,7 @@ class OperateTxnPairModal extends React.PureComponent{
                                             style={{width:'100%'}}
                                             onClick={this.inject}>{tu("capital_injection")}</button>:
                                         <button
-                                            disabled={this.state.tokenQuant === '' ||  this.state.tokenQuant > exchange.second_token_balance - dealPairTrxLimit}
+                                            disabled={this.state.tokenQuant === '' ||  this.state.tokenQuant > exchange.second_token_balance - dealPairLindLimit}
                                             className="btn btn-warning"
                                             style={{width:'100%'}}
                                             onClick={this.withdraw}>{tu("capital_withdrawal")}</button>

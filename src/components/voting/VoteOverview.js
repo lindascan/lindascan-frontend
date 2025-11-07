@@ -8,10 +8,10 @@ import Countdown from "react-countdown-now";
 import { Sticky, StickyContainer } from "react-sticky";
 import { connect } from "react-redux";
 import { Alert } from "reactstrap";
-import { BarLoader, TronLoader } from "../common/loaders";
+import { BarLoader, LindaLoader } from "../common/loaders";
 import { QuestionMark } from "../common/QuestionMark";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { ONE_TRX, IS_MAINNET } from "../../constants";
+import { ONE_LIND, IS_MAINNET } from "../../constants";
 import { login } from "../../actions/app";
 import { reloadWallet } from "../../actions/wallet";
 import { Link } from "react-router-dom";
@@ -22,9 +22,9 @@ import { loadVoteTimer } from "../../actions/votes";
 import {
   transactionResultManager,
   transactionResultManagerSun
-} from "../../utils/tron";
+} from "../../utils/linda";
 import Lockr from "lockr";
-import { withTronWeb } from "../../utils/tronWeb";
+import { withLindaWeb } from "../../utils/lindaWeb";
 
 function VoteChange({ value, arrow = false }) {
   if (value > 0) {
@@ -57,7 +57,7 @@ function SortDom({type}){
   )
 }
 
-@withTronWeb
+@withLindaWeb
 @injectIntl
 @withTimers
 @connect(
@@ -129,10 +129,10 @@ export default class VoteOverview extends React.Component {
     let { wallet } = this.props;
     let { votes } = this.state;
 
-    let trxBalance = 0;
+    let lindBalance = 0;
 
     if (wallet.isOpen) {
-      trxBalance = wallet.current.frozenTrx / ONE_TRX;
+      lindBalance = wallet.current.frozenLind / ONE_LIND;
     }
 
     let votesSpend = sumBy(
@@ -140,7 +140,7 @@ export default class VoteOverview extends React.Component {
       vote => parseInt(vote, 10) || 0
     );
 
-    let votesAvailable = trxBalance - votesSpend;
+    let votesAvailable = lindBalance - votesSpend;
     let spendAll = votesSpend > 0 && votesAvailable === 0;
 
     let voteState = 0;
@@ -151,17 +151,17 @@ export default class VoteOverview extends React.Component {
       voteState = -1;
     }
 
-    if (trxBalance === 0) {
+    if (lindBalance === 0) {
       voteState = -2;
     }
 
     return {
-      trxBalance,
+      lindBalance,
       votesSpend,
       votesAvailable,
       spendAll,
       voteState,
-      votePercentage: (votesSpend / trxBalance) * 100
+      votePercentage: (votesSpend / lindBalance) * 100
     };
   };
 
@@ -248,7 +248,7 @@ export default class VoteOverview extends React.Component {
       case -2:
         return (
           <span className="text-danger">
-            {tu("need_min_trx_to_vote_message")}
+            {tu("need_min_lind_to_vote_message")}
           </span>
         );
     }
@@ -263,7 +263,7 @@ export default class VoteOverview extends React.Component {
   renderVotingBar() {
     let { votingEnabled, votesSubmitted, submittingVotes } = this.state;
     let { intl, account } = this.props;
-    let { trxBalance } = this.getVoteStatus();
+    let { lindBalance } = this.getVoteStatus();
 
     if (!account.isLoggedIn) {
       return (
@@ -281,7 +281,7 @@ export default class VoteOverview extends React.Component {
       );
     }
 
-    if (votingEnabled && trxBalance <= 0) {
+    if (votingEnabled && lindBalance <= 0) {
       return (
         <div className="text-center">
           {tu("warning_votes")}{" "}
@@ -405,8 +405,8 @@ export default class VoteOverview extends React.Component {
     let res;
     this.setState({ submittingVotes: true });
     let witnessVotes = {};
-    const tronWebLedger = this.props.tronWeb();
-    const { tronWeb, sunWeb } = this.props.account;
+    const lindaWebLedger = this.props.lindaWeb();
+    const { lindaWeb, sunWeb } = this.props.account;
     for (let address of Object.keys(votes)) {
       if (votes[address] != "") {
         witnessVotes[address] = parseInt(votes[address], 10);
@@ -428,12 +428,12 @@ export default class VoteOverview extends React.Component {
     if (IS_MAINNET) {
       if (this.props.walletType.type === "ACCOUNT_LEDGER") {
         try {
-          const unSignTransaction = await tronWebLedger.transactionBuilder
+          const unSignTransaction = await lindaWebLedger.transactionBuilder
             .vote(witnessVotes, account.address)
             .catch(e => false);
           const { result } = await transactionResultManager(
             unSignTransaction,
-            tronWebLedger
+            lindaWebLedger
           );
           res = result;
         } catch (e) {
@@ -445,16 +445,16 @@ export default class VoteOverview extends React.Component {
           witnessVotes
         )(account.key);
         res = success;
-      } else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
+      } else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
         try {
-          const unSignTransaction = await tronWeb.transactionBuilder
+          const unSignTransaction = await lindaWeb.transactionBuilder
             .vote(witnessVotes, account.address)
             .catch(e => {
               console.error(e);
             });
           const { result } = await transactionResultManager(
             unSignTransaction,
-            tronWeb
+            lindaWeb
           );
           res = result;
         } catch (e) {
@@ -464,7 +464,7 @@ export default class VoteOverview extends React.Component {
     } else {
       if (
         this.props.walletType.type === "ACCOUNT_PRIVATE_KEY" ||
-        this.props.walletType.type === "ACCOUNT_TRONLINK"
+        this.props.walletType.type === "ACCOUNT_LINDALINK"
       ) {
         try {
           const unSignTransaction = await sunWeb.sidechain.transactionBuilder
@@ -595,9 +595,9 @@ export default class VoteOverview extends React.Component {
     let totalVotes = votesList.totalVotes || 0;
 
     let biggestGainer = votesList.fastestRise || {};
-    let { trxBalance } = this.getVoteStatus();
+    let { lindBalance } = this.getVoteStatus();
 
-    let voteSize = Math.ceil(trxBalance / 20);
+    let voteSize = Math.ceil(lindBalance / 20);
 
     return (
       <main className="container header-overlap _voteOverview">
@@ -674,7 +674,7 @@ export default class VoteOverview extends React.Component {
 
         {loading ? (
           <div className="card mt-2">
-            <TronLoader>{tu("loading_super_representatives")}</TronLoader>
+            <LindaLoader>{tu("loading_super_representatives")}</LindaLoader>
           </div>
         ) : (
           <div className="row mt-2">
@@ -757,7 +757,7 @@ export default class VoteOverview extends React.Component {
                               />
                             </span>
                           </th>
-                          {votingEnabled && trxBalance > 0 && (
+                          {votingEnabled && lindBalance > 0 && (
                             <th style={{ width: 150 }}>{tu("your_vote")}</th>
                           )}
                         </tr>
@@ -896,7 +896,7 @@ export default class VoteOverview extends React.Component {
                                   </Fragment>
                                 }
                               </td>
-                              {votingEnabled && trxBalance > 0 && (
+                              {votingEnabled && lindBalance > 0 && (
                                 <td className="vote-input-field">
                                   <div className="input-group"
                                     style={{ minWidth: "100px" }}>

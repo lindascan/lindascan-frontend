@@ -81,7 +81,7 @@ export class SocialInfo extends Component {
   render() {
     const { getFieldDecorator } = this.props.form
     const { intl } = this.props
-    let  {isTrc20, iconList, isUpdate } =  this.props.state
+    let  {isLrc20, iconList, isUpdate } =  this.props.state
     const {modal} = this.state;
     return (
       <div>
@@ -98,17 +98,17 @@ export class SocialInfo extends Component {
                 )}
               </Form.Item>
             </Col>
-            <Col  span={24} md={11} className={ isTrc20 || isUpdate? 'd-block': 'd-none'}>
+            <Col  span={24} md={11} className={ isLrc20 || isUpdate? 'd-block': 'd-none'}>
               <Form.Item label={tu('email')}>
                 {getFieldDecorator('email', {
-                  rules: [{ required: isTrc20, message: tu('email_v_required'), whitespace: true},
+                  rules: [{ required: isLrc20, message: tu('email_v_required'), whitespace: true},
                           {type: 'email', message: tu('email_v_format')}],
                 })(
                   <Input placeholder={intl.formatMessage({id: 'email_placeholder'})}/>
                 )}
               </Form.Item>
             </Col>
-            <Col  span={24} md={11} className={ isTrc20 || isUpdate? 'd-block': 'd-none'}>
+            <Col  span={24} md={11} className={ isLrc20 || isUpdate? 'd-block': 'd-none'}>
               <Form.Item label={tu('GitHub')}>
                   {getFieldDecorator('github_url', {
                       rules: [{ required: false, message: tu('no_url_error'), whitespace: true}],
@@ -117,7 +117,7 @@ export class SocialInfo extends Component {
                   )}
               </Form.Item>
             </Col>
-            <Col span={24}  md={11} className={ isTrc20 || isUpdate? 'd-block': 'd-none'}>
+            <Col span={24}  md={11} className={ isLrc20 || isUpdate? 'd-block': 'd-none'}>
               <Form.Item label={tu('whitepaper_address')}>
                 {getFieldDecorator('white_paper', {})(
                   <Input placeholder={intl.formatMessage({id: 'whitepaper_address'})}/>
@@ -125,14 +125,14 @@ export class SocialInfo extends Component {
               </Form.Item>
             </Col>
           </Row>
-          <div className={`${!isTrc20 && !isUpdate? 'd-block': 'd-none'} pl-2`}>
+          <div className={`${!isLrc20 && !isUpdate? 'd-block': 'd-none'} pl-2`}>
             <i className="fas fa-exclamation-circle mr-2" style={{color:"#FF8C00"}}></i>
-              {tu("token_input_trc10_tip")}
+              {tu("token_input_lrc10_tip")}
           </div>
 
         </div>
         
-        <div className={ isTrc20 || isUpdate? 'd-block px-2 mb-3': 'd-none'}>
+        <div className={ isLrc20 || isUpdate? 'd-block px-2 mb-3': 'd-none'}>
           <div className="d-flex mb-3">
             <h5>{tu('select_socoal_link')}</h5>
             <div className="d-flex icon-list ml-3">
@@ -175,9 +175,9 @@ export class SocialInfo extends Component {
               })
             }
           </Row>
-          <div className={`${isTrc20 && !isUpdate? 'd-block': 'd-none'} pl-2`}>
+          <div className={`${isLrc20 && !isUpdate? 'd-block': 'd-none'} pl-2`}>
             <i className="fas fa-exclamation-circle mr-2" style={{color:"#FF8C00"}}></i>
-              {tu("token_input_trc20_tip")}
+              {tu("token_input_lrc20_tip")}
           </div>
         </div>
         {modal}

@@ -114,11 +114,11 @@ export class TeamInfo extends Component {
         );
 
         // What is your lock up plan for the team and are you willing to do a 1/12th per month lock up
-        // schedule for 12-24 months after TRX market listing item
+        // schedule for 12-24 months after LIND market listing item
         const lockUpItem = (
             <Col span={24} md={24}>
                 <Form.Item
-                    label="What is your lock up plan for the team and are you willing to do a 1/12th per month lock up schedule for 12-24 months after TRX market listing">
+                    label="What is your lock up plan for the team and are you willing to do a 1/12th per month lock up schedule for 12-24 months after LIND market listing">
                     {getFieldDecorator('teamLockUpPlan', {
                         initialValue: teamLockUpPlan,
                     })(

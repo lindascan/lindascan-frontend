@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { AddressLink, ExternalLink, ContractLink, TokenTRC20Link } from "../../../common/Links";
+import { AddressLink, ExternalLink, ContractLink, TokenLRC20Link } from "../../../common/Links";
 import Field from "../../../tools/TransactionViewer/Field";
 import { TransationTitle } from './common/Title'
 import PermissionItem from './common/PermissionItem'
@@ -52,7 +52,7 @@ function AccountPermissionUpdateContract({contract,intl}) {
                             </span>
                         </Field>
                 }
-                <Field label="transaction_fee">100 TRX</Field>
+                <Field label="transaction_fee">100 LIND</Field>
                 {
                     owner && <PermissionItem permissionItem={owner} label='signature_privilege'/>
                 }

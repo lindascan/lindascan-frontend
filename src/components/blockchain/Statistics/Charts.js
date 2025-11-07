@@ -1,13 +1,13 @@
 import React from "react";
 import xhr from "axios/index";
 import {Client} from "../../../services/api";
-import {ONE_TRX} from "../../../constants";
+import {ONE_LIND} from "../../../constants";
 import {connect} from "react-redux";
 import {FormattedNumber, injectIntl} from "react-intl";
 import BigNumber from "bignumber.js";
 import {filter, includes} from "lodash";
-import {tronAddresses} from "../../../utils/tron";
-import {TronLoader} from "../../common/loaders";
+import {lindaAddresses} from "../../../utils/linda";
+import {LindaLoader} from "../../common/loaders";
 import PieReact from "../../common/PieChart";
 import LineReact from "../../common/LineChart";
 import {cloneDeep} from "lodash";
@@ -26,8 +26,8 @@ import { CsvExport } from "../../common/CsvExport";
 import isMobile from "../../../utils/isMobile";
 import {
     OverallFreezingRateChart,
-    LineTRXSupplyChart,
-    HoldTrxAccountChart
+    LineLINDSupplyChart,
+    HoldLindAccountChart
 } from "../../common/LineCharts";
 import {loadPriceData} from "../../../actions/markets";
 import {t} from "../../../utils/i18n";
@@ -90,8 +90,8 @@ class StatCharts extends React.Component {
                 start_day:moment('2019-12-01').valueOf(),
                 end_day: moment().valueOf()
             },
-            HoldTrxAccount:null,
-            HoldTrxAccountParams:{
+            HoldLindAccount:null,
+            HoldLindAccountParams:{
                 start_day:'2019-12-01',
                 end_day: moment().format("YYYY-MM-DD")
             },
@@ -110,8 +110,8 @@ class StatCharts extends React.Component {
             case 'supply':
                 this.loadSupply();
                 break; 
-            case 'HoldTrxAccount':
-                this.loadHoldTrxAccount();
+            case 'HoldLindAccount':
+                this.loadHoldLindAccount();
                 break; 
             default:
                 this.loadTxOverviewStats();
@@ -372,35 +372,35 @@ class StatCharts extends React.Component {
         });
     }
 
-    //hold trx account
-    async loadHoldTrxAccount() {
+    //hold lind account
+    async loadHoldLindAccount() {
         
-        let {data: {data}} = await xhr.get(API_URL + "/api/stats/overview?type=trxHolder");      
+        let {data: {data}} = await xhr.get(API_URL + "/api/stats/overview?type=lindHolder");      
         let x;
         data.map((item, index) => {
             item.timestamp = item.date; 
             x = new BigNumber(item.totalAddress);
             item.account_total = x.decimalPlaces(0).toNumber();
-            item.hold_total = new BigNumber(item.accountWithTrx || 0).decimalPlaces(0).toNumber();
-            item.hold_trx_rate = parseFloat((item.hold_total/item.account_total * 100).toFixed(2));
+            item.hold_total = new BigNumber(item.accountWithLind || 0).decimalPlaces(0).toNumber();
+            item.hold_lind_rate = parseFloat((item.hold_total/item.account_total * 100).toFixed(2));
 
         })
         this.setState({
-            HoldTrxAccount:  sortBy(data, function(o) { return o.timestamp; })
+            HoldLindAccount:  sortBy(data, function(o) { return o.timestamp; })
         });
        
-        let pr = cloneDeep(data).sort(this.compare('hold_trx_rate'));
+        let pr = cloneDeep(data).sort(this.compare('hold_lind_rate'));
         
         this.setState({
             summit: {
-                HoldTrxAccount_sort: [
+                HoldLindAccount_sort: [
                     {
                         date: pr[pr.length - 1].date,
-                        increment: pr[pr.length - 1].hold_trx_rate ? (pr[pr.length - 1].hold_trx_rate).toFixed(2) + '%': 0
+                        increment: pr[pr.length - 1].hold_lind_rate ? (pr[pr.length - 1].hold_lind_rate).toFixed(2) + '%': 0
                     },
                     {
                         date: pr[0].date,
-                        increment: pr[0].hold_trx_rate ? (pr[0].hold_trx_rate).toFixed(2) + '%': 0
+                        increment: pr[0].hold_lind_rate ? (pr[0].hold_lind_rate).toFixed(2) + '%': 0
                     }],
 
             }
@@ -537,7 +537,7 @@ class StatCharts extends React.Component {
         return column;
     }
 
-    TRXSupplyCustomizedColumn = () => {
+    LINDSupplyCustomizedColumn = () => {
         let {intl} = this.props;
         let column = [
             {
@@ -552,12 +552,12 @@ class StatCharts extends React.Component {
             },
             {
                 title: () => {
-                    let text = intl.formatMessage({id: 'Supply_TRX_total_tip'}); 
+                    let text = intl.formatMessage({id: 'Supply_LIND_total_tip'}); 
                     return (
                     <div>
-                        {upperFirst(intl.formatMessage({id: 'Supply_TRX_total'}))}
+                        {upperFirst(intl.formatMessage({id: 'Supply_LIND_total'}))}
                         <span className="ml-2">
-                             <QuestionMark placement="top" text={text} className="trxsupply-tip"/>
+                             <QuestionMark placement="top" text={text} className="lindsupply-tip"/>
                         </span>
                     </div>
                     )
@@ -570,10 +570,10 @@ class StatCharts extends React.Component {
             },
             {
                 title: () => {
-                    let text = intl.formatMessage({id: 'Supply_amount_TRX_produced_tip'}); 
+                    let text = intl.formatMessage({id: 'Supply_amount_LIND_produced_tip'}); 
                     return (
                     <div>
-                        {upperFirst(intl.formatMessage({id: 'Supply_amount_TRX_produced'}))}
+                        {upperFirst(intl.formatMessage({id: 'Supply_amount_LIND_produced'}))}
                         <span className="ml-2">
                             <QuestionMark placement="top" text={text} />
                         </span>
@@ -624,13 +624,13 @@ class StatCharts extends React.Component {
             },
             {
             title: () => {
-                let text = intl.formatMessage({id: 'Supply_amount_TRX_burned_tip1'})
-                let textTip = intl.formatMessage({id: 'Supply_amount_TRX_burned_tip2'}) ; 
+                let text = intl.formatMessage({id: 'Supply_amount_LIND_burned_tip1'})
+                let textTip = intl.formatMessage({id: 'Supply_amount_LIND_burned_tip2'}) ; 
                 return (
                 <div>
-                    {upperFirst(intl.formatMessage({id: 'Supply_amount_TRX_burned'}))}
+                    {upperFirst(intl.formatMessage({id: 'Supply_amount_LIND_burned'}))}
                     <span className="ml-2">
-                        <QuestionMark placement="top" text={text}  testSecond={textTip} className="trxsupply-tip"/>
+                        <QuestionMark placement="top" text={text}  testSecond={textTip} className="lindsupply-tip"/>
                     </span>
                 </div>
                 )
@@ -679,18 +679,18 @@ class StatCharts extends React.Component {
     render() {
         let {match, intl} = this.props;
         let {txOverviewStats, txOverviewStatsFull, 
-            addressesStats, blockSizeStats, blockchainSizeStats, summit ,OverallFreezingRate, OverallFreezingRateRevers, SupplyData, SupplyDataRevers,HoldTrxAccount } = this.state;
+            addressesStats, blockSizeStats, blockchainSizeStats, summit ,OverallFreezingRate, OverallFreezingRateRevers, SupplyData, SupplyDataRevers,HoldLindAccount } = this.state;
         let { start_day, end_day} = this.state.OverallFreezingRateParams;
-        let start_day_hold_trx_start_day = this.state.HoldTrxAccountParams.start_day;
-        let start_day_hold_trx_end_day = this.state.HoldTrxAccountParams.end_day
+        let start_day_hold_lind_start_day = this.state.HoldLindAccountParams.start_day;
+        let start_day_hold_lind_end_day = this.state.HoldLindAccountParams.end_day
 
         let { SupplyParams } = this.state;
         let unit;
         let freezeresourceCsvurl = API_URL + "/api/freezeresource?start_day=" + start_day +"&end_day="+end_day + "&format=csv";
         let supplyCsvurl =  API_URL + "/api/turnover?size="+ SupplyParams.limit +"&start=" + SupplyParams.start_day +"&end="+ SupplyParams.end_day + "&format=csv";
-        let HoldTrxAccountCsvUrl = API_URL + "/api/v2/node/overview_upload?type=trxHolder";
+        let HoldLindAccountCsvUrl = API_URL + "/api/v2/node/overview_upload?type=lindHolder";
         let freezing_column = this.freezingCustomizedColumn();
-        let TRXSupply_column = this.TRXSupplyCustomizedColumn();
+        let LINDSupply_column = this.LINDSupplyCustomizedColumn();
         
         let chartHeight = isMobile? 580: 580
         if (match.params.chartName === 'blockchainSizeStats' || match.params.chartName === 'addressesStats') {
@@ -710,7 +710,7 @@ class StatCharts extends React.Component {
                                     <span>
                                         {match.params.chartName === 'OverallFreezingRate' &&  t('freezing_column_freezing_rate_highest')}
                                         {match.params.chartName === 'supply' &&  t('Supply_amount_net_new_highest')}
-                                        {match.params.chartName === 'HoldTrxAccount' &&  t('chart_hold_trx_account_per_t')}
+                                        {match.params.chartName === 'HoldLindAccount' &&  t('chart_hold_lind_account_per_t')}
                                          &nbsp;{tu('highest')}{t(unit)}{t('_of')}
                                         <strong>{' ' + summit[match.params.chartName + '_sort'][0].increment + ' '}</strong>
                                         {t('was_recorded_on')} {intl.formatDate(summit[match.params.chartName + '_sort'][0].date)}
@@ -721,7 +721,7 @@ class StatCharts extends React.Component {
                                 {
                                     summit && summit[match.params.chartName + '_sort'] &&
                                     <span>{match.params.chartName === 'OverallFreezingRate' &&  t('freezing_column_freezing_rate_highest')}
-                                    {match.params.chartName === 'HoldTrxAccount' &&  t('chart_hold_trx_account_per_t')}
+                                    {match.params.chartName === 'HoldLindAccount' &&  t('chart_hold_lind_account_per_t')}
                                     {match.params.chartName === 'supply' &&  t('Supply_amount_net_new_highest')}&nbsp;{tu('lowest')}{t(unit)}{t('_of')}
                                       <strong>{' ' + summit[match.params.chartName + '_sort'][1].increment + ' '}</strong>
                                         {t('was_recorded_on')} {intl.formatDate(summit[match.params.chartName + '_sort'][1].date)}
@@ -740,7 +740,7 @@ class StatCharts extends React.Component {
                            match.params.chartName === 'OverallFreezingRate' &&
                            <div>
                            {
-                               OverallFreezingRate === null ? <TronLoader/> :
+                               OverallFreezingRate === null ? <LindaLoader/> :
                                <div>
                                    <OverallFreezingRateChart
                                        style={{height: chartHeight}}
@@ -755,9 +755,9 @@ class StatCharts extends React.Component {
                            match.params.chartName === 'supply' &&
                            <div>
                            {
-                               SupplyData === null ? <TronLoader/> :
+                               SupplyData === null ? <LindaLoader/> :
                                <div>
-                                   <LineTRXSupplyChart
+                                   <LineLINDSupplyChart
                                        style={{height: chartHeight}}
                                        data={SupplyData}
                                        intl={intl}
@@ -767,14 +767,14 @@ class StatCharts extends React.Component {
                            </div>
                         }
                         {
-                           match.params.chartName === 'HoldTrxAccount' &&
+                           match.params.chartName === 'HoldLindAccount' &&
                            <div>
                            {
-                               HoldTrxAccount === null ? <TronLoader/> :
+                               HoldLindAccount === null ? <LindaLoader/> :
                                <div>
-                                   <HoldTrxAccountChart
+                                   <HoldLindAccountChart
                                        style={{height: chartHeight}}
-                                       data={HoldTrxAccount}
+                                       data={HoldLindAccount}
                                        intl={intl}
                                    />
                                </div>
@@ -789,7 +789,7 @@ class StatCharts extends React.Component {
                             match.params.chartName === 'OverallFreezingRate' &&
                             <div>
                                 {
-                                    OverallFreezingRate === null ? <TronLoader/> :
+                                    OverallFreezingRate === null ? <LindaLoader/> :
                                     <div>
                                         <div className="token_black">
                                             <div className="col-md-12 table_pos" style={{padding:0}}>
@@ -831,15 +831,15 @@ class StatCharts extends React.Component {
                             match.params.chartName === 'supply' &&
                             <div>
                         {
-                            SupplyData === null ? <TronLoader/> :
+                            SupplyData === null ? <LindaLoader/> :
                             <div>
                                 <div className="token_black">
                                     <div className="col-md-12 table_pos" style={{padding:0}}>
                                         <div className="pt-4 pb-2 d-flex justify-content-between">
                                             <div>
                                                 {
-                                                    intl.formatMessage({id: 'Supply_TRX_supply_records'}) + intl.formatNumber(SupplyData.length)+ 
-                                                    intl.formatMessage({id: 'Supply_TRX_supply_records_total'})
+                                                    intl.formatMessage({id: 'Supply_LIND_supply_records'}) + intl.formatNumber(SupplyData.length)+ 
+                                                    intl.formatMessage({id: 'Supply_LIND_supply_records_total'})
                                                 }
                                             </div>
                                             <div style={{marginTop:-20}}>
@@ -858,7 +858,7 @@ class StatCharts extends React.Component {
                                             :
                                             <SmartTable 
                                                 bordered={true} 
-                                                column={TRXSupply_column} 
+                                                column={LINDSupply_column} 
                                                 data={SupplyDataRevers}
                                                 position="bottom"
                                             />
@@ -870,24 +870,24 @@ class StatCharts extends React.Component {
                            </div>
                         }
                         {
-                            match.params.chartName === 'HoldTrxAccount' &&
+                            match.params.chartName === 'HoldLindAccount' &&
                             <div>
                                 {
-                                    HoldTrxAccount &&
+                                    HoldLindAccount &&
                                     <div>
                                         <div className="token_black">
                                             <div className="col-md-12 table_pos" style={{padding:0}}>
                                                 <div className="pb-2">
                                                     <div style={{ float: 'right',marginTop:20}}>
                                                             [
-                                                            <span style={{fontWeight:'bold'}}>&nbsp;<Link to="/blockchain/accounts">{tu('chart_hold_trx_more')}</Link>&nbsp;</span>
+                                                            <span style={{fontWeight:'bold'}}>&nbsp;<Link to="/blockchain/accounts">{tu('chart_hold_lind_more')}</Link>&nbsp;</span>
                                                             ]
                                                     </div>  
                                                     <div style={{}}>
                                                     {[
-                                                        "HoldTrxAccount"
+                                                        "HoldLindAccount"
                                                         ].indexOf(match.params.chartName) !== -1 ? (
-                                                        <CsvExport downloadURL={HoldTrxAccountCsvUrl} style={{marginTop:-20}}/>
+                                                        <CsvExport downloadURL={HoldLindAccountCsvUrl} style={{marginTop:-20}}/>
                                                         ) : (
                                                         ""
                                                         )}

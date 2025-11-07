@@ -16,10 +16,10 @@ export const setPriceData = (prices = []) => ({
 
 export const loadPriceData = () => async (dispatch) => {
 
-  let {data} = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=TRX&tsym=USD&limit=10");
+  let {data} = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=LIND&tsym=USD&limit=10");
   dispatch(setPriceData(data.Data));
 
-  let {data: volumeData} = await xhr.get("https://min-api.cryptocompare.com/data/exchange/histohour?fsym=TRX&tsym=USD&limit=10");
+  let {data: volumeData} = await xhr.get("https://min-api.cryptocompare.com/data/exchange/histohour?fsym=LIND&tsym=USD&limit=10");
   volumeData = volumeData.Data.map(row => ({
     time: row.time,
     volume: parseInt(row.volume),

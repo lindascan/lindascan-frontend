@@ -10,8 +10,8 @@ import { FormattedNumber } from "react-intl";
 import TokenBalances from "../components/TokenBalances";
 import MyContracts from "./Contracts";
 import { AddressLink, ExternalLink, HrefLink } from "../../common/Links";
-import { TRXPrice } from "../../common/Price";
-import { TronLoader } from "../../common/loaders";
+import { LINDPrice } from "../../common/Price";
+import { LindaLoader } from "../../common/loaders";
 import Transactions from "../../common/Transactions";
 import NewTransactions from "../../common/NewTransactions";
 import Votes from "../../common/Votes";
@@ -21,14 +21,14 @@ import _ from "lodash";
 import Blocks from "../../common/Blocks";
 import rebuildList from "../../../utils/rebuildList";
 import rebuildToken20List from "../../../utils/rebuildToken20List";
-import { ONE_TRX, API_URL, ADDRESS_TAG_ICON,IS_MAINNET } from "../../../constants.js";
+import { ONE_LIND, API_URL, ADDRESS_TAG_ICON,IS_MAINNET } from "../../../constants.js";
 import { updateAccountTabInfo } from "../../../actions/blockchain";
 import {
   FormatNumberByDecimals,
   FormatNumberByDecimalsBalance,
   toThousands
 } from "../../../utils/number";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import { toastr } from "react-redux-toastr";
 import { Tooltip, Icon } from "antd";
 import BigNumber from "bignumber.js";
@@ -43,7 +43,7 @@ import FreezeDetail from './FreezeDetail';
 import { Piechart } from "../components/Piechart";
 import SweetAlert from "react-bootstrap-sweetalert";
 import ApiClientAccount from "../../../services/accountApi";
-import {transactionResultManager, transactionResultManagerSun} from "../../../utils/tron";
+import {transactionResultManager, transactionResultManagerSun} from "../../../utils/linda";
 import { loadUsdPrice } from "../../../actions/blockchain";
 import AddTag from "../../account/components/AddTag";
 import '../../../styles/account.scss'
@@ -92,14 +92,14 @@ class Address extends React.Component {
           icon: "fa fa-exchange-alt",
           path: "",
           label: <span>{tu("transfers")}</span>,
-          cmp: () => <TronLoader>{tu("loading_transfers")}</TronLoader>
+          cmp: () => <LindaLoader>{tu("loading_transfers")}</LindaLoader>
         },
         transactions: {
           id: "transactions",
           icon: "fas fa-handshake",
           path: "/transactions",
           label: <span>{tu("transactions")}</span>,
-          cmp: () => <TronLoader>{tu("loading_transactions")}</TronLoader>
+          cmp: () => <LindaLoader>{tu("loading_transactions")}</LindaLoader>
         }
       },
       walletReward: 0,
@@ -107,7 +107,7 @@ class Address extends React.Component {
       frozenBandwidth: 0,
       sentDelegateResource: 0,
       frozenEnergy: 0,
-      TRXBalance: 0,
+      LINDBalance: 0,
       realTimeVotes: 0,
       realTimeRanking: 0,
       lastRanking: 0,
@@ -175,7 +175,7 @@ class Address extends React.Component {
 
   async loadVotes(address) {
     let votes = await xhr.get(
-      "https://api.tronscan.org/api/vote?sort=-votes&limit=40&start=0&candidate=" +
+      "https://api.lindascan.org/api/vote?sort=-votes&limit=40&start=0&candidate=" +
         address
     );
 
@@ -297,33 +297,33 @@ class Address extends React.Component {
         item.map_amount_logo =
           "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png";
         item.tokenType = "-";
-        item.priceInTrx = 1;
+        item.priceInLind = 1;
         item.available_amount = item.map_amount
-        item.map_amount += totalPower / ONE_TRX
+        item.map_amount += totalPower / ONE_LIND
       } else {
-        item.tokenType = "TRC10";
+        item.tokenType = "LRC10";
       }
 
-      if (item.priceInTrx) {
+      if (item.priceInLind) {
         x = new BigNumber(item.map_amount);
-        item.TRXBalance = x.multipliedBy(item.priceInTrx).decimalPlaces(6);
-        item.TRXBalance_toThousands = toThousands(
-          x.multipliedBy(item.priceInTrx).decimalPlaces(6)
+        item.LINDBalance = x.multipliedBy(item.priceInLind).decimalPlaces(6);
+        item.LINDBalance_toThousands = toThousands(
+          x.multipliedBy(item.priceInLind).decimalPlaces(6)
         );
       } else {
-        item.TRXBalance = 0;
+        item.LINDBalance = 0;
       }
     });
 
-    let trc20token_balances_new = rebuildToken20List(
-      address.trc20token_balances,
+    let lrc20token_balances_new = rebuildToken20List(
+      address.lrc20token_balances,
       "contract_address",
       "balance"
     );
     let y;
-    trc20token_balances_new &&
-      trc20token_balances_new.map(item => {
-        item.tokenType = "TRC20";
+    lrc20token_balances_new &&
+      lrc20token_balances_new.map(item => {
+        item.tokenType = "LRC20";
         item.token20_name = item.name + "(" + item.symbol + ")";
         item.token20_balance = FormatNumberByDecimals(
           item.balance,
@@ -337,31 +337,31 @@ class Address extends React.Component {
           item.balance,
           item.decimals
         );
-        if (item.priceInTrx) {
+        if (item.priceInLind) {
           y = new BigNumber(item.token20_balance_decimals);
-          item.TRXBalance = y.multipliedBy(item.priceInTrx).decimalPlaces(6);
-          item.TRXBalance_toThousands = toThousands(
-            y.multipliedBy(item.priceInTrx).decimalPlaces(6)
+          item.LINDBalance = y.multipliedBy(item.priceInLind).decimalPlaces(6);
+          item.LINDBalance_toThousands = toThousands(
+            y.multipliedBy(item.priceInLind).decimalPlaces(6)
           );
         } else {
-          item.TRXBalance = 0;
+          item.LINDBalance = 0;
         }
 
         return item;
       });
 
-    let tokenBalances = balances.concat(trc20token_balances_new);
+    let tokenBalances = balances.concat(lrc20token_balances_new);
 
     let sortTokenBalances = _(tokenBalances)
-      .sortBy(tb => -tb.TRXBalance)
+      .sortBy(tb => -tb.LINDBalance)
       .value();
     this.setState({
       sortTokenBalances: sortTokenBalances
     });
 
-    let TRXBalance = 0;
+    let LINDBalance = 0;
     tokenBalances.map((item, index) => {
-      TRXBalance += Number(item.TRXBalance);
+      LINDBalance += Number(item.LINDBalance);
     });
 
     let stats = await Client.getAddressStats(id);
@@ -403,7 +403,7 @@ class Address extends React.Component {
    
     this.setState({
       totalPower: totalPower,
-      TRXBalanceTotal: TRXBalance,
+      LINDBalanceTotal: LINDBalance,
       netUsed: address.bandwidth.netUsed + address.bandwidth.freeNetUsed,
       netLimit: address.bandwidth.netLimit + address.bandwidth.freeNetLimit,
       netRemaining:
@@ -432,7 +432,7 @@ class Address extends React.Component {
       frozenBandwidth,
       sentDelegateResource,
       frozenEnergy,
-      TRXBalance,
+      LINDBalance,
       balance: address.balance,
     });
 
@@ -475,7 +475,7 @@ class Address extends React.Component {
           //   // icon: "fa fa-exchange-alt",
           //   path: "/20transfers",
           //   label: <span>{tu("20_transfers")}</span>,
-          //   cmp: () => <TransfersTrc20 filter={{address: id}}/>
+          //   cmp: () => <TransfersLrc20 filter={{address: id}}/>
           // },
           transactions: {
             id: "transactions",
@@ -608,7 +608,7 @@ class Address extends React.Component {
           //   // icon: "fa fa-exchange-alt",
           //   path: "/20transfers",
           //   label: <span>{tu("20_transfers")}</span>,
-          //   cmp: () => <TransfersTrc20 filter={{address: id}}/>:
+          //   cmp: () => <TransfersLrc20 filter={{address: id}}/>:
           // },
           transactions: {
             id: "transactions",
@@ -754,37 +754,37 @@ class Address extends React.Component {
       <div style={{ lineHeight: "25px" }}>
         <div style={{ borderBottom: "1px solid #eee", paddingBottom: "5px" }}>
           {tu("address_get_energe")}：
-          <FormattedNumber value={GetEnergy / ONE_TRX} />
-          &nbsp;TRX ({GetEnergyPer}%)
+          <FormattedNumber value={GetEnergy / ONE_LIND} />
+          &nbsp;LIND ({GetEnergyPer}%)
           <br />
           {tu("address_get_bandwith")}：
-          <FormattedNumber value={GetBandWidth / ONE_TRX} />
-          &nbsp;TRX ({GetBandWidthPer}%)
+          <FormattedNumber value={GetBandWidth / ONE_LIND} />
+          &nbsp;LIND ({GetBandWidthPer}%)
         </div>
         <div style={{ paddingTop: "5px" }}>
           {tu("address_freeze_owner")}：
-          <FormattedNumber value={Owner / ONE_TRX} />
-          &nbsp;TRX ({OwnerPer}%)
+          <FormattedNumber value={Owner / ONE_LIND} />
+          &nbsp;LIND ({OwnerPer}%)
           <br />
           {tu("address_freeze_other")}：
-          <FormattedNumber value={Other / ONE_TRX} />
-          &nbsp;TRX ({OtherPer}%)
+          <FormattedNumber value={Other / ONE_LIND} />
+          &nbsp;LIND ({OtherPer}%)
         </div>
       </div>
     );
     return (
       <div>
         <span className="ml-1">(</span>
-        {tu("address_tron_power_remaining")}:{" "}
-        <FormattedNumber value={balance / ONE_TRX} />
-        &nbsp;TRX &nbsp;
+        {tu("address_linda_power_remaining")}:{" "}
+        <FormattedNumber value={balance / ONE_LIND} />
+        &nbsp;LIND &nbsp;
         {tu("freeze")}:{" "}
         <Tooltip placement="top" innerClassName="w-100" title={TooltipText}>
           <NavLink exact to={match.url + "/freeze"}>
             <span style={{ color: "rgb(255, 163, 11)" }} 
                   onClick={this.scrollToAnchor.bind(this)}>
-              <FormattedNumber value={totalPower / ONE_TRX} />
-              &nbsp;TRX&nbsp;
+              <FormattedNumber value={totalPower / ONE_LIND} />
+              &nbsp;LIND&nbsp;
             </span>
           </NavLink>
         </Tooltip>
@@ -799,7 +799,7 @@ class Address extends React.Component {
     let { sortTokenBalances } = this.state;
     let data = [];
     sortTokenBalances.map(item => {
-      let balance = Number(item.TRXBalance);
+      let balance = Number(item.LINDBalance);
       if (balance > 0) {
         let name = item.symbol ? item.symbol : item.map_token_name_abbr;
         data.push({ name: name, value: balance,usdBalance:balance*priceUSD });
@@ -849,14 +849,14 @@ class Address extends React.Component {
     let res,hashid;
     let {account, walletType} = this.props;
 
-    let tronWeb;
+    let lindaWeb;
     if (walletType.type === "ACCOUNT_LEDGER") {
-        tronWeb = this.props.tronWeb();
+        lindaWeb = this.props.lindaWeb();
     } else {
-        tronWeb = account.tronWeb;
+        lindaWeb = account.lindaWeb;
     }
-    const unSignTransaction = await tronWeb.transactionBuilder.withdrawBlockRewards(walletType.address).catch(e => false);
-    const {result} = await transactionResultManager(unSignTransaction, tronWeb)
+    const unSignTransaction = await lindaWeb.transactionBuilder.withdrawBlockRewards(walletType.address).catch(e => false);
+    const {result} = await transactionResultManager(unSignTransaction, lindaWeb)
     res = result;
     //hashid = txid
 
@@ -918,7 +918,7 @@ class Address extends React.Component {
           id: "warning"
         }),
         intl.formatMessage({
-          id: "search_TRC20_error"
+          id: "search_LRC20_error"
         })
       );
       this.setState({
@@ -1007,7 +1007,7 @@ class Address extends React.Component {
       bandWidthPercentage,
       energyRemaining,
       energyPercentage,
-      TRXBalanceTotal,
+      LINDBalanceTotal,
       availableBandWidthPercentage,
       availableEnergyPercentage,
       csvurl,
@@ -1050,9 +1050,9 @@ class Address extends React.Component {
           <div className="col-md-12">
             {loading ? (
               <div className="card">
-                <TronLoader>
+                <LindaLoader>
                   {tu("loading_address")} {address.address}
-                </TronLoader>
+                </LindaLoader>
               </div>
             ) : (
               <Fragment>
@@ -1160,20 +1160,20 @@ class Address extends React.Component {
                                             this
                                           )}
                                         >
-                                          <TRXPrice amount={TRXBalanceTotal} />{" "}
+                                          <LINDPrice amount={LINDBalanceTotal} />{" "}
                                         </span>
                                       </NavLink>
 
                                       <span className="small">
                                         (
-                                        <TRXPrice
-                                          amount={TRXBalanceTotal}
+                                        <LINDPrice
+                                          amount={LINDBalanceTotal}
                                           currency="USD"
                                           showPopup={false}
                                         />
                                         )
                                       </span>
-                                      {TRXBalanceTotal > 0 && <img
+                                      {LINDBalanceTotal > 0 && <img
                                         src={require("../../../images/address/chart.png")}
                                         onClick={this.pieChart.bind(this)}
                                         style={{ width: "17px", cursor: "pointer" }}
@@ -1216,9 +1216,9 @@ class Address extends React.Component {
                                   <li className="d-flex flex-wrap">
                                     <span>
                                       <FormattedNumber
-                                        value={(balance + totalPower) / ONE_TRX}
+                                        value={(balance + totalPower) / ONE_LIND}
                                       />{" "}
-                                      TRX
+                                      LIND
                                     </span>
                                     <div>{this.renderFrozenTokens()}</div>
                                   </li>
@@ -1235,8 +1235,8 @@ class Address extends React.Component {
                               <td>
                                 <ul className="list-unstyled m-0">
                                   <li className="d-flex">
-                                    <TRXPrice
-                                      amount={walletReward / ONE_TRX}
+                                    <LINDPrice
+                                      amount={walletReward / ONE_LIND}
                                       showPopup={false}
                                     />
                                     {account.isLoggedIn && walletReward > 0 && address.address === account.address && <a href="javascript:;"
@@ -1331,12 +1331,12 @@ class Address extends React.Component {
                         energyRemaining={energyRemaining}
                         netLimit={netLimit}
                         energyLimit={energyLimit}
-                        totalPower={totalPower / ONE_TRX}
+                        totalPower={totalPower / ONE_LIND}
                         powerPercentage={
-                          ((totalPower / ONE_TRX - address.voteTotal) / (totalPower / ONE_TRX)) *
+                          ((totalPower / ONE_LIND - address.voteTotal) / (totalPower / ONE_LIND)) *
                             100 || 0
                         }
-                        powerRemaining={totalPower / ONE_TRX - address.voteTotal}
+                        powerRemaining={totalPower / ONE_LIND - address.voteTotal}
                         address={this.props.match.params.id || ""}
                         isRepresentative={address.representative.enabled}
                         realTimeVotes={realTimeVotes}

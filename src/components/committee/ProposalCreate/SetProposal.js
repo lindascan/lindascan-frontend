@@ -7,7 +7,7 @@ import { Steps, Table, Checkbox, Input, InputNumber, Form, Select } from 'antd';
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Client} from "../../../services/api";
 import _,{upperFirst} from 'lodash'
-import {ONE_TRX,IS_MAINNET} from "../../../constants";
+import {ONE_LIND,IS_MAINNET} from "../../../constants";
 const Step = Steps.Step;
 const { Option } = Select;
 @connect(
@@ -47,42 +47,42 @@ export class SetProposal extends Component {
             break;
             case "getAccountUpgradeCost":
                 this.props.form.setFieldsValue({
-                    "getAccountUpgradeCost": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getAccountUpgradeCost": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getCreateAccountFee":
                 this.props.form.setFieldsValue({
-                    "getCreateAccountFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getCreateAccountFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getTransactionFee":
                 this.props.form.setFieldsValue({
-                    "getTransactionFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getTransactionFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getAssetIssueFee":
                 this.props.form.setFieldsValue({
-                    "getAssetIssueFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getAssetIssueFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getWitnessPayPerBlock":
                 this.props.form.setFieldsValue({
-                    "getWitnessPayPerBlock": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getWitnessPayPerBlock": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getWitnessStandbyAllowance":
                 this.props.form.setFieldsValue({
-                    "getWitnessStandbyAllowance": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getWitnessStandbyAllowance": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getEnergyFee":
                 this.props.form.setFieldsValue({
-                    "getEnergyFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getEnergyFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getExchangeCreateFee":
                 this.props.form.setFieldsValue({
-                    "getExchangeCreateFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getExchangeCreateFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;
             case "getMaxCpuTimeOfOneTx":
@@ -95,9 +95,9 @@ export class SetProposal extends Component {
                     "getAllowUpdateAccountName": item.newValue?item.newValue:undefined
                 });
             break;  
-            case "getAllowTvmTransferTrc10":
+            case "getAllowTvmTransferLrc10":
                 this.props.form.setFieldsValue({
-                    "getAllowTvmTransferTrc10": item.newValue?item.newValue:undefined
+                    "getAllowTvmTransferLrc10": item.newValue?item.newValue:undefined
                 });
             break; 
             case "getTotalEnergyCurrentLimit":
@@ -117,12 +117,12 @@ export class SetProposal extends Component {
             break; 
             case "getUpdateAccountPermissionFee":
                 this.props.form.setFieldsValue({
-                    "getUpdateAccountPermissionFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getUpdateAccountPermissionFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break; 
             case "getMultiSignFee":
                 this.props.form.setFieldsValue({
-                    "getMultiSignFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getMultiSignFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break; 
             case "getAllowProtoFilterNum":
@@ -132,7 +132,7 @@ export class SetProposal extends Component {
             break;
             case "getShieldedTransactionFee":
                 this.props.form.setFieldsValue({
-                    "getShieldedTransactionFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getShieldedTransactionFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;  
             case "getAdaptiveResourceLimitMultiplier":
@@ -147,7 +147,7 @@ export class SetProposal extends Component {
             break; 
             case "getWitness127PayPerBlock":
                 this.props.form.setFieldsValue({
-                    "getWitness127PayPerBlock": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getWitness127PayPerBlock": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;  
             case "getAllowTvmSolidity059":
@@ -162,7 +162,7 @@ export class SetProposal extends Component {
             break;  
             case "getShieldedTransactionCreateAccountFee":
                 this.props.form.setFieldsValue({
-                    "getShieldedTransactionCreateAccountFee": item.newValue !== undefined?item.newValue/ONE_TRX:''
+                    "getShieldedTransactionCreateAccountFee": item.newValue !== undefined?item.newValue/ONE_LIND:''
                 });
             break;  
             case "getForbidTransferToContract":
@@ -190,7 +190,7 @@ export class SetProposal extends Component {
     const {isLoggedInFn, nextState} = this.props
     nextState({type: type})
     // if(isLoggedInFn()){
-    //   if(type == 'trc10'){
+    //   if(type == 'lrc10'){
     //     if(this.state.issuedAsset){
     //       nextState({type: type})
     //     }else{
@@ -208,12 +208,12 @@ export class SetProposal extends Component {
     const {type} = this.props.state;
     if(!isLoggedInFn()) return;
     // if( isUpdate  && !isAuthorFn(author)) return;
-    // if(!issuedAsset && (type == 'trc10')){
-    //   this.setModal('trx_token_account_limit')
+    // if(!issuedAsset && (type == 'lrc10')){
+    //   this.setModal('lind_token_account_limit')
     //   return
     // }
     // if(wallet.balance < 1024*Math.pow(10,6)){
-    //   this.setModal('trx_token_fee_message')
+    //   this.setModal('lind_token_fee_message')
     //   return
     // }
     this.props.nextState(this.state)
@@ -240,7 +240,7 @@ export class SetProposal extends Component {
     if (wallet !== null) {
       Client.getIssuedAsset(wallet.address).then(({token}) => {
         this.setState({issuedAsset: (token == undefined)})
-        // token !== undefined && this.props.nextState({type: 'trc20'})
+        // token !== undefined && this.props.nextState({type: 'lrc20'})
       });
     }
   };
@@ -278,25 +278,25 @@ export class SetProposal extends Component {
                                     }</span></div>
                                 }
                                 {
-                                    record.key == 'getAccountUpgradeCost' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getAccountUpgradeCost' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
-                                    record.key == 'getCreateAccountFee' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getCreateAccountFee' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
                                     record.key == 'getTransactionFee' && <div><span>{text}</span> &nbsp;<span>Sun/byte</span></div>
                                 }
                                 {
-                                    record.key == 'getAssetIssueFee' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getAssetIssueFee' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
-                                    record.key == 'getWitnessPayPerBlock' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getWitnessPayPerBlock' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
-                                    record.key == 'getWitnessStandbyAllowance' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getWitnessStandbyAllowance' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {/*{*/}
-                                    {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>*/}
+                                    {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>*/}
                                 {/*}*/}
                                 {/*{*/}
                                     {/*record.key == 'getCreateNewAccountBandwidthRate' && <div><span>{text}</span> &nbsp;<span>bandwith/byte</span></div>*/}
@@ -318,14 +318,14 @@ export class SetProposal extends Component {
                                 {
                                     record.key == 'getEnergyFee' && <div>
                                         {
-                                            <span>{text / ONE_TRX} TRX</span>
+                                            <span>{text / ONE_LIND} LIND</span>
                                         }
                                     </div>
                                 }
                                 {
                                     record.key == 'getExchangeCreateFee' && <div>
                                         {
-                                            <span>{text / ONE_TRX} TRX</span>
+                                            <span>{text / ONE_LIND} LIND</span>
                                         }
                                     </div>
                                 }
@@ -369,7 +369,7 @@ export class SetProposal extends Component {
                                     </div>
                                 }
                                 {
-                                    record.key == 'getAllowTvmTransferTrc10' && <div>
+                                    record.key == 'getAllowTvmTransferLrc10' && <div>
                                         {
                                             text? <span>{tu('propose_allowed')}</span>:
                                                 <span>{tu('propose_not_allowed')}</span>
@@ -422,13 +422,13 @@ export class SetProposal extends Component {
                                 }
                                 {
                                     record.key == 'getUpdateAccountPermissionFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;
-                                        <span>TRX</span></div>
+                                        <span>{text / ONE_LIND}</span> &nbsp;
+                                        <span>LIND</span></div>
                                 }
                                 {
                                     record.key == 'getMultiSignFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;
-                                        <span>TRX</span></div>
+                                        <span>{text / ONE_LIND}</span> &nbsp;
+                                        <span>LIND</span></div>
                                 }
 
                                 {
@@ -457,7 +457,7 @@ export class SetProposal extends Component {
                                 }
                                 {                       
                                     record.key == 'getShieldedTransactionFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                     </div>
                                 }
                                 {                       
@@ -477,7 +477,7 @@ export class SetProposal extends Component {
                                 {
                                     record.key == 'getWitness127PayPerBlock' &&
                                         <div>
-                                            <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                            <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         </div>
                                 }
                                 {
@@ -496,7 +496,7 @@ export class SetProposal extends Component {
                                 {
                                     record.key == 'getShieldedTransactionCreateAccountFee' &&
                                         <div>
-                                            <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                            <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         </div>
                                 }
                                 {
@@ -783,8 +783,8 @@ export class SetProposal extends Component {
                 </Form.Item>
               } 
               {
-                record.key == "getAllowTvmTransferTrc10" &&  <Form.Item>
-                    {getFieldDecorator('getAllowTvmTransferTrc10', {
+                record.key == "getAllowTvmTransferLrc10" &&  <Form.Item>
+                    {getFieldDecorator('getAllowTvmTransferLrc10', {
                         rules: [{ required: true, message: tu("proposal_validate_text_3") }],
                     })(
                         <Select
@@ -1065,28 +1065,28 @@ export class SetProposal extends Component {
             inputValue = e * 1000
             break;
         case "getAccountUpgradeCost":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;
         case "getCreateAccountFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;  
         case "getTransactionFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;     
         case "getAssetIssueFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;    
         case "getWitnessPayPerBlock":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;  
         case "getWitnessStandbyAllowance":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;   
         case "getEnergyFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;          
         case "getExchangeCreateFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;     
         case "getMaxCpuTimeOfOneTx":
             inputValue = e
@@ -1094,7 +1094,7 @@ export class SetProposal extends Component {
         case "getAllowUpdateAccountName":
             inputValue = e
             break;  
-        case "getAllowTvmTransferTrc10":
+        case "getAllowTvmTransferLrc10":
             inputValue = e
             break; 
         case "getTotalEnergyCurrentLimit":
@@ -1107,16 +1107,16 @@ export class SetProposal extends Component {
             inputValue = e
             break;  
         case "getUpdateAccountPermissionFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;
         case "getMultiSignFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;  
         case "getAllowProtoFilterNum":
             inputValue = e
             break;   
         case "getShieldedTransactionFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break;  
         case "getAdaptiveResourceLimitMultiplier":
             inputValue = e 
@@ -1125,7 +1125,7 @@ export class SetProposal extends Component {
             inputValue = e 
             break;   
         case "getWitness127PayPerBlock":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break; 
         case "getAllowTvmSolidity059":
             inputValue = e 
@@ -1134,7 +1134,7 @@ export class SetProposal extends Component {
             inputValue = e 
             break;  
         case "getShieldedTransactionCreateAccountFee":
-            inputValue = e * ONE_TRX
+            inputValue = e * ONE_LIND
             break; 
         case "getForbidTransferToContract":
             inputValue = e 

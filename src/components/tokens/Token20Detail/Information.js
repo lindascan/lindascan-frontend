@@ -14,7 +14,7 @@ import {upperFirst} from "lodash";
 
 import {
   API_URL,
-  ONE_TRX,
+  ONE_LIND,
   ONE_USDJ,
   ONE_JST,
   CONTRACT_ADDRESS_USDT,
@@ -61,11 +61,11 @@ export function Information({ token: tokens, priceUSD,intl }) {
   let currentTotal = totalSupply;
 
   let totalSupplyUsd = token["market_info"]
-    ? (token["market_info"].priceInTrx * totalSupply * priceUSD).toFixed(0)
+    ? (token["market_info"].priceInLind * totalSupply * priceUSD).toFixed(0)
     : 0;
 
   let currentTotalSupplyUsd = token["market_info"]
-    ? (token["market_info"].priceInTrx * currentTotal * priceUSD).toFixed(0)
+    ? (token["market_info"].priceInLind * currentTotal * priceUSD).toFixed(0)
     : 0;
   // if wink
   if (token.contract_address === "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7") {
@@ -129,8 +129,8 @@ export function Information({ token: tokens, priceUSD,intl }) {
             (token.contract_address == CONTRACT_ADDRESS_USDJ || token.contract_address == CONTRACT_ADDRESS_USDJ_TESTNET) &&
             <div className="d-flex price-info">
             { ONE_USDJ.toFixed(6)} USD&nbsp;
-            <span className="token-price-trx">
-              ≈ {(ONE_USDJ/priceUSD).toFixed(6)} TRX
+            <span className="token-price-lind">
+              ≈ {(ONE_USDJ/priceUSD).toFixed(6)} LIND
             </span>
           </div> 
           }
@@ -138,8 +138,8 @@ export function Information({ token: tokens, priceUSD,intl }) {
            (token.contract_address == CONTRACT_ADDRESS_JED || token.contract_address == CONTRACT_ADDRESS_JED_TESTNET )&&
             <div className="d-flex price-info">
             { ONE_JST.toFixed(6)} USD&nbsp;
-            <span className="token-price-trx">
-              ≈ {(ONE_JST/priceUSD).toFixed(6)} TRX
+            <span className="token-price-lind">
+              ≈ {(ONE_JST/priceUSD).toFixed(6)} LIND
             </span>
           </div> 
           }
@@ -148,8 +148,8 @@ export function Information({ token: tokens, priceUSD,intl }) {
           { ((token.contract_address != CONTRACT_ADDRESS_USDJ || token.contract_address != CONTRACT_ADDRESS_JED || token.contract_address != CONTRACT_ADDRESS_USDJ_TESTNET || token.contract_address != CONTRACT_ADDRESS_JED_TESTNET )  && token["market_info"]) ? (
             <div className="d-flex price-info">
               {token["priceToUsd"].toFixed(6)} USD&nbsp;
-              <span className="token-price-trx">
-                ≈ {token["market_info"].priceInTrx} TRX
+              <span className="token-price-lind">
+                ≈ {token["market_info"].priceInLind} LIND
               </span>
               <span
                 className={
@@ -171,7 +171,7 @@ export function Information({ token: tokens, priceUSD,intl }) {
                 )}
               </span>
               <Link
-                to={`/exchange/trc20?id=${token["market_info"].pairId}`}
+                to={`/exchange/lrc20?id=${token["market_info"].pairId}`}
                 target="_blank"
                 className="btn btn-danger btn-sm ml-1"
                 style={{ height: "1.2rem", lineHeight: "0.6rem",textTransform:'capitalize' }}
@@ -261,7 +261,7 @@ export function Information({ token: tokens, priceUSD,intl }) {
       )
     },
     {
-      name: "TRC20_decimals",
+      name: "LRC20_decimals",
       content: token.decimals ? (
         <FormattedNumber value={token.decimals} />
       ) : (

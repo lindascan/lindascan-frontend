@@ -6,10 +6,10 @@ import { alpha } from "../../utils/str";
 import { Client } from "../../services/api";
 import { upperFirst, cloneDeep } from "lodash";
 import { Tag, Radio } from "antd";
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import {
   TokenLink,
-  TokenTRC20Link,
+  TokenLRC20Link,
   HrefLink,
   AddressLink
 } from "../common/Links";
@@ -42,9 +42,9 @@ import Countdown from "react-countdown-now";
 import _, { find } from "lodash";
 import SignDetailsModal from "./SignDetailsModal";
 import { reloadWallet } from "../../actions/wallet";
-import {withTronWeb} from "../../utils/tronWeb";
+import {withLindaWeb} from "../../utils/lindaWeb";
 
-@withTronWeb
+@withLindaWeb
 class MySignature extends React.Component {
   constructor(props) {
     super(props);
@@ -98,7 +98,7 @@ class MySignature extends React.Component {
     let {
       data: { data }
     } = await xhr.get(
-       "https://list.tronlink.org/api/wallet/multi/trx_record",
+       "https://list.lindalink.org/api/wallet/multi/lind_record",
       {
         params: {
           address: wallet.address,
@@ -214,11 +214,11 @@ class MySignature extends React.Component {
     let { wallet } = this.props;
     let { filter } = this.state;
     let transactionId;
-    let result, success, tronWeb, currentTransactionHexStr;
+    let result, success, lindaWeb, currentTransactionHexStr;
     if(this.props.wallet.type==="ACCOUNT_LEDGER"){
-      tronWeb = this.props.tronWeb()
+      lindaWeb = this.props.lindaWeb()
     }else{
-      tronWeb = this.props.account.tronWeb;
+      lindaWeb = this.props.account.lindaWeb;
     }
     if (
       !(
@@ -242,10 +242,10 @@ class MySignature extends React.Component {
     //set transaction txID
     currentTransaction.txID = details.hash;
     //sign transaction
-    let SignTransaction = await tronWeb.trx
+    let SignTransaction = await lindaWeb.lind
       .multiSign(
         currentTransaction,
-        tronWeb.defaultPrivateKey,
+        lindaWeb.defaultPrivateKey,
         currentTransaction.raw_data.contract[0].Permission_id
       )
       .catch(e => {
@@ -300,7 +300,7 @@ class MySignature extends React.Component {
       modal: (
         <SweetAlert
           error
-          title={tu("tronscan_not_support_signatures_this_transaction")}
+          title={tu("lindascan_not_support_signatures_this_transaction")}
           onConfirm={this.hideModal}
         />
       )
@@ -525,7 +525,7 @@ class MySignature extends React.Component {
                   </div>
                   <div className="mt-3">
                     <Link
-                      className="color-tron-100 list-item-word"
+                      className="color-linda-100 list-item-word"
                       style={{ fontSize: 12 }}
                       to={`/transaction/${record.hash}`}
                     >
@@ -659,7 +659,7 @@ class MySignature extends React.Component {
                     typeText="transactions_unit"
                   />
                 )}
-                {loading?<TronLoader/>:(
+                {loading?<LindaLoader/>:(
                   data.length === 0 ? (
                     <div className="p-3 text-center no-data">
                       {tu("no_transactions")}

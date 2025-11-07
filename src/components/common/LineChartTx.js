@@ -42,7 +42,7 @@ export class LineReactTx extends React.Component {
       }
     };
     _config.overviewChart.grid[0].top = 120;
-    // config.overviewChart.title.text = intl.formatMessage({id: 'TRON Transactions Chart'});
+    // config.overviewChart.title.text = intl.formatMessage({id: 'LINDA Transactions Chart'});
     _config.overviewChart.xAxis[0].data = [];
     _config.overviewChart.series[0].data = [];
     _config.overviewChart.yAxis[0].name = intl.formatMessage({id: 'Transactions Per Day'});

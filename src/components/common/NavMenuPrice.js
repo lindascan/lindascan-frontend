@@ -5,7 +5,7 @@ import { FormattedNumber } from "react-intl";
 import { Tooltip } from "reactstrap";
 import { alpha } from "../../utils/str";
 import { connect } from "react-redux";
-import { ONE_TRX, API_URL } from "../../constants";
+import { ONE_LIND, API_URL } from "../../constants";
 import Lockr from "lockr";
 let PriceContext = React.createContext({
   priceBTC: 0,
@@ -23,9 +23,9 @@ class PriceProviderCmp extends React.PureComponent {
         BTC: 0,
         EUR: 0,
         USD: 0,
-        TRX: 1
+        LIND: 1
       },
-      priceShown: props.activeCurrency || "TRX",
+      priceShown: props.activeCurrency || "LIND",
       currencies: {},
       activePrice: 1
     };
@@ -68,7 +68,7 @@ class PriceProviderCmp extends React.PureComponent {
       EUR: parseFloat(dataEur[0].price_eur),
       USD: parseFloat(dataEur[0].price_usd),
       ETH: parseFloat(dataEth[0].price_eth),
-      TRX: 1
+      LIND: 1
     };
 
     this.setState(state => ({
@@ -102,7 +102,7 @@ export let PriceProvider = connect(
   mapDispatchToProps
 )(PriceProviderCmp);
 
-export class NavMenuTRXPrice extends React.PureComponent {
+export class NavMenuLINDPrice extends React.PureComponent {
   constructor() {
     super();
 
@@ -148,22 +148,22 @@ export class NavMenuTRXPrice extends React.PureComponent {
                         onMouseLeave={() => this.setState({ open: false })}
                         {...props}
                       >
-                        {name == "TRX" ? amount / ONE_TRX : amount} {name}
+                        {name == "LIND" ? amount / ONE_LIND : amount} {name}
                       </span>
                     )}
                   </FormattedNumber>
                   {showPopup && (
                     <Tooltip placement="top" isOpen={open} target={id}>
-                      TRX
+                      LIND
                       <FormattedNumber
-                        value={amount / ONE_TRX}
+                        value={amount / ONE_LIND}
                         maximumFractionDigits={6}
                         // minimumFractionDigits={6}
                       />
                       <br />
                       BTC
                       <FormattedNumber
-                        value={priceValues.prices.BTC * (amount / ONE_TRX)}
+                        value={priceValues.prices.BTC * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.BTC.fractions || 2
                         }
@@ -171,7 +171,7 @@ export class NavMenuTRXPrice extends React.PureComponent {
                       <br />
                       ETH
                       <FormattedNumber
-                        value={priceValues.prices.ETH * (amount / ONE_TRX)}
+                        value={priceValues.prices.ETH * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.ETH.fractions || 2
                         }
@@ -179,7 +179,7 @@ export class NavMenuTRXPrice extends React.PureComponent {
                       <br />
                       USD
                       <FormattedNumber
-                        value={priceValues.prices.USD * (amount / ONE_TRX)}
+                        value={priceValues.prices.USD * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.USD.fractions || 3
                         }
@@ -187,7 +187,7 @@ export class NavMenuTRXPrice extends React.PureComponent {
                       <br />
                       EUR
                       <FormattedNumber
-                        value={priceValues.prices.EUR * (amount / ONE_TRX)}
+                        value={priceValues.prices.EUR * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.EUR.fractions || 2
                         }
@@ -225,7 +225,7 @@ export class NavMenuTRXPrice extends React.PureComponent {
                   </FormattedNumber>
                   {showPopup && (
                     <Tooltip placement="top" isOpen={open} target={id}>
-                      TRX
+                      LIND
                       <FormattedNumber
                         value={amount}
                         maximumFractionDigits={6}
@@ -298,7 +298,7 @@ export class NavMenuTRXPrice extends React.PureComponent {
                   </FormattedNumber>
                   {showPopup && (
                     <Tooltip placement="top" isOpen={open} target={id}>
-                      TRX
+                      LIND
                       <FormattedNumber
                         value={amount}
                         maximumFractionDigits={6}

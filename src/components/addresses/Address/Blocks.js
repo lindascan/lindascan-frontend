@@ -43,8 +43,8 @@ export default function Blocks({blocks = []}) {
     },
     {
       title: <i className="fas fa-exchange-alt"/>,
-      dataIndex: 'nrOfTrx',
-      key: 'nrOfTrx',
+      dataIndex: 'nrOfLind',
+      key: 'nrOfLind',
       align: 'right',
       className: 'ant_table',
       render: (text, record, index) => {

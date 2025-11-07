@@ -2,20 +2,20 @@ import React, {Component} from 'react';
 import { FormattedNumber, injectIntl} from "react-intl";
 import {t, tu} from "../../../utils/i18n";
 import {Client} from "../../../services/api";
-import {TokenLink, TokenTRC20Link} from "../../common/Links";
+import {TokenLink, TokenLRC20Link} from "../../common/Links";
 import {QuestionMark} from "../../common/QuestionMark";
-import {API_URL, ONE_TRX, ONE_USDJ, ONE_JST, IS_MAINNET, CONTRACT_ADDRESS_USDJ, CONTRACT_ADDRESS_USDJ_TESTNET, CONTRACT_ADDRESS_JED,CONTRACT_ADDRESS_JED_TESTNET} from "../../../constants";
+import {API_URL, ONE_LIND, ONE_USDJ, ONE_JST, IS_MAINNET, CONTRACT_ADDRESS_USDJ, CONTRACT_ADDRESS_USDJ_TESTNET, CONTRACT_ADDRESS_JED,CONTRACT_ADDRESS_JED_TESTNET} from "../../../constants";
 import {upperFirst, toLower} from "lodash";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import xhr from "axios/index";
 import {Tooltip} from "reactstrap";
-import {withTronWeb} from "../../../utils/tronWeb";
+import {withLindaWeb} from "../../../utils/lindaWeb";
 import {Link} from "react-router-dom";
 import { Button,Table, Radio, Divider, Row, Col } from 'antd';
-import { TRXPrice } from "../../common/Price";
+import { LINDPrice } from "../../common/Price";
 import { connect } from "react-redux";
 import { loadUsdPrice } from "../../../actions/blockchain";
-@withTronWeb
+@withLindaWeb
 class TokenList extends Component {
 
   constructor(props) {
@@ -82,8 +82,8 @@ class TokenList extends Component {
      
       // item.marketcap = item.marketcap || 0
       // item.nrOfTokenHolders = item.nrOfTokenHolders || '-'
-      // item.volume24hInTrx =  item.volume24hInTrx|| 0
-      // item.priceInTrx = item.priceInTrx || '-'
+      // item.volume24hInLind =  item.volume24hInLind|| 0
+      // item.priceInLind = item.priceInLind || '-'
 
       if(item.gain != undefined){
         item.gain = item.gain * 100
@@ -156,8 +156,8 @@ class TokenList extends Component {
     const sortMap = {
       nrOfTokenHolders: 'holderCount',
       gain: 'gain',
-      priceInTrx: 'priceInTrx',
-      volume24hInTrx: 'volume24hInTrx',
+      priceInLind: 'priceInLind',
+      volume24hInLind: 'volume24hInLind',
       marketcap: 'marketcap'
     }
     if(sorter.order === undefined){
@@ -259,15 +259,15 @@ class TokenList extends Component {
                     </a>
                   ) : (
                     <div>
-                      {record.tokenType == "trc10" && (
+                      {record.tokenType == "lrc10" && (
                         <TokenLink
                           name={record.name}
                           id={record.tokenId}
                           namePlus={record.name + " (" + record.abbr + ")"}
                         />
                       )}
-                      {record.tokenType == "trc20" && (
-                        <TokenTRC20Link
+                      {record.tokenType == "lrc20" && (
+                        <TokenLRC20Link
                           name={record.name}
                           namePlus={record.name + " (" + record.abbr + ")"}
                           address={record.contractAddress}
@@ -284,17 +284,17 @@ class TokenList extends Component {
       },
       {
         title: intl.formatMessage({id: 'price'}),
-        dataIndex: 'priceInTrx',
-        key: 'priceInTrx',
+        dataIndex: 'priceInLind',
+        key: 'priceInLind',
         sorter: true,
-        sortOrder: filter.sort === 'priceInTrx' && filter.order_current,
+        sortOrder: filter.sort === 'priceInLind' && filter.order_current,
         align: 'left',
         className: 'ant_table d-none d-md-table-cell _text_nowrap',
         render:(text, record, index)=>{
           return (
             text ? (<div className="d-flex flex-column">
               <span>{(text*priceUSD).toFixed(6)}{' USD'}</span>
-              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="trx-price">{text.toFixed(6)}{' TRX'}</span> : ''}
+              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="lind-price">{text.toFixed(6)}{' LIND'}</span> : ''}
             </div>) : (
               <div>
               {
@@ -331,25 +331,25 @@ class TokenList extends Component {
         className: 'ant_table d-none d-md-table-cell _text_nowrap'
       },
       {
-        title: intl.formatMessage({id: 'volume_24_trx'}),
-        dataIndex: 'volume24hInTrx',
-        key: 'volume24hInTrx',
+        title: intl.formatMessage({id: 'volume_24_lind'}),
+        dataIndex: 'volume24hInLind',
+        key: 'volume24hInLind',
         align: 'left',
         className: 'ant_table',
         sorter: true,
-        sortOrder: filter.sort === 'volume24hInTrx' && filter.order_current,
+        sortOrder: filter.sort === 'volume24hInLind' && filter.order_current,
         render: (text, record, index) => {
           // return text>0? <FormattedNumber value={text} maximumFractionDigits={2}/>: '-'
           return (
             text ? (<div className="d-flex flex-column">
               <span><FormattedNumber value={text*priceUSD} maximumFractionDigits={2}/>{' USD'}</span>
-              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="trx-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' TRX'}</span> : ''}
+              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="lind-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' LIND'}</span> : ''}
             </div>) : '-'
           )
         }
       },
       {
-        // title: intl.formatMessage({id: 'market_capitalization_trx'}),
+        // title: intl.formatMessage({id: 'market_capitalization_lind'}),
         title: () => {
           let text = intl.formatMessage({id: 'total_supply_tip1'}) + valueAtLeast + intl.formatMessage({id: 'total_supply_tip2'});
           return (
@@ -370,7 +370,7 @@ class TokenList extends Component {
           return (
             text ? (<div className="d-flex flex-column">
               <span><FormattedNumber value={text*priceUSD} maximumFractionDigits={2}/>{' USD'}</span>
-              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="trx-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' TRX'}</span> : ''}
+              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="lind-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' LIND'}</span> : ''}
             
             </div>) : "-"
           )
@@ -391,35 +391,35 @@ class TokenList extends Component {
         className: 'ant_table d-none d-sm-table-cell'
       },
       {
-          title: intl.formatMessage({id: 'trc20_cur_order_header_action'}),
+          title: intl.formatMessage({id: 'lrc20_cur_order_header_action'}),
           dataIndex: 'abbr',
           key: 'abbr',
           width: '11%',
           render: (text, record, index) => {
             return <div>
               {
-                  record.tokenType == 'trc10'&&
+                  record.tokenType == 'lrc10'&&
                   <Link to={`/token/${encodeURI(record.tokenId)}`} className="token-details btn" style={{textTransform:'capitalize'}}>{tu('details')}</Link>
               }
               {
-                  record.tokenType == 'trc20'&&
+                  record.tokenType == 'lrc20'&&
                   <Link to={`/token20/${encodeURI(record.contractAddress)}`} className="token-details btn" style={{textTransform:'capitalize'}}>{tu('details')}</Link>
               }
               {
                   IS_MAINNET&& <span>
                     {(record.extra && record.extra.url && record.extra.desc) ? <a href={record.extra.url} className="token-active-details btn mt-2"  style={{textTransform:'capitalize'}}>{tu(record.extra.desc)}</a>
                         : (record.pairId )?
-                            <Link to={`/exchange/trc20?id=${record.pairId}`} className="token-details btn mt-2" target="_blank" style={{textTransform:'capitalize'}}> {tu('token_trade')}</Link>
+                            <Link to={`/exchange/lrc20?id=${record.pairId}`} className="token-details btn mt-2" target="_blank" style={{textTransform:'capitalize'}}> {tu('token_trade')}</Link>
                             : <div>
                               <a href="javascript:;"
                                  className="token-disabled-exchange btn mt-2"
                                  style={{textTransform:'capitalize'}}
-                                 id={record.tokenType == "trc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId}
+                                 id={record.tokenType == "lrc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId}
                                  onMouseOver={(prevS,props) => this.setState({[record.abbr + record.tokenId]: true})}
                                  onMouseOut={() => this.setState({[record.abbr+record.tokenId]: false})}>
                                   {tu('token_trade')}
                               </a>
-                              <Tooltip placement="top" target={record.tokenType == "trc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId} isOpen={this.state[record.abbr+record.tokenId]}> <span className="text-capitalize">{tu("token_does_not_support_exchange")}</span></Tooltip>
+                              <Tooltip placement="top" target={record.tokenType == "lrc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId} isOpen={this.state[record.abbr+record.tokenId]}> <span className="text-capitalize">{tu("token_does_not_support_exchange")}</span></Tooltip>
                             </div>}
                 </span>
 
@@ -527,7 +527,7 @@ class TokenList extends Component {
                               </a>
                             ) : (
                               <div>
-                                {record.tokenType == "trc10" && (
+                                {record.tokenType == "lrc10" && (
                                   <TokenLink
                                     name={record.name}
                                     id={record.tokenId}
@@ -536,8 +536,8 @@ class TokenList extends Component {
                                     }
                                   />
                                 )}
-                                {record.tokenType == "trc20" && (
-                                  <TokenTRC20Link
+                                {record.tokenType == "lrc20" && (
+                                  <TokenLRC20Link
                                     name={record.name}
                                     namePlus={
                                       record.name + " (" + record.abbr + ")"
@@ -569,34 +569,34 @@ class TokenList extends Component {
                 className: 'ant_table d-none d-sm-table-cell'
             },
             {
-                title: intl.formatMessage({id: 'trc20_cur_order_header_action'}),
+                title: intl.formatMessage({id: 'lrc20_cur_order_header_action'}),
                 dataIndex: 'abbr',
                 key: 'abbr',
                 width: '10%',
                 render: (text, record, index) => {
                     return <div>
                         {
-                            record.tokenType == 'trc10'&&
+                            record.tokenType == 'lrc10'&&
                             <Link to={`/token/${encodeURI(record.tokenId)}`} className="token-details btn">{tu('details')}</Link>
                         }
                         {
-                            record.tokenType == 'trc20'&&
+                            record.tokenType == 'lrc20'&&
                             <Link to={`/token20/${encodeURI(record.contractAddress)}`} className="token-details btn">{tu('details')}</Link>
                         }
                         {
                             IS_MAINNET&& <span>
                            {(record.extra && record.extra.url && record.extra.desc)? <a href={record.extra.url} className="token-active-details btn mt-2">{tu(record.extra.desc)}</a>
                             : (record.pairId )?
-                            <Link to={`/exchange/trc20?id=${record.pairId}`} className="token-details btn mt-2"> {tu('token_trade')}</Link>
+                            <Link to={`/exchange/lrc20?id=${record.pairId}`} className="token-details btn mt-2"> {tu('token_trade')}</Link>
                             : <div>
                                   <a href="javascript:;"
                                      className="token-disabled-exchange btn mt-2"
-                                     id={record.tokenType == "trc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId}
+                                     id={record.tokenType == "lrc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId}
                                      onMouseOver={(prevS,props) => this.setState({[record.abbr + record.tokenId]: true})}
                                      onMouseOut={() => this.setState({[record.abbr+record.tokenId]: false})}>
                                       {tu('token_trade')}
                                   </a>
-                                  <Tooltip placement="top" target={record.tokenType == "trc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId} isOpen={this.state[record.abbr+record.tokenId]}> <span className="text-capitalize">{tu("token_does_not_support_exchange")}</span></Tooltip>
+                                  <Tooltip placement="top" target={record.tokenType == "lrc20"?"exchange_"+record.contractAddress:"exchange_"+record.tokenId} isOpen={this.state[record.abbr+record.tokenId]}> <span className="text-capitalize">{tu("token_does_not_support_exchange")}</span></Tooltip>
                             </div>}
                 </span>
 
@@ -618,7 +618,7 @@ class TokenList extends Component {
     let column = IS_MAINNET?this.customizedColumn():this.suncustomizedColumn();
     let mainInfo = `${intl.formatMessage({id: 'part_total'})} ${total} ${intl.formatMessage({id: 'token_unit'})}`;
     //let mainInfo = `${intl.formatMessage({id: 'token_list_count'})} : ${total} `;
-    let sunInfo = `${intl.formatMessage({id: 'token_list_count'})} : ${total} , ${intl.formatMessage({id: 'total_in_tronscan'})} : ${totalAll} `;
+    let sunInfo = `${intl.formatMessage({id: 'token_list_count'})} : ${total} , ${intl.formatMessage({id: 'total_in_lindascan'})} : ${totalAll} `;
 
     let url = 'https://poloniex.org/launchBase?utm_source=TS3'
     if(intl.locale == 'zh'){
@@ -627,10 +627,10 @@ class TokenList extends Component {
     return (
         <main className="container header-overlap token_black">
           {alert}
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
           {
             <div className="row token-list-wrap">
-              <div className="col-md-12 table_pos trc20-ad-bg pt-5 pt-md-0">
+              <div className="col-md-12 table_pos lrc20-ad-bg pt-5 pt-md-0">
               {IS_MAINNET && <Link to={'/tokens/create'} className="create-token-btn">{tu('create_token')}</Link>}
                 {total ?
                   <div className="d-md-block">
@@ -639,7 +639,7 @@ class TokenList extends Component {
                           <div className="d-flex bg-white justify-content-center">
                             <div className="d-flex flex-column justify-content-center">
                               <div ><FormattedNumber value={all}/></div>
-                              <div>{tu('token_tron_total')}</div>
+                              <div>{tu('token_linda_total')}</div>
                             </div>
                             <div></div>
                             <div className="d-flex flex-column justify-content-center">
@@ -663,21 +663,21 @@ class TokenList extends Component {
                       <div className="d-flex justify-content-between align-items-center mb-2 filter-wrap">
                         <div>
                           <div>
-                            {all && !IS_MAINNET && <div>{tu('total_tron_ecosystem_tokens')}{all}</div>}
+                            {all && !IS_MAINNET && <div>{tu('total_linda_ecosystem_tokens')}{all}</div>}
                             {IS_MAINNET ? mainInfo : sunInfo}  
                             {' '}
                             <span>
-                              <QuestionMark placement="top" text="newly_issued_token_by_tronscan" className="token-list-info"></QuestionMark>
+                              <QuestionMark placement="top" text="newly_issued_token_by_lindascan" className="token-list-info"></QuestionMark>
                             </span>
                           </div>
                             {/* {IS_MAINNET?<a href={`https://poloniex.org`} target="_blank" >{t("Trade_on_Poloni DEX")}></a>:''} */}
                         </div>
-                        <div className="d-md-flex apply-trc20 apply-all align-items-center">
+                        <div className="d-md-flex apply-lrc20 apply-all align-items-center">
                           <div className="d-flex align-items-center mb-2 mb-md-0">
                             <Radio.Group size="Small" value={filter.filter}  onChange={this.onChange}>
                               <Radio.Button value="all">{tu('all')}</Radio.Button>
-                              <Radio.Button value="trc10">TRC10</Radio.Button>
-                              <Radio.Button value="trc20">TRC20</Radio.Button>
+                              <Radio.Button value="lrc10">LRC10</Radio.Button>
+                              <Radio.Button value="lrc20">LRC20</Radio.Button>
                             </Radio.Group>
                           </div>
                           {/**<a className="pl-2 md-2 ml-4" href="https://goo.gl/forms/PiyLiDeaXv3uesSE3" target="_blank" style={{color:'#C23631'}}>
@@ -700,7 +700,7 @@ class TokenList extends Component {
                   bordered={true}
                   rowClassName={ (record, index) => {
                     if(record.isTop){
-                      return 'trc20-star-ad'
+                      return 'lrc20-star-ad'
                     }
                   }}
                   onRow={(record) => {

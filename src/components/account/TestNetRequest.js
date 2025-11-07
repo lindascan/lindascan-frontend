@@ -4,7 +4,7 @@ import {RecaptchaAsync} from "../common/async";
 import xhr from "axios/index";
 import {FormattedNumber} from "react-intl";
 import SweetAlert from "react-bootstrap-sweetalert";
-import {API_URL, ONE_TRX} from "../../constants";
+import {API_URL, ONE_LIND} from "../../constants";
 import {Alert} from "reactstrap";
 
 export default class TestNetRequest extends React.Component {
@@ -16,7 +16,7 @@ export default class TestNetRequest extends React.Component {
       modal: null,
       verificationCode: null,
       success: false,
-      waitingForTrx: false,
+      waitingForLind: false,
     };
   }
 
@@ -36,11 +36,11 @@ export default class TestNetRequest extends React.Component {
 
   };
 
-  requestTrx = async () => {
+  requestLind = async () => {
     let {account, onRequested} = this.props;
     let {verificationCode} = this.state;
 
-    this.setState({waitingForTrx: true});
+    this.setState({waitingForLind: true});
 
     try {
 
@@ -57,8 +57,8 @@ export default class TestNetRequest extends React.Component {
         this.setState({
           success: true,
           modal: (
-              <SweetAlert success title={tu("trx_received")} onConfirm={this.hideModal}>
-                <FormattedNumber value={amount / ONE_TRX}/> TRX {tu("have_been_added_to_your_account")}
+              <SweetAlert success title={tu("lind_received")} onConfirm={this.hideModal}>
+                <FormattedNumber value={amount / ONE_LIND}/> LIND {tu("have_been_added_to_your_account")}
               </SweetAlert>
           )
         });
@@ -67,7 +67,7 @@ export default class TestNetRequest extends React.Component {
           verificationCode: null,
           modal: (
               <SweetAlert danger title={tu("error")} onConfirm={this.hideModal}>
-                {tu("test_trx_temporarily_unavailable_message")}
+                {tu("test_lind_temporarily_unavailable_message")}
               </SweetAlert>
           )
         });
@@ -88,7 +88,7 @@ export default class TestNetRequest extends React.Component {
       this.setState({
         verificationCode: null,
         modal: (
-            <SweetAlert danger title="TRX Received" onConfirm={this.hideModal}>
+            <SweetAlert danger title="LIND Received" onConfirm={this.hideModal}>
               {tu("An_unknown_error_occurred,_please_try_again_in_a_few_minutes")}
             </SweetAlert>
         )
@@ -96,7 +96,7 @@ export default class TestNetRequest extends React.Component {
     }
     finally {
       this.setState({
-        waitingForTrx: false,
+        waitingForLind: false,
       });
     }
   };
@@ -106,8 +106,8 @@ export default class TestNetRequest extends React.Component {
   };
 
   canRequest = () => {
-    let {verificationCode, waitingForTrx} = this.state;
-    return !waitingForTrx && !!verificationCode;
+    let {verificationCode, waitingForLind} = this.state;
+    return !waitingForLind && !!verificationCode;
   };
 
   render() {
@@ -135,9 +135,9 @@ export default class TestNetRequest extends React.Component {
                         verifyCallback={this.onVerify}/>
                   </p>
                   <button className="btn btn-secondary"
-                          onClick={this.requestTrx}
+                          onClick={this.requestLind}
                           disabled={!this.canRequest()}>
-                    {tu("request_trx_for_testing")}
+                    {tu("request_lind_for_testing")}
                   </button>
                 </React.Fragment>
           }

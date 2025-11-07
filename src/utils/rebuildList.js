@@ -30,15 +30,15 @@ export default (list = [], tokenId, amount, infolist=false) => {
 
           const id = item[tokenId]
           
-          if(id == '_' || upperCase(id) == "TRX" || id == ''){
-            setItem(item, 'TRX', id, 6, amount?item[amount] / Math.pow(10,6): 0,'TRX','')
+          if(id == '_' || upperCase(id) == "LIND" || id == ''){
+            setItem(item, 'LIND', id, 6, amount?item[amount] / Math.pow(10,6): 0,'LIND','')
           }
           if(IDmap[id]){
             const list = IDmap[id].split('_&&_')
             setItem(item, list[0], list[1], list[2], amount? item[amount] / Math.pow(10,list[2]): 0,list[3],list[4])
 
           }
-          if(!IDmap[id] && id != "_" && upperCase(id) != "TRX" && id != ''){
+          if(!IDmap[id] && id != "_" && upperCase(id) != "LIND" && id != ''){
             setItem(item, item[tokenId], item[tokenId], 0, item[amount],item[tokenId],item[tokenId])
           }
           return item
@@ -48,15 +48,15 @@ export default (list = [], tokenId, amount, infolist=false) => {
           obj[infolist].map(item =>{
             const id = item[tokenId]
           
-            if(id == '_' || upperCase(id) == "TRX" || id == ''){
-              setItem(item, 'TRX', id, 6, amount?item[amount] / Math.pow(10,6): 0,'TRX','')
+            if(id == '_' || upperCase(id) == "LIND" || id == ''){
+              setItem(item, 'LIND', id, 6, amount?item[amount] / Math.pow(10,6): 0,'LIND','')
             }
             if(IDmap[id]){
               const list = IDmap[id].split('_&&_');
               setItem(item, list[0], list[1], list[2], amount? item[amount] / Math.pow(10,list[2]): 0,list[3],list[4])
 
             }
-            if(!IDmap[id] && id != "_" && upperCase(id) != "TRX" && id != ''){
+            if(!IDmap[id] && id != "_" && upperCase(id) != "LIND" && id != ''){
               setItem(item, item[tokenId], item[tokenId], 0, item[amount],item[tokenId],item[tokenId])
             }
             return item
@@ -68,14 +68,14 @@ export default (list = [], tokenId, amount, infolist=false) => {
           tokenId.map((tid,index) => {
             const id = item[tid]
             
-            if(id == '_' || upperCase(id) == "TRX" || id == ''){
-              setItem(item, 'TRX', id, 6, amount[index]?item[amount[index]] / Math.pow(10,6): 0,'TRX','',index)
+            if(id == '_' || upperCase(id) == "LIND" || id == ''){
+              setItem(item, 'LIND', id, 6, amount[index]?item[amount[index]] / Math.pow(10,6): 0,'LIND','',index)
             }
             if(IDmap[id]){
               const list = IDmap[id].split('_&&_')
               setItem(item, list[0], list[1], list[2], amount[index]? item[amount[index]] / Math.pow(10,list[2]): 0,list[3],list[4],index);
             }
-            if(!IDmap[id] && id != "_" && upperCase(id) != "TRX"){
+            if(!IDmap[id] && id != "_" && upperCase(id) != "LIND"){
               setItem(item, item[tid], 0, 0, item[amount[index]],item[tid],item[tid],index)
             }
           });

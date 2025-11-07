@@ -6,8 +6,8 @@ import React, { Fragment } from "react";
 import { tu } from "../../../../utils/i18n";
 import Field from "../../../tools/TransactionViewer/Field";
 import { AddressLink } from "../../../common/Links";
-import { TRXPrice } from "../../../common/Price";
-import { ONE_TRX } from "../../../../constants";
+import { LINDPrice } from "../../../common/Price";
+import { ONE_LIND } from "../../../../constants";
 import { NameWithId } from "../../../common/names";
 import rebuildList from "../../../../utils/rebuildList";
 import { TransationTitle } from "./common/Title";
@@ -106,7 +106,7 @@ class TransferAssetContract extends React.Component {
                 </span>
               </Field>
               <Field label="amount">{tokenIdData.map_amount || 0}</Field>
-              <Field label="trc20_token_id">
+              <Field label="lrc20_token_id">
                 {contract.map_token_id || "-"}
               </Field>
               <Field label="token">

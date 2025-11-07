@@ -1,12 +1,12 @@
 import React from "react";
-import {TRXPrice} from "./Price";
+import {LINDPrice} from "./Price";
 import { FormattedNumber } from "react-intl";
 import {Link} from "react-router-dom";
 
 export const NameWithId = ({value,type, notamount=false, totoken=false, br=false, page='',tokenid=true }) => {
   return (
-    value.map_token_name === "TRX" ?
-    <TRXPrice amount={value.map_amount}/> :
+    value.map_token_name === "LIND" ?
+    <LINDPrice amount={value.map_amount}/> :
     <span>
       {
         !notamount &&

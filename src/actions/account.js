@@ -15,14 +15,14 @@ export const SET_WS_DATA_SUN = "SET_WS_DATA_SUN";
 export const SET_PERMISSIONS = "SET_PERMISSIONS";
 export const setTokenBalances = (
   tokens = [],
-  trc20token = [],
+  lrc20token = [],
   frozen = {},
   accountResource = {},
   delegated = {},
 ) => ({
   type: SET_TOKEN_BALANCES,
   tokens,
-  trc20token,
+  lrc20token,
   frozen,
   accountResource,
   delegated,

@@ -153,14 +153,14 @@ class BaseInfo extends Component {
   };
 
   setBodyParameter = async file => {
-    const { tronWeb } = this.props.account;
+    const { lindaWeb } = this.props.account;
     let data = {
       issuer_addr: this.state.paramData.author,
       id: this.state.paramData.token_id,
       type: this.state.type
     };
-    let hash = tronWeb.toHex(JSON.stringify(data), false);
-    let sig = await tronWeb.trx.sign(hash);
+    let hash = lindaWeb.toHex(JSON.stringify(data), false);
+    let sig = await lindaWeb.lind.sign(hash);
     let body = {
       content: JSON.stringify(data),
       sig: sig
@@ -183,7 +183,7 @@ class BaseInfo extends Component {
       body,
       logoUrl
     } = this.state;
-    const { isTrc20, isUpdate } = this.props.state;
+    const { isLrc20, isUpdate } = this.props.state;
     const logoOptions = autoCompleteResult.map(logo => (
       <AutoCompleteOption key={logo}>{logo}</AutoCompleteOption>
     ));
@@ -260,7 +260,7 @@ class BaseInfo extends Component {
                   placeholder={intl.formatMessage({
                     id: "description_message"
                   })}
-                  disabled={isUpdate && !isTrc20}
+                  disabled={isUpdate && !isLrc20}
                 />
               )}
             </Form.Item>
@@ -279,26 +279,26 @@ class BaseInfo extends Component {
                 <NumericInput
                   placeholder={intl.formatMessage({ id: "supply_message" })}
                   disabled={isUpdate}
-                  decimal={isTrc20 ? true : false}
+                  decimal={isLrc20 ? true : false}
                 />
               )}
             </Form.Item>
           </Col>
           <Col span={24} md={11}>
-            <Form.Item label={tu("TRC20_decimals")}>
+            <Form.Item label={tu("LRC20_decimals")}>
               {getFieldDecorator("precision", {
                 rules: [{ required: true, message: tu("decimals_v_required") }]
               })(
                 <InputNumber
                   min={0}
-                  max={isTrc20 ? precision_20 : 6}
+                  max={isLrc20 ? precision_20 : 6}
                   className="w-100"
                   disabled={isUpdate}
                 />
               )}
             </Form.Item>
           </Col>
-          {/*<Col  span={24} md={11} className={ isTrc20? 'd-block': 'd-none'}>*/}
+          {/*<Col  span={24} md={11} className={ isLrc20? 'd-block': 'd-none'}>*/}
           <Col span={24} md={11} className={isUpdate ? "d-block" : "d-none"}>
             <Form.Item
               label={tu("token_logo")}

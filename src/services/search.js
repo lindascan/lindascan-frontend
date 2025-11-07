@@ -1,6 +1,6 @@
 import {trim, isUndefined} from "lodash";
 import {Client} from "./api";
-import {isAddressValid} from "@tronscan/client/src/utils/crypto";
+import {isAddressValid} from "@lindascan/client/src/utils/crypto";
 
 export async function doSearch(criteria, type = null) {
 

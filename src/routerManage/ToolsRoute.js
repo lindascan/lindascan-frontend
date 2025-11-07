@@ -1,6 +1,6 @@
 import {
     TransactionViewerAsync,
-    TronConvertToolAsync,
+    LindaConvertToolAsync,
     SystemAsync,
 } from "../components/async";
 
@@ -33,10 +33,10 @@ export const ToolsRoutes = [
             //   component: NodeTesterAsync
             // },
             {
-                label: "tron_convert_tool",
-                path: "/tools/tron-convert-tool",
+                label: "linda_convert_tool",
+                path: "/tools/linda-convert-tool",
                 icon: "fa fa-random",
-                component: TronConvertToolAsync
+                component: LindaConvertToolAsync
             },
             {
                 path: "/tools/system",
@@ -45,7 +45,7 @@ export const ToolsRoutes = [
                 component: SystemAsync
             },
             {
-                url: "https://github.com/tronscan/tronscan-desktop/releases",
+                url: "https://github.com/lindascan/lindascan-desktop/releases",
                 icon: "fa fa-download",
                 label: "desktop_explorer"
             },

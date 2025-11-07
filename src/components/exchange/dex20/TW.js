@@ -16,7 +16,7 @@ class ApiTW {
   /**
    * 获取合约
    */
-  async getContract(tronWeb, type) {
+  async getContract(lindaWeb, type) {
     let _this = this;
     let address = ""; //type === 1 ? contractV10Addr : contractAddress
     switch (type) {
@@ -34,23 +34,23 @@ class ApiTW {
         break;
     }
 
-    return await tronWeb.contract().at(address);
-    // return await tronWeb.contract().at(contranctAddress)
+    return await lindaWeb.contract().at(address);
+    // return await lindaWeb.contract().at(contranctAddress)
   }
 
-  async getContract10(tronWeb) {
-    return await tronWeb.contract().at(this.contractAddress10);
-    // return await tronWeb.contract().at(contranctAddress)
+  async getContract10(lindaWeb) {
+    return await lindaWeb.contract().at(this.contractAddress10);
+    // return await lindaWeb.contract().at(contranctAddress)
   }
 
   /**
    * 撤单
    */
-  async cancelOrder(_id, tronWeb, pairType) {
+  async cancelOrder(_id, lindaWeb, pairType) {
     let contract;
-    // if (pairType === 1) contract = await this.getContract10(tronWeb, pairType);
-    // if (pairType === 2) contract = await this.getContract(tronWeb);
-    contract = await this.getContract(tronWeb, pairType);
+    // if (pairType === 1) contract = await this.getContract10(lindaWeb, pairType);
+    // if (pairType === 2) contract = await this.getContract(lindaWeb);
+    contract = await this.getContract(lindaWeb, pairType);
     const transactionID = contract
       .cancelOrder(_id)
       .send()
@@ -62,8 +62,8 @@ class ApiTW {
    * 获取token余额
    */
 
-  async getBalance({ _tokenA, _uToken, _precision, tronWeb }) {
-    const contractInstance = await tronWeb.contract().at(_tokenA);
+  async getBalance({ _tokenA, _uToken, _precision, lindaWeb }) {
+    const contractInstance = await lindaWeb.contract().at(_tokenA);
     const _b = await contractInstance.balanceOf(_uToken).call();
     let balance = 0;
 
@@ -79,8 +79,8 @@ class ApiTW {
    * 获取10token余额
    */
 
-  async getV10Balance({ _tokenA, _uToken, _precision, tronWeb }) {
-    const _c = await this.getContract(tronWeb, 1);
+  async getV10Balance({ _tokenA, _uToken, _precision, lindaWeb }) {
+    const _c = await this.getContract(lindaWeb, 1);
     const _id = await _c.getTokenBalance(_uToken, _tokenA).call();
     return _id.toString() / Math.pow(10, _precision || 0);
   }
@@ -96,10 +96,10 @@ class ApiTW {
     _price,
     _amountB,
     _pairType,
-    tronWeb
+    lindaWeb
   }) {
     let transactionID;
-    const _c = await this.getContract(tronWeb, _pairType);
+    const _c = await this.getContract(lindaWeb, _pairType);
     if (_pairType === 1) {
       transactionID = _c
         .buyOrder(
@@ -123,7 +123,7 @@ class ApiTW {
           _tokenB,
           Math.round(_amountB),
           _pairType,
-          tronWeb
+          lindaWeb
         );
       }
       if (!allowAmount) return;
@@ -145,7 +145,7 @@ class ApiTW {
         _tokenB,
         Math.round(_amountB),
         _pairType,
-        tronWeb
+        lindaWeb
       );
       if (!allowAmount) return;
       transactionID = _c
@@ -171,15 +171,15 @@ class ApiTW {
     //     _user,
     //     _tokenB,
     //     Math.round(_amountB),
-    //     tronWeb,
-    //     tronWeb
+    //     lindaWeb,
+    //     lindaWeb
     //   );
     // }
     // if (!allowAmount) return;
     // let _c;
     // let transactionID;
     // if (_pairType === 1) {
-    //   _c = await this.getContract10(tronWeb);
+    //   _c = await this.getContract10(lindaWeb);
     //   transactionID = _c
     //     .buyOrder(
     //       _tokenA,
@@ -192,7 +192,7 @@ class ApiTW {
     //     });
     // }
     // if (_pairType === 2) {
-    //   _c = await this.getContract(tronWeb);
+    //   _c = await this.getContract(lindaWeb);
     //   transactionID = _c
     //     .buyOrder(
     //       _tokenA,
@@ -220,10 +220,10 @@ class ApiTW {
     _price,
     _amountB,
     _pairType,
-    tronWeb
+    lindaWeb
   }) {
     let transactionID;
-    const _c = await this.getContract(tronWeb, _pairType);
+    const _c = await this.getContract(lindaWeb, _pairType);
     if (_pairType === 1) {
       transactionID = _c
         .sellOrder(
@@ -247,7 +247,7 @@ class ApiTW {
             : _amountA
         ),
         _pairType,
-        tronWeb
+        lindaWeb
       );
       if (!allowAmount) return;
       transactionID = _c
@@ -271,7 +271,7 @@ class ApiTW {
           _tokenA,
           Math.round(_amountA),
           _pairType,
-          tronWeb
+          lindaWeb
         );
       }
       if (!allowAmount) return;
@@ -310,14 +310,14 @@ class ApiTW {
     //     _user,
     //     _tokenA,
     //     Math.round(_amountA),
-    //     tronWeb
+    //     lindaWeb
     //   );
     //   if (!allowAmount) return;
     // }
     // let _c;
     // let transactionID;
     // if (_pairType === 1) {
-    //   _c = await this.getContract10(tronWeb);
+    //   _c = await this.getContract10(lindaWeb);
     //   transactionID = _c
     //     .sellOrder(
     //       _tokenA,
@@ -331,7 +331,7 @@ class ApiTW {
     //     });
     // }
     // if (_pairType === 2) {
-    //   _c = await this.getContract(tronWeb);
+    //   _c = await this.getContract(lindaWeb);
     //   transactionID = _c
     //     .sellOrder(
     //       _tokenA,
@@ -350,8 +350,8 @@ class ApiTW {
   /**
    * 授权
    */
-  async authorization(_user, _tokenA, _amountA, _type, tronWeb) {
-    const newContract = await tronWeb.contract().at(_tokenA);
+  async authorization(_user, _tokenA, _amountA, _type, lindaWeb) {
+    const newContract = await lindaWeb.contract().at(_tokenA);
     let address = "";
     switch (_type) {
       case 1:
@@ -381,7 +381,7 @@ class ApiTW {
       return allowAmount;
     }
 
-    // const newContract = await tronWeb.contract().at(_tokenA)
+    // const newContract = await lindaWeb.contract().at(_tokenA)
 
     // const transactionID = await newContract
     //   .approve(this.contranctAddress, _amountA.toString())

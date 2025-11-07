@@ -7,7 +7,7 @@ import { alpha } from "../../utils/str";
 import {tu} from "../../utils/i18n"
 import { HrefLink} from "./Links"
 import { connect } from "react-redux";
-import { ONE_TRX, API_URL } from "../../constants";
+import { ONE_LIND, API_URL } from "../../constants";
 import Lockr from "lockr";
 let PriceContext = React.createContext({
   priceBTC: 0,
@@ -25,9 +25,9 @@ class PriceProviderCmp extends React.PureComponent {
         BTC: 0,
         EUR: 0,
         USD: 0,
-        TRX: 1
+        LIND: 1
       },
-      priceShown: props.activeCurrency || "TRX",
+      priceShown: props.activeCurrency || "LIND",
       currencies: {},
       activePrice: 1,
       percent_change_24h:0,
@@ -57,16 +57,16 @@ class PriceProviderCmp extends React.PureComponent {
     var dataEth = Lockr.get("dataEth");
     // old api https://api.coinmarketcap.com/v1/ticker/bittorrent/?convert=EUR
     let eurURL = encodeURI(
-      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=EUR`
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=EUR`
     );
     let ethURL = encodeURI(
-      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=ETH`
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=ETH`
     );
     let btcURL =  encodeURI(
-      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=BTC`
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=BTC`
     );
     let usdURL = encodeURI(
-      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=USD`
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=USD`
     );
     if (!Lockr.get("dataEur")) {
       var { data: {data:dataEur} } = await xhr.post(
@@ -87,12 +87,12 @@ class PriceProviderCmp extends React.PureComponent {
     }
     let BTC_Price,EUR_Price,USD_Price,ETH_Price;
     if(dataEur){
-      EUR_Price = parseFloat(dataEur.TRX.quote.EUR.price)
+      EUR_Price = parseFloat(dataEur.LIND.quote.EUR.price)
     }else{
       EUR_Price = 0
     }
     if(dataEth){
-      ETH_Price = parseFloat(dataEth.TRX.quote.ETH.price)
+      ETH_Price = parseFloat(dataEth.LIND.quote.ETH.price)
     }else{
       ETH_Price = 0
     }
@@ -105,7 +105,7 @@ class PriceProviderCmp extends React.PureComponent {
       }
     ).then(res=>{
       if(res&&res.data&&res.data.data){
-        BTC_Price = parseFloat(res.data.data.TRX.quote.BTC.price); 
+        BTC_Price = parseFloat(res.data.data.LIND.quote.BTC.price); 
       }else{
         BTC_Price = 0
       }
@@ -121,8 +121,8 @@ class PriceProviderCmp extends React.PureComponent {
       }
     ).then(res=>{
       if(res&&res.data&&res.data.data){
-        USD_Price = parseFloat(res.data.data.TRX.quote.USD.price)
-        let percent_change_24h = res.data.data.TRX.quote.USD.percent_change_24h.toFixed(2) || 0;
+        USD_Price = parseFloat(res.data.data.LIND.quote.USD.price)
+        let percent_change_24h = res.data.data.LIND.quote.USD.percent_change_24h.toFixed(2) || 0;
         this.setState({
           percent_change_24h,
           isLoading:false
@@ -145,7 +145,7 @@ class PriceProviderCmp extends React.PureComponent {
       EUR: EUR_Price,
       USD: USD_Price,
       ETH: ETH_Price,
-      TRX: 1
+      LIND: 1
     };
 
     this.setState(state => ({
@@ -166,8 +166,8 @@ class PriceProviderCmp extends React.PureComponent {
       }
     ).then(res=>{
       if(res&&res.data&&res.data.data){
-        USD_Price = parseFloat(res.data.data.TRX.quote.USD.price)
-        let percent_change_24h = res.data.data.TRX.quote.USD.percent_change_24h.toFixed(2) || 0;
+        USD_Price = parseFloat(res.data.data.LIND.quote.USD.price)
+        let percent_change_24h = res.data.data.LIND.quote.USD.percent_change_24h.toFixed(2) || 0;
         this.setState({
           percent_change_24h,
           isLoading:false,
@@ -226,7 +226,7 @@ export let PriceProvider = connect(
 
 let oTimer = null;
 @injectIntl
-export class TRXPrice extends React.PureComponent {
+export class LINDPrice extends React.PureComponent {
   constructor() {
     super();
 
@@ -239,7 +239,7 @@ export class TRXPrice extends React.PureComponent {
   
 
   componentDidMount() {
-    // oTimer = setInterval(() => this.loadTrxPrices(), 10000);
+    // oTimer = setInterval(() => this.loadLindPrices(), 10000);
   }
 
   componentWillUnmount() {
@@ -291,23 +291,23 @@ export class TRXPrice extends React.PureComponent {
                         onMouseLeave={() => this.setState({ open: false })}
                         {...props}
                       >
-                        {name == "TRX" ? amount / ONE_TRX : amount} &nbsp;{" "}
+                        {name == "LIND" ? amount / ONE_LIND : amount} &nbsp;{" "}
                         {name}
                       </span>
                     )}
                   </FormattedNumber>
                   {showPopup && (
                     <Tooltip placement="top" isOpen={open} target={id}>
-                      TRX{" "}
+                      LIND{" "}
                       <FormattedNumber
-                        value={amount / ONE_TRX}
+                        value={amount / ONE_LIND}
                         maximumFractionDigits={6}
                         // minimumFractionDigits={6}
                       />
                       <br />
                       BTC{" "}
                       <FormattedNumber
-                        value={priceValues.prices.BTC * (amount / ONE_TRX)}
+                        value={priceValues.prices.BTC * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.BTC.fractions || 2
                         }
@@ -315,7 +315,7 @@ export class TRXPrice extends React.PureComponent {
                       <br />
                       ETH{" "}
                       <FormattedNumber
-                        value={priceValues.prices.ETH * (amount / ONE_TRX)}
+                        value={priceValues.prices.ETH * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.ETH.fractions || 2
                         }
@@ -323,7 +323,7 @@ export class TRXPrice extends React.PureComponent {
                       <br />
                       USD{" "}
                       <FormattedNumber
-                        value={priceValues.prices.USD * (amount / ONE_TRX)}
+                        value={priceValues.prices.USD * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.USD.fractions || 3
                         }
@@ -331,7 +331,7 @@ export class TRXPrice extends React.PureComponent {
                       <br />
                       EUR{" "}
                       <FormattedNumber
-                        value={priceValues.prices.EUR * (amount / ONE_TRX)}
+                        value={priceValues.prices.EUR * (amount / ONE_LIND)}
                         maximumFractionDigits={
                           priceValues.currencies.EUR.fractions || 2
                         }
@@ -361,7 +361,7 @@ export class TRXPrice extends React.PureComponent {
                           onMouseOut={() => this.setState({ open: false })}
                           {...props}
                         >
-                          <span className="currentTrxPirce">{value} </span>
+                          <span className="currentLindPirce">{value} </span>
                           <span className="currentCurrency">
                             {showCurreny &&
                               (currency.toUpperCase() ||
@@ -387,7 +387,7 @@ export class TRXPrice extends React.PureComponent {
                     </FormattedNumber>
                     {showPopup && (
                       <Tooltip placement="top" isOpen={open} target={id}>
-                        TRX{" "}
+                        LIND{" "}
                         <FormattedNumber
                           value={amount}
                           maximumFractionDigits={6}
@@ -461,7 +461,7 @@ export class TRXPrice extends React.PureComponent {
                   </FormattedNumber>
                   {showPopup && (
                     <Tooltip placement="top" isOpen={open} target={id}>
-                      TRX{" "}
+                      LIND{" "}
                       <FormattedNumber
                         value={amount}
                         maximumFractionDigits={6}

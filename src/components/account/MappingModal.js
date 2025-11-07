@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { tu } from '../../utils/i18n';
 import PropTypes from 'prop-types';
 import { Modal, Form, Input, Select } from 'antd';
-import { API_URL, ONE_TRX, FEELIMIT } from './../../constants';
+import { API_URL, ONE_LIND, FEELIMIT } from './../../constants';
 import xhr from 'axios';
 import { injectIntl } from 'react-intl';
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -33,7 +33,7 @@ class MappingModal extends Component {
     }
 
     async componentWillMount() {
-        await this.getTrxHash();
+        await this.getLindHash();
     }
 
     /**
@@ -46,7 +46,7 @@ class MappingModal extends Component {
             modal: (
                 <SweetAlert
                     type={isSuccess ? 'success' : 'error'}
-                    confirmBtnText={tu("trc20_confirm")}
+                    confirmBtnText={tu("lrc20_confirm")}
                     confirmBtnBsStyle="danger"
                     title={isSuccess ? tu("mapping_success") : tu("mapping_error")}
                     onConfirm={this.hideModal}
@@ -85,13 +85,13 @@ class MappingModal extends Component {
         const isSubmit = this.validateNum();
         validateFields(async(err, values) => {
             if (!err && isSubmit) {
-                const fee = mul(mappingFee, ONE_TRX);
+                const fee = mul(mappingFee, ONE_LIND);
                 try {
                     const sideChain = values.sidechain;
                     const list = sideChain && sideChain.split('-');
                     sunWeb.setChainId(list[0]);
                     sunWeb.setSideGatewayAddress(list[1]);
-                    const mappingData = await sunWeb.mappingTrc20(txHash, fee, FEELIMIT);
+                    const mappingData = await sunWeb.mappingLrc20(txHash, fee, FEELIMIT);
                     this.openModal(mappingData);
                     this.setState({ isDisabled: false });
                 } catch (e) {
@@ -112,9 +112,9 @@ class MappingModal extends Component {
     };
 
     /**
-     * get trxHash
+     * get lindHash
      */
-    getTrxHash = async() => {
+    getLindHash = async() => {
         const { address } = this.props;
         const contractData = await xhr.get(API_URL + `/api/contract?contract=${address}`);
         const { data } = contractData;
@@ -184,7 +184,7 @@ class MappingModal extends Component {
 
         // mappingFeeTextItem
         const mappingFeeTextItem = (
-            <p className="mt-4 mb-2">{tu('mapping_text')}{mappingFee}TRX</p>
+            <p className="mt-4 mb-2">{tu('mapping_text')}{mappingFee}LIND</p>
         );
 
         // feeError

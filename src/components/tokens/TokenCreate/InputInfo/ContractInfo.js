@@ -6,17 +6,17 @@ const { TextArea } = Input;
 
 export function ContractInfo({form, intl, state, loadContractCode}) {
     const { getFieldDecorator } = form;
-    const {isTrc20, isUpdate } =  state;
+    const {isLrc20, isUpdate } =  state;
 
     return (
-      <div className={ isTrc20? 'd-block': 'd-none'}>
+      <div className={ isLrc20? 'd-block': 'd-none'}>
         <h4 className="mb-3">{tu('contract_info')}</h4>
         <hr/>
         <Row gutter={24} type="flex" justify="space-between" className="px-2">
           <Col span={24} md={11}>
             <Form.Item label={tu('contract_address')}>
               {getFieldDecorator('contract_address', {
-                rules: [{ required: isTrc20, message: tu('contract_address_required'), whitespace: true},
+                rules: [{ required: isLrc20, message: tu('contract_address_required'), whitespace: true},
                         {pattern: /^T[a-zA-Z0-9]{33}$/, message: tu('contract_address_format')}],
               })(
                 <Input
@@ -44,7 +44,7 @@ export function ContractInfo({form, intl, state, loadContractCode}) {
           {/*<Col  span={24}>*/}
             {/*<Form.Item label={tu('contract_code')}>*/}
             {/*{getFieldDecorator('contract_code', {*/}
-              {/*rules: [{ required: isTrc20, message: tu('contract_address_required'), whitespace: true}],*/}
+              {/*rules: [{ required: isLrc20, message: tu('contract_address_required'), whitespace: true}],*/}
             {/*})(*/}
               {/*<TextArea rows={6}  placeholder={intl.formatMessage({id: 'contract_code_placeholder'})} />*/}
             {/*)}*/}

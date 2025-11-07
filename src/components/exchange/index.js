@@ -4,12 +4,12 @@ import { injectIntl } from "react-intl";
 import { Client, Client20 } from "../../services/api";
 import { tu } from "../../utils/i18n";
 
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-// import Trc10 from "./dex10/index";
-import Trc20 from "./dex20/index";
+// import Lrc10 from "./dex10/index";
+import Lrc20 from "./dex20/index";
 
 class Exchange extends React.Component {
   constructor() {
@@ -85,8 +85,8 @@ class Exchange extends React.Component {
             ) : null}
           </div> */}
 
-          {/* {match.params.type === "trc10" && <Trc10 />} */}
-          {match.params.type === "trc20" && <Trc20 />}
+          {/* {match.params.type === "lrc10" && <Lrc10 />} */}
+          {match.params.type === "lrc20" && <Lrc20 />}
         </main>
       </div>
     );
@@ -95,8 +95,8 @@ class Exchange extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    widget10: state.exchange.trc10,
-    widget20: state.exchange.trc20
+    widget10: state.exchange.lrc10,
+    widget20: state.exchange.lrc20
   };
 }
 

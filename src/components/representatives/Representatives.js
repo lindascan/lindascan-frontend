@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { loadWitnesses, loadStatisticData } from "../../actions/network";
 import { tu } from "../../utils/i18n";
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 import { FormattedNumber } from "react-intl";
 import { injectIntl } from "react-intl";
 import _, { filter, maxBy, sortBy, trim, sumBy, slice } from "lodash";
@@ -61,7 +61,7 @@ class Representatives extends Component {
     if (witnesses.length === 0) {
       return (
         <div className="card">
-          <TronLoader>{tu("loading_representatives")}</TronLoader>
+          <LindaLoader>{tu("loading_representatives")}</LindaLoader>
         </div>
       );
     }
@@ -223,7 +223,7 @@ class Representatives extends Component {
           }
         >
           {witnesses.length === 0 || pieChart.length === 0 ? (
-            <TronLoader />
+            <LindaLoader />
           ) : (
             <div className="row">
               <div className="col-md-6 foundation_title represent_title">
@@ -285,7 +285,7 @@ class Representatives extends Component {
                     className="pt-2 bg-line_blue"
                   >
                     <div
-                      className="card-header bg-tron-light color-grey-100 text-center pb-0"
+                      className="card-header bg-linda-light color-grey-100 text-center pb-0"
                       style={{ border: 0 }}
                     >
                       <h6 className="m-0 lh-150" style={{ fontSize: 16 }}>
@@ -397,8 +397,8 @@ function Row({ account, showSync = true, index, state, props }) {
       </td>
       {/* <td className="text-center">
           {
-            account.producedTrx !== 0 ?
-                <FormattedNumber value={account.producedTrx}/> :
+            account.producedLind !== 0 ?
+                <FormattedNumber value={account.producedLind}/> :
                 '-'
           }
         </td> */}

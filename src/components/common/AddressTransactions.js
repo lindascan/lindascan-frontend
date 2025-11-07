@@ -1,23 +1,23 @@
 import React from "react";
 import { injectIntl,FormattedDate,FormattedTime,FormattedNumber} from "react-intl";
 import { Client } from "../../services/api";
-import { TransactionHashLink, AddressLink, BlockNumberLink,TokenLink, TokenTRC20Link } from "./Links";
+import { TransactionHashLink, AddressLink, BlockNumberLink,TokenLink, TokenLRC20Link } from "./Links";
 import { Icon,Checkbox } from 'antd';
 import {connect} from "react-redux";
 import { tu } from "../../utils/i18n";
 // import TimeAgo from "react-timeago";
-import { TronLoader } from "./loaders";
+import { LindaLoader } from "./loaders";
 import { Truncate,TruncateAddress } from "./text";
 import { ContractTypes } from "../../utils/protocol";
 import SmartTable from "./SmartTable.js";
 import { upperFirst } from "lodash";
 import TotalInfo from "./../../components/addresses/components/TableTotal";
 import DateSelect from "./../../components/addresses/components/dateSelect";
-import {isAddressValid} from "@tronscan/client/src/utils/crypto";
+import {isAddressValid} from "@lindascan/client/src/utils/crypto";
 import { CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC } from "../../constants";
 import moment from "moment";
 // import { NameWithId } from "./names";
-import {TRXPrice} from "./Price";
+import {LINDPrice} from "./Price";
 import rebuildList from "../../utils/rebuildList";
 import { API_URL } from "../../constants";
 import qs from "qs";
@@ -40,7 +40,7 @@ class Transactions extends React.Component {
       transactions: [],
       total: 0,
       emptyState: props.EmptyState || (
-        <TronLoader>Loading Transactions</TronLoader>
+        <LindaLoader>Loading Transactions</LindaLoader>
       ),
       timeType:true,
       tokenFilter:{
@@ -350,7 +350,7 @@ class Transactions extends React.Component {
     });
 }
 
-  trc20CustomizedColumn = (activeLanguage) => {
+  lrc20CustomizedColumn = (activeLanguage) => {
     let { intl,filter,allSelectedTokenAry } = this.props;
     const { 
       timeType,
@@ -513,7 +513,7 @@ class Transactions extends React.Component {
           >
               {upperFirst(
               intl.formatMessage({
-                  id: timeType ? "age" : "trc20_cur_order_header_order_time"
+                  id: timeType ? "age" : "lrc20_cur_order_header_order_time"
               })
               )}
               <Icon
@@ -668,8 +668,8 @@ class Transactions extends React.Component {
           return record.valueInfoList.length
             ? record.valueInfoList.map((item, index) => {
                 return (
-                  item.map_token_name === "TRX" ?
-                  <TRXPrice key="index" amount={item.map_amount}/> :
+                  item.map_token_name === "LIND" ?
+                  <LINDPrice key="index" amount={item.map_amount}/> :
                   <span key="index" >
                     {
                       <span className="mr-1">
@@ -747,8 +747,8 @@ class Transactions extends React.Component {
                         </b>
                         {item.tokenType?
                             <span>
-                                {item.tokenType == "trc20" ? (
-                                    <TokenTRC20Link
+                                {item.tokenType == "lrc20" ? (
+                                    <TokenLRC20Link
                                         name={item.map_token_id}
                                         address={item.contract_address}
                                         namePlus={item.map_token_name_abbr}
@@ -802,8 +802,8 @@ class Transactions extends React.Component {
                             {
                                 item.tokenType?
                                 <span>
-                                    {item.tokenType == "trc20" ? (
-                                        <TokenTRC20Link
+                                    {item.tokenType == "lrc20" ? (
+                                        <TokenLRC20Link
                                             name={item.map_token_id}
                                             address={item.contract_address}
                                             namePlus={item.map_token_name_abbr}
@@ -871,7 +871,7 @@ class Transactions extends React.Component {
     } = this.props;
     let column = !isinternal
       ? this.customizedColumn()
-      : this.trc20CustomizedColumn(activeLanguage);
+      : this.lrc20CustomizedColumn(activeLanguage);
     let tableInfo =
       intl.formatMessage({ id: "view_total" }) +
       " " +
@@ -892,7 +892,7 @@ class Transactions extends React.Component {
       <div className={"token_black mt-5"} >
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
 
@@ -907,7 +907,7 @@ class Transactions extends React.Component {
                 style={{ color: "#999999" }}
               ></i>
               <span className="flex-1" style={{ width: "700px" }}>
-                {tu("interTrx_tip_contract")}
+                {tu("interLind_tip_contract")}
               </span>
             </div>
           ) : (

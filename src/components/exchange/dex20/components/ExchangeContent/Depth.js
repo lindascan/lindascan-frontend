@@ -5,10 +5,10 @@ import { widget } from "../../../../../lib/charting_library.min";
 import Datafeed from "./udf/index.js";
 import { connect } from "react-redux";
 import { tu, tv } from "../../../../../utils/i18n";
-import { TRXPrice } from "../../../../common/Price";
+import { LINDPrice } from "../../../../common/Price";
 import { Client20 } from "../../../../../services/api";
 import { change10lock, setWidget } from "../../../../../actions/exchange";
-import { TokenTRC20Link } from "../../../../common/Links";
+import { TokenLRC20Link } from "../../../../common/Links";
 import { Icon } from "antd";
 
 const echarts = require("echarts/lib/echarts");
@@ -134,7 +134,7 @@ class Depth extends React.Component {
 
   componentWillUnmount() {
     const { setWidget } = this.props;
-    setWidget({ widget: null, type: "trc20" });
+    setWidget({ widget: null, type: "lrc20" });
   }
 
   createWidget(id) {
@@ -413,7 +413,7 @@ function mapStateToProps(state) {
     selectData: state.exchange.data,
     selectStatus: state.exchange.status,
     activeLanguage: state.app.activeLanguage,
-    widget: state.exchange.trc20,
+    widget: state.exchange.lrc20,
     register: state.exchange.register
   };
 }

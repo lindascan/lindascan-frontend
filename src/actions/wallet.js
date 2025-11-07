@@ -18,9 +18,9 @@ export const reloadWallet = () => async (dispatch, getState) => {
   let {app, account} = getState();
 
   if (app.account.isLoggedIn) {
-      let {balances, trc20token_balances, frozen, accountResource, delegated, tokenBalances, exchanges, ...wallet} = await Client.getAccountByAddressNew(app.account.address);
+      let {balances, lrc20token_balances, frozen, accountResource, delegated, tokenBalances, exchanges, ...wallet} = await Client.getAccountByAddressNew(app.account.address);
       try {
-          let {data: {data}} = await xhr.get("https://list.tronlink.org/api/wallet/multi/trx_record", { 
+          let {data: {data}} = await xhr.get("https://list.tronlink.org/api/wallet/multi/lind_record", { 
               params: {
                   "address": app.account.address,
                   "start": 0,
@@ -108,22 +108,22 @@ export const reloadWallet = () => async (dispatch, getState) => {
       frozenEnergy=accountResource.frozen_balance_for_energy.frozen_balance;
     }
 
-      wallet.frozenTrx = sentDelegateBandwidth+frozenBandwidth+sentDelegateResource+frozenEnergy;
+      wallet.frozenLind = sentDelegateBandwidth+frozenBandwidth+sentDelegateResource+frozenEnergy;
 
       wallet.exchanges = rebuildList(exchanges, ['first_token_id', 'second_token_id'], ['first_token_balance', 'second_token_balance']);
       wallet.tokenBalances = rebuildList(tokenBalances, 'name', 'balance');
       let balances_new = rebuildList(balances, 'name', 'balance');
-      let trc20token_balances_new  = rebuildToken20List(trc20token_balances, 'contract_address', 'balance');
+      let lrc20token_balances_new  = rebuildToken20List(lrc20token_balances, 'contract_address', 'balance');
 
 
-      trc20token_balances_new && trc20token_balances_new.map(item => {
+      lrc20token_balances_new && lrc20token_balances_new.map(item => {
           item.token20_name = item.name + '(' + item.symbol + ')';
           item.token20_balance = FormatNumberByDecimals(item.balance, item.decimals);
           item.token20_balance_decimals = FormatNumberByDecimalsBalance(item.balance, item.decimals);
           return item
       });
       dispatch(setActiveWallet(wallet));
-      dispatch(setTokenBalances(balances_new, trc20token_balances_new, frozen, accountResource.frozen_balance_for_energy, delegated));
+      dispatch(setTokenBalances(balances_new, lrc20token_balances_new, frozen, accountResource.frozen_balance_for_energy, delegated));
   }
 
 };

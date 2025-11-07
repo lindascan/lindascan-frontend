@@ -25,8 +25,8 @@ const initialState = {
   data: {},
   status: false,
   klineLock: true,
-  trc10: null,
-  trc20: null
+  lrc10: null,
+  lrc20: null
 };
 
 export function exchangeReducer(state = initialState, action) {

@@ -12,7 +12,7 @@ export const SET_LANGUAGE = "SET_LANGUAGE";
 export const LOGIN = "LOGIN";
 export const LOGIN_PK = "LOGIN_PK";
 export const LOGIN_ADDRESS = "LOGIN_ADDRESS";
-export const LOGIN_TRONLINK = "LOGIN_TRONLINK";
+export const LOGIN_LINDALINK = "LOGIN_LINDALINK";
 export const LOGOUT = "LOGOUT";
 export const ENABLE_FLAG = "ENABLE_FLAG";
 export const DISABLE_FLAG = "DISABLE_FLAG";
@@ -21,10 +21,10 @@ export const SET_SYNC_STATUS = "SET_SYNC_STATUS";
 export const SET_SIDECHAINS = 'SET_SIDECHAINS';
 export const SET_FEES = 'SET_FEES';
 
-export const setLoginWithLedger = (address, tronWeb, pathIndex) => ({
+export const setLoginWithLedger = (address, lindaWeb, pathIndex) => ({
   type: LOGIN_LEDGER,
   address,
-  tronWeb,
+  lindaWeb,
   pathIndex,
 });
 
@@ -59,10 +59,10 @@ export const setLoginWithAddress = address => ({
 });
 
 
-export const setLoginWithTronLink = (address,tronWeb,sunWeb) => ({
-    type: LOGIN_TRONLINK,
+export const setLoginWithLindaLink = (address,lindaWeb,sunWeb) => ({
+    type: LOGIN_LINDALINK,
     address,
-    tronWeb,
+    lindaWeb,
     sunWeb
 });
 
@@ -116,9 +116,9 @@ export const loginWithAddress = address => async (dispatch, getState) => {
   }, 50);
 };
 
-export const loginWithLedger = (address, tronWeb, pathIndex) => async (dispatch, getState) => {
+export const loginWithLedger = (address, lindaWeb, pathIndex) => async (dispatch, getState) => {
 
-  dispatch(setLoginWithLedger(address, tronWeb, pathIndex));
+  dispatch(setLoginWithLedger(address, lindaWeb, pathIndex));
 
   setTimeout(() => {
     dispatch(reloadWallet());
@@ -128,10 +128,10 @@ export const loginWithLedger = (address, tronWeb, pathIndex) => async (dispatch,
   }, 50);
 };
 
-export const loginWithTronLink = (address,tronWeb,sunWeb) => async (dispatch, getState) => {
+export const loginWithLindaLink = (address,lindaWeb,sunWeb) => async (dispatch, getState) => {
 
     dispatch(setWalletLoading(true));
-    await dispatch(setLoginWithTronLink(address,tronWeb,sunWeb));
+    await dispatch(setLoginWithLindaLink(address,lindaWeb,sunWeb));
     //setTimeout(() => {
     await dispatch(reloadWallet());
     dispatch(setWalletLoading(false));
@@ -153,7 +153,7 @@ export const loadSyncStatus = () => async dispatch => {
 
 export const loadPrice = () => async dispatch => {
   let { data } = await xhr.get(
-    `https://api.coinmarketcap.com/v1/ticker/tronix/`
+    `https://api.coinmarketcap.com/v1/ticker/lindaix/`
   );
   dispatch(setPrice(data[0].price_usd, data[0].percent_change_24h));
 };
@@ -195,7 +195,7 @@ async  function setWebsocketContent(getState, address){
   //     Lockr.set("websocket","close")
   //     setWebsocket()
   // }
-  if(app.wallet.type === 'ACCOUNT_TRONLINK' && account.websocket ){
+  if(app.wallet.type === 'ACCOUNT_LINDALINK' && account.websocket ){
     if(localAddress !== address && account.websocket){
       await account.websocket.send('cancel:'+localAddress)
     }

@@ -41,8 +41,8 @@ export default class LedgerHelp extends Component {
                   <h3>{tu('opening_your_wallet')}</h3>
                   <ol>
                     <li>
-                      {tu('open_the_tronscan_desktop_client')}<HrefLink
-                        href="https://tronscan.org/">tronscan.org</HrefLink>
+                      {tu('open_the_lindascan_desktop_client')}<HrefLink
+                        href="https://lindascan.org/">lindascan.org</HrefLink>
                     </li>
                     <li>
                       {tu('click_open_wallet_top_right')}
@@ -54,10 +54,10 @@ export default class LedgerHelp extends Component {
                       {tu('connect_unlock_ledger_with_pin')}
                     </li>
                     <li>
-                      {tu('open_tron_app_on_ledger')}
+                      {tu('open_linda_app_on_ledger')}
                     </li>
                     <li>
-                      {tu('ledger_connected_tronscan_message_0')}
+                      {tu('ledger_connected_lindascan_message_0')}
                     </li>
                     <li>
                       {tu('click_on_open_wallet')}

@@ -6,19 +6,19 @@ import {Client} from "../../services/api";
 import {Link, withRouter} from "react-router-dom";
 import SmartTable from "../common/SmartTable.js"
 import {FormattedDate, FormattedTime, injectIntl} from "react-intl";
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import {AddressLink} from "../common/Links";
 import {QuestionMark} from "../common/QuestionMark";
-import {ONE_TRX,IS_MAINNET} from "../../constants";
+import {ONE_LIND,IS_MAINNET} from "../../constants";
 import { Table } from "antd";
 import SweetAlert from 'react-bootstrap-sweetalert';
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import ApplyForDelegate from "./common/ApplyForDelegate";
 import Lockr from "lockr";
-import {transactionResultManager, transactionResultManagerSun} from "../../utils/tron";
-import {withTronWeb} from "../../utils/tronWeb";
+import {transactionResultManager, transactionResultManagerSun} from "../../utils/linda";
+import {withLindaWeb} from "../../utils/lindaWeb";
 
-@withTronWeb
+@withLindaWeb
 class Proposal extends React.Component {
 
     constructor() {
@@ -35,7 +35,7 @@ class Proposal extends React.Component {
                 total: 0
             },
             modal: null,
-            isTronLink: 0,
+            isLindaLink: 0,
             balanceTip: false,
             isAction: false,
             timer: null,
@@ -53,7 +53,7 @@ class Proposal extends React.Component {
                 this.load(1,20,1);
             }, 10000);
             this.setState({
-                isTronLink: Lockr.get("islogin"),
+                isLindaLink: Lockr.get("islogin"),
                 timer
             });
         }
@@ -69,7 +69,7 @@ class Proposal extends React.Component {
                 this.load(page, pageSize, 1);
             }, 10000);
             this.setState({
-                isTronLink: Lockr.get("islogin"),
+                isLindaLink: Lockr.get("islogin"),
                 timer
             });
         }
@@ -134,7 +134,7 @@ class Proposal extends React.Component {
             'getAllowSameTokenName',
             'getAllowDelegateResource',
             'getTotalEnergyLimit',
-            'getAllowTvmTransferTrc10',
+            'getAllowTvmTransferLrc10',
             'getTotalEnergyLimitNew',
             'getAllowMultiSign',
            // 'getTotalEnergyCurrentLimit',
@@ -294,8 +294,8 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_2'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -303,8 +303,8 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_3'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -321,8 +321,8 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_5'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -331,8 +331,8 @@ class Proposal extends React.Component {
                                                 <div>
                                                     <span>{ intl.formatMessage({id: 'propose_6'})}</span>
                                                     <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                    <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                    <span>TRX</span>
+                                                    <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                    <span>LIND</span>
                                                 </div>
                                             </div>
                                         }
@@ -341,16 +341,16 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_7'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span></div>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span></div>
                                         }
                                         {
                                             item.proposalKey == 'getCreateNewAccountFeeInSystemContract' &&
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_8'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span></div>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span></div>
                                         }
                                         {
                                             item.proposalKey == 'getCreateNewAccountBandwidthRate' &&
@@ -379,7 +379,7 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_12'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX} TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND} LIND</span>
                                             </div>
                                         }
                                         {
@@ -387,7 +387,7 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_13'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX} TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND} LIND</span>
                                             </div>
                                         }
                                         {
@@ -440,7 +440,7 @@ class Proposal extends React.Component {
                                             </div>
                                         }
                                         {
-                                            item.proposalKey == 'getAllowTvmTransferTrc10' &&
+                                            item.proposalKey == 'getAllowTvmTransferLrc10' &&
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_19'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
@@ -513,8 +513,8 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_25'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -522,8 +522,8 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_26'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
 
@@ -565,8 +565,8 @@ class Proposal extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_28_1'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -594,8 +594,8 @@ class Proposal extends React.Component {
                                             <div className="mt-1">
                                                 <span>{ intl.formatMessage({id: 'propose_31'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
 
                                         }
@@ -623,8 +623,8 @@ class Proposal extends React.Component {
                                             <div className="mt-1">
                                                 <span>{ intl.formatMessage({id: 'propose_34'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -877,7 +877,7 @@ class Proposal extends React.Component {
         this.setState({
             isAction: true
         })
-        const { account, account: { tronWeb }, currentWallet } = this.props;
+        const { account, account: { lindaWeb }, currentWallet } = this.props;
         if(currentWallet.representative.enabled){
             if(v){
                 this.voteProposal(id,v)
@@ -916,18 +916,18 @@ class Proposal extends React.Component {
 
     async getResult(id, v){
         let res;
-        let {isTronLink} = this.state;
+        let {isLindaLink} = this.state;
         let {account} = this.props;
         if(IS_MAINNET){
-            let tronWeb;
+            let lindaWeb;
             if (this.props.walletType.type === "ACCOUNT_LEDGER"){
-                tronWeb = this.props.tronWeb();
-            }else if(this.props.walletType.type === "ACCOUNT_TRONLINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"){
-                tronWeb = account.tronWeb;
+                lindaWeb = this.props.lindaWeb();
+            }else if(this.props.walletType.type === "ACCOUNT_LINDALINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"){
+                lindaWeb = account.lindaWeb;
             }
 
-            const unSignTransaction = await tronWeb.transactionBuilder.voteProposal(id, v , account.address, 1).catch(e=> console.log(e));
-            const {result} = await transactionResultManager(unSignTransaction, tronWeb);
+            const unSignTransaction = await lindaWeb.transactionBuilder.voteProposal(id, v , account.address, 1).catch(e=> console.log(e));
+            const {result} = await transactionResultManager(unSignTransaction, lindaWeb);
 
             res = result;
         }else{
@@ -1023,7 +1023,7 @@ class Proposal extends React.Component {
         this.setState({
           modal: (
               <ApplyForDelegate
-                  isTronLink={this.state.isTronLink}
+                  isLindaLink={this.state.isLindaLink}
                   privateKey={privateKey}
                   onCancel={this.hideModal}
                   onConfirm={() => {
@@ -1071,7 +1071,7 @@ class Proposal extends React.Component {
                         <a href="javascript:;" onClick={()=>this.pageHandle(1)}>{tu("proposal_create")}</a>
                         <a href="javascript:;" onClick={()=>this.pageHandle()}>{tu("proposal_mine")}</a>
                     </div>}
-                    {loading && <div className="loading-style"><TronLoader/></div>}
+                    {loading && <div className="loading-style"><LindaLoader/></div>}
                     {!loading&&
                         <Table
                         bordered={true}

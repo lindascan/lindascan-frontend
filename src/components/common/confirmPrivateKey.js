@@ -1,6 +1,6 @@
 import React from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import {pkToAddress} from "@tronscan/client/src/utils/crypto";
+import {pkToAddress} from "@lindascan/client/src/utils/crypto";
 import {tu} from "../../utils/i18n";
 
 

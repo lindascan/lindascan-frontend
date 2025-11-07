@@ -1,12 +1,12 @@
 /*eslint-disable no-script-url*/
 import React, {Fragment, PureComponent} from 'react'
 import {injectIntl} from "react-intl";
-import logo from '../images/tron-banner-inverted.png'
-import tronLogoBlue from '../images/tron-banner-tronblue.png'
-import tronLogoDark from '../images/tron-banner-1.png'
-import tronLogoTestNet from "../images/tron-logo-testnet.png";
-import tronLogoSunNet from "../images/tron-logo-sunnet.png";
-import tronLogoInvertedTestNet from "../images/tron-logo-inverted-testnet.png";
+import logo from '../images/linda-banner-inverted.png'
+import lindaLogoBlue from '../images/linda-banner-lindablue.png'
+import lindaLogoDark from '../images/linda-banner-1.png'
+import lindaLogoTestNet from "../images/linda-logo-testnet.png";
+import lindaLogoSunNet from "../images/linda-logo-sunnet.png";
+import lindaLogoInvertedTestNet from "../images/linda-logo-inverted-testnet.png";
 import {flatRoutes, routes} from "../routes"
 import {Link, NavLink, withRouter} from "react-router-dom"
 import {filter, find, isString, isUndefined, trim, toUpper, debounce, slice} from "lodash"
@@ -15,7 +15,7 @@ import {
   enableFlag,
   login,
   loginWithAddress,
-  loginWithTronLink,
+  loginWithLindaLink,
   logout,
   setActiveCurrency,
   setLanguage,
@@ -27,19 +27,19 @@ import {Badge, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap"
 import Avatar from "./common/Avatar"
 import {AddressLink, HrefLink} from "./common/Links"
 import {FormattedNumber} from "react-intl"
-import {API_URL, IS_TESTNET, ONE_TRX, IS_MAINNET, IS_SUNNET, SUNWEBCONFIG, NETURL} from "../constants"
+import {API_URL, IS_TESTNET, ONE_LIND, IS_MAINNET, IS_SUNNET, SUNWEBCONFIG, NETURL} from "../constants"
 import {matchPath} from 'react-router'
 import {doSearch, getSearchType} from "../services/search"
 import {readFileContentsFromEvent} from "../services/file"
 import {decryptString, validatePrivateKey} from "../services/secureKey";
 import SweetAlert from "react-bootstrap-sweetalert";
-import {passwordToAddress,pkToAddress} from "@tronscan/client/src/utils/crypto";
+import {passwordToAddress,pkToAddress} from "@lindascan/client/src/utils/crypto";
 import Notifications from "./account/Notifications";
 import SendModal from "./transfer/Send/SendModal";
 import SendMultiModal from "./transfer/SendMulti/SendModal";
-import {bytesToString} from "@tronscan/client/src/utils/bytes";
-import {hexStr2byteArray} from "@tronscan/client/src/lib/code";
-import {isAddressValid} from "@tronscan/client/src/utils/crypto";
+import {bytesToString} from "@lindascan/client/src/utils/bytes";
+import {hexStr2byteArray} from "@lindascan/client/src/lib/code";
+import {isAddressValid} from "@lindascan/client/src/utils/crypto";
 import ReceiveModal from "./transfer/Receive/ReceiveModal";
 import MenuNavigation from './MenuNavigation';
 import {toastr} from 'react-redux-toastr'
@@ -74,7 +74,7 @@ class Navigation extends React.Component {
       popup: null,
       notifications: [],
       isImportAccount: false,
-      isTRONlinkLogin: false,
+      isLINDAlinkLogin: false,
       loginWarning: false,
       signInWarning: false,
       address: '',
@@ -89,13 +89,13 @@ class Navigation extends React.Component {
       testNetAry: [
         "testnet",
         {
-          url: "https://nile.tronscan.org",
+          url: "https://nile.lindascan.org",
           icon: false,
           label: "NILE TESTNET",
           sidechain: false
         },
         {
-          url: "https://shasta.tronscan.org",
+          url: "https://shasta.lindascan.org",
           icon: false,
           label: "SHASTA TESTNET",
           sidechain: false
@@ -120,7 +120,7 @@ class Navigation extends React.Component {
       // this.props.login('441d39fa209abf368a5f51191319d58dc2d4ef94f8f51514812bb4c036582079').then(() => {
       //     toastr.info(intl.formatMessage({id: 'success'}), intl.formatMessage({id: 'login_success'}));
       // });
-    this.reLoginWithTronLink();
+    this.reLoginWithLindaLink();
   }
 
   componentDidMount() {
@@ -152,15 +152,15 @@ class Navigation extends React.Component {
         selectedNet: IS_MAINNET?'mainnet':'sunnet'
     });
     Lockr.set("NET", IS_MAINNET?'mainnet':'sunnet')
-    // this.loadTrxPrices()
-    // this.oTimer = setInterval(() => this.loadTrxPrices(), 1000*60*10);
+    // this.loadLindPrices()
+    // this.oTimer = setInterval(() => this.loadLindPrices(), 1000*60*10);
 
   }
 
-  async loadTrxPrices() {
+  async loadLindPrices() {
       // var dataEur = Lockr.get("dataEur");
       let eurURL = encodeURI(
-       `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=USD` 
+       `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=USD` 
       );
       var { data: {data: dataEurObj} } = await xhr.post(
           `${API_URL}/api/system/proxy`,
@@ -169,8 +169,8 @@ class Navigation extends React.Component {
           }
       );
       if (dataEurObj) {
-        let percent_change_24h = dataEurObj.TRX.quote.USD.percent_change_24h.toFixed(2) || 0;
-        let USD_Price = parseFloat(dataEurObj.TRX.quote.USD.price)
+        let percent_change_24h = dataEurObj.LIND.quote.USD.percent_change_24h.toFixed(2) || 0;
+        let USD_Price = parseFloat(dataEurObj.LIND.quote.USD.price)
         this.setState({
           percent_change_24h,
           USD_Price
@@ -187,10 +187,10 @@ class Navigation extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
       let { account,match,walletType } = this.props;
-        if ((nextState.address !== this.state.address) && this.isString(nextState.address) && this.isString(this.state.address) && walletType.type === "ACCOUNT_TRONLINK") {
-            this.reLoginWithTronLink();
+        if ((nextState.address !== this.state.address) && this.isString(nextState.address) && this.isString(this.state.address) && walletType.type === "ACCOUNT_LINDALINK") {
+            this.reLoginWithLindaLink();
         }
-        if((nextState.selectedNet !== this.state.selectedNet) && this.state.selectedNet && nextState.selectedNet && this.props.account.isLoggedIn && walletType.type === "ACCOUNT_TRONLINK"){
+        if((nextState.selectedNet !== this.state.selectedNet) && this.state.selectedNet && nextState.selectedNet && this.props.account.isLoggedIn && walletType.type === "ACCOUNT_LINDALINK"){
             if(nextState.selectedNet === 'mainnet'){
                 window.location.href= NETURL.MAINNET;
             }else if(nextState.selectedNet === 'sunnet'){
@@ -247,30 +247,30 @@ class Navigation extends React.Component {
 
   }
 
-  reLoginWithTronLink = () => {
+  reLoginWithLindaLink = () => {
     let {intl} = this.props;
     let { address } = this.state;
-    if(getQueryString('from') == 'tronlink'){
+    if(getQueryString('from') == 'lindalink'){
         Lockr.set("islogin", 1)
     }
     if (Lockr.get("islogin")) {
       let timer = null;
       let count = 0;
       timer = setInterval(() => {
-        const tronWeb = window.tronWeb;
+        const lindaWeb = window.lindaWeb;
         const sunWeb = window.sunWeb;
-        if (tronWeb && tronWeb.defaultAddress.base58) {
-          this.props.loginWithTronLink(tronWeb.defaultAddress.base58, tronWeb, sunWeb).then(() => {
+        if (lindaWeb && lindaWeb.defaultAddress.base58) {
+          this.props.loginWithLindaLink(lindaWeb.defaultAddress.base58, lindaWeb, sunWeb).then(() => {
             toastr.info(intl.formatMessage({id: 'success'}), intl.formatMessage({id: 'login_success'}));
-            window.gtag("event", "Tronlink", {
+            window.gtag("event", "Lindalink", {
               event_category: "Login",
-              event_label: tronWeb.defaultAddress.base58,
+              event_label: lindaWeb.defaultAddress.base58,
               referrer: window.location.origin,
-              value: tronWeb.defaultAddress.base58
+              value: lindaWeb.defaultAddress.base58
             });
 
           });
-          this.setState({address: tronWeb.defaultAddress.base58});
+          this.setState({address: lindaWeb.defaultAddress.base58});
           clearInterval(timer)
         } else {
           count++
@@ -356,7 +356,7 @@ class Navigation extends React.Component {
   openPasswordPrompt = (contents) => {
     this.setState({
       isImportAccount: false,
-      isTRONlinkLogin: false,
+      isLINDAlinkLogin: false,
       loginWarning: false,
       signInWarning: false,
       popup: (
@@ -425,7 +425,7 @@ class Navigation extends React.Component {
     this.setState({
       privateKey: '',
       isImportAccount: false,
-      isTRONlinkLogin: false,
+      isLINDAlinkLogin: false,
     });
     toastr.info(intl.formatMessage({id: 'success'}), intl.formatMessage({id: 'logout_success'}));
   };
@@ -459,10 +459,10 @@ class Navigation extends React.Component {
       if (searchResults[0].desc === 'Block') {
         this.afterSearch("#/block/" + trim(searchResults[0].value));
       }
-      if (searchResults[0].desc === 'Token-TRC20') {
+      if (searchResults[0].desc === 'Token-LRC20') {
         this.afterSearch("#/token20/" + trim(searchResults[0].value.split(' ')[searchResults[0].value.split(' ').length-1]));
       }
-      if (searchResults[0].desc === 'Token-TRC10') {
+      if (searchResults[0].desc === 'Token-LRC10') {
         this.afterSearch("#/token/" + trim(searchResults[0].value.split(' ')[searchResults[0].value.split(' ').length-1]));
       }
       if (searchResults[0].desc === 'Address') {
@@ -513,8 +513,8 @@ class Navigation extends React.Component {
     }
     this.isSearching = false;
     /*let results = [
-      {desc: 'Token-TRC10', value: "IGG 1000029"},
-      {desc: 'Token-TRC20', value: "IGG 1000029"},
+      {desc: 'Token-LRC10', value: "IGG 1000029"},
+      {desc: 'Token-LRC20', value: "IGG 1000029"},
       {desc: 'Block', value: "1000029"},
       {desc: 'Address', value: "TVethjgashn8t4cwKWfGA3VvSgMwVmHKNM"},
       {desc: 'Contract', value: "TVethjgashn8t4cwKWfGA3VvSgMwVmHKNM"},
@@ -547,7 +547,7 @@ class Navigation extends React.Component {
       case "dark":
         this.props.setTheme("light");
         break;
-      case "tron":
+      case "linda":
         this.props.setTheme("dark");
         break;
 
@@ -567,8 +567,8 @@ class Navigation extends React.Component {
       case "dark":
         icon = "fa fa-sun";
         break;
-      case "tron":
-        icon = "fas fa-user-astronaut";
+      case "linda":
+        icon = "fas fa-user-aslindaaut";
         break;
     }
 
@@ -613,23 +613,23 @@ class Navigation extends React.Component {
     if (IS_TESTNET) {
       switch (theme) {
         case "light":
-          return tronLogoTestNet;
+          return lindaLogoTestNet;
         default:
-          return tronLogoInvertedTestNet;
+          return lindaLogoInvertedTestNet;
       }
     }else if(!IS_MAINNET){
       switch (theme) {
           case "light":
-              return tronLogoSunNet;
+              return lindaLogoSunNet;
           default:
-              return tronLogoSunNet;
+              return lindaLogoSunNet;
       }
     }else{
       switch (theme) {
-        case "tron":
-          return tronLogoBlue;
+        case "linda":
+          return lindaLogoBlue;
         case "light":
-          return tronLogoDark;
+          return lindaLogoDark;
         default:
           return logo;
       }
@@ -664,21 +664,21 @@ class Navigation extends React.Component {
     console.log("LOGIN WITH MOBILE");
   };
 
-  loginWithTronLink(e) {
+  loginWithLindaLink(e) {
     let {intl} = this.props;
     e.stopPropagation();
     const {loginWarning, signInWarning} = this.state;
-    const tronWeb = window.tronWeb;
+    const lindaWeb = window.lindaWeb;
     const sunWeb = window.sunWeb;
-    // 没有下载 tronlink
-    if (!tronWeb || !sunWeb) {
+    // 没有下载 lindalink
+    if (!lindaWeb || !sunWeb) {
       this.setState({loginWarning: true});
       // this.loading = false
       return
     }
 
-    // 没有登录 tronlink
-    const address = tronWeb.defaultAddress.base58;
+    // 没有登录 lindalink
+    const address = lindaWeb.defaultAddress.base58;
     if (!address) {
       this.setState({signInWarning: true});
       //this.loading = false
@@ -686,19 +686,19 @@ class Navigation extends React.Component {
       return
     }
 
-    // 如果是tronlink的ledger登录，跳转到tronscan的ledger登录
-    const tronlinkLoginType = tronWeb.defaultAddress.type;
-    if (tronlinkLoginType == 2) {
+    // 如果是lindalink的ledger登录，跳转到lindascan的ledger登录
+    const lindalinkLoginType = lindaWeb.defaultAddress.type;
+    if (lindalinkLoginType == 2) {
       this.closeLoginModel(e);
-      this.openLedgerModal(tronlinkLoginType);
+      this.openLedgerModal(lindalinkLoginType);
       return;
     }
 
     if (address) {
-        // 已登录 tronlink
+        // 已登录 lindalink
         //this.isauot = true
         Lockr.set("islogin", 1);
-        this.props.loginWithTronLink(address, tronWeb, sunWeb).then(() => {
+        this.props.loginWithLindaLink(address, lindaWeb, sunWeb).then(() => {
           toastr.info(
             intl.formatMessage({ id: "success" }),
             intl.formatMessage({ id: "login_success" })
@@ -706,7 +706,7 @@ class Navigation extends React.Component {
           this.setState({ isImportAccount: false });
         });
 
-        window.gtag("event", "Tronlink", {
+        window.gtag("event", "Lindalink", {
           event_category: "Login",
           event_label: address,
           referrer: window.location.origin,
@@ -719,16 +719,16 @@ class Navigation extends React.Component {
     e.stopPropagation()
     this.setState({
       isImportAccount: false,
-      isTRONlinkLogin: false,
+      isLINDAlinkLogin: false,
       loginWarning: false,
       signInWarning: false
     })
   };
 
-  clickLoginWithTronLink(e) {
+  clickLoginWithLindaLink(e) {
     e.stopPropagation()
     this.setState({
-      isTRONlinkLogin: true,
+      isLINDAlinkLogin: true,
       isImportAccount: false
     }, () => {
 
@@ -738,7 +738,7 @@ class Navigation extends React.Component {
   clickLoginWithPk(e) {
     e.stopPropagation()
     this.setState({
-      isTRONlinkLogin: false,
+      isLINDAlinkLogin: false,
       isImportAccount: true
     }, () => {
 
@@ -757,7 +757,7 @@ class Navigation extends React.Component {
 
   renderWallet() {
     let {account, totalTransactions = 0, flags, wallet, activeLanguage} = this.props;
-    let {isImportAccount, isTRONlinkLogin, loginWarning, signInWarning, address} = this.state;
+    let {isImportAccount, isLINDAlinkLogin, loginWarning, signInWarning, address} = this.state;
 
     if (wallet.isLoading) {
       return (
@@ -827,12 +827,12 @@ class Navigation extends React.Component {
                     <li className="dropdown-divider"/>
                     <Link className="dropdown-item" to="/account">
                       <i className="fa fa-credit-card mr-2"/>
-                      <FormattedNumber value={wallet.current.balance / ONE_TRX}/> TRX
+                      <FormattedNumber value={wallet.current.balance / ONE_LIND}/> LIND
                       <i className="fa fa-angle-right float-right" ></i>
                     </Link>
                     <Link className="dropdown-item" to="/account">
                       <i className="fa fa-bolt mr-2"/>
-                      <FormattedNumber value={wallet.current.frozenTrx / ONE_TRX}/> TRON {tu("power")}
+                      <FormattedNumber value={wallet.current.frozenLind / ONE_LIND}/> LINDA {tu("power")}
                       <i className="fa fa-angle-right float-right" ></i>
                     </Link>
                     <Link className="dropdown-item" to="/account">
@@ -900,11 +900,11 @@ class Navigation extends React.Component {
                   
                     <ul className="dropdown-menu dropdown-menu-right nav-login-wallet" style={{minWidth: style_width}}>
                         <li className="px-2 py-1 border-bottom-0" onClick={(e) => {
-                            this.clickLoginWithTronLink(e)
+                            this.clickLoginWithLindaLink(e)
                         }}>
                           <div className="dropdown-item text-uppercase d-flex align-items-center text-muted">
-                            <img src={require("../images/login/tronlink.png")} width="16px" height="16px" className="mr-2"/>
-                              {tu('sign_in_with_TRONlink')}
+                            <img src={require("../images/login/lindalink.png")} width="16px" height="16px" className="mr-2"/>
+                              {tu('sign_in_with_LINDAlink')}
                           </div>
                         </li>
                       {
@@ -948,8 +948,8 @@ class Navigation extends React.Component {
                           <div className="login-privatekey-warn pt-2">
                               <i className="fas fa-exclamation-triangle mr-2" style={{color:"#FF8C00"}}></i>
                               {tu("login_privatekey_warn")}
-                              <a href="https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec" target="_blank">
-                                 TronLink
+                              <a href="https://chrome.google.com/webstore/detail/lindalink/ibnejdfjmmkpcnlpebklmnkoeoihofec" target="_blank">
+                                 LindaLink
                               </a>
                               {tu("login_privatekey_warn_safe")}
                           </div>
@@ -1004,8 +1004,8 @@ class Navigation extends React.Component {
                     </div> : ''
                   }
                   {
-                    isTRONlinkLogin ? <div className="login-mask">
-                      <div className="login-tronlink">
+                    isLINDAlinkLogin ? <div className="login-mask">
+                      <div className="login-lindalink">
                         <div className="login-cancel" onClick={(e) => {
                           this.closeLoginModel(e)
                         }}>
@@ -1013,19 +1013,19 @@ class Navigation extends React.Component {
                         </div>
                         <div className="px-3 py-4">
                           <div className="text-center">
-                            <label>{tu('sign_in_TRONlink')}</label>
+                            <label>{tu('sign_in_LINDAlink')}</label>
                           </div>
                         </div>
                         {/* <li className="dropdown-divider blod"/> */}
-                        <div className="px-3 py-2 tronlink-pic">
-                          <img src={require("../images/tronlink.png")} alt="TRONlink"/>
+                        <div className="px-3 py-2 lindalink-pic">
+                          <img src={require("../images/lindalink.png")} alt="LINDAlink"/>
                         </div>
                         <div className="text-center pt-2" style={{color: '#C23631'}}>
                           {
-                            loginWarning ? tu('sign_in_TRONlink_warning') : ''
+                            loginWarning ? tu('sign_in_LINDAlink_warning') : ''
                           }
                           {
-                            signInWarning ? tu('sign_in_TRONlink_warning_0') : ''
+                            signInWarning ? tu('sign_in_LINDAlink_warning_0') : ''
                           }
                         </div>
 
@@ -1047,14 +1047,14 @@ class Navigation extends React.Component {
                         <div className="px-3 py-4">
                           <button className="btn btn-warning btn-block"
                                   onClick={(e) => {
-                                    this.loginWithTronLink(e)
+                                    this.loginWithLindaLink(e)
                                   }}>
-                            {tu("sign_in_TRONlink")}
+                            {tu("sign_in_LINDAlink")}
                           </button>
                         </div>
-                        <div className="text-center px-3 pb-4 install-TRONlink">
-                          <a href="https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec">
-                            {tu('uninstall_TRONlink')}>>
+                        <div className="text-center px-3 pb-4 install-LINDAlink">
+                          <a href="https://chrome.google.com/webstore/detail/lindalink/ibnejdfjmmkpcnlpebklmnkoeoihofec">
+                            {tu('uninstall_LINDAlink')}>>
                           </a>
                         </div>
                       </div>
@@ -1091,15 +1091,15 @@ class Navigation extends React.Component {
             {/* zh  ko ar fa nav menu flex space-between*/}
             {/* <div className={!IS_MAINNET?(activeLanguage == 'ru'||activeLanguage == 'es' ||activeLanguage == 'ja' ?'py-2 d-flex px-0 sunnet-menu-nav-wrapper':'py-2 d-flex px-0 single-menu-nav-wrapper' ):(activeLanguage === 'zh' || activeLanguage === 'ko' || activeLanguage === 'ar'  ? "py-2 d-flex px-0 single-menu-nav-wrapper" : "py-2 d-flex px-0 menu-nav-wrapper") }> */}
             <div className={IS_SUNNET ? "py-2 d-flex px-0 menu-nav-wrapper sunnet-menu-nav-wrapper":"py-2 d-flex px-0 menu-nav-wrapper"}>
-              <div className="logoTrxPrice">
+              <div className="logoLindPrice">
                 <div className="mobileFlexible">
                   <Link to="/">
-                    <img  src={this.getLogo()} className="logo" alt="Tron"/>
+                    <img  src={this.getLogo()} className="logo" alt="Linda"/>
                   </Link>
                   {
                     IS_MAINNET?
-                    <div className="currentTRXInfo">
-                      <span className="TRXPrice">
+                    <div className="currentLINDInfo">
+                      <span className="LINDPrice">
                         <NavPrice
                           showPopup={false}
                           amount={1}
@@ -1123,7 +1123,7 @@ class Navigation extends React.Component {
                 {
                   (syncStatus && syncStatus.sync && syncStatus.sync.progress < 95) &&
                   <div className="col text-danger text-center py-2">
-                    Tronscan is syncing, data might not be up-to-date ({Math.round(syncStatus.sync.progress)}%)
+                    Lindascan is syncing, data might not be up-to-date ({Math.round(syncStatus.sync.progress)}%)
                   </div>
                 }
             
@@ -1155,7 +1155,7 @@ class Navigation extends React.Component {
                                             to={route.redirect? route.redirect: route.path}
                                         >
                                           <span  className={
-                                            (currentRouter.slice(1).split('/').indexOf(route.path.slice(1)) !== -1 || (currentRouter==='/exchange/trc20' && route.path ==="/exchange/trc20") || (route.path==='/more' && currentRouter.slice(1,5)==='help') || (route.path==='/more' && currentRouter.slice(1,6)==='tools')) || (route.path==='/newblock' && currentRouter.slice(1,11)==='blockchain') || (route.path==='/newblock' && currentRouter.slice(1,10)==='contracts') || (route.path==='/newblock' && currentRouter.slice(1,7)==='tokens') ? "menu-active-tilte-pc": ""}>
+                                            (currentRouter.slice(1).split('/').indexOf(route.path.slice(1)) !== -1 || (currentRouter==='/exchange/lrc20' && route.path ==="/exchange/lrc20") || (route.path==='/more' && currentRouter.slice(1,5)==='help') || (route.path==='/more' && currentRouter.slice(1,6)==='tools')) || (route.path==='/newblock' && currentRouter.slice(1,11)==='blockchain') || (route.path==='/newblock' && currentRouter.slice(1,10)==='contracts') || (route.path==='/newblock' && currentRouter.slice(1,7)==='tokens') ? "menu-active-tilte-pc": ""}>
                                           {route.icon &&
                                             <i className={route.icon + " d-none d-lg-inline-block mr-1"}/>}
                                             {tu(route.label)}
@@ -1169,7 +1169,7 @@ class Navigation extends React.Component {
                                         {...((route.routes && route.routes.length > 0) ? {'data-toggle': 'dropdown'} : {})}
                                         >
                                           <span  className={
-                                            (currentRouter.slice(1).split('/').indexOf(route.path.slice(1)) !== -1 || (currentRouter==='/exchange/trc20' && route.path ==="/exchange/trc20") || (route.path==='/more' && currentRouter.slice(1,5)==='help') || (route.path==='/more' && currentRouter.slice(1,6)==='tools')) || (route.path==='/newblock' && currentRouter.slice(1,11)==='blockchain') || (route.path==='/newblock' && currentRouter.slice(1,10)==='contracts') || (route.path==='/newblock' && currentRouter.slice(1,7)==='tokens') ? "menu-active-tilte-pc": ""}>
+                                            (currentRouter.slice(1).split('/').indexOf(route.path.slice(1)) !== -1 || (currentRouter==='/exchange/lrc20' && route.path ==="/exchange/lrc20") || (route.path==='/more' && currentRouter.slice(1,5)==='help') || (route.path==='/more' && currentRouter.slice(1,6)==='tools')) || (route.path==='/newblock' && currentRouter.slice(1,11)==='blockchain') || (route.path==='/newblock' && currentRouter.slice(1,10)==='contracts') || (route.path==='/newblock' && currentRouter.slice(1,7)==='tokens') ? "menu-active-tilte-pc": ""}>
                                           {route.icon &&
                                             <i className={route.icon + " d-none d-lg-inline-block mr-1"}/>}
                                             {tu(route.label)}
@@ -1428,12 +1428,12 @@ class Navigation extends React.Component {
                                     this.afterSearch()
                                   }} key={index}>{result.desc + ': '}<Truncate><strong>{result.value}</strong></Truncate></Link>
                                 }
-                                if (result.desc === 'Token-TRC20') {
+                                if (result.desc === 'Token-LRC20') {
                                   return <Link className="dropdown-item dropdown-text-none" to={"/token20/" + trim(result.value.split(' ')[result.value.split(' ').length-1])} onClick={() => {
                                     this.afterSearch()
                                   }} key={index}>{result.desc + ': '}<Truncate><strong>{result.value}</strong></Truncate></Link>
                                 }
-                                if (result.desc === 'Token-TRC10') {
+                                if (result.desc === 'Token-LRC10') {
                                   return <Link className="dropdown-item dropdown-text-none" to={"/token/" + trim(result.value.split(' ')[result.value.split(' ').length-1])} onClick={() => {
                                     this.afterSearch()
                                   }} key={index}>{result.desc + ': '}<Truncate><strong>{result.value}</strong></Truncate></Link>
@@ -1491,13 +1491,13 @@ class Navigation extends React.Component {
                           }}
                                     key={index}>{result.desc + ': '}<Truncate><strong>{result.value}</strong></Truncate></Link>
                         }
-                        if (result.desc === 'Token-TRC20') {
+                        if (result.desc === 'Token-LRC20') {
                           return <Link className="dropdown-item text-uppercase" to={"/token20/" + trim(result.value.split(' ')[result.value.split(' ').length-1])} onClick={() => {
                             this.afterSearch()
                           }}
                                     key={index}>{result.desc + ': '}<Truncate><strong>{result.value}</strong></Truncate></Link>
                         }
-                        if (result.desc === 'Token-TRC10') {
+                        if (result.desc === 'Token-LRC10') {
                           return <Link className="dropdown-item text-uppercase" to={"/token/" + trim(result.value.split(' ')[result.value.split(' ').length-1])} onClick={() => {
                             this.afterSearch()
                           }}
@@ -1537,13 +1537,13 @@ class Navigation extends React.Component {
                     activeComponent && <h4 className="pt-4">
                       <span className="text-uppercase">{tu(activeComponent.label)}</span> &nbsp;&nbsp;
                       {activeComponent.label === 'overview' &&
-                      <small className='text-muted'>{tu('token_overview_tron')}</small>
+                      <small className='text-muted'>{tu('token_overview_linda')}</small>
                       }
                       {activeComponent.label === 'participate' &&
-                      <small className='text-muted'>{tu('token_participate_tron')}</small>
+                      <small className='text-muted'>{tu('token_participate_linda')}</small>
                       }
                       {/*{activeComponent.label === 'create' &&*/}
-                      {/*<small className='text-muted' style={{fontSize: '14px'}}>{tu('issued_token_of_tronscan')}</small>*/}
+                      {/*<small className='text-muted' style={{fontSize: '14px'}}>{tu('issued_token_of_lindascan')}</small>*/}
                       {/*}*/}
                       {IsRepresentative && activeComponent.label == 'contract_code_overview_account' && <span className="Representative-subTttle">{tu('Super Representatives')}</span>}
                     </h4>
@@ -1677,7 +1677,7 @@ const mapDispatchToProps = {
   logout,
   login,
   loginWithAddress,
-  loginWithTronLink,
+  loginWithLindaLink,
   setActiveCurrency,
   setTheme,
   enableFlag,

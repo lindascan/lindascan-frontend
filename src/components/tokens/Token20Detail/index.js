@@ -13,16 +13,16 @@ import TokenHolders from "./TokenHolders";
 import { Icon } from "antd";
 import { NavLink, Route, Switch } from "react-router-dom";
 //import { AddressLink, ExternalLink } from "../../common/Links";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import Transfers from "./Transfers.js";
 //import TokenInfo from "./TokenInfo.js";
 import { Information } from "./Information.js";
 //import qs from "qs";
 import { toastr } from "react-redux-toastr";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import {
   API_URL,
-  ONE_TRX,
+  ONE_LIND,
   CONTRACT_ADDRESS_USDT,
   CONTRACT_ADDRESS_WIN,
   CONTRACT_ADDRESS_GGC,
@@ -36,7 +36,7 @@ import { reloadWallet } from "../../../actions/wallet";
 import { updateTokenInfo } from "../../../actions/tokenInfo";
 import { connect } from "react-redux";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { pkToAddress } from "@tronscan/client/src/utils/crypto";
+import { pkToAddress } from "@lindascan/client/src/utils/crypto";
 import { Link } from "react-router-dom";
 import { some, toLower } from "lodash";
 import xhr from "axios/index";
@@ -141,9 +141,9 @@ class Token20Detail extends React.Component {
     let { priceUSD } = this.props;
 
     xhr
-      .get(API_URL + "/api/token_trc20?contract=" + address + "&showAll=1")
+      .get(API_URL + "/api/token_lrc20?contract=" + address + "&showAll=1")
       .then(async res => {
-        let token = res.data.trc20_tokens[0];
+        let token = res.data.lrc20_tokens[0];
         this.props.updateTokenInfo({
           tokenDetail: token
         });
@@ -239,7 +239,7 @@ class Token20Detail extends React.Component {
         this.setState({ loading: true });
         token.priceToUsd =
           token && token["market_info"]
-            ? token["market_info"].priceInTrx * priceUSD
+            ? token["market_info"].priceInLind * priceUSD
             : 0;
 
         token.winkTotalSupply = winkTotalSupply;
@@ -350,8 +350,8 @@ class Token20Detail extends React.Component {
     }
     this.setState({ buyAmount: value });
     this.buyAmount.value = value;
-    let priceTRX = value * (price / ONE_TRX);
-    this.priceTRX.innerHTML = intl.formatNumber(priceTRX);
+    let priceLIND = value * (price / ONE_LIND);
+    this.priceLIND.innerHTML = intl.formatNumber(priceLIND);
   };
 
   preBuyTokens = token => {
@@ -438,7 +438,7 @@ class Token20Detail extends React.Component {
               </div>
               <div className="text-center mt-3 text-muted">
                 <b>
-                  = <span ref={ref => (this.priceTRX = ref)}>0</span> TRX
+                  = <span ref={ref => (this.priceLIND = ref)}>0</span> LIND
                 </b>
               </div>
               <button
@@ -462,9 +462,9 @@ class Token20Detail extends React.Component {
       return;
     }
     let { currentWallet, wallet } = this.props;
-    let tokenCosts = buyAmount * (token.price / ONE_TRX);
+    let tokenCosts = buyAmount * (token.price / ONE_LIND);
 
-    if (currentWallet.balance / ONE_TRX < tokenCosts) {
+    if (currentWallet.balance / ONE_LIND < tokenCosts) {
       this.setState({
         alert: (
           <SweetAlert
@@ -486,7 +486,7 @@ class Token20Detail extends React.Component {
               >
                 <i className="fa fa-times" ariaHidden="true"></i>
               </a>
-              <span>{tu("not_enough_trx_message")}</span>
+              <span>{tu("not_enough_lind_message")}</span>
               <button
                 className="btn btn-danger btn-block mt-3"
                 onClick={() => {
@@ -526,7 +526,7 @@ class Token20Detail extends React.Component {
               </p>
               <span>
                 {buyAmount} {token.name} {t("for")}{" "}
-                {buyAmount * (token.price / ONE_TRX)} TRX?
+                {buyAmount * (token.price / ONE_LIND)} LIND?
               </span>
               <button
                 className="btn btn-danger btn-block mt-3"
@@ -631,7 +631,7 @@ class Token20Detail extends React.Component {
           id: "warning"
         }),
         intl.formatMessage({
-          id: "search_TRC20_error"
+          id: "search_LRC20_error"
         })
       );
       this.setState({
@@ -646,19 +646,19 @@ class Token20Detail extends React.Component {
     } = this.props.tokensInfo.tokenDetail;
     await xhr
       .get(
-        `${API_URL}/api/token_trc20/holders?uuid=${uuidv4}&holder_address=${serchInputVal}&contract_address=${contract_address}`
+        `${API_URL}/api/token_lrc20/holders?uuid=${uuidv4}&holder_address=${serchInputVal}&contract_address=${contract_address}`
       )
       .then(res => {
         if (res.data) {
-          let trc20Token = res.data.trc20_tokens;
+          let lrc20Token = res.data.lrc20_tokens;
           let balance = 0;
-          if (trc20Token.length > 0) {
-            let newBalance = trc20Token[0].balance;
+          if (lrc20Token.length > 0) {
+            let newBalance = lrc20Token[0].balance;
             let accountedFor =
               new BigNumber(newBalance)
                 .dividedBy(new BigNumber(total_supply_with_decimals))
                 .toNumber(8) || 0;
-            let trc20TokenObj = {
+            let lrc20TokenObj = {
               srTag: false,
               srName: null,
               addressTag: null,
@@ -671,7 +671,7 @@ class Token20Detail extends React.Component {
             this.props.updateTokenInfo({
               transferSearchStatus: true,
               transfer: {
-                ...trc20TokenObj
+                ...lrc20TokenObj
               }
             });
           } else {
@@ -703,12 +703,12 @@ class Token20Detail extends React.Component {
     };
 
     const allData = await Promise.all([
-      Client.getTokenTRC20Transfers({
+      Client.getTokenLRC20Transfers({
         limit: 20,
         ...params
       }),
       Client.getCountByType({
-        type: "trc20",
+        type: "lrc20",
         contract: decodeURI(match.params.address),
         address: serchInputVal
       })
@@ -758,12 +758,12 @@ class Token20Detail extends React.Component {
     };
 
     const allData = await Promise.all([
-      Client.getTokenTRC20Transfers({
+      Client.getTokenLRC20Transfers({
         limit: 20,
         ...params
       }),
       Client.getCountByType({
-        type: "trc20",
+        type: "lrc20",
         contract: decodeURI(match.params.address)
       })
     ]).catch(e => {
@@ -825,9 +825,9 @@ class Token20Detail extends React.Component {
         {alert}
         {loading ? (
           <div className="card">
-            <TronLoader>
+            <LindaLoader>
               {tu("loading_token")} {token.name}
-            </TronLoader>
+            </LindaLoader>
           </div>
         ) : (
           <div className="row">
@@ -872,9 +872,9 @@ class Token20Detail extends React.Component {
                           { (token.contract_address == CONTRACT_ADDRESS_USDJ || token.contract_address == CONTRACT_ADDRESS_USDJ_TESTNET) && <section className="to-USDj"><HrefLink href="https://www.just.network"><i className="fas fa-coins ml-2 mr-1"></i>{intl.formatMessage({id:'get_usdj'})}</HrefLink></section>}
                         </h5>
                         <p className="card-text" style={{marginBottom: 0}}>{token.token_desc}</p>
-                        { token.contract_address == CONTRACT_ADDRESS_USDJ && <div className="to-USDj" style={{marginTop: '.5rem'}}><HrefLink href="https://tronscanorg.zendesk.com/hc/en-us/articles/360041737852-Step-by-step-instructions-on-how-to-generate-USDJ-on-JUST-CDP"><i className="fas fa-book mx-1"></i>{intl.formatMessage({id:'get_usdj_guide'})}</HrefLink></div>}
+                        { token.contract_address == CONTRACT_ADDRESS_USDJ && <div className="to-USDj" style={{marginTop: '.5rem'}}><HrefLink href="https://lindascanorg.zendesk.com/hc/en-us/articles/360041737852-Step-by-step-instructions-on-how-to-generate-USDJ-on-JUST-CDP"><i className="fas fa-book mx-1"></i>{intl.formatMessage({id:'get_usdj_guide'})}</HrefLink></div>}
                       </div>
-                      <div className="token-sign">TRC20</div>
+                      <div className="token-sign">LRC20</div>
                       {/*<div className="ml-auto">*/}
                       {/*{(!(token.endTime < new Date() || token.issuedPercentage === 100 || token.startTime > new Date() || token.isBlack) && !token.isBlack) &&*/}
                       {/*<button className="btn btn-default btn-xs d-inline-block"*/}
@@ -941,7 +941,7 @@ class Token20Detail extends React.Component {
                               padding: "0 1.4rem 0 0.7rem"
                             }}
                             placeholder={intl.formatMessage({
-                              id: "search_TRC20"
+                              id: "search_LRC20"
                             })}
                             value={searchAddress}
                             onKeyDown={this.onSearchKeyDown}

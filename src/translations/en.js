@@ -42,7 +42,7 @@ export const messages = {
   ##################################################################################
   */
   ok: "OK",
-  app_title: "TRON Protocol",
+  app_title: "LINDA Protocol",
   password: "Password",
   money_price: "Price",
   price: "Price",
@@ -70,7 +70,7 @@ export const messages = {
   submit: "submit",
   send: "send",
   receive: "receive",
-  supply: "TRX Held",
+  supply: "LIND Held",
   view: "view",
   view_all: "View all",
   create: "create",
@@ -146,11 +146,11 @@ export const messages = {
   #                                                                                #
   ##################################################################################
   */
-  tron_main_message: "Decentralize the Web",
+  linda_main_message: "Decentralize the Web",
   transactions_last_hour: "Transactions last hour",
   block_height: "Block Height",
   online_nodes: "Online Nodes",
-  pice_per_1000trx: "Price (per 1000TRX)",
+  pice_per_1000lind: "Price (per 1000LIND)",
   vote_for_super_representatives: "Vote for SR",
   view_super_representatives: "View SR",
   create_new_wallet: "Create a new Wallet",
@@ -214,14 +214,14 @@ export const messages = {
   ##################################################################################
   */
   addresses: "addresses",
-  trx_transferred_past_hour: "TRX transferred in the past hour",
+  lind_transferred_past_hour: "LIND transferred in the past hour",
   transactions_past_hour: "Transactions in the past hour",
   average_blocksize: "Average Block Size",
   rich_list: "Rich List",
-  tron_transaction_chart: "TRON Transaction Chart",
+  linda_transaction_chart: "LINDA Transaction Chart",
   transactions_per_day: "Transactions Per Day",
   foundation: "Foundation Addresses",
-  foundation_address: "Foundation Freeze TRX Total Number",
+  foundation_address: "Foundation Freeze LIND Total Number",
   unfreeze_time: "Unfreeze Time",
   addresses_number: "Addresses Number",
   Confirmed: "Confirmed",
@@ -242,10 +242,10 @@ export const messages = {
   account_name: "Account name",
   show_qr_code: "Show QR Code",
   do_not_send_2:
-    "Do not send TRX from your own wallet or exchange to the above account address of testnet!",
+    "Do not send LIND from your own wallet or exchange to the above account address of testnet!",
   bandwidth: "bandwidth",
   balance: "Balance",
-  tron_power: "TRON Power",
+  linda_power: "LINDA Power",
   transactions: "transactions",
   no_transfers: "No Transfers",
   no_tokens: "No Tokens",
@@ -253,9 +253,9 @@ export const messages = {
   expires: "expires",
   have_been_added_to_your_account: "have been added to your account!",
   information_message_1:
-    "Mainnet cannot request testing trx, please contact TRON to get test trx.",
-  information_message_2: "You may only request TRX 10 times per account.",
-  request_trx_for_testing: "Request TRX for testing",
+    "Mainnet cannot request testing lind, please contact LINDA to get test lind.",
+  information_message_2: "You may only request LIND 10 times per account.",
+  request_lind_for_testing: "Request LIND for testing",
   token_balances: "token balances",
   produced_blocks: "produced blocks",
   voters: "voters",
@@ -265,12 +265,12 @@ export const messages = {
   issuer: "issuer",
   network: "network",
   current: "current",
-  trx_received: "TRX received",
-  test_trx_temporarily_unavailable_message:
-    "Test TRX is temporarily unavailable. Please try again later.",
-  not_enough_trx: "Not enough TRX",
+  lind_received: "LIND received",
+  test_lind_temporarily_unavailable_message:
+    "Test LIND is temporarily unavailable. Please try again later.",
+  not_enough_lind: "Not enough LIND",
   information_message_3:
-    "Successfully requested TRX. If you did not receive any TRX then there is no test TRX available right now and you should try again at a later time.",
+    "Successfully requested LIND. If you did not receive any LIND then there is no test LIND available right now and you should try again at a later time.",
   send_to_following_address: "Send to the following address",
   change_website: "Change Website",
   you_must_enter_url: "You must enter a URL",
@@ -284,16 +284,16 @@ export const messages = {
   */
   freeze: "freeze",
   unfreeze: "unfreeze",
-  freeze_trx_least: "You need at least 1 TRX to be able to freeze",
-  unable_unfreeze_trx_message:
-    "Unable to unfreeze TRX. This could be caused because the minimal freeze period hasn't been reached yet.",
-  freeze_trx_premessage_0: `TRX can be frozen to gain TRON Power and enable additional features.
-   For example, with TRON Power you can `,
-  freeze_trx_premessage_link: "vote for Super Representatives.",
-  freeze_trx_premessage_1: `Frozen tokens are "locked" for a period of 3 days. During this period the frozen TRX cannot be traded.
-   After this period you can unfreeze the TRX and trade the tokens.`,
-  freeze_trx_premessage_2: `Either one of bandwidth or energy can be acquired by each freeze. You cannot acquire both resources at the same time. When a user unfreeze a certain resource, his previous votes will be completely voided. If a user would like to vote using the remaining TRON Power, he will have to perform his voting operations all over again.`,
-  trx_amount: "TRX Amount",
+  freeze_lind_least: "You need at least 1 LIND to be able to freeze",
+  unable_unfreeze_lind_message:
+    "Unable to unfreeze LIND. This could be caused because the minimal freeze period hasn't been reached yet.",
+  freeze_lind_premessage_0: `LIND can be frozen to gain LINDA Power and enable additional features.
+   For example, with LINDA Power you can `,
+  freeze_lind_premessage_link: "vote for Super Representatives.",
+  freeze_lind_premessage_1: `Frozen tokens are "locked" for a period of 3 days. During this period the frozen LIND cannot be traded.
+   After this period you can unfreeze the LIND and trade the tokens.`,
+  freeze_lind_premessage_2: `Either one of bandwidth or energy can be acquired by each freeze. You cannot acquire both resources at the same time. When a user unfreeze a certain resource, his previous votes will be completely voided. If a user would like to vote using the remaining LINDA Power, he will have to perform his voting operations all over again.`,
+  lind_amount: "LIND Amount",
   token_freeze_confirm_message_0: "I confirm to freeze ",
   token_freeze_confirm_message_1: "for at least of 3 days",
   frozen_supply: " Frozen Supply",
@@ -308,7 +308,7 @@ export const messages = {
   unable_to_rename_title: "This name has existed",
   unable_to_rename_message:
     "Something went wrong while updating your account name, please try again later",
-  unfreeze_trx_confirm_message: "Are you sure you want to unfreeze TRX?",
+  unfreeze_lind_confirm_message: "Are you sure you want to unfreeze LIND?",
   unfreeze_assets: "Unfreeze Assets",
   sure_to_unfreeze_unlocked_tokens_message:
     "Are you sure you want to unfreeze unlocked tokens?",
@@ -324,17 +324,17 @@ export const messages = {
   apply_super_representative_candidate: "Apply to be a Super Representative",
   your_personal_website_address: "your personal website address",
   apply_for_delegate_predescription:
-    "Every token holder has the opportunity to become a TRON Super Representative.However, for the network and community to operate more smoothly and effectively,we have created a set of standards and regulations for eligible partners to become recommended Super Representatives. We will promote recommended SRs to increase their chances of being elected. New recommended Super Representatives are updated and posted once a week.",
+    "Every token holder has the opportunity to become a LINDA Super Representative.However, for the network and community to operate more smoothly and effectively,we have created a set of standards and regulations for eligible partners to become recommended Super Representatives. We will promote recommended SRs to increase their chances of being elected. New recommended Super Representatives are updated and posted once a week.",
   apply_for_delegate_description:
-    "All token holders can apply to become Super Representative (SR) candidate by clicking into the Account page; they can also vote for the candidates by clicking into the Votes page. Each user can vote for multiple candidates, with the number of votes smaller or equal to the amount of TRX that they hold.The voting results are based on the last round of voting by each user. The number of votes will be updated at 02:00(GMT+8),08:00(GMT+8),14:00(GMT+8),20:00(GMT+8) every day; users can also view real-time vote numbers. The top 27 most-voted partners will become SRs and be responsible for transaction packaging and block generation, with a reward of 16 TRX per block generation. The 27 SRs and the top 100 SR partners can also receive rewards of nodes based on the votes they receive. A one-time transaction fee of 9,999 TRX will be deducted for the application to become a partner. It will not cost any TRX for users to vote for SR partners.",
+    "All token holders can apply to become Super Representative (SR) candidate by clicking into the Account page; they can also vote for the candidates by clicking into the Votes page. Each user can vote for multiple candidates, with the number of votes smaller or equal to the amount of LIND that they hold.The voting results are based on the last round of voting by each user. The number of votes will be updated at 02:00(GMT+8),08:00(GMT+8),14:00(GMT+8),20:00(GMT+8) every day; users can also view real-time vote numbers. The top 27 most-voted partners will become SRs and be responsible for transaction packaging and block generation, with a reward of 16 LIND per block generation. The 27 SRs and the top 100 SR partners can also receive rewards of nodes based on the votes they receive. A one-time transaction fee of 9,999 LIND will be deducted for the application to become a partner. It will not cost any LIND for users to vote for SR partners.",
   apply_for_delegate_predescription_1:
-    "Every token holder has the opportunity to become a TRON Super Representative.After spending an application fee of 9,999 TRX, you become a Super Representative candidate. The Super Representative candidate can accept the user’s vote.",
+    "Every token holder has the opportunity to become a LINDA Super Representative.After spending an application fee of 9,999 LIND, you become a Super Representative candidate. The Super Representative candidate can accept the user’s vote.",
   apply_for_delegate_predescription_2:
-    "The top 27 most-voted partners will become SRs and be responsible for transaction packaging and block generation, with a reward of 16 TRX per block generation.",
+    "The top 27 most-voted partners will become SRs and be responsible for transaction packaging and block generation, with a reward of 16 LIND per block generation.",
   apply_for_delegate_predescription_3:
     "The 27 SRs and the top 100 SR partners can also receive rewards of nodes based on the votes they receive.",
   unknown_error: "an unknown error occurred",
-  representative_understand: "I understand how to be a TRON representative",
+  representative_understand: "I understand how to be a LINDA representative",
   generate_account: "Click to generate your account address and password",
   create_account_confirm_1:
     "I understand that if I forget/lose my password I will never be able to access my assets",
@@ -349,28 +349,28 @@ export const messages = {
   most_votes: "most votes",
   start_end_time: "Start / End Time",
   scan_qr_code: "Scan the code with a QR Code scanner",
-  receive_trx: "receive TRX",
+  receive_lind: "receive LIND",
   require_account_to_send: "You must be logged in to send coins",
   require_account_to_receive: "You must be logged in to receive coins",
   successful_send: "Succesfully send!",
   confirm_transaction: "confirm transaction",
   last_confirmed: "Last Confirmed",
-  trx_produced: "Transactions Produced",
+  lind_produced: "Transactions Produced",
   do_not_send_1:
-    "Do not send TRX from your own wallet or exchange to your testnet address!",
+    "Do not send LIND from your own wallet or exchange to your testnet address!",
   go_to_votelist: "Go to votelist",
-  understand_tron_sr_message_0:
-    "I understand how to be a TRON representative and I confirm to spend a",
-  understand_tron_sr_message_1: "fee.",
+  understand_linda_sr_message_0:
+    "I understand how to be a LINDA representative and I confirm to spend a",
+  understand_linda_sr_message_1: "fee.",
   invalid_url: "Invalid URL",
   apply_representative_error_message_0:
     "Something went wrong while trying to apply for representative.",
   apply_representative_error_message_1:
-    "Make sure you have enough TRX for the fee,or try again later.",
+    "Make sure you have enough LIND for the fee,or try again later.",
   open_external_link: "You are opening an external link",
   private_key_untrusted_website_message_0:
     "Never enter your private key on an untrusted website.",
-  no_official_tron_website: "is not an official TRON site.",
+  no_official_linda_website: "is not an official LINDA site.",
   continue_to_external_website: "Continue",
   visit_third_party_website:
     "The page you visit will be redirected to a third-party website. There may be security risks. Are you sure you want to continue?",
@@ -436,9 +436,9 @@ export const messages = {
   available: "available",
   testnet: "Testnet",
   days_to_freeze: "Days to freeze",
-  trx_token_fee_message: "1024 TRX is required to issue a new token",
-  trx_token_account_limit: "You may create only one TRC10 token per account",
-  trx_token_wallet_requirement:
+  lind_token_fee_message: "1024 LIND is required to issue a new token",
+  lind_token_account_limit: "You may create only one LRC10 token per account",
+  lind_token_wallet_requirement:
     "You need to open a wallet to be able to create a token",
   invalid_address: "invalid address",
   insufficient_tokens: "Insufficient tokens",
@@ -446,7 +446,7 @@ export const messages = {
   fill_a_valid_address: "Please fill a valid address",
   make_another_transaction: "Make another transaction",
   token_exchange_confirm:
-    "I've confirmed to spend {trxAmount} on token distribution, and get a total of {tokenAmount} tokens.",
+    "I've confirmed to spend {lindAmount} on token distribution, and get a total of {tokenAmount} tokens.",
   "An_unknown_error_occurred,_please_try_again_in_a_few_minutes":
     "An unknown error occured, please try again in a few minutes",
   An_error_occurred: "An error occurred",
@@ -550,8 +550,8 @@ export const messages = {
   how_much_buy_message: "How much tokens do you want to buy?",
   buy_confirm_message_1: "Are you sure you want to buy",
   for: "for",
-  insufficient_trx: "Insufficient TRX",
-  not_enough_trx_message: "You do not have enough TRX to buy so many tokens",
+  insufficient_lind: "Insufficient LIND",
+  not_enough_lind_message: "You do not have enough LIND to buy so many tokens",
   ends: "ends",
   starts: "starts",
   can_be_unlocked: "can be unlocked",
@@ -563,15 +563,15 @@ export const messages = {
   ##################################################################################
   */
   address_warning:
-    "Only enter valid TRON wallet address. Incorrect addresses can lead to TRX loss.",
+    "Only enter valid LINDA wallet address. Incorrect addresses can lead to LIND loss.",
   search_address_or_url: "Search for address or URL",
   the_lunch_test:
     "The launch of testnet aims to test all the features of our blockchain explorer and wallet.",
   please_keep_in_mind:
-    "Please keep in mind, that since your registered account address is only used for testnet, do not send TRX from your own wallet or exchange to the account address of testnet.",
-  tron_foundation: "TRON Foundation",
-  trx_for_testing:
-    "TRX for testing will be sent to your testing account once you successfully apply through account management.",
+    "Please keep in mind, that since your registered account address is only used for testnet, do not send LIND from your own wallet or exchange to the account address of testnet.",
+  linda_foundation: "LINDA Foundation",
+  lind_for_testing:
+    "LIND for testing will be sent to your testing account once you successfully apply through account management.",
   dear_users: "Dear users,",
   finished: "Finished",
   token: "token",
@@ -579,11 +579,11 @@ export const messages = {
   need_to_login: "You must be logged in to access to account page",
   thanks_for_applying: "Thanks for applying!",
   to_much_votes: "To many votes",
-  no_trx_remaining: "No TRX remaining",
+  no_lind_remaining: "No LIND remaining",
   show_more: "Show {countriesLength} More",
-  vote_guide_message: `Use your TRX to vote for Super Representatives.
-   For every TRX you hold in your account you have one vote to spend.
-   TRX will not be consumed. You can vote as many times for the several representatives as you like.
+  vote_guide_message: `Use your LIND to vote for Super Representatives.
+   For every LIND you hold in your account you have one vote to spend.
+   LIND will not be consumed. You can vote as many times for the several representatives as you like.
    The number of votes will be updated at 02:00,08:00,14:00,20:00(GMT+8）every day and the list of delegates will be updated.`,
   search_address: "Search for address",
   token_transactions: "Token Transactions",
@@ -631,12 +631,12 @@ export const messages = {
   description_message: "A short description of the purpose of the token",
   url_message: "A website address that shows more information about the token",
   exchange_rate_message_0:
-    "Specify the price of a single token by defining how many tokens a participant will receive for every TRX they spend.",
+    "Specify the price of a single token by defining how many tokens a participant will receive for every LIND they spend.",
   exchange_rate_message_1: "Participants will receive",
   exchange_rate_message_2: "for every",
-  exchange_rate_message_3: "TRX",
+  exchange_rate_message_3: "LIND",
   participation_message_0:
-    "Specify the participation period in which tokens will be issued. During the participation period users can exchange TRX for ",
+    "Specify the participation period in which tokens will be issued. During the participation period users can exchange LIND for ",
   participation_message_1: " tokens.",
   frozen_supply_message_0: `A part of the supply can be frozen. The amount of supply can be specified and must be frozen
    for a minimum of 1 day. The frozen supply can manually be unfrozen after start date and frozen
@@ -646,14 +646,14 @@ export const messages = {
   start_date: "Start Date",
   end_date: "End Date",
   token_spend_confirm:
-    "I confirm that creating the total supply of the token costs a one time total fee of 1024 TRX.",
-  token_issue_guide_message_1: `Issuing a token on the TRON Protocol can be done
-    by anyone who has at least 1024 TRX in their account.`,
+    "I confirm that creating the total supply of the token costs a one time total fee of 1024 LIND.",
+  token_issue_guide_message_1: `Issuing a token on the LINDA Protocol can be done
+    by anyone who has at least 1024 LIND in their account.`,
   token_issue_guide_message_2: `When a token is issued it will be shown on the token overview page.
-    Users can then participate within the issuing time and exchange their TRX for tokens.`,
+    Users can then participate within the issuing time and exchange their LIND for tokens.`,
   token_issue_guide_message_3: `After issuing the token your account will receive the amount of tokens equal to the total supply.
-    When other users exchange their TRX for tokens then the tokens will be withdrawn from your account and you will
-    receive TRX equal to the specified exchange rate.`,
+    When other users exchange their LIND for tokens then the tokens will be withdrawn from your account and you will
+    receive LIND equal to the specified exchange rate.`,
   /*
   ##################################################################################
   #                                                                                #
@@ -665,7 +665,7 @@ export const messages = {
   no_name_error: "Name is required",
   no_supply_error: "Total Supply must be at least 1",
   coin_value_error: "Token amount must be at least 1",
-  tron_value_error: "The amount of TRX per coin must be at least 1",
+  linda_value_error: "The amount of LIND per coin must be at least 1",
   invalid_starttime_error: "The provided starting date is invalid",
   invalid_endtime_error: "The provided ending date is invalid",
   no_description_error: "Description is required",
@@ -732,7 +732,7 @@ export const messages = {
   view_live_ranking: "View Live Ranking",
   open_team_page: "Open Team Page",
   warning_votes:
-    "At least 1 TRON Power is required to start voting. TRON Power is gained by freezing TRX on the",
+    "At least 1 LINDA Power is required to start voting. LINDA Power is gained by freezing LIND on the",
   account_page: "Account Page",
   loading_votes: "Loading Votes",
   "3_day_ranking": "3 Days Ranking(Top 10)",
@@ -745,7 +745,7 @@ export const messages = {
   votes_remaining_message: "Votes Remaining",
   open_wallet_start_voting_message: "Open wallet to start voting",
   thanks_submitting_vote_message: "Thanks for submitting your vote!",
-  need_min_trx_to_vote_message: "You need at least 1 TRX to be able to vote",
+  need_min_lind_to_vote_message: "You need at least 1 LIND to be able to vote",
   to_much_votes_massage: "You spend to much votes!",
   all_votes_are_used_message: "All votes are used!",
   submissing_vote_message_title: "Thank you for voting!",
@@ -809,10 +809,10 @@ export const messages = {
   #                                                                                #
   ##################################################################################
   */
-  what_is_tron: "TRON whitepaper V2.0",
-  tron_explorer_api: "TRONSCAN API",
-  tron_architechure: "TRON Architecture",
-  tron_protobuf_doc: "Protobuf Doc",
+  what_is_linda: "LINDA whitepaper V2.0",
+  linda_explorer_api: "LINDASCAN API",
+  linda_architechure: "LINDA Architecture",
+  linda_protobuf_doc: "Protobuf Doc",
   report_an_error: "Submit bug / suggestion",
   frequently_asked_questions: "FAQ",
   telegram: "Telegram",
@@ -840,7 +840,7 @@ export const messages = {
   download_keystore_file: "Download Encrypted Key",
   do_not_lose_it: "Do not lose it!",
   do_not_lose_it_message_0:
-    "TRON Foundation cannot help you recover a lost key.",
+    "LINDA Foundation cannot help you recover a lost key.",
   do_not_share_it: "Do not share it!",
   do_not_share_it_message_0:
     "Your funds may be stolen if you use this file a malicious site.",
@@ -885,35 +885,35 @@ export const messages = {
   ledger_guide: "Ledger Guide",
   requirements: "Requirements",
   using_ledger_steps_message_0:
-    "Using the Ledger with Tronscan requires the following steps:",
+    "Using the Ledger with Lindascan requires the following steps:",
   a: "A",
   install_the: "Install the ",
   app: "app",
   install_latest_version_message_0: "Install the latest version of ",
   opening_your_wallet: "Opening your wallet",
-  open_the_tronscan_desktop_client: "Open the blockchain explorer: ",
+  open_the_lindascan_desktop_client: "Open the blockchain explorer: ",
   click_open_wallet_top_right: `Click "Sign in" at the top right`,
   choose_ledger: "Choose Ledger",
   connect_unlock_ledger_with_pin:
     "Connect and unlock your device with your PIN code",
-  open_tron_app_on_ledger: "Open the TRON app on your Ledger",
-  ledger_connected_tronscan_message_0: `If your Ledger is connected properly then Tronscan will show "Connected"`,
+  open_linda_app_on_ledger: "Open the LINDA app on your Ledger",
+  ledger_connected_lindascan_message_0: `If your Ledger is connected properly then Lindascan will show "Connected"`,
   click_on_open_wallet: `Click on "Open Wallet"`,
   redirect_to_your_wallet_message:
-    "You will be redirected to your wallet and you can view your TRON address",
+    "You will be redirected to your wallet and you can view your LINDA address",
   using_ledger_to_sign_transactions: "Using the ledger to sign transactions",
   using_ledger_to_sign_transactions_message_0:
-    "Make sure to keep the Ledger connected and the TRON app open to sign transactions using the Ledger while using Tronscan",
+    "Make sure to keep the Ledger connected and the LINDA app open to sign transactions using the Ledger while using Lindascan",
   using_ledger_to_sign_transactions_message_1:
-    "Tronscan will show a popup with the transaction details when a transaction signature is required. Signatures are required whenever you vote, send TRX, change account name, etc..",
+    "Lindascan will show a popup with the transaction details when a transaction signature is required. Signatures are required whenever you vote, send LIND, change account name, etc..",
   ledger_note: "Note",
   ledger_note_message_1:
     "only support Ledger Nano S,Ledger Nano X,Ledger Blue for now.",
   ledger_note_message_2: "use chrome explorer.",
   ledger_note_message_3:
-    "We support：TRX and TRC10 token transfer, TRC20 token transfer, freeze and unfreeze TRX, voting, setting name.",
+    "We support：LIND and LRC10 token transfer, LRC20 token transfer, freeze and unfreeze LIND, voting, setting name.",
   ledger_note_message_4:
-    "Features unavailable currently: TRC20 token transfer, unfreeze TRC10 tokens, token creation, Poloni DEX, SR application, SR rewards application, Github update, trading pair creation, capital injection and capital withdrawal.",
+    "Features unavailable currently: LRC20 token transfer, unfreeze LRC10 tokens, token creation, Poloni DEX, SR application, SR rewards application, Github update, trading pair creation, capital injection and capital withdrawal.",
 
   /*
   ##################################################################################
@@ -945,14 +945,14 @@ export const messages = {
   /*
   ##################################################################################
   #                                                                                #
-  # buy Tron                                                                       #
+  # buy Linda                                                                       #
   #                                                                                #
   ##################################################################################
   */
-  buy_trx: "Buy TRX",
-  buy_trx_message_0:
-    "TRX can be purchased directly with Fiat or other Crypto-Currencies without a stock exchange. It uses a service from Changelly.com and is the easiest and fastest way to purchase trx. A list of supported currencies and a FAQ can be found at ",
-  buy_trx_using_changelly: "Buy TRX using Changelly",
+  buy_lind: "Buy LIND",
+  buy_lind_message_0:
+    "LIND can be purchased directly with Fiat or other Crypto-Currencies without a stock exchange. It uses a service from Changelly.com and is the easiest and fastest way to purchase lind. A list of supported currencies and a FAQ can be found at ",
+  buy_lind_using_changelly: "Buy LIND using Changelly",
   cant_load_widget: "Can't load widget",
   /*
   ##################################################################################
@@ -968,7 +968,7 @@ export const messages = {
   total_BlockCount: "Total BlockCount",
   new_address_seen: "New Address Seen",
   transfer_contract: "Transfer Contract",
-  TRX_transfer_between_addresses: "TRX transfer between addresses",
+  LIND_transfer_between_addresses: "LIND transfer between addresses",
   transfer_asset_contract: "Transfer Asset Contract",
   token_transfer_between_addresses: "Token transfer between addresses",
   participate_asset_issue_contract: "Participate Asset Issue Contract",
@@ -982,9 +982,9 @@ export const messages = {
   withdraw_balance_contract: "Withdraw Balance Contract",
   withdraw_balance: "Withdraw balance",
   freeze_balance_contract: "Freeze Balance Contract",
-  freeze_TRX: "Freeze TRX",
+  freeze_LIND: "Freeze LIND",
   unfreeze_balance_contract: "Unfreeze Balance Contract",
-  unfreeze_TRX: "Unfreeze TRX",
+  unfreeze_LIND: "Unfreeze LIND",
   vote_witness_contract: "Vote Witness Contract",
   vote_for_a_witness: "Vote for a Witness",
   asset_issue_contract: "Asset Issue Contract",
@@ -993,7 +993,7 @@ export const messages = {
   frozen_balance: "Frozen Balance",
   frozen_days: "Days frozen",
   counts: "counts",
-  TRX_exchange_rate: "TRX Exchange Rate",
+  LIND_exchange_rate: "LIND Exchange Rate",
   start_time: "Start time",
   end_time: "End time",
   contracts: "Contracts",
@@ -1020,7 +1020,7 @@ export const messages = {
   note: "Note",
   _percentage: "Percentage",
   foundation: "Foundation Addresses",
-  foundation_address: "Foundation Freeze TRX Total Number",
+  foundation_address: "Foundation Freeze LIND Total Number",
   unfreeze_time: "Unfreeze time",
   addresses_number: "Addresses Number",
   copyright: "Copyright",
@@ -1031,10 +1031,10 @@ export const messages = {
     #                                                                                #
     ##################################################################################
   */
-  tron_convert_tool: "Encode Convert Tool",
+  linda_convert_tool: "Encode Convert Tool",
   breakdown_supply_types: "Breakdown By Supply Types",
   genesis: "Genesis",
-  TRX_distribution_overview: "TRX DISTRIBUTION OVERVIEW",
+  LIND_distribution_overview: "LIND DISTRIBUTION OVERVIEW",
 
   block_produce_rewards: "Block Rewards",
   node_rewards: "Node Rewards",
@@ -1042,14 +1042,14 @@ export const messages = {
   fee_burned: "Fee Burned",
   current_total_supply: "Current Total Supply",
   foundation_freeze: "Foundation Freeze",
-  price_per_1000_trx: "PRICE PER 1000 TRX",
+  price_per_1000_lind: "PRICE PER 1000 LIND",
   in_USD: "In USD",
   in_BTC: "In BTC",
-  total_TRX_supply: "Total TRX Supply",
+  total_LIND_supply: "Total LIND Supply",
   market_capitalization: "Market Capitalization",
   circulating_supply: "Circulating Supply",
-  list_trx: "List TRX on exchanges",
-  burned_trx: "TRX Burned",
+  list_lind: "List LIND on exchanges",
+  burned_lind: "LIND Burned",
   supply_notes:
     "Crowdsale and pre-sale available globally, except in the US, China, and Japan",
   "14_day_transaction_history": "14 days Transaction History",
@@ -1061,11 +1061,11 @@ export const messages = {
   #                                                                                #
   ##################################################################################
 */
-  TRONRating: "TRON Token Rating",
-  rating_title: "Tronscan Token Reputation System",
+  LINDARating: "LINDA Token Rating",
+  rating_title: "Lindascan Token Reputation System",
   modify_on: "Modified on",
   rating_description:
-    "The Tronscan Reputation System aims at helping users to understand, differentiate and assess different tokens. When you visit the token page, the Reputation is classified into 5 categories:",
+    "The Lindascan Reputation System aims at helping users to understand, differentiate and assess different tokens. When you visit the token page, the Reputation is classified into 5 categories:",
   rating_status_1: "Review Pending",
   rating_status_1_desc_a: "Not yet reviewed",
   rating_status_2: "OK",
@@ -1100,7 +1100,7 @@ export const messages = {
     "There is information indicating that the fraud/phishing/fraud/spamming or misrepresentation behavior related to this token has not been properly handled, or the token has other 'dangerous' signs.",
   rating_disclaimer: "DISCLAIMER",
   disclaimer_desc_1:
-    "Tronscan does not endorse, approve or condemn any services or projects related to the token contracts displayed on the Tronscan. Users should always conduct research with due diligence before taking any action related to the token, especially when it comes to value investing.",
+    "Lindascan does not endorse, approve or condemn any services or projects related to the token contracts displayed on the Lindascan. Users should always conduct research with due diligence before taking any action related to the token, especially when it comes to value investing.",
   disclaimer_desc_2:
     "Reputation associated with this service may or may not be accurate as they are based on subjective evaluations and/or reports from the community. We take no sides, nor do we guarantee or conduct any level of responsibility/accuracy/reliability evaluation; our reputation evaluation cannot be deemed as any behavioral advice, especially investment advice.",
   disclaimer_desc_3:
@@ -1116,9 +1116,9 @@ export const messages = {
   my_created_token: "My Token",
   my_token_desc_1:
     "The information related to the token will be displayed on the token page. Each token based on the comprehensiveness and authenticity of the information will get a",
-  tron_rating: "Token Reputation",
+  linda_rating: "Token Reputation",
   my_token_desc_2:
-    "If you need to update your information, please send the updates using the following Excel template to token@tronscan.org via your company email or certified email with necessary credentials.",
+    "If you need to update your information, please send the updates using the following Excel template to token@lindascan.org via your company email or certified email with necessary credentials.",
   brief_info: "Brief introduction",
   website_official: "Official website",
   white_paper: "White Paper",
@@ -1204,8 +1204,8 @@ export const messages = {
   part_pass: "tokens found",
   view_total: "A Total of",
   view_pass: "Tokens to participate",
-  token_overview_tron: "Overview of TRON token market",
-  token_participate_tron: "Participate in TRON token issuance",
+  token_overview_linda: "Overview of LINDA token market",
+  token_participate_linda: "Participate in LINDA token issuance",
   not_started: "Not started",
   no_token_to_buy:
     "Sorry, all the circulating supply has been issued, please wait the tokens to be unfrozen to participate.",
@@ -1220,7 +1220,7 @@ export const messages = {
 
   Code: "Code",
   contract_overview: "Contract Overview",
-  trx_value: "TRX Value",
+  lind_value: "LIND Value",
   token_tracker: "Token Tracker",
   contract_creator: "Contract creator",
   at_txn: "at txn",
@@ -1266,10 +1266,10 @@ export const messages = {
   contract_setting: "Setting",
   contract_v_license: "License",
   contract_verified_time: "ValidationTime",
-  contract_balance_tip: "Only contains the number of TRX within the contract",
+  contract_balance_tip: "Only contains the number of LIND within the contract",
   contract_version_tip: "The version that has reliability loopholes",
   verify_code3:
-    "Tronscan respects the ownership of the developers (or the owner) of the source code. We are morally as well as legally obligated to ensure that the code will only be used within the service we procide.",
+    "Lindascan respects the ownership of the developers (or the owner) of the source code. We are morally as well as legally obligated to ensure that the code will only be used within the service we procide.",
   verify_code6: "Please see Source Code ",
   verify_code7: "Terms of Usage ",
   verify_code8: "for specific terms.",
@@ -1293,13 +1293,13 @@ export const messages = {
     "Contract source code is verified (Perfect match)",
   contract_source_code_no_match: "Contract source code is UnVerified",
   contract_source_code_p1:
-    "At Tronscan we have a moral, ethical and legal obligation that the all contract source codes (a.k.a. end user data) provided to us is (1) only used within the scope of the services we provide and (2) usage governed in accordance to our general",
+    "At Lindascan we have a moral, ethical and legal obligation that the all contract source codes (a.k.a. end user data) provided to us is (1) only used within the scope of the services we provide and (2) usage governed in accordance to our general",
   contract_source_code_p1_use_service: "terms of service.",
   contract_source_code_p2_1:
     "source code verification provides transparency for end users interacting with smart contracts. The",
   contract_source_code_p2_ver: "source code verification ",
   contract_source_code_p2_2:
-    "service at Tronscan provides contract authors or owners an opportunity to publish this information transparently and publicly.",
+    "service at Lindascan provides contract authors or owners an opportunity to publish this information transparently and publicly.",
   contract_source_code_p3_title: "1. Our fundamental ethical principles",
   contract_source_code_p3_a:
     "a. We fully respect the author's right to ownership and the author (or copyright holder) of the source code 'owns' the code.",
@@ -1320,7 +1320,7 @@ export const messages = {
   contract_terms_title_2:
     "BY ACCESSING OR USING OUR SERVICES, YOU AGREE TO BE BOUND BY THESE USE AND SERVICE TERMS AND ALL TERMS INCORPORATED BY REFERENCE.",
   contract_terms_title_3:
-    "These Use and any Service Terms and terms expressly incorporated herein (“Terms”) apply to your access to and use of all services (our “Services”) provided by White Ayn Limited/Tronscan.org (“Company,” “we,” or “us”).",
+    "These Use and any Service Terms and terms expressly incorporated herein (“Terms”) apply to your access to and use of all services (our “Services”) provided by White Ayn Limited/Lindascan.org (“Company,” “we,” or “us”).",
   contract_terms_p1_title: "1. ELIGIBILITY",
   contract_terms_p1_1:
     "You represent and warrant that you: (a) are of legal age to form a binding contract; (b) have not previously been suspended or removed from using our Services; and (c) have full power and authority to enter into this agreement and  will not violate any other agreement to which you are a party. If you are registering to use the Services on behalf of a legal entity, you further represent and warrant that (i) such legal entity is duly organized and validly existing under the applicable laws of the jurisdiction of its organization, and (ii) you are duly authorized by such legal entity to act on its behalf.",
@@ -1332,7 +1332,7 @@ export const messages = {
     "We may, in our sole discretion and without liability to you, with or without prior notice and at any time, modify or discontinue, temporarily or permanently, any portion of our Services.",
   contract_terms_p4_title: "4. ASSUMPTION OF RISK",
   contract_terms_p4_1:
-    "You acknowledge and agree that there are risks associated with utilizing an Internet-based service including, but not limited to, the risk of failure of hardware, software and Internet connections, the risk of malicious software introduction, and the risk that third parties may obtain unauthorized access to information stored within your Account. You acknowledge and agree that Company will not be responsible for any communication failures, disruptions, errors, distortions or delays you may experience when using the Services, however caused. Company takes no responsibility for and will not be liable for any losses, damages or claims arising from the use of our Services, including, but not limited to, any losses, damages or claims arising from (a) passwords being attacked, (b) server failure or data loss, (c) forgotten passwords, (d) corrupted wallet files, (e) incorrectly constructed transactions or mistyped Tronscan addresses; or (f) unauthorized access to mobile applications, (g) 'phishing,' viruses,third-party attacks or any other unauthorized third-party activities.",
+    "You acknowledge and agree that there are risks associated with utilizing an Internet-based service including, but not limited to, the risk of failure of hardware, software and Internet connections, the risk of malicious software introduction, and the risk that third parties may obtain unauthorized access to information stored within your Account. You acknowledge and agree that Company will not be responsible for any communication failures, disruptions, errors, distortions or delays you may experience when using the Services, however caused. Company takes no responsibility for and will not be liable for any losses, damages or claims arising from the use of our Services, including, but not limited to, any losses, damages or claims arising from (a) passwords being attacked, (b) server failure or data loss, (c) forgotten passwords, (d) corrupted wallet files, (e) incorrectly constructed transactions or mistyped Lindascan addresses; or (f) unauthorized access to mobile applications, (g) 'phishing,' viruses,third-party attacks or any other unauthorized third-party activities.",
   contract_terms_p4_2:
     "You are responsible for maintaining the confidentiality of your account and password and for restricting access to your account, and you agree to accept responsibility for all activities that occur under your account or password.",
   contract_terms_p5_title: "5. THIRD-PARTY SERVICES AND CONTENT",
@@ -1371,7 +1371,7 @@ export const messages = {
     "6.4 No Reverse Engineering. You may not reverse engineer, decompile or disassemble, tamper with, or bypass any security associated with the Software, whether in whole or in part. Updates. We may offer automatic or manual updates to the Software at any time and without notice to you.",
   contract_terms_p7_title: "7. USER-GENERATED CONTENT",
   contract_terms_p7_1:
-    "7.1. Responsibility for User-Generated Content - You are solely responsible for the content of, and for any harm resulting from, any User-Generated Content that you post, upload, link to or otherwise make available via the Service, regardless of the form of that Content. We are not responsible for any public display or misuse of your User-Generated Content. We have the right (though not the obligation) to refuse or remove any User-Generated Content that, in our sole discretion, violates any Tronscan terms or policies.",
+    "7.1. Responsibility for User-Generated Content - You are solely responsible for the content of, and for any harm resulting from, any User-Generated Content that you post, upload, link to or otherwise make available via the Service, regardless of the form of that Content. We are not responsible for any public display or misuse of your User-Generated Content. We have the right (though not the obligation) to refuse or remove any User-Generated Content that, in our sole discretion, violates any Lindascan terms or policies.",
   contract_terms_p7_2:
     "7.2. Ownership of Content & Right to Post - If you're posting anything you did not create yourself or do not own the rights to, you agree (a) that you are responsible for any Content you post; (b) that you will only submit Content that you have the right to post; (c) and that you will fully comply with any third party licenses relating to Content you post.",
   contract_terms_p7_3:
@@ -1379,14 +1379,14 @@ export const messages = {
   contract_terms_p7_4:
     "7.4. Moral Rights - You retain all moral rights to Your Content that you upload, publish, or submit to any part of the Service, including the rights of integrity and attribution. However, you waive these rights and agree not to assert them against us, to enable us to reasonably exercise the rights granted in Section 7.3.",
   contract_terms_p7_5:
-    "7.5. To the extent this agreement is not enforceable by applicable law, you grant Tronscan the rights we need to use your content without attribution and to make reasonable adaptations of your content as necessary to render the Website and provide the service.",
+    "7.5. To the extent this agreement is not enforceable by applicable law, you grant Lindascan the rights we need to use your content without attribution and to make reasonable adaptations of your content as necessary to render the Website and provide the service.",
   contract_terms_p8_title:
     "8. COPYRIGHTS AND OTHER INTELLECTUAL PROPERTY RIGHTS",
   contract_terms_p8_1:
     "Unless otherwise indicated by us, all copyright and other intellectual property rights in all content and other materials contained on our website or provided in connection with the Services, including, without limitation, the Company or Company logo and all designs, text, graphics, pictures, information, data, software, sound files, other files and the selection and arrangement thereof (collectively, “Company Materials”) are the proprietary property of Company or our licensors or suppliers and are protected by copyright laws and other intellectual property rights laws. We hereby grant you a limited, nonexclusive and non-sublicensable license to access and use the Company Materials for your personal or internal business use. Such license is subject to these Terms and does not permit (a) any resale of the Company Materials; (b) the distribution, public performance or public display of any Company Materials; (c) modifying or otherwise making any derivative uses of the Company Materials, or any portion thereof; or (d) any use of the Company Materials other than for their intended purposes. The license granted under this Section will automatically terminate if we suspend or terminate your access to the Services.",
   contract_terms_p9_title: "9. TRADEMARKS",
   contract_terms_p9_1:
-    "“Tronscan” the Company logo, and any other Company product or service names, logos or slogans that may appear on our Services are trademarks of Company and may not be copied, imitated or used, in whole or in part, without our prior written permission. You will not use any trademark, product or service name of Company without our prior written permission, including without limitation any metatags or other “hidden text” utilizing any trademark, product or service name of Company. In addition, the look and feel of our Services, including all page headers, custom graphics, button icons and scripts, is the service mark, trademark and/or trade dress of Company and may not be copied, imitated or used, in whole or in part, without our prior written permission. All other trademarks, registered trademarks, product names and company names or logos mentioned through our Services are the property of their respective owners. Reference to any products, services, processes or other information, by name, trademark, manufacturer, supplier or otherwise does not constitute or imply endorsement, sponsorship or recommendation by us.",
+    "“Lindascan” the Company logo, and any other Company product or service names, logos or slogans that may appear on our Services are trademarks of Company and may not be copied, imitated or used, in whole or in part, without our prior written permission. You will not use any trademark, product or service name of Company without our prior written permission, including without limitation any metatags or other “hidden text” utilizing any trademark, product or service name of Company. In addition, the look and feel of our Services, including all page headers, custom graphics, button icons and scripts, is the service mark, trademark and/or trade dress of Company and may not be copied, imitated or used, in whole or in part, without our prior written permission. All other trademarks, registered trademarks, product names and company names or logos mentioned through our Services are the property of their respective owners. Reference to any products, services, processes or other information, by name, trademark, manufacturer, supplier or otherwise does not constitute or imply endorsement, sponsorship or recommendation by us.",
   contract_terms_p10_title: "10. SUSPENSION; TERMINATION",
   contract_terms_p10_1:
     "In the event of any Force Majeure Event, breach of these Terms, or any other event that would make provision of the Services commercially unreasonable for Company, we may, in our discretion and without liability to you, with or without prior notice, suspend your access to all or a portion of our Services. We may terminate your access to the Services in our sole discretion, immediately and without prior notice, and delete or deactivate your Account and all related information and files in such account without liability to you, including, for instance, in the event that you breach any term of these Terms.",
@@ -1496,21 +1496,21 @@ export const messages = {
   #                                                                                #
   ##################################################################################
   */
-  pice_per_1trx: "Real-time TRX price",
-  tron_power_freezing:
-    "TRON power can be gained through freezing TRX, 1 TRX for 1 TRON power.",
+  pice_per_1lind: "Real-time LIND price",
+  linda_power_freezing:
+    "LINDA power can be gained through freezing LIND, 1 LIND for 1 LINDA power.",
   HighChart_tip: "Click and drag in the plot area to zoom in",
   general_information: "General Information",
   blockchain_information: "Blockchain Information",
   sr_information: "SR Information",
   currency_information: "Currency Information",
   your_vote: "Your vote",
-  total_number_frozenTRX: "Total number of frozen TRX",
-  tronics_support_planTRX: "TRX frozen by the Tronics Support Plan",
-  frozen_by_the_foundationTRX: "TRX frozen by the Foundation",
-  tronics_support_plan: "Tronics Support Plan",
-  tronics_support_plan_recipient_address:
-    "Tronics Support Plan recipient address",
+  total_number_frozenLIND: "Total number of frozen LIND",
+  lindaics_support_planLIND: "LIND frozen by the Lindaics Support Plan",
+  frozen_by_the_foundationLIND: "LIND frozen by the Foundation",
+  lindaics_support_plan: "Lindaics Support Plan",
+  lindaics_support_plan_recipient_address:
+    "Lindaics Support Plan recipient address",
   update_token: "Update Token",
   total_frozen: "Foundation Reserve",
   account_create_contract: "Account Create Contract",
@@ -1544,7 +1544,7 @@ export const messages = {
   contract_notes_1:
     "To verify Contracts that accept Constructor arguments,please enter the ABI-encoded Arguments in the box below.",
   contract_notes_2_1: "For debugging purposes if it compiles correctly at",
-  contract_notes_2_2: " TRON studio",
+  contract_notes_2_2: " LINDA studio",
   contract_notes_2_3: ", it should also compile correctly here.",
   contract_notes_3:
     'We do not support contract verification that use "imports" up to now.',
@@ -1624,18 +1624,18 @@ export const messages = {
   no_tnx: "No Transaction",
   no_event: "No Event",
   link_test_fauct: "test faucet",
-  gain_bandwith: "Freeze TRX to gain bandwith",
-  gain_energy: "Freeze TRX to gain energy",
+  gain_bandwith: "Freeze LIND to gain bandwith",
+  gain_energy: "Freeze LIND to gain energy",
   energy: "energy",
-  freeze_trx_gain_bandwith_energy: "You can gain bandwith or energy as well.",
+  freeze_lind_gain_bandwith_energy: "You can gain bandwith or energy as well.",
   freeze_type: "Freeze Type",
-  success_unfrozen_trx: "Successfully Unfrozen TRX",
+  success_unfrozen_lind: "Successfully Unfrozen LIND",
   please_select_the_type_of_unfreeze: "Please select the type of unfreeze",
-  unfreeze_bandwidth: "Unfreeze the bandwidth account to get TRX",
-  unfreeze_energy: "Unfreeze the energy account to get TRX",
+  unfreeze_bandwidth: "Unfreeze the bandwidth account to get LIND",
+  unfreeze_energy: "Unfreeze the energy account to get LIND",
   hide_small_currency: "Hide small balances",
   tokens_less_than_10: "Tokens with a quantity less than 10",
-  only_TRX_transfers: "Only TRX transfers",
+  only_LIND_transfers: "Only LIND transfers",
   no_transfers_found: "No transfers found",
   current_MaxTPS: "Current/Max TPS",
 
@@ -1703,11 +1703,11 @@ export const messages = {
   slightly_revenue:
     "Slightly lower the estimated revenue, and the turnover rate will be higher.",
   participation_message_2:
-    "The issue time is not enabled, which means users cannot participate in the token on tronscan.",
+    "The issue time is not enabled, which means users cannot participate in the token on lindascan.",
   created_token_time: "Created",
-  overview_TRC20: "TRC20 Overview",
-  overview_TRC10: "TRC10 Overview",
-  pice_per_onetrx: "Price (TRX)",
+  overview_LRC20: "LRC20 Overview",
+  overview_LRC10: "LRC10 Overview",
+  pice_per_onelind: "Price (LIND)",
   total_tokens: "Total tokens",
   application_entry: "Application Entry",
 
@@ -1718,18 +1718,18 @@ export const messages = {
    #                                                                                #
    ##################################################################################
   */
-  committee: "TRON Committee",
+  committee: "LINDA Committee",
   committee_dec_1:
-    "TRON Committee is for modifying the dynamic parameters on the TRON network, e.g. block generation rewards, transaction fees, etc.",
+    "LINDA Committee is for modifying the dynamic parameters on the LINDA network, e.g. block generation rewards, transaction fees, etc.",
   committee_dec_2:
     "The Committee consists of the current {total} Super Representatives (SRs).",
   committee_dec_3: "Each SR has the right to propose and vote on proposals.",
   committee_dec_4:
     "When a proposal receives {total} votes or more from the SRs within the valid time frame, the proposal will be approved and its network parameters will be modified in the next maintenance period.",
   get_committee_proposal: "Check committee proposals",
-  TRON_network_parameters: "TRON network parameters",
+  LINDA_network_parameters: "LINDA network parameters",
   commission_proposed: "Committee proposals",
-  TRONSR: "TRON SR",
+  LINDASR: "LINDA SR",
   learn_more: "Learn More",
   propose_number: "Number",
   propose_parameters: "Parameter",
@@ -1738,7 +1738,7 @@ export const messages = {
   propose_1: "Propose to modify the maintenance interval of SR ",
   propose_2: "Propose to modify the cost of applying for SR account",
   propose_3: "Propose to modify the account creation fee",
-  propose_4: "Propose to modify the amount of TRX used to gain extra bandwidth",
+  propose_4: "Propose to modify the amount of LIND used to gain extra bandwidth",
   propose_5: "Propose to modify asset issuance fee",
   propose_6: "Propose to modify SR block generation reward",
   propose_7:
@@ -1773,7 +1773,7 @@ export const messages = {
   propose_32:"Propose to allow  TVM to support solidity 0.5.9",
   propose_33: "Propose to modify the adaptive resource limit target ratio",
   propose_34: "Propose to modify the transaction fee on creating public address when transferring funds from shielded addresses to public addresses in shielded transaction",
-  propose_35: "Propose to ban transferring TRX and TRC10 tokens to smart contracts via TransferContract or TransferAssetContract",
+  propose_35: "Propose to ban transferring LIND and LRC10 tokens to smart contracts via TransferContract or TransferAssetContract",
   propose_prohibit:"Ban",
   propose_not_prohibit:"Not ban",
   propose_unprohibit:"Not ban",
@@ -1799,17 +1799,17 @@ export const messages = {
   total_approving_votes: "Total Approving Votes",
   to_provide_a_better_experience:
     "To provide a better experience, this statistic is updated every minute.",
-  TRC10_token: "TRC10 Token",
-  TRC20_token: "TRC20 Token",
-  TRC20_decimals: "Precision",
+  LRC10_token: "LRC10 Token",
+  LRC20_token: "LRC20 Token",
+  LRC20_decimals: "Precision",
   nav_more: "more",
   no_holders_found: "No Token Holders Found",
-  search_TRC20: "Search Address",
+  search_LRC20: "Search Address",
   beginners_guide: "Guide",
   Submit_a_bug: "Submit bug",
-  TRONdice: "Hold dice coin and get TRX dividend!",
-  Join_TRONdice: "-Join TRONdice!",
-  search_TRC20_error: " Please enter the correct address",
+  LINDAdice: "Hold dice coin and get LIND dividend!",
+  Join_LINDAdice: "-Join LINDAdice!",
+  search_LRC20_error: " Please enter the correct address",
   dex_announcement: "notice:",
   regulations_on_trading_pairs: "Regulations on Trading Pairs",
   How_to_trade_on_DEX: "How to trade on DEX",
@@ -1823,13 +1823,13 @@ export const messages = {
   about_us: "About Us",
   what_we_do: "What are we doing?",
   Transcan_desc:
-    "Tronscan is the first block explorer based on TRON. It not only includes some basic functions of the block explorer, such as search query transactions, accounts, blocks, nodes, smart contracts; data statistics and queries on the chain, but also directly supports token creation. At the same time, Tronscan also has a built-in web wallet and Bancor-based DEX, which enriches the Tronscan application matrix.",
+    "Lindascan is the first block explorer based on LINDA. It not only includes some basic functions of the block explorer, such as search query transactions, accounts, blocks, nodes, smart contracts; data statistics and queries on the chain, but also directly supports token creation. At the same time, Lindascan also has a built-in web wallet and Bancor-based DEX, which enriches the Lindascan application matrix.",
   Our_team: "Community Contributor",
   Team_desc:
-    "Our team is the Blockchain Welfare Foundation in Malta and has been actively involved in the ecological construction of TRON. The team consists of more than 30 people all over the world, mostly developers and operators. In the future, we will be bound to the TRON ecological development in the long run. To perfect the Tronscan, we will also develop DApps based on TRON.",
-  User_many: "Tronscan users all over the world",
+    "Our team is the Blockchain Welfare Foundation in Malta and has been actively involved in the ecological construction of LINDA. The team consists of more than 30 people all over the world, mostly developers and operators. In the future, we will be bound to the LINDA ecological development in the long run. To perfect the Lindascan, we will also develop DApps based on LINDA.",
+  User_many: "Lindascan users all over the world",
   User_many_desc:
-    "Every day, TRON supporters from around the world use the Tronscan block explorer, where they can query the details of the transaction and experience the latest features of TRON.",
+    "Every day, LINDA supporters from around the world use the Lindascan block explorer, where they can query the details of the transaction and experience the latest features of LINDA.",
   HarryXu: "Provide front-end technical support ",
   Skye: "Collect community comments and help solve them",
   Ariml: "Provide more inspiration for the design of the page",
@@ -1837,7 +1837,7 @@ export const messages = {
   YanZheng: "Provide back-end technical support",
   Zach: "Provide back-end technical&test support",
   Adolph:
-    "Investigating the latest developments in the blockchain industry, making a lot of contributions to tronscan's product design and positioning",
+    "Investigating the latest developments in the blockchain industry, making a lot of contributions to lindascan's product design and positioning",
   "Vincent Lau": "Provide a lot blockchain technical support",
 
   /*
@@ -1847,14 +1847,14 @@ export const messages = {
   #                                                                                #
   ##################################################################################
   */
-  newly_issued_token_by_tronscan:
+  newly_issued_token_by_lindascan:
     "The fake tokens will be added to the blacklist and not displayed.",
   Favorites: "Favorites",
   dex_search_dec: "Enter the Abbreviation of the token",
-  TRC20_exchange_online: "TRC20 exchange is online now",
+  LRC20_exchange_online: "LRC20 exchange is online now",
   "Trade_on_Poloni DEX": "Trade on Poloni DEX",
-  issued_token_of_tronscan:
-    "The issued token will only be displayed on the TRC10 overview after they pass the auditon of tronscan.",
+  issued_token_of_lindascan:
+    "The issued token will only be displayed on the LRC10 overview after they pass the auditon of lindascan.",
   /*
     ##################################################################################
     #                                                                                #
@@ -1867,228 +1867,228 @@ export const messages = {
   /*
     ##################################################################################
     #                                                                                #
-    # trc20  2018-12-18                                     #
+    # lrc20  2018-12-18                                     #
     #                                                                                #
     ##################################################################################
    */
-  trc20_nav_state: "logged on",
-  trc20_nav_dex: "DEX",
-  trc20_nav_trc10: "TRC10 Exchange",
-  trc20_nav_trc20: "TRC20 Exchange",
-  trc20_nav_tokenList: "Token Listing",
-  trc20_nav_aboutUs: "About",
-  trc20_footer_explain: "Rate standard",
-  trc20_footer_qa: "Q&A",
-  trc20_footer_standard_1: "The Poloni DEX service charges are as follow:",
-  trc20_footer_standard_2: "•Recharge: no need to recharge",
-  trc20_footer_standard_3: "•Withdrawal: no withdrawal",
-  trc20_footer_standard_4: "•Transaction: handling fee 0.1%",
-  trc20_footer_standard_5:
+  lrc20_nav_state: "logged on",
+  lrc20_nav_dex: "DEX",
+  lrc20_nav_lrc10: "LRC10 Exchange",
+  lrc20_nav_lrc20: "LRC20 Exchange",
+  lrc20_nav_tokenList: "Token Listing",
+  lrc20_nav_aboutUs: "About",
+  lrc20_footer_explain: "Rate standard",
+  lrc20_footer_qa: "Q&A",
+  lrc20_footer_standard_1: "The Poloni DEX service charges are as follow:",
+  lrc20_footer_standard_2: "•Recharge: no need to recharge",
+  lrc20_footer_standard_3: "•Withdrawal: no withdrawal",
+  lrc20_footer_standard_4: "•Transaction: handling fee 0.1%",
+  lrc20_footer_standard_5:
     "Note: The right to interpret the fee standard is owned by Poloni DEX, and Poloni DEX reserves the right to adjust the rate.",
-  trc20_apply_for_the_currency: "Apply for the currency",
-  trc20_apply_for_process: "Apply for the currency process",
-  trc20_apply_content:
+  lrc20_apply_for_the_currency: "Apply for the currency",
+  lrc20_apply_for_process: "Apply for the currency process",
+  lrc20_apply_content:
     "If you want to add coins, please fill out the application form to provide information about the currency. After submitting the information, we will review the data as soon as possible. Please wait patiently before replying to the audit results.",
-  trc20_operate_txn_pair_message: "Please enter an integer",
-  trc20_withdraw_all: "Not fully divested",
-  trc20_creat_valid: "Cannot exceed account balance",
-  trc20_my_trading_pairs: "My Trading Pairs",
-  trc20_create_trading_pairs: "Create Trading Pairs",
-  trc20_pairs: "Pairs",
-  trc20_no_pairs: "No Pairs",
-  trc20_capital_injection: "Capital Injection",
-  trc20_capital_withdrawal: "Capital Withdrawal",
-  trc20_pair_has_been_created: "Pair has been created",
-  trc20_successfully_created_pair: "Successfully created a deal pair",
-  trc20_pair_creation_failed: "pair creation failed",
-  trc20_successful_injection: "Successful Injection",
-  trc20_sorry_injection_failed: "Sorry, injection failed",
-  trc20_successful_withdrawal: "Successful Withdrawal",
-  trc20_sorry_withdrawal_failed: "Sorry, withdrawal failed",
-  trc20_select_the_name_of_the_Token: "Please select the name of the Token",
-  trc20_enter_the_amount: "Enter the Amount",
-  trc20_choose_a_Token_for_capital_injection:
+  lrc20_operate_txn_pair_message: "Please enter an integer",
+  lrc20_withdraw_all: "Not fully divested",
+  lrc20_creat_valid: "Cannot exceed account balance",
+  lrc20_my_trading_pairs: "My Trading Pairs",
+  lrc20_create_trading_pairs: "Create Trading Pairs",
+  lrc20_pairs: "Pairs",
+  lrc20_no_pairs: "No Pairs",
+  lrc20_capital_injection: "Capital Injection",
+  lrc20_capital_withdrawal: "Capital Withdrawal",
+  lrc20_pair_has_been_created: "Pair has been created",
+  lrc20_successfully_created_pair: "Successfully created a deal pair",
+  lrc20_pair_creation_failed: "pair creation failed",
+  lrc20_successful_injection: "Successful Injection",
+  lrc20_sorry_injection_failed: "Sorry, injection failed",
+  lrc20_successful_withdrawal: "Successful Withdrawal",
+  lrc20_sorry_withdrawal_failed: "Sorry, withdrawal failed",
+  lrc20_select_the_name_of_the_Token: "Please select the name of the Token",
+  lrc20_enter_the_amount: "Enter the Amount",
+  lrc20_choose_a_Token_for_capital_injection:
     "Choose a Token for Capital Injection:",
-  trc20_choose_a_Token_for_capital_withdrawal:
+  lrc20_choose_a_Token_for_capital_withdrawal:
     "Choose a Token for Capital Withdrawal:",
-  trc20_injection_amount: "Injection Amount:",
-  trc20_withdrawal_amount: "Withdrawal Amount:",
-  trc20_marks: "market",
-  trc20_guide: "user guide",
-  trc20_last_price: "Last price",
-  trc20_pairs_change: "Change",
-  trc20_H: "H",
-  trc20_L: "L",
-  trc20_O: "O",
-  trc20_C: "C",
-  trc20_24H_VOL: "24h VOL",
-  trc20_24H_Total: "24h Total",
-  trc20_price: "Price",
-  trc20_amount: "Amount",
-  trc20_enter_the_trading_amount: "Enter the Trading Amount",
-  trc20_enter_10: "Total ≥ 10 TRX",
-  trc20_enter_1: "Total ≥ 1 USDT",
-  trc20_enter_the_trading_price: "Enter the Trading Price",
-  trc20_TxAvailable: "Available",
-  trc20_BUY: "BUY",
-  trc20_SELL: "SELL",
-  trc20_token_application_instructions_title: "Token Application Instructions",
-  trc20_token_application_instructions_1:
+  lrc20_injection_amount: "Injection Amount:",
+  lrc20_withdrawal_amount: "Withdrawal Amount:",
+  lrc20_marks: "market",
+  lrc20_guide: "user guide",
+  lrc20_last_price: "Last price",
+  lrc20_pairs_change: "Change",
+  lrc20_H: "H",
+  lrc20_L: "L",
+  lrc20_O: "O",
+  lrc20_C: "C",
+  lrc20_24H_VOL: "24h VOL",
+  lrc20_24H_Total: "24h Total",
+  lrc20_price: "Price",
+  lrc20_amount: "Amount",
+  lrc20_enter_the_trading_amount: "Enter the Trading Amount",
+  lrc20_enter_10: "Total ≥ 10 LIND",
+  lrc20_enter_1: "Total ≥ 1 USDT",
+  lrc20_enter_the_trading_price: "Enter the Trading Price",
+  lrc20_TxAvailable: "Available",
+  lrc20_BUY: "BUY",
+  lrc20_SELL: "SELL",
+  lrc20_token_application_instructions_title: "Token Application Instructions",
+  lrc20_token_application_instructions_1:
     "For better user experience, please fill in the application with detailed information about the token that you would like to issue. After receiving your application, we will conclude the review of the information that you have submitted in 3 - 5 business days. Tokens without review will be hidden.",
-  trc20_click_here_to_apply: "Click here to apply",
-  trc20_TxTime: "Transaction Time",
-  trc20_TxAmount: "Transaction Amount",
-  trc20_TxRecord: "Trading Record",
-  trc20_CurOrder: "Current Order",
-  trc20_TxBuy: "Expected to buy",
-  trc20_TxSell: "Amount want to sell",
-  trc20_my_transaction: "Order History",
-  trc20_estimated_cost: "Estimated Cost",
-  trc20_estimated_revenue: "Estimated Revenue",
-  trc20_slightly_cost:
+  lrc20_click_here_to_apply: "Click here to apply",
+  lrc20_TxTime: "Transaction Time",
+  lrc20_TxAmount: "Transaction Amount",
+  lrc20_TxRecord: "Trading Record",
+  lrc20_CurOrder: "Current Order",
+  lrc20_TxBuy: "Expected to buy",
+  lrc20_TxSell: "Amount want to sell",
+  lrc20_my_transaction: "Order History",
+  lrc20_estimated_cost: "Estimated Cost",
+  lrc20_estimated_revenue: "Estimated Revenue",
+  lrc20_slightly_cost:
     "Slightly increase the estimated cost, and the turnover rate will be higher.",
-  trc20_slightly_revenue:
+  lrc20_slightly_revenue:
     "Slightly lower the estimated revenue, and the turnover rate will be higher.",
-  trc20_accumulative: "Total",
-  trc20_buy: "buy",
-  trc20_sell: "sell",
-  trc20_balance_tip: "Balance is not enough",
-  trc20_available_balance: "Balance",
-  trc20_volume: "Trading Amount",
-  trc20_cancel_order_confirm: "Are you sure you want to cancel this order?",
-  trc20_cancel: "No",
-  trc20_confirm: "Yes",
-  trc20_prompt: "Warning",
-  trc20_order_success: "Submitted successfully",
-  trc20_cancel_order_fail: "Cancel order fail",
-  trc20_order_fail: "Failure to submit",
-  trc20_downLoad_wallet1: "Please download wallet",
-  trc20_downLoad_wallet2: " to start your trade",
-  trc20_login_wallet: "Please login to your account for next step",
-  trc20_cur_order_header_order_time: "Time",
-  trc20_cur_order_header_order_type: "Type",
-  trc20_cur_order_header_price: "Price",
-  trc20_cur_order_header_amount: "Amount",
-  trc20_cur_order_header_volume: "Volume",
-  trc20_cur_order_header_progress: "Progress",
-  trc20_cur_order_header_action: "Operation",
-  trc20_cur_order_cancel: "Cancel",
-  trc20_trans_record_header_block: "Block Height",
-  trc20_trans_record_header_buyAdr: "Buyer",
-  trc20_trans_record_header_sellAdr: "Seller",
-  trc20_trans_record_header_amount: "Amount",
-  trc20_trans_record_header_time: "Time",
-  trc20_trans_record_header_price: "Price",
-  trc20_my_trans_header_time: "Time",
-  trc20_my_trans_header_type: "Side",
-  trc20_my_trans_header_pair: "Pair",
-  trc20_my_trans_header_price: "Price",
-  trc20_my_trans_header_amount: "Amount",
-  trc20_my_trans_header_volume: "Volume",
-  trc20_my_trans_header_status: "Status",
-  trc20_my_trans_header_detail: "Details",
-  trc20_my_trans_finish: "All dealt",
-  trc20_my_trans_part: "Partially dealt",
-  trc20_my_trans_cancle: "Cancel",
-  trc20_my_trans_check: "Check",
-  trc20_no_data: "No Data",
-  trc20_token_info_Token_Info: "Introduction",
-  trc20_token_info_Total_Name: "Name",
-  trc20_token_info_Token_Symbol: "Token Symbol",
-  trc20_token_info_Total_Supply: "Supply",
-  trc20_token_info_Circulating_Supply: "Circulating Supply",
-  trc20_token_info_Contract_Address: "Contract Address",
-  trc20_token_info_Website: "Website",
-  trc20_token_info_ths_1: "Pair",
-  trc20_token_info_ths_2: "Last Price",
-  trc20_token_info_ths_3: "24h Change",
-  trc20_token_info_ths_4: "24h High",
-  trc20_token_info_ths_5: "24h Low",
-  trc20_token_info_ths_6: "24h Volume",
-  trc20_token_info_ths_7: "24h Volume",
-  trc20_new_price: "Latest price",
-  trc20_exchange_status: "Trading Pair Status",
-  trc20_examine: "Reviewed",
-  trc20_unexamine: "Unreviewed",
-  trc20_id: "ID",
-  trc20_first_token: "First Token",
-  trc20_balance: "balance",
-  trc20_second_token: "Second Token",
+  lrc20_accumulative: "Total",
+  lrc20_buy: "buy",
+  lrc20_sell: "sell",
+  lrc20_balance_tip: "Balance is not enough",
+  lrc20_available_balance: "Balance",
+  lrc20_volume: "Trading Amount",
+  lrc20_cancel_order_confirm: "Are you sure you want to cancel this order?",
+  lrc20_cancel: "No",
+  lrc20_confirm: "Yes",
+  lrc20_prompt: "Warning",
+  lrc20_order_success: "Submitted successfully",
+  lrc20_cancel_order_fail: "Cancel order fail",
+  lrc20_order_fail: "Failure to submit",
+  lrc20_downLoad_wallet1: "Please download wallet",
+  lrc20_downLoad_wallet2: " to start your trade",
+  lrc20_login_wallet: "Please login to your account for next step",
+  lrc20_cur_order_header_order_time: "Time",
+  lrc20_cur_order_header_order_type: "Type",
+  lrc20_cur_order_header_price: "Price",
+  lrc20_cur_order_header_amount: "Amount",
+  lrc20_cur_order_header_volume: "Volume",
+  lrc20_cur_order_header_progress: "Progress",
+  lrc20_cur_order_header_action: "Operation",
+  lrc20_cur_order_cancel: "Cancel",
+  lrc20_trans_record_header_block: "Block Height",
+  lrc20_trans_record_header_buyAdr: "Buyer",
+  lrc20_trans_record_header_sellAdr: "Seller",
+  lrc20_trans_record_header_amount: "Amount",
+  lrc20_trans_record_header_time: "Time",
+  lrc20_trans_record_header_price: "Price",
+  lrc20_my_trans_header_time: "Time",
+  lrc20_my_trans_header_type: "Side",
+  lrc20_my_trans_header_pair: "Pair",
+  lrc20_my_trans_header_price: "Price",
+  lrc20_my_trans_header_amount: "Amount",
+  lrc20_my_trans_header_volume: "Volume",
+  lrc20_my_trans_header_status: "Status",
+  lrc20_my_trans_header_detail: "Details",
+  lrc20_my_trans_finish: "All dealt",
+  lrc20_my_trans_part: "Partially dealt",
+  lrc20_my_trans_cancle: "Cancel",
+  lrc20_my_trans_check: "Check",
+  lrc20_no_data: "No Data",
+  lrc20_token_info_Token_Info: "Introduction",
+  lrc20_token_info_Total_Name: "Name",
+  lrc20_token_info_Token_Symbol: "Token Symbol",
+  lrc20_token_info_Total_Supply: "Supply",
+  lrc20_token_info_Circulating_Supply: "Circulating Supply",
+  lrc20_token_info_Contract_Address: "Contract Address",
+  lrc20_token_info_Website: "Website",
+  lrc20_token_info_ths_1: "Pair",
+  lrc20_token_info_ths_2: "Last Price",
+  lrc20_token_info_ths_3: "24h Change",
+  lrc20_token_info_ths_4: "24h High",
+  lrc20_token_info_ths_5: "24h Low",
+  lrc20_token_info_ths_6: "24h Volume",
+  lrc20_token_info_ths_7: "24h Volume",
+  lrc20_new_price: "Latest price",
+  lrc20_exchange_status: "Trading Pair Status",
+  lrc20_examine: "Reviewed",
+  lrc20_unexamine: "Unreviewed",
+  lrc20_id: "ID",
+  lrc20_first_token: "First Token",
+  lrc20_balance: "balance",
+  lrc20_second_token: "Second Token",
 
-  trc20_kchart: "K Line",
-  trc20_depth: "DEPTH",
-  trc20_trade_win_content: "Current network is unstable , please check later",
-  trc20_trade_win_confirm: "Confirm",
-  trc20_hot: "Hot",
-  trc20_top_Volume: "Top VOL",
-  trc20_top_Rising: "Rising",
-  trc20_history: "Market Trades",
-  trc20_register: "Order Book",
-  trc20_24h_h: "24h High",
-  trc20_24h_l: "24h Low",
-  trc20_fire_token: "50 lucky draws to win 100,000 VENA!",
-  trc20_vena_tip:
+  lrc20_kchart: "K Line",
+  lrc20_depth: "DEPTH",
+  lrc20_trade_win_content: "Current network is unstable , please check later",
+  lrc20_trade_win_confirm: "Confirm",
+  lrc20_hot: "Hot",
+  lrc20_top_Volume: "Top VOL",
+  lrc20_top_Rising: "Rising",
+  lrc20_history: "Market Trades",
+  lrc20_register: "Order Book",
+  lrc20_24h_h: "24h High",
+  lrc20_24h_l: "24h Low",
+  lrc20_fire_token: "50 lucky draws to win 100,000 VENA!",
+  lrc20_vena_tip:
     "Due to the particularity of VENA contract, extra 0.1 VENA will be authorized but not deducted.",
-  "trc20_status_-1": "Pending",
-  trc20_status_0: "Open",
-  trc20_status_1: "Open",
-  trc20_status_2: "Completed",
-  trc20_status_3: "",
-  trc20_status_4: "",
-  trc20_status_5: "Completed",
-  trc20_status_6: "Canceling",
-  trc20_status_7: "Canceled",
-  trc20_status_8: "Submit Failed",
-  trc20_status_9: "",
-  trc20_status_100: "Partially cancel",
-  trc20_failed_order: "Order wasn't confirmed by blockchain",
-  trc20_ignore: "Ignore",
-  trc20_see_currentParis: "Hide other pairs",
-  trc20_search_more_tokens: "Search for more tokens",
-  trc20_token_name: "Token Name",
-  trc20_token_id: "Token ID",
-  trc20_risk_token: "Risk Token",
-  trc20_risk_token_desc:
+  "lrc20_status_-1": "Pending",
+  lrc20_status_0: "Open",
+  lrc20_status_1: "Open",
+  lrc20_status_2: "Completed",
+  lrc20_status_3: "",
+  lrc20_status_4: "",
+  lrc20_status_5: "Completed",
+  lrc20_status_6: "Canceling",
+  lrc20_status_7: "Canceled",
+  lrc20_status_8: "Submit Failed",
+  lrc20_status_9: "",
+  lrc20_status_100: "Partially cancel",
+  lrc20_failed_order: "Order wasn't confirmed by blockchain",
+  lrc20_ignore: "Ignore",
+  lrc20_see_currentParis: "Hide other pairs",
+  lrc20_search_more_tokens: "Search for more tokens",
+  lrc20_token_name: "Token Name",
+  lrc20_token_id: "Token ID",
+  lrc20_risk_token: "Risk Token",
+  lrc20_risk_token_desc:
     "These tokens have not officially listed. There might be potential risks. Please make your investments cautiously.",
-  trc20_symbol_risk: "Same symbol as other token",
-  trc20_hight_risk_token: "High risk token",
+  lrc20_symbol_risk: "Same symbol as other token",
+  lrc20_hight_risk_token: "High risk token",
 
   create_deal_pair: "Create Trading Pairs",
   add_deal_pair_desc: "Trading pair creation is available.",
   click_create: "click here to create",
-  deal_pair_tip: "At least 100,000 TRX in your balance",
-  create_deal_pair_input_tip: "No less than 100,000 TRX in the pool",
+  deal_pair_tip: "At least 100,000 LIND in your balance",
+  create_deal_pair_input_tip: "No less than 100,000 LIND in the pool",
   create_deal_pair_input_tip2:
-    "The offering price cannot be altered after successful creation, one creation burns 1024 TRX",
+    "The offering price cannot be altered after successful creation, one creation burns 1024 LIND",
   publish_price: "Your offering price is",
-  pool_revert: "The balance of TRX in pool should be no less than 100,000",
-  sign_in_with_TRONlink: "TRONLINK",
+  pool_revert: "The balance of LIND in pool should be no less than 100,000",
+  sign_in_with_LINDAlink: "LINDALINK",
   import_a_wallet: "Import a wallet",
-  sign_in_TRONlink_warning: "Please install TRONlink and refresh the page",
-  sign_in_TRONlink: "TRONLINK",
-  uninstall_TRONlink: "Haven't installed TRONlink yet? Click here",
+  sign_in_LINDAlink_warning: "Please install LINDAlink and refresh the page",
+  sign_in_LINDAlink: "LINDALINK",
+  uninstall_LINDAlink: "Haven't installed LINDAlink yet? Click here",
   change_login_method:
-    "TRONlink login does not support this function at present, please use private key or keystore file to login .",
+    "LINDAlink login does not support this function at present, please use private key or keystore file to login .",
   Create_token_link_message_0:
-    "The token will be listed only if it has passed the token review of tronscan.",
-  sign_in_TRONlink_warning_0: "Please log in to the TRONlink wallet!",
+    "The token will be listed only if it has passed the token review of lindascan.",
+  sign_in_LINDAlink_warning_0: "Please log in to the LINDAlink wallet!",
   account_ad:
-    "Win dice tokens by playing TRONDice. Pledge dice tokens to win TRX dividends every day",
+    "Win dice tokens by playing LINDADice. Pledge dice tokens to win LIND dividends every day",
   bandwidth_tip:
-    "On TRON, bandwidths will be consumed with any transaction but query 5,000 bandwidths will be given to each activated account every day by the system. Users can earn bandwidths by freezing TRX.",
+    "On LINDA, bandwidths will be consumed with any transaction but query 5,000 bandwidths will be given to each activated account every day by the system. Users can earn bandwidths by freezing LIND.",
   energy_tip:
-    "On TRON, the creation and triggering of smart contracts consume Energy. Users can gain Energy through freezing TRX.",
+    "On LINDA, the creation and triggering of smart contracts consume Energy. Users can gain Energy through freezing LIND.",
   power_tip:
-    "TRON Power (TP) is used for voting for TRON SRs. Users can gain TP through freezing TRX.",
+    "LINDA Power (TP) is used for voting for LINDA SRs. Users can gain TP through freezing LIND.",
   token_precision: "Token Precision",
   token_precision_message_0:
     "Set the precision of the token as required, the range is 0-6",
   check_my_token: "Check my token",
   totle_transactions_per_day: "Total Daily Transactions",
-  tron_total_transactions_chart: "TRON Total Transactions Chart",
+  linda_total_transactions_chart: "LINDA Total Transactions Chart",
   sign_in_with_ledger: "LEDGER",
   can_be_unlocked_now: "can be unlocked",
-  TRC20_under_maintenance: "TRC20 under maintenance",
+  LRC20_under_maintenance: "LRC20 under maintenance",
   transaction_fewer_than_100000:
     "1. When there are fewer than 100,000 (including 100,000) transaction data entries, all the data will be displayed.",
   transaction_more_than_100000:
@@ -2112,16 +2112,16 @@ export const messages = {
   my_account: "My Account",
   receive_list: "Recipient Address",
   unfreeze_warning:
-    "You can only unfreeze TRX frozen by yourself. Do you wish to continue unfreezing?",
+    "You can only unfreeze LIND frozen by yourself. Do you wish to continue unfreezing?",
   contract_method: "Contract Method",
   contract_parameters: "Method Parameters",
-  energy_fee: "Burning TRX Number to Get Energy",
+  energy_fee: "Burning LIND Number to Get Energy",
   energy_usage: "Energy usage from user's frozen energy",
   energy_usage_total: "Total Energy Cost",
   origin_energy_usage: "Consume contract owner's Energy",
-  net_fee: "Burning TRX Number to Get Bandwidth",
+  net_fee: "Burning LIND Number to Get Bandwidth",
   net_usage: "Bandwidth Usage from User's Frozen Bandwidth",
-  TRC20_transfers: "TRC20 transfers",
+  LRC20_transfers: "LRC20 transfers",
   Basic_info: "Basic info",
   Internal_txns: "Internal txns",
   Fee_Consumption: "Fee Consumption",
@@ -2135,13 +2135,13 @@ export const messages = {
   BTT_supply: "BTT Supply",
   BTT_Token_Release_Schedule: "BTT Token Release Schedule",
   source_btt_team: "Source: BTT Management Team",
-  EnergyConsume_title: "TRON Daily EnergyUsed History",
+  EnergyConsume_title: "LINDA Daily EnergyUsed History",
   EnergyConsume_subtitle: "Click and drag in the point area to zoom in",
   EnergyConsume_yaxis: "energy",
   total_energy_used_chart: "total energy used chart",
   total_used_energy: "total used energy",
-  energy_used_by_freezing_TRX: "energy used by freezing TRX",
-  energy_used_by_burning_TRX: "energy uese by burning TRX",
+  energy_used_by_freezing_LIND: "energy used by freezing LIND",
+  energy_used_by_burning_LIND: "energy uese by burning LIND",
   total_energy_used: "total energy used",
   freezing_energy: "freezing energy",
   burning_energy: "burning energy",
@@ -2157,8 +2157,8 @@ export const messages = {
   call_address_number: "address number",
   contract_call_per_day: "Contract Call Per Day",
   contract_call_chart_day: "contract call per day",
-  Tron_energy_chart: "energy consumption per day",
-  tron_contract_call_chart: "contract call per day",
+  Linda_energy_chart: "energy consumption per day",
+  linda_contract_call_chart: "contract call per day",
   day_contract_energy_distribution: "energy consumption distribution per day",
   day_contract_call_distribution: "contract call distribution per day",
   a_total: "A total",
@@ -2186,7 +2186,7 @@ export const messages = {
     "If you would like to look up other statistics, we recommend that you change the selected duration of time.",
   table_info_account_tip1: "There are altogether ",
   table_info_account_tip2:
-    "accounts on TRON's MainNet and only 10,000 accounts are displayed (sorted by TRX balance from high to low)",
+    "accounts on LINDA's MainNet and only 10,000 accounts are displayed (sorted by LIND balance from high to low)",
   table_info_holders_tip1: "There are",
   table_info_holders_tip2:
     "addresses in the current pass, and only the first 10,000 are currently displayed (sorted from big to small according to the number of passes)",
@@ -2197,13 +2197,13 @@ export const messages = {
   select_end_time: "Please select the end time",
   binance: "binance",
   social_link: "Social Link",
-  TRON_ecosystem: "TRON Ecosystem",
+  LINDA_ecosystem: "LINDA Ecosystem",
   accunt_ad_tip: "Poloni DEX LaunchBase grand open ACE is waiting for you",
   token_fliter: "token fliter",
   gain: "Change (%)",
-  volume_24_trx: "Volume (24H)",
+  volume_24_lind: "Volume (24H)",
   all: "All",
-  market_capitalization_trx: "Market Cap (TRX)",
+  market_capitalization_lind: "Market Cap (LIND)",
   token_txs_info: "Token",
   result: "Result",
 
@@ -2233,13 +2233,13 @@ export const messages = {
       */
 
   address_balance_token_type: "Token Type",
-  address_balance_token_price_TRX: "Value",
+  address_balance_token_price_LIND: "Value",
   address_transactions_tip: "Number of actively initiated transactions",
-  address_tron_power_tip: "Freeze TRX to get TRON Power",
+  address_linda_power_tip: "Freeze LIND to get LINDA Power",
   address_total_balance_tip:
-    "The total balance is the sum of all valuable tokens (including TRON Power)",
-  address_tron_power_used: "Used",
-  address_tron_power_remaining: "Available",
+    "The total balance is the sum of all valuable tokens (including LINDA Power)",
+  address_linda_power_used: "Used",
+  address_linda_power_remaining: "Available",
   address_total_balance_info_sources: "Information source ",
   address_info_transfers: "Transfers",
   address_info_transactions: "Transactions",
@@ -2267,14 +2267,14 @@ export const messages = {
   footer_fellow_us: "Follow Us",
   footer_developer_resources: "Developer Resources",
   footer_support_center: "Support Center",
-  footer_tron_network: "Tron.network",
+  footer_linda_network: "Linda.network",
   login_privatekey_warn:
     "In order to ensure account security and avoid asset loss, please take good care of your private key and never give it away to anyone. It is recommended to use ",
   login_privatekey_warn_safe: " to login",
   token_does_not_support_exchange: "Token doesn't support trading now",
   token_trade: "Trade",
   updata_token_info: "update token information",
-  input_transcan: "Record into TRONSCAN",
+  input_transcan: "Record into LINDASCAN",
   pass_time: "approved at",
   black_time: "blacklisted at",
   appeal_time: "request received at",
@@ -2301,14 +2301,14 @@ export const messages = {
   token_input: "token record",
   input: "record",
   select_type: "please select token type",
-  select_trx_tip1: "TRC20 token issuance is recommended",
-  select_trx_tip2: "click here",
-  select_trx_tip3:
-    "learn more about the differences between TRC10 and TRC20 tokens",
+  select_lind_tip1: "LRC20 token issuance is recommended",
+  select_lind_tip2: "click here",
+  select_lind_tip3:
+    "learn more about the differences between LRC10 and LRC20 tokens",
   select_tip1:
-    "Issuing TRC10 tokens will consume 1024 TRX. Smart contract deployment is not necessary. ",
+    "Issuing LRC10 tokens will consume 1024 LIND. Smart contract deployment is not necessary. ",
   select_tip2:
-    "Issuing TRC20 tokens will need smart contract deployment. TRX will not be consumed.",
+    "Issuing LRC20 tokens will need smart contract deployment. LIND will not be consumed.",
   name_v_required: "token name is required",
   name_v_format: "token name has to contain letters, numbers and space",
   name_v_length: "2-30 characters for token name",
@@ -2339,7 +2339,7 @@ export const messages = {
   select_socoal_link: "click to add social media link(s)",
   so_add: "continue to add",
   socoal_v_format: "20 links maximum",
-  trc20_token_return: "return",
+  lrc20_token_return: "return",
   token_input_success: "token recorded successfully",
   token_input_failure: "fail to record token",
   token_update_success: "Token updated successfully",
@@ -2354,18 +2354,18 @@ export const messages = {
   token_input_success_wallet: " Wallet",
   token_input_success_myaccount: "Token(s) issued by me",
   token_input_success_find_it: " ",
-  token_input_success_trx_market:
+  token_input_success_lind_market:
     "fill in 10 more items to be recorded in Poloni DEX",
   token_input_success_tip:
-    "token(s) that have been successfully recorded can be found in the list; will be automatically recorded in wallet and tronlink; can be searched",
+    "token(s) that have been successfully recorded can be found in the list; will be automatically recorded in wallet and lindalink; can be searched",
   token_spend_confirm_new:
-    "I have learned that issuing a token requires a one-time consumption of 1024TRX.",
+    "I have learned that issuing a token requires a one-time consumption of 1024LIND.",
   token_logo_input_placeholder:
     "Please submit image link, jpg/jpeg/png are supported, size ratio 1:1",
   contract_created_address: "Address of contract creator",
-  token_input_trc10_tip:
+  token_input_lrc10_tip:
     "Please fill in the Logo, GitHub, Social media links when updating Token",
-  token_input_trc20_tip: "Please fill in the Logo when updating Token",
+  token_input_lrc20_tip: "Please fill in the Logo when updating Token",
   token_create_auther_different:
     "The login account is inconsistent with the publisher and cannot be updated",
   ico_infomation: "ICO information",
@@ -2403,18 +2403,18 @@ export const messages = {
     "The login account is inconsistent with the publisher and cannot be updated",
   information_is_being_confirmed:
     "Information is being confirmed, this process may take 10 minutes, please try again later",
-  interTrx_tip:
+  interLind_tip:
     "Internal Transactions is an operation which a general address calls a Smart Contract， and the Smart Contract transfers token to other address.",
-  interTrx_tip_contract: "Internal transactions from contract execution",
+  interLind_tip_contract: "Internal transactions from contract execution",
   event_tip:
     "Events is to let the programmer or external interface provider use it to pay attention to contract operations and audits.",
   /* 2019-07-06*/
-  trc20_free_orders: "0 trading fee for all orders",
+  lrc20_free_orders: "0 trading fee for all orders",
   Expected_acquisition: "Estimated gain",
   energy_more:
-    "Bandwidth obtained = TRX frozen for gaining bandwidth / the total TRX frozen in the network for gaining bandwidth.",
+    "Bandwidth obtained = LIND frozen for gaining bandwidth / the total LIND frozen in the network for gaining bandwidth.",
   bandwidth_more:
-    "Energy obtained = TRX frozen for gaining Energy / total TRX frozen for gaining Energy in the entire network * total energy limit.",
+    "Energy obtained = LIND frozen for gaining Energy / total LIND frozen for gaining Energy in the entire network * total energy limit.",
   table_info_big: "only the first 10,000 data are displayed",
   Download: "Download",
 
@@ -2446,12 +2446,12 @@ export const messages = {
   contract_optimizered: "Yes",
   contract_verify_status: "The contract has not been verified yet, click here",
   contract_verify_btn: "to verify",
-  write_payable: "Run these functions with TRX or Token",
-  write_nonePayable: "Run these functions will consume TRX or Energy",
+  write_payable: "Run these functions with LIND or Token",
+  write_nonePayable: "Run these functions will consume LIND or Energy",
   verify_code1:
     "Contract verification is the matching of the smart contract code you write with the smart contract code posted on the blockchain network to check the authenticity and transparency of the smart contract.",
   verify_code2:
-    "You can verify your smart contract on TRONSCAN by uploading the smart contract file and review it.",
+    "You can verify your smart contract on LINDASCAN by uploading the smart contract file and review it.",
 
   /*
    ##################################################################################
@@ -2468,9 +2468,9 @@ export const messages = {
   contract_deployment: "Contract deployment",
   contract_verification: "Contract verification",
   contract_deploy_info1:
-    "Contract deployment means publishing your smart contract code to a blockchain network. You can compile and deploy smart contracts on TRONSCAN by uploading smart contract files. ",
+    "Contract deployment means publishing your smart contract code to a blockchain network. You can compile and deploy smart contracts on LINDASCAN by uploading smart contract files. ",
   contract_deploy_info2:
-    "Note that contract deployment consumes a certain amount of TRX, please ensure that your account balance is sufficient.",
+    "Note that contract deployment consumes a certain amount of LIND, please ensure that your account balance is sufficient.",
   contract_deployment_btn_compile: "Compile",
   contract_deployment_btn_deploy: "Deploy",
   contract_compile_params: "Compile Params",
@@ -2480,11 +2480,11 @@ export const messages = {
   compile_first: "Please compile your contract first",
   contract_deploy_params: "Deploy Params",
   contract_deploy_modal_info:
-    "Contract deployment will cost a certain amount of TRX or energy",
+    "Contract deployment will cost a certain amount of LIND or energy",
   deploy_params_fee_limit: "Fee Limit",
   deploy_params_user_fee_percentage: "User Fee Percentage",
   deploy_params_energy_limit: "Origin Energy Limit",
-  deploy_params_send_token: "Select TRX or token to send",
+  deploy_params_send_token: "Select LIND or token to send",
   deploy_params_constructor: "Params for constructor",
   compile_close: "close",
   token_logo_upload_tip:
@@ -2493,9 +2493,9 @@ export const messages = {
   // Backbone - account - mapping
   main_account_mapping_title: "Map to DAppChain",
   main_account_mapping_text:
-    "DAppChain is a side chain network developed based on the TRON main chain, a scaling solution for the TRON MainNet. By mapping to DAppChain, you will gain higher TPS with lower energy consumption.",
+    "DAppChain is a side chain network developed based on the LINDA main chain, a scaling solution for the LINDA MainNet. By mapping to DAppChain, you will gain higher TPS with lower energy consumption.",
   main_account_mapping_text_1: "1.Higher TPS，lower energy consumption",
-  main_account_mapping_text_2: "2.Mapping operation consumes 1000TRX",
+  main_account_mapping_text_2: "2.Mapping operation consumes 1000LIND",
   main_account_mapping_btn: "Mapping",
   main_account_mapping_success_btn: "Mapped",
   main_account_mapping_desc1:
@@ -2519,7 +2519,7 @@ export const messages = {
   sign_text: "Withdraw operation will consume",
   pledge_mapping_text:
     "Your assets have not been mapped to DAppChain, and therefore cannot be deposited.",
-  lack_of_balance: "TRX has insufficient balance",
+  lack_of_balance: "LIND has insufficient balance",
   mapping_text: "Mapping operations consume:",
 
   // success
@@ -2575,12 +2575,12 @@ export const messages = {
   developers_contribution_link: "Contribution content corresponding link",
   developers_earn_points: "Earn points",
   developers_search: " Search username",
-  developers_scored_users: "TRON Global Community Developers",
+  developers_scored_users: "LINDA Global Community Developers",
   DAppChain_holders: "DAppChain Holders",
-  notrx_noenergy:
-    "Please make sure your TRX is not less than 10 and a certain amount of energy",
+  nolind_noenergy:
+    "Please make sure your LIND is not less than 10 and a certain amount of energy",
   inactive_MainChain_account:
-    "Submission Failed.This address has not been activated on TRON.Please activate first and try again",
+    "Submission Failed.This address has not been activated on LINDA.Please activate first and try again",
   mapping_warning: "This operation must be done by the token contract creator",
   freeze_balance_limit: "Insufficient balance, please re-enter",
 
@@ -2617,20 +2617,20 @@ export const messages = {
   SR_set_brokerage_contract: "SR address contract triggers",
   countdown_to_voting: "Countdown to the end of this round of voting",
   no_rewards_available_yet: "No rewards available",
-  total_tron_ecosystem_tokens: "Total TRON-ecosystem tokens:",
+  total_linda_ecosystem_tokens: "Total LINDA-ecosystem tokens:",
   number_of_lists: "Number of lists:",
-  total_in_tronscan: "Total in tronscan",
+  total_in_lindascan: "Total in lindascan",
   develpopers_reward_tip:
-    "Thank you for considering to help out with the java-tron! TRON Foundation welcome contributions from anyone on the internet, and are grateful for your contributions.",
+    "Thank you for considering to help out with the java-linda! LINDA Foundation welcome contributions from anyone on the internet, and are grateful for your contributions.",
   verifty_contract_result: "Result",
   main_contract_deployment: "(Please select the main contract deployment)",
   enter_main_contract: "Please enter the name of the main contract",
   contract_verifty_passed: "Verified",
   unverifty_passed: "Unverified",
   developers_reward_tip:
-    "Thank you for considering to help out with the java-tron! TRON Foundation welcome contributions from anyone on the internet, and are grateful for your contributions.",
-  developers_niTron:
-    "niTron global developer conference will be held in Korea at 29 Feb, 2020. By the end of  31 Jan, 2020, developers with the total points end up in Top 5 will be rewarded two tickets each.",
+    "Thank you for considering to help out with the java-linda! LINDA Foundation welcome contributions from anyone on the internet, and are grateful for your contributions.",
+  developers_niLinda:
+    "niLinda global developer conference will be held in Korea at 29 Feb, 2020. By the end of  31 Jan, 2020, developers with the total points end up in Top 5 will be rewarded two tickets each.",
   developers_account: "Developers",
   SR_rank: "Rank",
   SR_blocksMissed: "Blocks Missed",
@@ -2671,9 +2671,9 @@ export const messages = {
     "Total real-time accounts on the Main Chain and SUN Network",
   tooltip_accounts_mainnet: "Real-time accounts on the Main Chain",
   tooltip_accounts_sunnet: "Real-time accounts on SUN Network",
-  tooltip_trxPrice: "TRX price in USD",
-  tooltip_trxPrice_mainnet: "TRX price in USD, real-time quote",
-  tooltip_trxPrice_sunnet: "TRX price in USD, real-time quote",
+  tooltip_lindPrice: "LIND price in USD",
+  tooltip_lindPrice_mainnet: "LIND price in USD, real-time quote",
+  tooltip_lindPrice_sunnet: "LIND price in USD, real-time quote",
   nav_network: "SUN Network",
   sun_network_product: "Products ",
   sun_network_DAppChain: "DAppchain",
@@ -2756,7 +2756,7 @@ export const messages = {
   signature_alter: "Edit",
   signature_add: "Add",
   signature_giveup_change: "Do you wish to discard current edit?",
-  signature_set_spend_trx:
+  signature_set_spend_lind:
     "Submitting changes will alter the setting of multi-signature access structure and costs ",
   signature_submit_change: "，Do you wish to proceed?",
   signature_my: "My Signature",
@@ -2782,10 +2782,10 @@ export const messages = {
   permission_name_limit: "Please input English characters and numbers",
 
   // 2019-12-10
-  ledger_tronlink: "Login to TRONSCAN via TronLink",
+  ledger_lindalink: "Login to LINDASCAN via LindaLink",
   // 2019-12-18
   address_vote_reward_pending: "Unwithdrawn voting reward",
-  address_balance: "TRX Balance",
+  address_balance: "LIND Balance",
   address_get_energe: "For Energy",
   address_get_bandwith: "For Bandwidth",
   address_freeze_owner: "To your account",

@@ -11,7 +11,7 @@ import {Truncate} from "../common/text";
 import {ContractTypes} from "../../utils/protocol";
 import {upperFirst} from "lodash";
 import SmartTable from "../common/SmartTable.js"
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import TotalInfo from "../common/TableTotal";
 import DateRange from "../common/DateRange";
 import {DatePicker} from 'antd';
@@ -291,7 +291,7 @@ class Transactions extends React.Component {
         let column = this.customizedColumn();
         return (
             <main className="container header-overlap pb-3 token_black">
-                {loading && <div className="loading-style"><TronLoader/></div>}
+                {loading && <div className="loading-style"><LindaLoader/></div>}
               <div className="row">
                 <div className="col-md-12 table_pos">
                     {total ? <TotalInfo total={total} rangeTotal={rangeTotal} typeText="transactions_unit" common={addressLock} isQuestionMark={false} />:""}

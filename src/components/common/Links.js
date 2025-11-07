@@ -11,7 +11,7 @@ import { App } from "../../app";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import QRCode from "qrcode.react";
 import { Client } from "../../services/api";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import { Tooltip, message } from "antd";
 import { injectIntl } from "react-intl";
 
@@ -50,7 +50,7 @@ export const TokenLink = ({
   }
 };
 
-export const TokenTRC20Link = ({
+export const TokenLRC20Link = ({
   name,
   namePlus,
   address,
@@ -473,7 +473,7 @@ export const TransactionHashLink = ({ hash, children }) => {
     : hash.substring(59, 64);
 
   return (
-    <Link className="color-tron-100 list-item-word" to={`/transaction/${hash}`}>
+    <Link className="color-linda-100 list-item-word" to={`/transaction/${hash}`}>
       <div className="ellipsis_box">
         <div className="ellipsis_box_start">{children_start}</div>
         <div className="ellipsis_box_end">{children_end}</div>

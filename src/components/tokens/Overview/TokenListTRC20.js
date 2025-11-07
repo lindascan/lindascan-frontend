@@ -11,16 +11,16 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { t, tu } from "../../../utils/i18n";
 import { trim } from "lodash";
 import { Client } from "../../../services/api";
-import { TokenTRC20Link, AddressLink } from "../../common/Links";
+import { TokenLRC20Link, AddressLink } from "../../common/Links";
 import { getQueryParam } from "../../../utils/url";
 import SearchInput from "../../../utils/SearchInput";
 import { toastr } from "react-redux-toastr";
 import SmartTable from "../../common/SmartTable.js";
-import { API_URL, ONE_TRX } from "../../../constants";
+import { API_URL, ONE_LIND } from "../../../constants";
 import { login } from "../../../actions/app";
 import { reloadWallet } from "../../../actions/wallet";
 import { upperFirst, toLower } from "lodash";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { Link } from "react-router-dom";
 import xhr from "axios/index";
 
@@ -53,18 +53,18 @@ class TokenList extends Component {
     if (filter.name) {
       result = await xhr.get(
         API_URL +
-          "/api/token_trc20?sort=issue_time&limit=" +
+          "/api/token_lrc20?sort=issue_time&limit=" +
           pageSize +
           "&start=" +
           (page - 1) * pageSize +
           "&name=" +
           filter.name
       );
-      total = result.data["trc20_tokens"].length;
+      total = result.data["lrc20_tokens"].length;
     } else {
       result = await xhr.get(
         API_URL +
-          "/api/token_trc20?sort=issue_time&limit=" +
+          "/api/token_lrc20?sort=issue_time&limit=" +
           pageSize +
           "&start=" +
           (page - 1) * pageSize
@@ -72,7 +72,7 @@ class TokenList extends Component {
       total = result.data["total"];
     }
 
-    let tokens = result.data["trc20_tokens"];
+    let tokens = result.data["lrc20_tokens"];
     tokens.map((item, index) => {
       item.index = index + 1 + (page - 1) * pageSize;
     });
@@ -116,13 +116,13 @@ class TokenList extends Component {
     let { page } = this.state;
     let table = document.querySelector(".ant-table-tbody").firstElementChild; //获取第一个表格
     if (page == 1) {
-      table.classList.add("trc20-star-ad");
+      table.classList.add("lrc20-star-ad");
     } else {
-      table.classList.remove("trc20-star-ad");
+      table.classList.remove("lrc20-star-ad");
     }
-    if (document.querySelector(".trc20-star-ad")) {
+    if (document.querySelector(".lrc20-star-ad")) {
       document
-        .querySelector(".trc20-star-ad")
+        .querySelector(".lrc20-star-ad")
         .addEventListener("click", function() {
           window.open("http://www.tronace.com");
         });
@@ -206,7 +206,7 @@ class TokenList extends Component {
 
               <div>
                 <h5>
-                  <TokenTRC20Link
+                  <TokenLRC20Link
                     name={record.name}
                     namePlus={record.name + " (" + record.symbol + ")"}
                     address={record.contract_address}
@@ -231,7 +231,7 @@ class TokenList extends Component {
                     value={record.total_supply_with_decimals * record.price}
                     maximumFractionDigits={1}
                   />{" "}
-                  TRX
+                  LIND
                 </div>
               ) : (
                 <span style={{ color: "#666666" }}>-</span>
@@ -241,9 +241,9 @@ class TokenList extends Component {
         }
       },
       {
-        title: intl.formatMessage({ id: "pice_per_onetrx" }),
-        dataIndex: "pice_per_onetrx",
-        key: "pice_per_onetrx",
+        title: intl.formatMessage({ id: "pice_per_onelind" }),
+        dataIndex: "pice_per_onelind",
+        key: "pice_per_onelind",
         align: "center",
         className: "ant_table",
         render: (text, record, index) => {
@@ -256,7 +256,7 @@ class TokenList extends Component {
                     value={record.price}
                     maximumFractionDigits={1}
                   />{" "}
-                  TRX
+                  LIND
                 </div>
               ) : (
                 <span style={{ color: "#666666" }}>-</span>
@@ -315,10 +315,10 @@ class TokenList extends Component {
       intl.formatMessage({ id: "part_pass" });
 
     return (
-      <main className="container header-overlap token_black trc20-ad-bg">
+      <main className="container header-overlap token_black lrc20-ad-bg">
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         {
@@ -330,13 +330,13 @@ class TokenList extends Component {
                   style={{ left: "auto" }}
                 >
                   {tableInfo} &nbsp;&nbsp;
-                  <Link to="/exchange/trc20">{t("Trade_on_Poloni DEX")}></Link>
+                  <Link to="/exchange/lrc20">{t("Trade_on_Poloni DEX")}></Link>
                 </div>
               ) : (
                 ""
               )}
               <a
-                className="apply-trc20"
+                className="apply-lrc20"
                 href="https://goo.gl/forms/PiyLiDeaXv3uesSE3"
                 target="_blank"
                 style={{ color: "#C23631" }}

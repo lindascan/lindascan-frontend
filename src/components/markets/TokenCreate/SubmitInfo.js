@@ -10,7 +10,7 @@ import Lockr from 'lockr';
 import _ from 'lodash';
 import { tu } from '../../../utils/i18n';
 import { API_URL, MARKET_API_URL, FROMID } from '../../../constants';
-import { TRXPrice } from './../../common/Price';
+import { LINDPrice } from './../../common/Price';
 import xhr from 'axios/index';
 import { jsencrypt } from './../../../utils/jsencrypt';
 
@@ -103,12 +103,12 @@ class SubmitInfo extends Component {
                 ownerAddress,
                 description,
                 logo,
-                exchangePair: `${tokenSymbol.toUpperCase()}/TRX`,
+                exchangePair: `${tokenSymbol.toUpperCase()}/LIND`,
                 fprice: Number(fprice),
                 sprice: Number(sprice),
             };
 
-            basiInfo = type === 'trc10' ? Object.assign(basiInfo, { tokenId }) : Object.assign(basiInfo, { tokenAddress });
+            basiInfo = type === 'lrc10' ? Object.assign(basiInfo, { tokenId }) : Object.assign(basiInfo, { tokenAddress });
 
             const infoData = {
                 id: updateId,
@@ -121,7 +121,7 @@ class SubmitInfo extends Component {
             if (!isSubmit) {
                 return false;
             }
-            const tokenIdOrAddress = type === 'trc10' ? tokenId : tokenAddress;
+            const tokenIdOrAddress = type === 'lrc10' ? tokenId : tokenAddress;
             if (isUpdate) {
                 this.updateToken({ data: jsencrypt(JSON.stringify(infoData)) }, tokenIdOrAddress);
             } else {
@@ -134,15 +134,15 @@ class SubmitInfo extends Component {
      * signature
      */
     setBodyParameter = async(file) => {
-        const { tronWeb } = this.props.account;
+        const { lindaWeb } = this.props.account;
         const { paramData: { ownerAddress, tokenId }, type } = this.state;
         const data  = {
             issuer_addr: ownerAddress,
             id: tokenId,
             type,
         };
-        const hash = tronWeb.toHex(JSON.stringify(data), false);
-        const sig = await tronWeb.trx.sign(hash);
+        const hash = lindaWeb.toHex(JSON.stringify(data), false);
+        const sig = await lindaWeb.lind.sign(hash);
         if (!sig) {
             return false;
         }
@@ -199,7 +199,7 @@ class SubmitInfo extends Component {
                 ownerAddress, description, logo, fprice, sprice,
                 home_page, email, isInOtherMarket, tokenIssScheme, white_paper,
                 contractCodeUrl, reddit, icoAddress, teamInfo, coinMarketCapUrl } } = this.state;
-        const isTrc10 = type === 'trc10';
+        const isLrc10 = type === 'lrc10';
        // logo =  Lockr.get('TokenLogo', logo);
         
         // token information
@@ -243,9 +243,9 @@ class SubmitInfo extends Component {
                         </p>
                     </Col>
                     <Col span={24} md={12}>
-                        <label>{isTrc10?tu('Token ID'):tu('contract_address')}</label>
+                        <label>{isLrc10?tu('Token ID'):tu('contract_address')}</label>
                         <p className="border-dashed">
-                            {isTrc10 ? tokenId : tokenAddress}
+                            {isLrc10 ? tokenId : tokenAddress}
                         </p>
                     </Col>
                 </Row>
@@ -276,15 +276,15 @@ class SubmitInfo extends Component {
                     <Col span={24} md={24}>
                         <div className="pair-box">
                             <label>{tu('pair_trading')}</label>
-                            <p className="pair">TRX</p>
+                            <p className="pair">LIND</p>
                         </div>
                     </Col>
                     <Col span={24} md={24}>
                         <label>{tu('token_price')}</label>
                         <p className="border-dashed">
-                            {fprice} {tokenSymbol}  = {sprice} TRX
+                            {fprice} {tokenSymbol}  = {sprice} LIND
                             <span className="ml-4">
-                                TRX{tu('trc20_last_price')}: <TRXPrice amount={1} currency="USD"/>
+                                LIND{tu('lrc20_last_price')}: <LINDPrice amount={1} currency="USD"/>
                             </span>
                         </p>
                     </Col>

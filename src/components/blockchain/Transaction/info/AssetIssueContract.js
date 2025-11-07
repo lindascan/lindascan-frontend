@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { tu } from "../../../../utils/i18n";
 import Field from "../../../tools/TransactionViewer/Field";
 import { AddressLink, ExternalLink } from "../../../common/Links";
-import { ONE_TRX } from "../../../../constants";
+import { ONE_LIND } from "../../../../constants";
 import {
   FormattedNumber,
   FormattedDate,
@@ -32,10 +32,10 @@ class AssetIssueContract extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fee: "1,024 TRX",
+      fee: "1,024 LIND",
       createTime:0,
       UtcUnit:"",
-      TrxUnit:'TRX'
+      LindUnit:'LIND'
     };
   }
   componentDidMount(){
@@ -57,7 +57,7 @@ class AssetIssueContract extends React.Component {
   }
   render() {
     let { contract,activeLanguage,intl } = this.props;
-    let {createTime,TrxUnit} = this.state;
+    let {createTime,LindUnit} = this.state;
     let signList = contract.signature_addresses || [];
     let frozen_supply = contract.frozen_supply && contract.frozen_supply[0] ? contract.frozen_supply[0] : {}
     
@@ -101,7 +101,7 @@ class AssetIssueContract extends React.Component {
               </span>
               </Field>
               <Field label="transaction_fee">{this.state.fee}</Field>
-              <Field label="trc20_token_id">{contract.token_id}</Field>
+              <Field label="lrc20_token_id">{contract.token_id}</Field>
               <Field label="token_name">
                 <Link to={`/token/${contract.token_id}`}>
                     {contract.parameterValue && contract.parameterValue.name} ({contract.abbr})
@@ -115,7 +115,7 @@ class AssetIssueContract extends React.Component {
                   }
                 />
               </Field>
-                <Field label="token_price_new">{contract.trx_num/contract.num} {TrxUnit}</Field>
+                <Field label="token_price_new">{contract.lind_num/contract.num} {LindUnit}</Field>
                <Field
                 label="transaction_consumed_bandwidth_cap_per"
                 tip={true}
@@ -165,7 +165,7 @@ class AssetIssueContract extends React.Component {
               {frozen_supply.frozen_amount && <Field label="transaction_frozen_number">
                 <FormattedNumber
                   value={
-                    ((frozen_supply.frozen_amount) || 0) / ONE_TRX
+                    ((frozen_supply.frozen_amount) || 0) / ONE_LIND
                   }
                 ></FormattedNumber>
               </Field>}

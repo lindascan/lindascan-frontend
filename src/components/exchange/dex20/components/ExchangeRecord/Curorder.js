@@ -17,8 +17,8 @@ import {
   deleteCancelOrderObj,
   setRedirctPair
 } from "../../../../../actions/exchange";
-import { TronLoader } from "../../../../common/loaders";
-import { withTronWeb } from "../../../../../utils/tronWeb";
+import { LindaLoader } from "../../../../common/loaders";
+import { withLindaWeb } from "../../../../../utils/lindaWeb";
 import { Popover, Icon } from "antd";
 import { compare } from "../../../../../utils/compare";
 import { precisions } from "../../TokenPre";
@@ -26,7 +26,7 @@ import Lockr from "lockr";
 
 const confirm = Modal.confirm;
 
-@withTronWeb
+@withLindaWeb
 class Curorder extends Component {
   constructor(props) {
     super(props);
@@ -171,14 +171,14 @@ class Curorder extends Component {
 
     if (!list || list.length === 0) {
       return (
-        <div className="p-3 text-center no-data">{tu("trc20_no_data")}</div>
+        <div className="p-3 text-center no-data">{tu("lrc20_no_data")}</div>
       );
     }
 
     const columns = [
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_order_time" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_order_time" })
         ),
         dataIndex: "orderTime",
         key: "orderTime",
@@ -201,7 +201,7 @@ class Curorder extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_pair" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_pair" })
         ),
         dataIndex: "fShortName",
         key: "fShortName",
@@ -219,22 +219,22 @@ class Curorder extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_order_type" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_order_type" })
         ),
         dataIndex: "orderType",
         key: "orderType",
         width: "60px",
         render: (text, record, index) => {
           return record.orderType == 0 ? (
-            <span className="col-green">{tu("trc20_BUY")}</span>
+            <span className="col-green">{tu("lrc20_BUY")}</span>
           ) : (
-            <span className="col-red">{tu("trc20_SELL")}</span>
+            <span className="col-red">{tu("lrc20_SELL")}</span>
           );
         }
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_price" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_price" })
         ),
         dataIndex: "price",
         key: "price",
@@ -247,7 +247,7 @@ class Curorder extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_amount" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_amount" })
         ),
         dataIndex: "volume",
         key: "volume",
@@ -263,7 +263,7 @@ class Curorder extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_volume" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_volume" })
         ),
         dataIndex: "curTurnover",
         key: "curTurnover",
@@ -279,7 +279,7 @@ class Curorder extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_progress" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_progress" })
         ),
         dataIndex: "schedule",
         key: "schedule",
@@ -294,7 +294,7 @@ class Curorder extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_status" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_status" })
         ),
         dataIndex: "orderStatus",
         key: "orderStatus",
@@ -302,7 +302,7 @@ class Curorder extends Component {
         render: (text, record, index) => {
           let content = (
             <div style={{ width: "180px" }}>
-              <p>{tu("trc20_failed_order")}</p>
+              <p>{tu("lrc20_failed_order")}</p>
               <a
                 href={
                   activeLanguage === "zh"
@@ -324,7 +324,7 @@ class Curorder extends Component {
                   : ""
               }
             >
-              {tu(`trc20_status_${record.orderStatus}`)}
+              {tu(`lrc20_status_${record.orderStatus}`)}
               {record.orderStatus === 8 && (
                 <Popover content={content} title="">
                   <Icon
@@ -343,7 +343,7 @@ class Curorder extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_action" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_action" })
         ),
         dataIndex: "cancel",
         key: "cancel",
@@ -356,13 +356,13 @@ class Curorder extends Component {
                 className="cancel"
               >
                 {record.orderStatus === 1
-                  ? tu(`trc20_status_100`)
+                  ? tu(`lrc20_status_100`)
                   : statusOp[record.orderStatus]["operate"]
-                  ? tu("trc20_cur_order_cancel")
+                  ? tu("lrc20_cur_order_cancel")
                   : ""}
               </span>
               <span className="failed" onClick={() => this.ignore(record.hash)}>
-                {record.orderStatus === 8 ? tu(`trc20_ignore`) : ""}
+                {record.orderStatus === 8 ? tu(`lrc20_ignore`) : ""}
               </span>
             </span>
           );
@@ -374,7 +374,7 @@ class Curorder extends Component {
       <div className="exchange__tranlist">
         {modal}
         {isLoading ? (
-          <TronLoader />
+          <LindaLoader />
         ) : (
           <Table
             dataSource={list}
@@ -496,10 +496,10 @@ class Curorder extends Component {
     let { intl } = this.props;
     let _this = this;
     confirm({
-      title: intl.formatMessage({ id: "trc20_prompt" }),
-      content: intl.formatMessage({ id: "trc20_cancel_order_confirm" }),
-      okText: intl.formatMessage({ id: "trc20_confirm" }),
-      cancelText: intl.formatMessage({ id: "trc20_cancel" }),
+      title: intl.formatMessage({ id: "lrc20_prompt" }),
+      content: intl.formatMessage({ id: "lrc20_cancel_order_confirm" }),
+      okText: intl.formatMessage({ id: "lrc20_confirm" }),
+      cancelText: intl.formatMessage({ id: "lrc20_cancel" }),
       className: "exchange-modal-content",
       onOk() {
         if (record.orderID) {
@@ -518,27 +518,27 @@ class Curorder extends Component {
       account,
       setCancelOrderObj
     } = this.props;
-    let tronWebOBJ;
+    let lindaWebOBJ;
     if (walletType.type === "ACCOUNT_LEDGER") {
-      tronWebOBJ = this.props.tronWeb();
+      lindaWebOBJ = this.props.lindaWeb();
     } else if (
-      walletType.type === "ACCOUNT_TRONLINK" ||
+      walletType.type === "ACCOUNT_LINDALINK" ||
       walletType.type === "ACCOUNT_PRIVATE_KEY"
     ) {
-      tronWebOBJ = account.tronWeb;
+      lindaWebOBJ = account.lindaWeb;
     }
 
     try {
-      const _id = await TW.cancelOrder(item.orderID, tronWebOBJ, item.pairType);
+      const _id = await TW.cancelOrder(item.orderID, lindaWebOBJ, item.pairType);
       if (_id) {
         this.setState({
           modal: (
             <SweetAlert
               success
-              title={tu("trc20_order_success")}
+              title={tu("lrc20_order_success")}
               onConfirm={this.hideModal}
             >
-              {/*{tu("trc20_order_success")}*/}
+              {/*{tu("lrc20_order_success")}*/}
             </SweetAlert>
           )
         });
@@ -562,7 +562,7 @@ class Curorder extends Component {
             title={tu("transaction_error")}
             onConfirm={this.hideModal}
           >
-            {tu("trc20_cancel_order_fail")}
+            {tu("lrc20_cancel_order_fail")}
           </SweetAlert>
         )
       });
@@ -692,16 +692,16 @@ class Curorder extends Component {
   async getOrderId(id) {
     let _times = 0;
     let { walletType, account } = this.props;
-    let tronWeb;
+    let lindaWeb;
     if (walletType.type === "ACCOUNT_LEDGER") {
-      tronWeb = this.props.tronWeb();
+      lindaWeb = this.props.lindaWeb();
     } else if (
-      walletType.type === "ACCOUNT_TRONLINK" ||
+      walletType.type === "ACCOUNT_LINDALINK" ||
       walletType.type === "ACCOUNT_PRIVATE_KEY"
     ) {
-      tronWeb = account.tronWeb;
+      lindaWeb = account.lindaWeb;
     }
-    const event = await tronWeb.getEventByTransactionID(id).catch(e => {
+    const event = await lindaWeb.getEventByTransactionID(id).catch(e => {
       // 委托失败
       this.currentFaile(id);
       console.log("Delegate failure--failed event server");
@@ -793,7 +793,7 @@ class Curorder extends Component {
       exchange_name: v.fShortName + "/" + v.sShortName
     };
     this.props.history.push(
-      "/exchange/trc20?token=" + obj.exchange_name + "&id=" + obj.exchange_id
+      "/exchange/lrc20?token=" + obj.exchange_name + "&id=" + obj.exchange_id
     );
     window.location.reload();
     setRedirctPair(v);

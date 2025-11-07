@@ -15,7 +15,7 @@ import RecentTransfers from "./RecentTransfers";
 import { tu } from "../../utils/i18n";
 import { toastr } from "react-redux-toastr";
 import { HrefLink } from "../common/Links";
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 import {
   LineReactHighChartAdd,
   LineReactHighChartTx

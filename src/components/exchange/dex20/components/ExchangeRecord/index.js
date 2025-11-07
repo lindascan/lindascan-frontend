@@ -62,17 +62,17 @@ class TransactionList extends Component {
     return (
       <div className="exchange__transactionlist p-3">
         <Tabs defaultActiveKey="1" onChange={this.callback}>
-          <TabPane tab={tu("trc20_CurOrder")} key="1">
+          <TabPane tab={tu("lrc20_CurOrder")} key="1">
             <Curorder props={this.props} showCurrent={showCurrent} />
           </TabPane>
-          {/* <TabPane tab={tu("trc20_TxRecord")} key="2">
+          {/* <TabPane tab={tu("lrc20_TxRecord")} key="2">
           <TranList props={this.props}/>
         </TabPane> */}
           {currentWallet && (
             <TabPane
               tab={
                 <span>
-                  <Badge dot={isDot}>{tu("trc20_my_transaction")}</Badge>
+                  <Badge dot={isDot}>{tu("lrc20_my_transaction")}</Badge>
                 </span>
               }
               key="3"
@@ -90,7 +90,7 @@ class TransactionList extends Component {
             checked={this.state.showCurrent}
             onChange={this.changeCheckbox}
           >
-            {tu("trc20_see_currentParis")}
+            {tu("lrc20_see_currentParis")}
           </Checkbox>
         </div>
       </div>

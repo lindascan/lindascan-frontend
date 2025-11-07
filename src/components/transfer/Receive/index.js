@@ -58,7 +58,7 @@ class Receive extends React.Component {
             <div className="col-12 col-sm-8 col-lg-5">
               <div className="card">
                 <div className="card-header text-center">
-                  {tu("receive_trx")}
+                  {tu("receive_lind")}
                 </div>
                 <div className="card-body">
                   {qrcode && (

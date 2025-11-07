@@ -3,9 +3,9 @@ import { tu } from "../../utils/i18n";
 import { injectIntl } from "react-intl";
 import { loadTransactions } from "../../actions/blockchain";
 import { connect } from "react-redux";
-//import { TronLoader } from "../common/loaders";
+//import { LindaLoader } from "../common/loaders";
 import { Truncate } from "../common/text";
-//import { TRXPrice } from "../common/Price";
+//import { LINDPrice } from "../common/Price";
 import { AddressLink, TransactionHashLink } from "../common/Links";
 // import TimeAgo from "react-timeago";
 //import moment from "moment";
@@ -40,7 +40,7 @@ class RecentTransfers extends Component {
     // if (transactions === null) {
     //   return (
     //       <div className="text-center d-flex justify-content-center">
-    //         <TronLoader/>
+    //         <LindaLoader/>
     //       </div>
     //   );
     // }
@@ -48,14 +48,14 @@ class RecentTransfers extends Component {
     // if (transactions.length === 0) {
     //   return (
     //       <div className="text-center d-flex justify-content-center">
-    //         <TronLoader/>
+    //         <LindaLoader/>
     //       </div>
     //   );
     // }
 
     return (
       <div className="card" style={styles.card}>
-        <div className="card-header bg-tron-light d-flex">
+        <div className="card-header bg-linda-light d-flex">
           <i className="fa fa-server mr-3 fa_width_20 color-grey-100"></i>
           <h5 className="m-0 lh-175 color-grey-100">{tu("transfers")}</h5>
           <Link
@@ -82,7 +82,7 @@ class RecentTransfers extends Component {
                               <div className="text-left pt-1 w-100">
                                 <div className="d-flex justify-content-between">
                                   <div className="pt-1 d-flex flex-1">
-                                    <i className="fa fa-bars mr-2 mt-1 fa_width color-tron-100"></i>
+                                    <i className="fa fa-bars mr-2 mt-1 fa_width color-linda-100"></i>
                                     {/* <TransactionHashLink
                                       hash={transfer.transactionHash}>{transfer.transactionHash.substr(0, 13)}...</TransactionHashLink> */}
                                     <div className="flex-1">
@@ -113,7 +113,7 @@ class RecentTransfers extends Component {
                                     {tu("from")}
                                   </span>
                                   <AddressLink
-                                    className="color-tron-100 small"
+                                    className="color-linda-100 small"
                                     wrapClassName="d-inline-block w-50"
                                     address={transfer.transferFromAddress}
                                   >
@@ -131,7 +131,7 @@ class RecentTransfers extends Component {
                                     {tu("to")}
                                   </span>
                                   <AddressLink
-                                    className="color-tron-100 small"
+                                    className="color-linda-100 small"
                                     wrapClassName="d-inline-block w-50"
                                     address={transfer.transferToAddress}
                                   >
@@ -165,7 +165,7 @@ class RecentTransfers extends Component {
                           <div className="text-left pt-1 w-100">
                             <div className="d-flex justify-content-between">
                               <div className="pt-1 d-flex flex-1">
-                                <i className="fa fa-bars mr-2 mt-1 fa_width color-tron-100"></i>
+                                <i className="fa fa-bars mr-2 mt-1 fa_width color-linda-100"></i>
                                 <div className="flex-1">--</div>
                               </div>
                               <div className="text-muted color-grey-300 small pt-2 pl-3">
@@ -188,7 +188,7 @@ class RecentTransfers extends Component {
                                 {tu("from")}
                               </span>
                               <AddressLink
-                                className="color-tron-100 small"
+                                className="color-linda-100 small"
                                 wrapClassName="d-inline-block w-50"
                                 address=""
                               >
@@ -206,7 +206,7 @@ class RecentTransfers extends Component {
                                 {tu("to")}
                               </span>
                               <AddressLink
-                                className="color-tron-100 small"
+                                className="color-linda-100 small"
                                 wrapClassName="d-inline-block w-50"
                                 address=""
                               >
@@ -246,7 +246,7 @@ class RecentTransfers extends Component {
                                   className="pt-1 d-flex pr-2 color-transfers-hash"
                                   style={{ flex: 1, maxWidth: "309px" }}
                                 >
-                                  <i className="fa fa-bars mr-2 mt-1 fa_width color-tron-100"></i>
+                                  <i className="fa fa-bars mr-2 mt-1 fa_width color-linda-100"></i>
                                   <Truncate>
                                     <TransactionHashLink
                                       hash={transfer.transactionHash}
@@ -259,7 +259,7 @@ class RecentTransfers extends Component {
                                   className="color-grey-200 pt-1 "
                                   style={{ fontSize: "14px" }}
                                 >
-                                  {/* <TRXPrice amount={transfer.amount} name={transfer.tokenName} source='transfers'/> */}
+                                  {/* <LINDPrice amount={transfer.amount} name={transfer.tokenName} source='transfers'/> */}
                                   <NameWithId
                                     value={transfer}
                                     type="abbr"
@@ -283,7 +283,7 @@ class RecentTransfers extends Component {
 
                                   <AddressLink
                                     wrapClassName="d-inline-block mr-2 address_max_width"
-                                    className="color-tron-100"
+                                    className="color-linda-100"
                                     address={transfer.transferFromAddress}
                                     truncate={false}
                                   >
@@ -295,7 +295,7 @@ class RecentTransfers extends Component {
                                   </span>
                                   <AddressLink
                                     wrapClassName="d-inline-block mr-2 address_max_width"
-                                    className="color-tron-100"
+                                    className="color-linda-100"
                                     address={transfer.transferToAddress}
                                     truncate={false}
                                   >
@@ -329,7 +329,7 @@ class RecentTransfers extends Component {
                               className="pt-1 d-flex pr-2 color-transfers-hash"
                               style={{ flex: 1, maxWidth: "309px" }}
                             >
-                              <i className="fa fa-bars mr-2 mt-1 fa_width color-tron-100"></i>
+                              <i className="fa fa-bars mr-2 mt-1 fa_width color-linda-100"></i>
                               --
                             </div>
                             <div
@@ -354,7 +354,7 @@ class RecentTransfers extends Component {
 
                               <AddressLink
                                 wrapClassName="d-inline-block mr-2 address_max_width"
-                                className="color-tron-100"
+                                className="color-linda-100"
                                 address=""
                                 truncate={false}
                               >
@@ -366,7 +366,7 @@ class RecentTransfers extends Component {
                               </span>
                               <AddressLink
                                 wrapClassName="d-inline-block mr-2 address_max_width"
-                                className="color-tron-100"
+                                className="color-linda-100"
                                 address=""
                                 truncate={false}
                               >

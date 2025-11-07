@@ -67,7 +67,7 @@ export class OtherInfo extends Component {
 
     render() {
         const { params } = this.props;
-        const { keyBusDevAndPart, linkToAllTronWallet, relationshipWithAnyTronSR, whichExchangesTradedOn,
+        const { keyBusDevAndPart, linkToAllLindaWallet, relationshipWithAnyLindaSR, whichExchangesTradedOn,
             yourAvg24HVolume, theTop3ReasonsYouShouldBeListed, citeYourSources, top3Things,
             youSupportYourCoinProjectTime, productDemoLink, allYourProductsLink, circulatingSupply,
             top5HoldersOfYourToken } = params;
@@ -87,12 +87,12 @@ export class OtherInfo extends Component {
             </Col>
         );
 
-        // Link to all Tron wallet address used for token sale (to collect money) item
+        // Link to all Linda wallet address used for token sale (to collect money) item
         const linkItem = (
             <Col span={24} md={24}>
-                <Form.Item label="Link to all Tron wallet address used for token sale (to collect money)">
-                    {getFieldDecorator('linkToAllTronWallet', {
-                        initialValue: linkToAllTronWallet,
+                <Form.Item label="Link to all Linda wallet address used for token sale (to collect money)">
+                    {getFieldDecorator('linkToAllLindaWallet', {
+                        initialValue: linkToAllLindaWallet,
                     })(
                         <Input />
                     )}
@@ -100,12 +100,12 @@ export class OtherInfo extends Component {
             </Col>
         );
 
-        // Relationship with any TRON SR's item
+        // Relationship with any LINDA SR's item
         const relationshipItem = (
             <Col span={24} md={24}>
-                <Form.Item label="Relationship with any TRON SR's">
-                    {getFieldDecorator('relationshipWithAnyTronSR', {
-                        initialValue: relationshipWithAnyTronSR,
+                <Form.Item label="Relationship with any LINDA SR's">
+                    {getFieldDecorator('relationshipWithAnyLindaSR', {
+                        initialValue: relationshipWithAnyLindaSR,
                     })(
                         <Input />
                     )}

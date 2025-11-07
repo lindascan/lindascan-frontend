@@ -2,22 +2,22 @@ import {FormattedNumber} from "react-intl";
 import { cloneDeep } from 'lodash'
 import React from "react";
 
-export const tronAddresses = [
+export const lindaAddresses = [
   '27d3byPxZXKQWfXX7sJvemJJuv5M65F3vjS',
   '27fXgQ46DcjEsZ444tjZPKULcxiUfDrDjqj',
   '27SWXcHuQgFf9uv49FknBBBYBaH3DUk4JPx',
   '27WtBq2KoSy5v8VnVZBZHHJcDuWNiSgjbE3',
 ];
 
-export async function transactionResultManager(transaction, tronWeb) {
+export async function transactionResultManager(transaction, lindaWeb) {
   
-  const signedTransaction = await tronWeb.trx.sign(transaction, tronWeb.defaultPrivateKey).catch(e => {
+  const signedTransaction = await lindaWeb.lind.sign(transaction, lindaWeb.defaultPrivateKey).catch(e => {
     console.log(e.toString());
     return false;
   });
   
   if (signedTransaction) {
-    const broadcast = await tronWeb.trx.sendRawTransaction(signedTransaction);
+    const broadcast = await lindaWeb.lind.sendRawTransaction(signedTransaction);
     if (!broadcast.result) {
       broadcast.result = false;
     }
@@ -26,13 +26,13 @@ export async function transactionResultManager(transaction, tronWeb) {
     return false;
   }
 }
-export async function transactionResultManagerByLedger(transaction, tronWeb) {
-  const signedTransaction = await tronWeb.trx.sign(transaction, tronWeb.defaultPrivateKey).catch(e => {
+export async function transactionResultManagerByLedger(transaction, lindaWeb) {
+  const signedTransaction = await lindaWeb.lind.sign(transaction, lindaWeb.defaultPrivateKey).catch(e => {
     console.log(e.toString());
     return false;
   });
   if (signedTransaction) {
-    const broadcast = await tronWeb.trx.sendRawTransaction(signedTransaction);
+    const broadcast = await lindaWeb.lind.sendRawTransaction(signedTransaction);
     if (!broadcast.result) {
       broadcast.result = false;
     }
@@ -43,14 +43,14 @@ export async function transactionResultManagerByLedger(transaction, tronWeb) {
 }
 
 export async function transactionResultManagerSun(transaction, sunWeb) {
-    //sign((transaction = false), (privateKey = this.sidechain.defaultPrivateKey), (useTronHeader = true), (multisig = false));
+    //sign((transaction = false), (privateKey = this.sidechain.defaultPrivateKey), (useLindaHeader = true), (multisig = false));
    
-    const signedTransaction = await sunWeb.sidechain.trx.sign(transaction, sunWeb.sidechain.defaultPrivateKey).catch(e => {
+    const signedTransaction = await sunWeb.sidechain.lind.sign(transaction, sunWeb.sidechain.defaultPrivateKey).catch(e => {
         return false;
     });
   
     if (signedTransaction) {
-        const broadcast = await sunWeb.sidechain.trx.sendRawTransaction(signedTransaction);
+        const broadcast = await sunWeb.sidechain.lind.sendRawTransaction(signedTransaction);
         if (!broadcast.result) {
             broadcast.result = false;
         }
@@ -60,15 +60,15 @@ export async function transactionResultManagerSun(transaction, sunWeb) {
     }
 }
 
-export async function transactionMultiResultManager(unSignTransaction, tronWeb, permissionId, permissionTime, HexStr) {
+export async function transactionMultiResultManager(unSignTransaction, lindaWeb, permissionId, permissionTime, HexStr) {
     //set transaction expiration time (1H-24H)
-    const newTransaction = await tronWeb.transactionBuilder.extendExpiration(unSignTransaction, (3600*permissionTime-60));
+    const newTransaction = await lindaWeb.transactionBuilder.extendExpiration(unSignTransaction, (3600*permissionTime-60));
     if(unSignTransaction.extra){
       newTransaction.extra = unSignTransaction.extra;
     }
    
     //sign transaction
-    const signedTransaction = await tronWeb.trx.multiSign(newTransaction, tronWeb.defaultPrivateKey , permissionId).catch(e => {
+    const signedTransaction = await lindaWeb.lind.multiSign(newTransaction, lindaWeb.defaultPrivateKey , permissionId).catch(e => {
         console.log('e',e)
         return false;
     });
@@ -81,7 +81,7 @@ export async function transactionMultiResultManager(unSignTransaction, tronWeb, 
 }
 
 
-export function FormattedTRX(props) {
+export function FormattedLIND(props) {
   return (
     <FormattedNumber
       maximumFractionDigits={7}

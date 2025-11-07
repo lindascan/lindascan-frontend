@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {tu} from "../../utils/i18n";
 
-export default class TRONRating extends Component {
+export default class LINDARating extends Component {
 
   render() {
 

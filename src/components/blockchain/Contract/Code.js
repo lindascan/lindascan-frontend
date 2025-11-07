@@ -1,11 +1,11 @@
 import React from "react";
 import { tu } from "../../../utils/i18n";
 import xhr from "axios/index";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { Radio, Tooltip } from "antd";
 import ContractInfo from "./ContractInfo";
 import EntryContract from "./EntryContract";
-import tronWeb from "tronweb";
+import lindaWeb from "lindaweb";
 import { connect } from "react-redux";
 import {
   API_URL,
@@ -21,13 +21,13 @@ class Code extends React.Component {
   constructor(props) {
     super(props);
     if (IS_MAINNET) {
-      this.tronWeb = new tronWeb({
+      this.lindaWeb = new lindaWeb({
         fullNode: SUNWEBCONFIG.MAINFULLNODE,
         solidityNode: SUNWEBCONFIG.MAINSOLIDITYNODE,
         eventServer: SUNWEBCONFIG.MAINEVENTSERVER
       });
     } else {
-      this.tronWeb = new tronWeb({
+      this.lindaWeb = new lindaWeb({
         fullNode: SUNWEBCONFIG.SUNFULLNODE,
         solidityNode: SUNWEBCONFIG.SUNSOLIDITYNODE,
         eventServer: SUNWEBCONFIG.SUNEVENTSERVER
@@ -132,7 +132,7 @@ class Code extends React.Component {
       filter: { address }
     } = this.props;
     const { contractVerifyState, contractInfoList } = this.state;
-    let smartcontract = await this.tronWeb.trx.getContract(address);
+    let smartcontract = await this.lindaWeb.lind.getContract(address);
     let contractInfoListNew;
      if (contractVerifyState) {
       contractInfoListNew = { abi: smartcontract.abi, ...contractInfoList };
@@ -228,13 +228,13 @@ class Code extends React.Component {
   }
 
   async getContractTokenList() {
-    const { tronWeb } = this.props.account;
-    if (tronWeb) {
-      const myAccount = await tronWeb.trx.getAccount(
-        tronWeb.defaultAddress.hex
+    const { lindaWeb } = this.props.account;
+    if (lindaWeb) {
+      const myAccount = await lindaWeb.lind.getAccount(
+        lindaWeb.defaultAddress.hex
       );
-      const listTokens = await tronWeb.trx.listTokens();
-      const balance = await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex);
+      const listTokens = await lindaWeb.lind.listTokens();
+      const balance = await lindaWeb.lind.getBalance(lindaWeb.defaultAddress.hex);
       let currentTokens = [];
       if (myAccount.assetV2 !== undefined) {
         myAccount.assetV2.forEach(item => {
@@ -247,7 +247,7 @@ class Code extends React.Component {
       }
       currentTokens.push({
         id: "0",
-        name: "TRX",
+        name: "LIND",
         balance: balance / 100000
       });
       this.setState({
@@ -258,27 +258,27 @@ class Code extends React.Component {
   solidityVersions = v => {
     let version;
     switch (v) {
-      case "tron-0.4.24":
-      case "tronbox_soljson_v1":
-      case "tronbox_soljson_v2":
+      case "linda-0.4.24":
+      case "lindabox_soljson_v1":
+      case "lindabox_soljson_v2":
         version = "0.4.24";
         break;
-      case "tron-0.4.25_Odyssey_v3.2.3":
+      case "linda-0.4.25_Odyssey_v3.2.3":
       case "solidity-0.4.25_Odyssey_v3.2.3":
-      case "tronbox_soljson_v3":
+      case "lindabox_soljson_v3":
         version = "0.4.25";
         break;
-      case "tron-0.5.4_Odyssey_v3.6.0":
+      case "linda-0.5.4_Odyssey_v3.6.0":
         version = "0.5.4";
         break;
-      case "tron-0.5.8_Odyssey_v3.6.0":
+      case "linda-0.5.8_Odyssey_v3.6.0":
         version = "0.5.8";
         
         break;
-      case "tron-0.5.9_Odyssey_v3.6.5":
+      case "linda-0.5.9_Odyssey_v3.6.5":
         version = "0.5.9";
         break;
-      case "tron-0.5.10_Odyssey_v3.6.6":
+      case "linda-0.5.10_Odyssey_v3.6.6":
         version = "0.5.10"; 
         break;
       default:
@@ -491,7 +491,7 @@ class Code extends React.Component {
       <main className="contract-container">
         {loading ? (
           <div className="loading-style" style={{ marginTop: "-20px" }}>
-            <TronLoader />
+            <LindaLoader />
           </div>
         ) : (
           <div>

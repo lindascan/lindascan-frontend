@@ -82,7 +82,7 @@ export default class App {
     let {
       data
     } = await xhr.get(
-      `${API_URL}/api/tokens/overview?uuid=${uuidv4}&start=0&limit=1000&filter=trc20&sort=priceInTrx`
+      `${API_URL}/api/tokens/overview?uuid=${uuidv4}&start=0&limit=1000&filter=lrc20&sort=priceInLind`
     );
     let imgUrl;
     if(data.tokens && data.tokens.length){

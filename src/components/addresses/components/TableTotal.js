@@ -68,7 +68,7 @@ class TotalInfo extends React.Component {
                     <span className="ml-1">
                       <QuestionMark
                         placement="top"
-                        info={intl.formatMessage({ id: "interTrx_tip_contract" })}
+                        info={intl.formatMessage({ id: "interLind_tip_contract" })}
                       />
                     </span>
                   ) : (
@@ -94,7 +94,7 @@ class TotalInfo extends React.Component {
                     <span className="ml-1">
                       <QuestionMark
                         placement="top"
-                        info={intl.formatMessage({ id: "interTrx_tip_contract" })}
+                        info={intl.formatMessage({ id: "interLind_tip_contract" })}
                       />
                     </span>
                   ) : (
@@ -121,7 +121,7 @@ class TotalInfo extends React.Component {
                     <span className="ml-1">
                       <QuestionMark
                         placement="top"
-                        info={intl.formatMessage({ id: "interTrx_tip_contract" })}
+                        info={intl.formatMessage({ id: "interLind_tip_contract" })}
                       />
                     </span>
                   ) : (

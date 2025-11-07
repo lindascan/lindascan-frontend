@@ -14,7 +14,7 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
         account: state.app.account,
         wallet: state.app.wallet,
         tokenBalances: state.account.tokens,
-        trxBalance: state.account.trxBalance || state.account.balance,
+        lindBalance: state.account.lindBalance || state.account.balance,
     }),
 )
 @injectIntl

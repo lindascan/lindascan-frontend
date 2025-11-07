@@ -33,13 +33,13 @@ export const lang20Q1 = {
   data_time2: "1 День",
   data_time3: "1 Неделя",
   data_check: "Посмотреть ТОП 10",
-  data_account_send_Trx: "Топ Аккаунты -- Всего отправлено TRX",
-  data_account_send_Trx_items:
+  data_account_send_Lind: "Топ Аккаунты -- Всего отправлено LIND",
+  data_account_send_Lind_items:
     "Топ Аккаунты -- Количество Отправленных Транзакций",
-  data_account_receive_Trx: "Топ Аккаунты -- Всего получено TRX",
-  data_account_receive_Trx_items:
+  data_account_receive_Lind: "Топ Аккаунты -- Всего получено LIND",
+  data_account_receive_Lind_items:
     "Топ Аккаунты -- Количество Принятых Транзакций",
-  data_account_freeze: "Топ Аккаунты -- Замороженных TRX",
+  data_account_freeze: "Топ Аккаунты -- Замороженных LIND",
   data_account_vote: "Топ Аккаунты -- Голосование",
   data_range: "Рейтинг",
   data_number: "Количество",
@@ -55,7 +55,7 @@ export const lang20Q1 = {
   data_token_transcation_items_total: "Топ Токены -- Количество Транзакций",
   data_token_transcation_numbers: "Топ Токены -- Сумма Транзакций",
   data_token_circle_per: "Изменено",
-  data_contract_trx_number: "Топ Контракты -- TRX Баланс",
+  data_contract_lind_number: "Топ Контракты -- LIND Баланс",
   data_contract_accounts: "Топ Контракты -- Вызов Аккаунтов",
   data_contract_numbers: "Баланс",
   data_contract_times: "Топ Контракты -- Количество Вызовов",
@@ -64,8 +64,8 @@ export const lang20Q1 = {
   data_resource_table_title: "Пиковое Потребление Энергии",
   data_resource_table_rank: "Рейтинг",
   data_resource_table_account: "Аккаунт",
-  data_resource_table_freezingTRX_energy: "Энергия от Замораживания TRX",
-  data_resource_table_burningTRX_energy: "Энергия от Сжигания TRX",
+  data_resource_table_freezingLIND_energy: "Энергия от Замораживания LIND",
+  data_resource_table_burningLIND_energy: "Энергия от Сжигания LIND",
   data_resource_table_energy_consumed: "Общее Количество Потребляемой Энергии",
   data_resource_table_percentage: "Процент",
   data_resource_table_percentage_tips:
@@ -90,26 +90,26 @@ export const lang20Q1 = {
   data_contract_name: "Название контракта",
   data_title_chart: "Графики",
   // 2020-01-17 overview
-  data_TRX_transfer_total: "Сумма Перевода TRX",
-  data_TRX_transfer_count: "Количество Переводов TRX",
-  data_TRX_frozen_total: "Всего Замороженых TRX",
+  data_LIND_transfer_total: "Сумма Перевода LIND",
+  data_LIND_transfer_count: "Количество Переводов LIND",
+  data_LIND_frozen_total: "Всего Замороженых LIND",
   data_votes_total: "Всего голосов",
-  data_TRON_tokens_total: "Всего токенов TRON",
-  data_TRC10_tokens_total: "TRC10 Токены",
-  data_TRC20_tokens_total: "TRC20 Токены",
-  data_TRONSCAN_tokens_entered: "Токены, введенные на TRONSCAN",
-  data_TRONSCAN_TRC10_entries: "TRC10 Записи",
-  data_TRONSCAN_TRC20_entries: "TRC20 Записи",
-  data_TRX_balance: "TRX Баланс",
+  data_LINDA_tokens_total: "Всего токенов LINDA",
+  data_LRC10_tokens_total: "LRC10 Токены",
+  data_LRC20_tokens_total: "LRC20 Токены",
+  data_LINDASCAN_tokens_entered: "Токены, введенные на LINDASCAN",
+  data_LINDASCAN_LRC10_entries: "LRC10 Записи",
+  data_LINDASCAN_LRC20_entries: "LRC20 Записи",
+  data_LIND_balance: "LIND Баланс",
   data_calling_accounts: "Аккаунты Вызовов",
   data_calling_number: "Количество Вызовов",
   data_energy_consumed_total: "Общее Количество Потребляемой Энергии",
-  data_energy_freezed: "Энергия от Замораживания TRX",
-  data_energy_burned: "Энергия от Сжигания TRX",
+  data_energy_freezed: "Энергия от Замораживания LIND",
+  data_energy_burned: "Энергия от Сжигания LIND",
   data_whole_contract_use: "Энергия от подрядчика",
   data_bandwidth_consumed_total: "Общее Потребление Пропускной Способности",
-  data_bandwidth_freezed: "Пропускная Способность после Замораживания TRX",
-  data_bandwidth_burned: "Пропускная Способность после Сжигания TRX",
+  data_bandwidth_freezed: "Пропускная Способность после Замораживания LIND",
+  data_bandwidth_burned: "Пропускная Способность после Сжигания LIND",
   data_area:
     "Only tokens listed on <a href='https://poloniex.org/'  target='_blank'>POLONI DEX</a> are included",
   // index nav
@@ -120,17 +120,17 @@ export const lang20Q1 = {
   index_navigation_proposals: "ПРЕДЛОЖЕНИЯ",
 
   // 2020-02-04
-  chart_hold_trx_account: "Аккаунты, удерживающие TRX",
-  chart_hold_trx_account_per: "Процент держателя TRX",
-  chart_hold_trx_account_per_t: "Процент держателя TRX",
-  chart_hold_trx_account_per_tip:
-    "Аккаунты, удерживающие TRX / Всего аккаунтов",
+  chart_hold_lind_account: "Аккаунты, удерживающие LIND",
+  chart_hold_lind_account_per: "Процент держателя LIND",
+  chart_hold_lind_account_per_t: "Процент держателя LIND",
+  chart_hold_lind_account_per_tip:
+    "Аккаунты, удерживающие LIND / Всего аккаунтов",
   chart_hold_account_sum: "Всего аккаунтов",
-  chart_hold_trx: "Аккаунты, удерживающие TRX",
-  chart_hold_trx_more: "Больше данных",
-  chart_hold_trx_number: "Количество аккаунтов",
-  chart_resource_user_freeing: "Энергия от замораживания TRX",
-  chart_resource_user_burning: "Энергия от сжигания TRX",
+  chart_hold_lind: "Аккаунты, удерживающие LIND",
+  chart_hold_lind_more: "Больше данных",
+  chart_hold_lind_number: "Количество аккаунтов",
+  chart_resource_user_freeing: "Энергия от замораживания LIND",
+  chart_resource_user_burning: "Энергия от сжигания LIND",
   chart_resource_contract_deployer: "Энергия от выпускников контрактов",
 
   // 2020-2-5 leon
@@ -151,7 +151,7 @@ export const lang20Q1 = {
   proposal_apply_super: "Эта функция доступна только для SR.",
   proposal_apply_super_btn: "Подать заявку на SR",
   proposal_apply_super_desc:
-    "Все TRX-держатели могут подать заявку на участие в качестве кандидата в SR 27 наиболее проголосовавших кандидатов станут SR, а лучшие 28 - 127 кандидатов станут супер-партнерами. SR отвечают за упаковку транзакций и генерацию блоков. Они также имеют право блокировать награды и награды голосования. Суперпартнеры не упаковывают транзакции и не генерируют блоки и имеют право только на вознаграждение за голосование. Все кандидаты в SR, супер-партнеры и SR могут подать предложения по изменению параметров в сети TRON.",
+    "Все LIND-держатели могут подать заявку на участие в качестве кандидата в SR 27 наиболее проголосовавших кандидатов станут SR, а лучшие 28 - 127 кандидатов станут супер-партнерами. SR отвечают за упаковку транзакций и генерацию блоков. Они также имеют право блокировать награды и награды голосования. Суперпартнеры не упаковывают транзакции и не генерируют блоки и имеют право только на вознаграждение за голосование. Все кандидаты в SR, супер-партнеры и SR могут подать предложения по изменению параметров в сети LINDA.",
   // proposal_apply_super_input_name: "请输入您的名称",
   // proposal_apply_super_input_name_ph: "3-30个字符，设置后不可修改",
   proposal_apply_super_input_website: "Пожалуйста, введите ваш URL",
@@ -187,7 +187,7 @@ export const lang20Q1 = {
   proposal_confirm: "Подтвердить",
   proposal_result: "Результат",
   proposal_create_info:
-    "Инициировано предложение изменить параметры сети TRON. Каждый SR имеет право инициировать и голосовать за предложения. После получения голосов от 19 или более SR до истечения срока действия предложение считается принятым и соответствующие параметры сети будут изменены в следующем периоде обслуживания.",
+    "Инициировано предложение изменить параметры сети LINDA. Каждый SR имеет право инициировать и голосовать за предложения. После получения голосов от 19 или более SR до истечения срока действия предложение считается принятым и соответствующие параметры сети будут изменены в следующем периоде обслуживания.",
   proposal_select_table: "Выбрать",
   proposal_selected_network_parameters: "Настройки сети выбраны",
   proposal_content: "Содержание предложения",
@@ -222,7 +222,7 @@ export const lang20Q1 = {
   // 2020-02-19
   chart_energy: "используемая энергия",
   getAllowTvmSolidity059_tips:
-    "Three new features of TVM (TRON Virtual Machine) will be opened: support for parallel signature verification, multi signature verification, and judge whether the address is the contract address",
+    "Three new features of TVM (LINDA Virtual Machine) will be opened: support for parallel signature verification, multi signature verification, and judge whether the address is the contract address",
 
   // 0227 torn sr
   sr_vote_team_information: "команда",
@@ -236,19 +236,19 @@ export const lang20Q1 = {
   block_detail_confirmed_over_show: "confirmed by over 200 blocks",
   block_detail_rolled_back: "ROLLED BACK",
 
-  freeze_TRX_error:
-    "Something went wrong while trying to freeze TRX, please try again later.",
+  freeze_LIND_error:
+    "Something went wrong while trying to freeze LIND, please try again later.",
   votes_cannot_exceed_5_SRs: "Votes cannot exceed 5 SRs",
 
   // 2020-03-03 leon
   account_total_tip:
-    "Отображаются только первые 10000 записей, отсортированных по убыванию баланса TRX по умолчанию.",
+    "Отображаются только первые 10000 записей, отсортированных по убыванию баланса LIND по умолчанию.",
   account_rank: "№",
   // account_title: "账户",
-  account_balance: "Общий баланс TRX",
+  account_balance: "Общий баланс LIND",
   account_percent: "Процент",
-  account_percent_tip: "TRX удерживаемый этим аккаунтом/Общее предложение TRX",
-  account_power: "Заморожено TRX (право голоса)",
+  account_percent_tip: "LIND удерживаемый этим аккаунтом/Общее предложение LIND",
+  account_power: "Заморожено LIND (право голоса)",
   account_trade_count: "Количество транзакций",
   account_trade_count_tip: "Количество транзакций, связанных с этим адресом",
   account_more: "Больше",
@@ -298,34 +298,34 @@ export const lang20Q1 = {
   account_representative_block_table_res: "Использованные ресурсы",
   account_representative_block_table_prize: "Блок вознаграждения",
   account_representative_block_desc:
-    "{trx} TRX заработано на {block} произведенных блоках",
+    "{lind} LIND заработано на {block} произведенных блоках",
   account_representative_voters_per_tip:
     "Голоса, поданные избирателем / всего голосов",
   account_representative_transfer_tip:
-    "Количество переводов токенов TRX/TRC10/TRC20, связанных с этим аккаунтом",
+    "Количество переводов токенов LIND/LRC10/LRC20, связанных с этим аккаунтом",
   account_representative_unit: "{number} голосов от {votes} избирателей",
   account_piechart_title: "Распределение активов",
 
-  // 03-09 tron account  transfers transactions internal-transactions
+  // 03-09 linda account  transfers transactions internal-transactions
   address_account_tab_search_tips: "Поиск по Адресу/Хэшу Транзакции/Токену",
 
   address_account_table_filter_all: "полный",
   address_account_table_filter_transfers: "Перевод ",
-  address_account_table_filter_freeze: "Заморозить TRX",
-  address_account_table_filter_unfreeze: "Разморозить TRX",
+  address_account_table_filter_freeze: "Заморозить LIND",
+  address_account_table_filter_unfreeze: "Разморозить LIND",
   address_account_table_filter_trigger_smartContracts:
     "Запустить Смарт Контракт",
   address_account_table_filter_vote: "Голосовать",
   address_account_table_filter_other: "other",
 
   address_account_table_filter_token_tips:
-    "The token is not included in TRONSCAN",
+    "The token is not included in LINDASCAN",
   current_version: "издание",
   account_block: "Блоки",
   account_address_total_balance_tip:"Сумма стоимости всех токенов на счете",
 
   too_many_bytes_to_encode:"Too many bytes to encode",
-  use_TRONlink_or_private_key :"Please login to use this function via TRONlink or private key",
+  use_LINDAlink_or_private_key :"Please login to use this function via LINDAlink or private key",
   get_usdj:'получать USDJ',
   pledge_to_get_USDJ:'Pledge to get USDJ',
   get_usdj_guide: "Как получить USDJ",
@@ -363,10 +363,10 @@ export const lang20Q1 = {
 
   fill_a_valid_ledger_note:'Please confirm that the Transactions Data option in the ledger settings is allowed, otherwise you cannot send notes',
   enter_up_to_50_characters:'Enter up to 50 characters',
-  address_token_less_than_10:'tokens with a value less than 10 TRX',
-  address_total_tron_power:'Total TRON Power',
-  address_total_tron_power_remain:'Available TORN Power',
-  address_total_tron_power_used:'Used TRON Power',
+  address_token_less_than_10:'tokens with a value less than 10 LIND',
+  address_total_linda_power:'Total LINDA Power',
+  address_total_linda_power_remain:'Available TORN Power',
+  address_total_linda_power_used:'Used LINDA Power',
 
   // foundation address
   foundation_address_update_date:'Updated time: 2019/12/31',

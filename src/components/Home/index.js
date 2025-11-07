@@ -6,7 +6,7 @@ import { doSearch, getSearchType } from "../../services/search";
 //import CountUp from "react-countup";
 import { Client, Client20 } from "../../services/api";
 //import { Link } from "react-router-dom";
-//import { TRXPrice } from "../common/Price";
+//import { LINDPrice } from "../common/Price";
 import RecentBlocks from "./RecentBlocks";
 import { KEY_ENTER } from "../../utils/constants";
 import { withTimers } from "../../utils/timing";
@@ -15,7 +15,7 @@ import RecentTransfers from "./RecentTransfers";
 import { tu } from "../../utils/i18n";
 import { toastr } from "react-redux-toastr";
 //import { HrefLink } from "../common/Links";
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 import {
   LineReactHighChartAdd,
   LineReactHighChartTx,
@@ -194,7 +194,7 @@ export default class Home extends Component {
   async loadAllData() {
     const allData = await Promise.all([
       Client.getTxOverviewStats(),
-      xhr.get(`https://dappchainapi.tronscan.org/api/stats/overview`)
+      xhr.get(`https://dappchainapi.lindascan.org/api/stats/overview`)
     ]).catch(e => {
       console.log("error:" + e);
     });
@@ -309,7 +309,7 @@ export default class Home extends Component {
             total: addressesTemp[j]["total"] + SunAddressesTemp[i]["total"],
             increment:
               addressesTemp[j]["increment"] + SunAddressesTemp[i]["increment"],
-            name: "TRON"
+            name: "LINDA"
           });
         }
       }
@@ -320,7 +320,7 @@ export default class Home extends Component {
           date: temp[j]["date"],
           totalTransaction:
             temp[j]["totalTransaction"] + SunTemp[i]["totalTransaction"],
-          name: "TRON"
+          name: "LINDA"
         });
       }
     }
@@ -381,7 +381,7 @@ export default class Home extends Component {
     this.reconnect();
     isMobile && this.loadHomepageBundle();
     let { noticezhIEO, noticeenIEO } = this.state;
-    const data = await Client20.getTRONNotice(intl.locale, { page: 3 });
+    const data = await Client20.getLINDANotice(intl.locale, { page: 3 });
     // intl.locale == "zh"? data.articles.unshift(noticezhIEO):data.articles.unshift(noticeenIEO);
     this.setState({ notice: data.articles });
 
@@ -396,7 +396,7 @@ export default class Home extends Component {
       this.reconnect();
     }
     if (prevProps.intl.locale !== intl.locale) {
-      const data = await Client20.getTRONNotice(intl.locale, { page: 3 });
+      const data = await Client20.getLINDANotice(intl.locale, { page: 3 });
       // intl.locale == "zh"? data.articles.unshift(noticezhIEO):data.articles.unshift(noticeenIEO);
       this.setState({ notice: data.articles });
     }
@@ -442,10 +442,10 @@ export default class Home extends Component {
   getLogo = () => {
     let { theme } = this.props;
     switch (theme) {
-      case "tron":
-        return require("../../images/tron-banner-tronblue.png");
+      case "linda":
+        return require("../../images/linda-banner-lindablue.png");
       default:
-        return require("../../images/tron-banner-1.png");
+        return require("../../images/linda-banner-1.png");
     }
   };
 
@@ -529,8 +529,8 @@ export default class Home extends Component {
                       <a
                         href={
                           intl.locale == "zh"
-                            ? "https://support.tronscan.org/hc/zh-cn/categories/360001618172-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83"
-                            : "https://support.tronscan.org/hc/en-us/categories/360001621692-Announcements"
+                            ? "https://support.lindascan.org/hc/zh-cn/categories/360001618172-%E5%85%AC%E5%91%8A%E4%B8%AD%E5%BF%83"
+                            : "https://support.lindascan.org/hc/en-us/categories/360001621692-Announcements"
                         }
                         target="_blank"
                       >
@@ -657,15 +657,15 @@ export default class Home extends Component {
                     </div>
                     <div className="col-6">
                       <HrefLink
-                        href="https://coinmarketcap.com/currencies/tron/"
+                        href="https://coinmarketcap.com/currencies/linda/"
                         target="_blank"
                         className="hvr-underline-from-center hvr-underline-white text-muted"
                       >
                         <img src={require("../../images/home/price.png")} />
                         <h2>
-                          <TRXPrice amount={1} currency="USD" source="home" />
+                          <LINDPrice amount={1} currency="USD" source="home" />
                         </h2>
-                        <p className="m-0">{tu("pice_per_1trx")}</p>
+                        <p className="m-0">{tu("pice_per_1lind")}</p>
                       </HrefLink>
                     </div>
                   </div>
@@ -683,7 +683,7 @@ export default class Home extends Component {
                 <div className="col-md-6 mt-3 mt-md-0 ">
                   <div className="card " style={styles.card}>
                     {/* <div
-                      className="card-header bg-tron-light pb-0"
+                      className="card-header bg-linda-light pb-0"
                       style={styles.card}
                     >
                       <h5 className="m-0 lh-150">
@@ -701,7 +701,7 @@ export default class Home extends Component {
                         }
                       >
                         {txOverviewStats === null ? (
-                          <TronLoader />
+                          <LindaLoader />
                         ) : IS_MAINNET ? (
                           <LineReactHighChartHomeTx
                             style={{ minWidth: 255, height: 200 }}
@@ -726,7 +726,7 @@ export default class Home extends Component {
                 <div className="col-md-6 mt-3 mt-md-0 ">
                   <div className="card" style={styles.card}>
                     {/* <div
-                      className="card-header bg-tron-light pb-0"
+                      className="card-header bg-linda-light pb-0"
                       style={styles.card}
                     >
                       <h5 className="m-0 lh-150">
@@ -744,7 +744,7 @@ export default class Home extends Component {
                         }
                       >
                         {addressesStats === null ? (
-                          <TronLoader />
+                          <LindaLoader />
                         ) : IS_MAINNET ? (
                           <LineReactHighChartHomeAddress
                             style={{ minWidth: 255, height: 200 }}
@@ -772,12 +772,12 @@ export default class Home extends Component {
                 <div className="col-md-6 mt-3 mt-md-0 ">
                   <div className="card " style={styles.card}>
                     {/* <div
-                      className="card-header bg-tron-light color-grey-100 text-center pb-0"
+                      className="card-header bg-linda-light color-grey-100 text-center pb-0"
                       style={styles.card}
                     >
                       <h5 className="mt-1 lh-150">
                         
-                        <span className="color-tron-100">
+                        <span className="color-linda-100">
                           {tu("14_day_transaction_history")}
                         </span>
                       </h5>
@@ -794,7 +794,7 @@ export default class Home extends Component {
                         }
                       >
                         {txOverviewStats === null ? (
-                          <TronLoader />
+                          <LindaLoader />
                         ) : IS_MAINNET ? (
                           <LineReactHighChartHomeTx
                             style={{ minWidth: 255, height: 310 }}
@@ -819,7 +819,7 @@ export default class Home extends Component {
                 <div className="col-md-6 mt-3 mt-md-0 ">
                   <div className="card" style={styles.card}>
                     {/* <div
-                      className="card-header bg-tron-light color-grey-100 text-center pb-0"
+                      className="card-header bg-linda-light color-grey-100 text-center pb-0"
                       style={styles.card}
                     >
                       <h5 className="mt-1 lh-150">
@@ -841,7 +841,7 @@ export default class Home extends Component {
                         }
                       >
                         {addressesStats === null ? (
-                          <TronLoader />
+                          <LindaLoader />
                         ) : IS_MAINNET ? (
                           <LineReactHighChartHomeAddress
                             style={{ minWidth: 255, height: 310 }}

@@ -25,13 +25,13 @@ class Contracts extends React.Component {
   constructor() {
     super();
     this.state = {
-      trxUnit: "TRX",
+      lindUnit: "LIND",
       usdUnit: "USD",
       tpUnit: "TP",
       txnUnit: "Txns",
       types: {
         11: {
-          title: "data_contract_trx_number",
+          title: "data_contract_lind_number",
           tableTitle: [
             "data_range",
             "data_contract",
@@ -151,7 +151,7 @@ class Contracts extends React.Component {
   }
 
   renderDataTable(data, title, isUsd, type, index) {
-    const { trxUnit, usdUnit } = this.state;
+    const { lindUnit, usdUnit } = this.state;
     const { intl, priceUSD } = this.props;
     const titles = title;
     let lastData = this.setTotal(data, type);
@@ -241,7 +241,7 @@ class Contracts extends React.Component {
                 value={record[type] || 0}
                 maximumFractionDigits={isUsd ? 6 : 0}
               ></FormattedNumber>{" "}
-              {isUsd && trxUnit}
+              {isUsd && lindUnit}
               <br />
               {isUsd && (
                 <span className="usd-amount">

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Table } from "antd";
 import { AddressLink, TransactionHashLink } from "../../../../common/Links";
 import { FormattedDate, FormattedTime, injectIntl } from "react-intl";
-import { TRXPrice } from "../../../../common/Price";
-import { ONE_TRX } from "../../../../../constants";
+import { LINDPrice } from "../../../../common/Price";
+import { ONE_LIND } from "../../../../../constants";
 import { Truncate } from "../../../../common/text";
 import { tu, tv } from "../../../../../utils/i18n";
 import { Client } from "../../../../../services/api";
@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { upperFirst } from "lodash";
 import { dateFormat } from "../../../../../utils/DateTime";
 import { setUpdateTran, setRedirctPair } from "../../../../../actions/exchange";
-import { TronLoader } from "../../../../common/loaders";
+import { LindaLoader } from "../../../../common/loaders";
 import { Popover, Icon } from "antd";
 import { precisions } from "../../TokenPre";
 import { withRouter } from "react-router-dom";
@@ -126,7 +126,7 @@ class Mytran extends Component {
     const columns = [
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_time" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_time" })
         ),
         dataIndex: "orderTime",
         key: "orderTime",
@@ -149,7 +149,7 @@ class Mytran extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_pair" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_pair" })
         ),
         dataIndex: "fShortName",
         key: "fShortName",
@@ -167,22 +167,22 @@ class Mytran extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_type" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_type" })
         ),
         dataIndex: "orderType",
         key: "orderType",
         width: "60px",
         render: (text, record, index) => {
           return record.orderType === 0 ? (
-            <span className="col-green">{tu("trc20_BUY")}</span>
+            <span className="col-green">{tu("lrc20_BUY")}</span>
           ) : (
-            <span className="col-red">{tu("trc20_SELL")}</span>
+            <span className="col-red">{tu("lrc20_SELL")}</span>
           );
         }
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_price" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_price" })
         ),
         dataIndex: "price",
         key: "price",
@@ -195,7 +195,7 @@ class Mytran extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_amount" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_amount" })
         ),
         dataIndex: "volume",
         key: "volume",
@@ -211,7 +211,7 @@ class Mytran extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_volume" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_volume" })
         ),
         dataIndex: "curTurnover",
         key: "curTurnover",
@@ -227,7 +227,7 @@ class Mytran extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_progress" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_progress" })
         ),
         dataIndex: "schedule",
         key: "schedule",
@@ -246,7 +246,7 @@ class Mytran extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_my_trans_header_status" })
+          intl.formatMessage({ id: "lrc20_my_trans_header_status" })
         ),
         dataIndex: "orderStatus",
         key: "orderStatus",
@@ -255,7 +255,7 @@ class Mytran extends Component {
         render: (text, record, index) => {
           let content = (
             <div style={{ width: "180px" }}>
-              <p>{tu("trc20_failed_order")}</p>
+              <p>{tu("lrc20_failed_order")}</p>
               <a
                 href={
                   activeLanguage === "zh"
@@ -277,7 +277,7 @@ class Mytran extends Component {
                   : ""
               }
             >
-              {tu(`trc20_status_${record.orderStatus}`)}
+              {tu(`lrc20_status_${record.orderStatus}`)}
               {record.orderStatus === 8 && (
                 <Popover content={content} title="">
                   <Icon
@@ -317,13 +317,13 @@ class Mytran extends Component {
     let { dataSource, columns, total, isLoading } = this.state;
     if (!dataSource || dataSource.length === 0) {
       return (
-        <div className="p-3 text-center no-data">{tu("trc20_no_data")}</div>
+        <div className="p-3 text-center no-data">{tu("lrc20_no_data")}</div>
       );
     }
 
     return (
       <div className="exchange__tranlist">
-        {isLoading ? <TronLoader /> : this.getColumns()}
+        {isLoading ? <LindaLoader /> : this.getColumns()}
       </div>
     );
   }
@@ -340,7 +340,7 @@ class Mytran extends Component {
       exchange_name: v.fShortName + "/" + v.sShortName
     };
     this.props.history.push(
-      "/exchange/trc20?token=" + obj.exchange_name + "&id=" + obj.exchange_id
+      "/exchange/lrc20?token=" + obj.exchange_name + "&id=" + obj.exchange_id
     );
     window.location.reload();
     setRedirctPair(v);

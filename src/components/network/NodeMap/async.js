@@ -1,5 +1,5 @@
 import React from "react";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import {tu} from "../../../utils/i18n";
 import loadable from "@/utils/loadable"
 
@@ -7,8 +7,8 @@ import loadable from "@/utils/loadable"
 export const NodeMapAsync = 
   loadable(() => import(/* webpackChunkName: "NodeMap" */ './NodeMap'), () =>{
     return (<div className="card">
-    <TronLoader>
+    <LindaLoader>
       {tu("loading_map")}
-    </TronLoader>
+    </LindaLoader>
   </div>)
   })

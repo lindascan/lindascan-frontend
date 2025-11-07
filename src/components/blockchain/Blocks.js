@@ -10,7 +10,7 @@ import {Client} from "../../services/api";
 import {AddressLink, BlockNumberLink} from "../common/Links";
 import SmartTable from "../common/SmartTable.js"
 import {upperFirst} from "lodash";
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import TotalInfo from "../common/TableTotal";
 //import DateRange from "../common/DateRange";
 import BlockTime from '../common/blockTime'
@@ -144,8 +144,8 @@ class Blocks extends React.Component {
       },
       {
         title: upperFirst(intl.formatMessage({id: 'transactions'})),
-        dataIndex: 'nrOfTrx',
-        key: 'nrOfTrx',
+        dataIndex: 'nrOfLind',
+        key: 'nrOfLind',
         align: 'center',
         render: (text, record, index) => {
           return <FormattedNumber value={text}/>
@@ -204,7 +204,7 @@ class Blocks extends React.Component {
     let column = this.customizedColumn();
     return (
         <main className="container header-overlap pb-3 token_black">
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
           {
             <div className="row">
               <div className="col-md-12 table_pos">

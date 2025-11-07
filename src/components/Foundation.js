@@ -5,12 +5,12 @@ import {tu} from "../utils/i18n";
 import {FormattedNumber, injectIntl} from "react-intl";
 // import {AddressLink} from "./common/Links";
 import {Truncate} from "./common/text";
-import {TronLoader} from "./common/loaders";
+import {LindaLoader} from "./common/loaders";
 import {Table, Input, Button, Icon} from 'antd';
 import xhr from "axios/index";
 import {Tooltip} from "reactstrap";
-import {TRXPrice} from "./common/Price";
-import {ONE_TRX,API_URL,uuidv4} from "../constants";
+import {LINDPrice} from "./common/Price";
+import {ONE_LIND,API_URL,uuidv4} from "../constants";
 import {Client} from "../services/api";
 
 class Accounts extends Component {
@@ -23,8 +23,8 @@ class Accounts extends Component {
       searchString: "",
       accounts: [],
       total: 1000,
-      tronicsPlanTRX:0,
-      foundationTRX:0,
+      lindaicsPlanLIND:0,
+      foundationLIND:0,
     }
   }
 
@@ -68,9 +68,9 @@ class Accounts extends Component {
     this.setState({
         loading: false,
         accounts: foundationAddress,
-        total: funds.fundSumBalance / ONE_TRX ,
-        tronicsPlanTRX:funds.donateBalance / ONE_TRX,
-        foundationTRX:funds.fundTrx,
+        total: funds.fundSumBalance / ONE_LIND ,
+        lindaicsPlanLIND:funds.donateBalance / ONE_LIND,
+        foundationLIND:funds.fundLind,
         planAddress:list
     });
 
@@ -108,7 +108,7 @@ class Accounts extends Component {
           return (
               record.isPlan?  <div><div className="d-flex"
                                         style={{width:300}}
-                                        id={"Tronics-Support-Plan_"+record.key}
+                                        id={"Lindaics-Support-Plan_"+record.key}
                                         onMouseOver={(prevS,props) => this.setState({[record.key]: true})}
                                         onMouseOut={() => this.setState({[record.key]: false})}>
                                         <i className="fas fa-heart" style={{color:'#C23631', marginTop:3,marginRight:5}}></i>
@@ -117,7 +117,7 @@ class Accounts extends Component {
                                           <Truncate>{text}</Truncate>
                                         </span>    
                                     </div>
-                                    <Tooltip placement="top" target={"Tronics-Support-Plan_"+record.key} isOpen={this.state[record.key]}> <span className="text-capitalize">{tu("tronics_support_plan_recipient_address")}</span></Tooltip>
+                                    <Tooltip placement="top" target={"Lindaics-Support-Plan_"+record.key} isOpen={this.state[record.key]}> <span className="text-capitalize">{tu("lindaics_support_plan_recipient_address")}</span></Tooltip>
                               </div>:
                               // <AddressLink address={text}/>
                               <span style={{color: '#c23631',fontFamily: 'Helvetica-Bold',userSelect: 'none'}}>
@@ -136,7 +136,7 @@ class Accounts extends Component {
         width: 200,
         align: 'right',
         render: (text, record, index) => {
-          return <TRXPrice amount={text / ONE_TRX}/>
+          return <LINDPrice amount={text / ONE_LIND}/>
         }
       }
     ];
@@ -145,9 +145,9 @@ class Accounts extends Component {
           {
             accounts.length === 0 ?
                 <div className="card" style={{background: 'white'}}>
-                  <TronLoader>
+                  <LindaLoader>
                     {tu("loading")}
-                  </TronLoader>
+                  </LindaLoader>
                 </div>
                 :
                 <div className="card table_pos">
@@ -166,7 +166,7 @@ class Accounts extends Component {
   render() {
 
     let {match,intl} = this.props;
-    let {total, tronicsPlanTRX,foundationTRX,loading,planAddress} = this.state;
+    let {total, lindaicsPlanLIND,foundationLIND,loading,planAddress} = this.state;
     return (
         <main className="container header-overlap pb-3 token_black">
           <div className="row foundation_title" style={{position:"relative"}}>
@@ -176,7 +176,7 @@ class Accounts extends Component {
                   <p>
                     <FormattedNumber value={total}/>
                   </p>
-                  {tu("total_number_frozenTRX")}
+                  {tu("total_number_frozenLIND")}
                 </div>
               </div>
             </div>
@@ -184,12 +184,12 @@ class Accounts extends Component {
               <div className="card h-100 widget-icon">
                   <div className="card-body pl-4">
                       <p>
-                          <span className="tronics_plan_title">
-                              <FormattedNumber value={tronicsPlanTRX}/>
+                          <span className="lindaics_plan_title">
+                              <FormattedNumber value={lindaicsPlanLIND}/>
                           </span>
                       </p>
                       <span >
-                          {tu("tronics_support_planTRX")}
+                          {tu("lindaics_support_planLIND")}
                       </span>
                   </div>
               </div>
@@ -198,9 +198,9 @@ class Accounts extends Component {
               <div className="card h-100 widget-icon">
                 <div className="card-body pl-4 bg-image_home" >
                   <p>
-                    <FormattedNumber value={foundationTRX}/>
+                    <FormattedNumber value={foundationLIND}/>
                   </p>
-                  {tu("frozen_by_the_foundationTRX")}
+                  {tu("frozen_by_the_foundationLIND")}
                 </div>
               </div>
             </div> */}

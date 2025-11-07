@@ -16,7 +16,7 @@ export default class ActiveRead extends PureComponent {
     });
   }
   render() {
-    const { activePermissions, tronWeb } = this.props;
+    const { activePermissions, lindaWeb } = this.props;
     return (
       <div className="permission">
         <div className="permission-title">
@@ -66,7 +66,7 @@ export default class ActiveRead extends PureComponent {
                     {item.keys.map(itemKey => {
                       return (
                         <tr key={itemKey.address}>
-                          <td>{tronWeb.address.fromHex(itemKey.address)}</td>
+                          <td>{lindaWeb.address.fromHex(itemKey.address)}</td>
                           <td>{itemKey.weight}</td>
                         </tr>
                       );

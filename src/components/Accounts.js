@@ -5,10 +5,10 @@ import {tu} from "../utils/i18n";
 import {FormattedNumber, injectIntl} from "react-intl";
 import {filter, upperFirst} from "lodash";
 import {AddressLink} from "./common/Links";
-import {CIRCULATING_SUPPLY, ONE_TRX, ADDRESS_TAG_ICON} from "../constants";
-import {TRXPrice} from "./common/Price";
+import {CIRCULATING_SUPPLY, ONE_LIND, ADDRESS_TAG_ICON} from "../constants";
+import {LINDPrice} from "./common/Price";
 import SmartTable from "./common/SmartTable.js"
-import {TronLoader} from "./common/loaders";
+import {LindaLoader} from "./common/loaders";
 import {QuestionMark} from "./common/QuestionMark";
 import xhr from "axios/index";
 import {Client, AccountApi} from "../services/api";
@@ -180,16 +180,16 @@ class Accounts extends Component {
                       </th>
                       <td className="d-md-table-cell text-nowrap">
                         <FormattedNumber
-                            value={(((account.balance / ONE_TRX) / CIRCULATING_SUPPLY) * 100)}
+                            value={(((account.balance / ONE_LIND) / CIRCULATING_SUPPLY) * 100)}
                             minimumFractionDigits={8}
                             maximumFractionDigits={8}
                         /> %
                       </td>
                       <td className="text-nowrap d-md-table-cell">
-                        <FormattedNumber value={account.power / ONE_TRX}/>
+                        <FormattedNumber value={account.power / ONE_LIND}/>
                       </td>
                       <td className="text-nowrap">
-                        <TRXPrice amount={account.balance / ONE_TRX}/>
+                        <LINDPrice amount={account.balance / ONE_LIND}/>
                       </td>
                     </tr>
                 ))
@@ -279,7 +279,7 @@ class Accounts extends Component {
         className: 'ant_table',
         // width: '10%',
         render: (text, record, index) => {
-          return <TRXPrice amount={parseInt(text) / ONE_TRX}/>
+          return <LINDPrice amount={parseInt(text) / ONE_LIND}/>
         }
       },
       {
@@ -302,7 +302,7 @@ class Accounts extends Component {
         width: '12%',
         render: (text, record, index) => {
           return <div><FormattedNumber
-              value={(((parseInt(text) / ONE_TRX) / CIRCULATING_SUPPLY) * 100)}
+              value={(((parseInt(text) / ONE_LIND) / CIRCULATING_SUPPLY) * 100)}
               minimumFractionDigits={8}
               maximumFractionDigits={8}
           /> %</div>
@@ -320,7 +320,7 @@ class Accounts extends Component {
         render: (text, record, index) => {
           return (
             <span>
-              {text ? <FormattedNumber value={parseInt(text) / ONE_TRX} /> : (text == 0 ? 0 : '-')}
+              {text ? <FormattedNumber value={parseInt(text) / ONE_LIND} /> : (text == 0 ? 0 : '-')}
             </span>
           );
         }
@@ -407,7 +407,7 @@ class Accounts extends Component {
             </div>
 
           </div>
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
           <div className="row mt-2">
             <div className="col-md-12 table_pos">
               {total ?<div className="d-none d-md-block mt-2 mb-2"  style={{color: '#999',fontSize: '16px'}}>

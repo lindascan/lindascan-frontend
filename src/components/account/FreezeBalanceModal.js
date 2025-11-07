@@ -6,12 +6,12 @@ import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import {tu, t} from "../../utils/i18n";
 import {FormattedNumber} from "react-intl";
 import {Client} from "../../services/api";
-import {ONE_TRX, IS_MAINNET} from "../../constants";
+import {ONE_LIND, IS_MAINNET} from "../../constants";
 import {reloadWallet} from "../../actions/wallet";
 import {NumberField} from "../common/Fields";
-import { transactionResultManager, transactionResultManagerSun} from "../../utils/tron";
+import { transactionResultManager, transactionResultManagerSun} from "../../utils/linda";
 import Lockr from "lockr";
-import {withTronWeb} from "../../utils/tronWeb";
+import {withLindaWeb} from "../../utils/lindaWeb";
 import { Tooltip } from 'antd';
 
 @connect(
@@ -19,14 +19,14 @@ import { Tooltip } from 'antd';
     account: state.app.account,
     wallet: state.app.wallet,
     tokenBalances: state.account.tokens,
-    trxBalance: state.account.trxBalance || state.account.balance
+    lindBalance: state.account.lindBalance || state.account.balance
   }),
   {
     reloadWallet
   }
 )
 @injectIntl
-@withTronWeb
+@withLindaWeb
 export default class FreezeBalanceModal extends React.PureComponent {
 
   constructor(props) {
@@ -76,11 +76,11 @@ export default class FreezeBalanceModal extends React.PureComponent {
   };
 
   onAmountChanged = (value) => {
-    let {trxBalance,intl} = this.props;
+    let {lindBalance,intl} = this.props;
 
     let amount = parseInt(value);
     if (!isNaN(amount)) {
-      if (amount > Math.floor(trxBalance)) {
+      if (amount > Math.floor(lindBalance)) {
         this.setState({
             freezeError: `${intl.formatMessage({id: 'freeze_balance_limit'})}`
         });
@@ -116,8 +116,8 @@ export default class FreezeBalanceModal extends React.PureComponent {
     this.setState({loading: true});
 
     try {
-        const tronWebLedger = this.props.tronWeb();
-        const { tronWeb, sunWeb } = this.props.account;
+        const lindaWebLedger = this.props.lindaWeb();
+        const { lindaWeb, sunWeb } = this.props.account;
 
         if (!selectedResource) {
             type = 'BANDWIDTH';
@@ -125,46 +125,46 @@ export default class FreezeBalanceModal extends React.PureComponent {
             type = 'ENERGY';
         }
         if(IS_MAINNET){
-            if (Lockr.get("islogin") || this.props.wallet.type==="ACCOUNT_LEDGER" || this.props.wallet.type==="ACCOUNT_TRONLINK") {
+            if (Lockr.get("islogin") || this.props.wallet.type==="ACCOUNT_LEDGER" || this.props.wallet.type==="ACCOUNT_LINDALINK") {
 
               if(this.props.wallet.type==="ACCOUNT_LEDGER") {
                   let unSignTransaction;
                   if(receiver==="") {
-                      unSignTransaction = await tronWebLedger.transactionBuilder.freezeBalance(
-                          amount * ONE_TRX,
+                      unSignTransaction = await lindaWebLedger.transactionBuilder.freezeBalance(
+                          amount * ONE_LIND,
                           3,
                           type,
                           wallet.address);
                   }else{
-                      unSignTransaction = await tronWebLedger.transactionBuilder.freezeBalance(
-                          amount * ONE_TRX,
+                      unSignTransaction = await lindaWebLedger.transactionBuilder.freezeBalance(
+                          amount * ONE_LIND,
                           3,
                           type,
                           wallet.address, receiver);
                   }
-                  result = await transactionResultManager(unSignTransaction, tronWebLedger);
+                  result = await transactionResultManager(unSignTransaction, lindaWebLedger);
               }
-              if(this.props.wallet.type==="ACCOUNT_TRONLINK"){
+              if(this.props.wallet.type==="ACCOUNT_LINDALINK"){
                   let unSignTransaction;
                   if(receiver==="") {
-                      unSignTransaction = await tronWeb.transactionBuilder.freezeBalance(amount * ONE_TRX, 3, type, tronWeb.defaultAddress.base58).catch(e => false);
+                      unSignTransaction = await lindaWeb.transactionBuilder.freezeBalance(amount * ONE_LIND, 3, type, lindaWeb.defaultAddress.base58).catch(e => false);
                   }else{
-                      unSignTransaction = await tronWeb.transactionBuilder.freezeBalance(amount * ONE_TRX, 3, type, tronWeb.defaultAddress.base58,receiver).catch(e => false);
+                      unSignTransaction = await lindaWeb.transactionBuilder.freezeBalance(amount * ONE_LIND, 3, type, lindaWeb.defaultAddress.base58,receiver).catch(e => false);
                   }
-                  result = await transactionResultManager(unSignTransaction,tronWeb)
+                  result = await transactionResultManager(unSignTransaction,lindaWeb)
               }
               res = result;
           } else {
-              let {success} = await Client.freezeBalance(account.address, amount * ONE_TRX, 3, selectedResource, receiver)(account.key);
+              let {success} = await Client.freezeBalance(account.address, amount * ONE_LIND, 3, selectedResource, receiver)(account.key);
               res = success
           }
       }else{
-          if(this.props.wallet.type==="ACCOUNT_TRONLINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY"){
+          if(this.props.wallet.type==="ACCOUNT_LINDALINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY"){
               let unSignTransaction;
               if(receiver==="") {
-                  unSignTransaction = await sunWeb.sidechain.transactionBuilder.freezeBalance(amount * ONE_TRX, 3, type, sunWeb.sidechain.defaultAddress.base58).catch(e => false);
+                  unSignTransaction = await sunWeb.sidechain.transactionBuilder.freezeBalance(amount * ONE_LIND, 3, type, sunWeb.sidechain.defaultAddress.base58).catch(e => false);
               }else{
-                  unSignTransaction = await sunWeb.sidechain.transactionBuilder.freezeBalance(amount * ONE_TRX, 3, type, sunWeb.sidechain.defaultAddress.base58, receiver).catch(e => false);
+                  unSignTransaction = await sunWeb.sidechain.transactionBuilder.freezeBalance(amount * ONE_LIND, 3, type, sunWeb.sidechain.defaultAddress.base58, receiver).catch(e => false);
               }
               result = await transactionResultManagerSun(unSignTransaction,sunWeb)
               res = result;
@@ -184,27 +184,27 @@ export default class FreezeBalanceModal extends React.PureComponent {
 
   };
   async getFrozenEnergy(one){
-    const {account: {tronStationSDK}} = this.props
+    const {account: {lindaStationSDK}} = this.props
     const { amount } = this.state
     if(one){
-      const data = await tronStationSDK.energy.trx2FrozenEnergy(1);
+      const data = await lindaStationSDK.energy.lind2FrozenEnergy(1);
       this.setState({oneEnergy: data})
     }else{
       if(amount){
-        const data = await tronStationSDK.energy.trx2FrozenEnergy(amount);
+        const data = await lindaStationSDK.energy.lind2FrozenEnergy(amount);
         this.setState({getcalculate: data})
       }
     }
   }
   async getFrozenBandwidth(one){
-    const {account: {tronStationSDK}} = this.props
+    const {account: {lindaStationSDK}} = this.props
     const { amount } = this.state
     if(one){
-      const data = await tronStationSDK.bp.trx2FrozenBandwidth(1);
+      const data = await lindaStationSDK.bp.lind2FrozenBandwidth(1);
       this.setState({oneBandwidth: data})
     }else{
       if(amount){
-        const data = await tronStationSDK.bp.trx2FrozenBandwidth(amount);
+        const data = await lindaStationSDK.bp.lind2FrozenBandwidth(amount);
         this.setState({getcalculate: data})
       }
     }
@@ -229,9 +229,9 @@ export default class FreezeBalanceModal extends React.PureComponent {
   render() {
 
     let {receiver, amount, confirmed, loading, resources, selectedResource, oneEnergy, oneBandwidth, getcalculate, freezeError} = this.state;
-    let {trxBalance, frozenTrx, intl} = this.props;
-    trxBalance = !trxBalance ? 0 :  trxBalance;
-    let isValid =  (amount > 0 && trxBalance >= amount && confirmed);
+    let {lindBalance, frozenLind, intl} = this.props;
+    lindBalance = !lindBalance ? 0 :  lindBalance;
+    let isValid =  (amount > 0 && lindBalance >= amount && confirmed);
     // freezeError
     const freezeErrorItem = (
       <span className="pt-2 text-left" style={{ color: 'red', display: 'block' }}>{freezeError}</span>
@@ -245,7 +245,7 @@ export default class FreezeBalanceModal extends React.PureComponent {
 
               <div className="form-group">
                 <div className="text-left _power">{tu("current_power")}: <span
-                    style={{fontWeight: 800}}>{frozenTrx / ONE_TRX}</span>
+                    style={{fontWeight: 800}}>{frozenLind / ONE_LIND}</span>
                 </div>
               </div>
             <div className="form-group">
@@ -258,13 +258,13 @@ export default class FreezeBalanceModal extends React.PureComponent {
             <div className="form-group">
                 <div style={{position:'relative'}}>
                   <button type="button" onClick={ ()=>{
-                    this.setState({ amount: Math.floor(trxBalance) })
+                    this.setState({ amount: Math.floor(lindBalance) })
                   }} style={styles.maxButton}>MAX</button>
                   <NumberField
                       min={1}
                       decimals={0}
                       value={amount}
-                      placeholder={intl.formatMessage({id: 'trx_amount'})}
+                      placeholder={intl.formatMessage({id: 'lind_amount'})}
                       className="form-control text-left"
                       style={{marginTop: '12px', background: "#F3F3F3", border: "1px solid #EEEEEE"}}
                       onChange={this.onAmountChanged}/>
@@ -287,7 +287,7 @@ export default class FreezeBalanceModal extends React.PureComponent {
               </div>
               {Boolean(selectedResource == 0 && getcalculate) &&
                 <div className="text-left d-flex align-items-center">
-                  <span className="col-red mr-2">1TRX ≈ <FormattedNumber value={oneBandwidth}/>{tu('bandwidth')}, {tu('Expected_acquisition')}  &nbsp; <FormattedNumber value={getcalculate}/> &nbsp;{tu('bandwidth')} </span>
+                  <span className="col-red mr-2">1LIND ≈ <FormattedNumber value={oneBandwidth}/>{tu('bandwidth')}, {tu('Expected_acquisition')}  &nbsp; <FormattedNumber value={getcalculate}/> &nbsp;{tu('bandwidth')} </span>
                   <Tooltip placement="top" title={tu('energy_more')} overlayStyle={{ maxWidth: '320px'}}>
                     <div className="question-mark"><i>?</i></div>
                   </Tooltip>
@@ -295,7 +295,7 @@ export default class FreezeBalanceModal extends React.PureComponent {
               }
               {Boolean(selectedResource == 1&& getcalculate) &&
                 <div className="text-left d-flex align-items-center">
-                  <span className="col-red mr-2">1TRX ≈ <FormattedNumber value={oneEnergy}/>{tu('energy')}, {tu('Expected_acquisition')} &nbsp; <FormattedNumber value={getcalculate}/>  &nbsp;{tu('energy')}</span>
+                  <span className="col-red mr-2">1LIND ≈ <FormattedNumber value={oneEnergy}/>{tu('energy')}, {tu('Expected_acquisition')} &nbsp; <FormattedNumber value={getcalculate}/>  &nbsp;{tu('energy')}</span>
                   <Tooltip placement="top" title={tu('bandwidth_more')} overlayStyle={{maxWidth: '320px'}}>
                     <div className="question-mark"><i>?</i></div>
                   </Tooltip>
@@ -307,7 +307,7 @@ export default class FreezeBalanceModal extends React.PureComponent {
                        onChange={(ev) => this.setState({confirmed: ev.target.checked})}/>
                 <label className="form-check-label _freeze">
                   {tu("token_freeze_confirm_message_0")} <b><FormattedNumber
-                    value={amount}/> TRX</b> {t("token_freeze_confirm_message_1")}
+                    value={amount}/> LIND</b> {t("token_freeze_confirm_message_1")}
                 </label>
               </div>
               <p className="mt-3">

@@ -6,7 +6,7 @@ import { doSearch, getSearchType } from "../../services/search";
 import CountUp from "react-countup";
 import { Client, Client20 } from "../../services/api";
 import { Link } from "react-router-dom";
-import { TRXPrice } from "../common/Price";
+import { LINDPrice } from "../common/Price";
 import RecentBlocks from "./RecentBlocks";
 import { KEY_ENTER } from "../../utils/constants";
 import { withTimers } from "../../utils/timing";
@@ -15,7 +15,7 @@ import RecentTransfers from "./RecentTransfers";
 import { tu } from "../../utils/i18n";
 import { toastr } from "react-redux-toastr";
 import { HrefLink } from "../common/Links";
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 import {
   LineReactHighChartAdd,
   LineReactHighChartTx
@@ -84,7 +84,7 @@ export default class MobilePanelGroup extends Component {
                 className="col-12  card  pt-1 mb-0"
                 style={{ border: "none", borderRadius: 0 }}
               >
-                <p className="mb-0 mobile-title">TRON</p>
+                <p className="mb-0 mobile-title">LINDA</p>
                 <div className="row pt-3">
                   <div className="col-6 ">
                     <img src={require("../../images/home/node.png")} />
@@ -735,17 +735,17 @@ export default class MobilePanelGroup extends Component {
                 </div>
                 {/* <div className="col-6">
                   <HrefLink
-                    href="https://coinmarketcap.com/currencies/tron/"
+                    href="https://coinmarketcap.com/currencies/linda/"
                     target="_blank"
                     className="hvr-underline-from-center hvr-underline-white text-muted"
                   >
                     <img src={require("../../images/home/price.png")} />
                     <p className="text-muted mb-0 mt-2">
-                      {tu("pice_per_1trx")}
+                      {tu("pice_per_1lind")}
                     </p>
 
                     <h2>
-                      <TRXPrice amount={1} currency="USD" source="home" />
+                      <LINDPrice amount={1} currency="USD" source="home" />
                     </h2>
                   </HrefLink>
                 </div> */}

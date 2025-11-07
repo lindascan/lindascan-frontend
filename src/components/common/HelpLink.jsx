@@ -71,7 +71,7 @@ class HelpLinkCont extends Component {
                 <p>{tu("collapse")}</p>
               </li>
               <li className="twitter commonLi">
-                <a href="https://twitter.com/TRONSCAN_ORG" target="_blank">
+                <a href="https://twitter.com/LINDASCAN_ORG" target="_blank">
                   <span className="img"></span>
                 </a>
               </li>

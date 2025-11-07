@@ -2,9 +2,9 @@ import React, {Fragment, useState, useEffect} from "react";
 import {tu} from "../../../../utils/i18n";
 import { Icon, Tooltip } from "antd";
 import { upperFirst } from "lodash";
-import {AddressLink, ExternalLink, ContractLink, TokenTRC20Link, TokenLink} from "../../../common/Links";
-import {TRXPrice} from "../../../common/Price";
-import {ONE_TRX, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../../constants";
+import {AddressLink, ExternalLink, ContractLink, TokenLRC20Link, TokenLink} from "../../../common/Links";
+import {LINDPrice} from "../../../common/Price";
+import {ONE_LIND, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../../constants";
 import rebuildList from "../../../../utils/rebuildList";
 import BandwidthUsage from './common/BandwidthUsage'
 import SignList from "./common/SignList";
@@ -228,11 +228,11 @@ function TriggerContract({contract,intl}){
               <div className="flex1">
                 <div className="d-flex content_item">
                   {contract["call_value"] ? (
-                    <TRXPrice
-                      amount={contract["call_value"] / ONE_TRX}
+                    <LINDPrice
+                      amount={contract["call_value"] / ONE_LIND}
                     />
                   ) : (
-                    <TRXPrice amount={0} />
+                    <LINDPrice amount={0} />
                   )}
                 </div>
               </div>
@@ -257,7 +257,7 @@ function TriggerContract({contract,intl}){
                 undefined && (
                 <div className="d-flex border-bottom">
                   <div className="content_box_name">
-                    {tu("TRC20_transfers")}:
+                    {tu("LRC20_transfers")}:
                   </div>
                   <div className="flex1">
                     <div className="d-flex content_item">
@@ -420,7 +420,7 @@ function TriggerContract({contract,intl}){
                             }}
                           />
                         )} */}
-                        <TokenTRC20Link
+                        <TokenLRC20Link
                           name={
                             contract.tokenTransferInfo["name"]
                           }

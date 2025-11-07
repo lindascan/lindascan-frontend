@@ -6,8 +6,8 @@ import React, { Fragment } from "react";
 import { tu } from "../../../../utils/i18n";
 import Field from "../../../tools/TransactionViewer/Field";
 import { AddressLink } from "../../../common/Links";
-import { TRXPrice } from "../../../common/Price";
-import { ONE_TRX } from "../../../../constants";
+import { LINDPrice } from "../../../common/Price";
+import { ONE_LIND } from "../../../../constants";
 import { TransationTitle } from "./common/Title";
 import BandwidthUsage from "./common/BandwidthUsage";
 import SignList from "./common/SignList";
@@ -93,7 +93,7 @@ class TransferContract extends React.Component {
                 </span>
               </Field>
               <Field label="amount">
-                <TRXPrice amount={contract.amount / ONE_TRX} />
+                <LINDPrice amount={contract.amount / ONE_LIND} />
               </Field>
               {contract.contract_note && <Field label="note">
                 {contract.contract_note || ""}

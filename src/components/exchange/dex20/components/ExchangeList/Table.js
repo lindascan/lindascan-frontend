@@ -36,14 +36,14 @@ class ExchangeTable extends Component {
         id: [],
         linkUrl: {
           en:
-            "https://support.poloniex.org/hc/en-us/articles/360030644412-TRC20-USDT-Reloaded-with-Powerful-Aid-from-TRXMarket-15-000-USD-Awaits-",
+            "https://support.poloniex.org/hc/en-us/articles/360030644412-LRC20-USDT-Reloaded-with-Powerful-Aid-from-LINDMarket-15-000-USD-Awaits-",
           zh:
-            "https://support.poloniex.org/hc/zh-cn/articles/360030644412-TRXMarket%E5%8A%A9%E5%8A%9BTRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81"
+            "https://support.poloniex.org/hc/zh-cn/articles/360030644412-LINDMarket%E5%8A%A9%E5%8A%9BLRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81"
         },
         text: {
           en:
-            "TRC20-USDT Returns with Generous Rewards from Poloni DEX - 15,000 USDT Awaits!",
-          zh: "Poloni DEX助力TRC20-USDT重装上阵，惊喜放送10万人民币"
+            "LRC20-USDT Returns with Generous Rewards from Poloni DEX - 15,000 USDT Awaits!",
+          zh: "Poloni DEX助力LRC20-USDT重装上阵，惊喜放送10万人民币"
         }
       },
       AdClose: props.isAdClose,
@@ -61,7 +61,7 @@ class ExchangeTable extends Component {
 
     const risk_token_desc = (
       <div style={{ width: "180px" }}>
-        <p>{intl.formatMessage({ id: "trc20_risk_token_desc" })}</p>
+        <p>{intl.formatMessage({ id: "lrc20_risk_token_desc" })}</p>
         <p style={{ textAlign: "right", color: "#C53028" }}>
           <a
             href={activeLanguage == "zh" ? risk_href["zh"] : risk_href["en"]}
@@ -77,13 +77,13 @@ class ExchangeTable extends Component {
       <div className="market-table">
         <section className="table-header">
           <span className="table-1">
-            {upperFirst(intl.formatMessage({ id: "trc20_price" }))}
+            {upperFirst(intl.formatMessage({ id: "lrc20_price" }))}
           </span>
           <span className="table-2">
-            {upperFirst(intl.formatMessage({ id: "trc20_24H_Total" }))}
+            {upperFirst(intl.formatMessage({ id: "lrc20_24H_Total" }))}
           </span>
           <span className="table-3">
-            {upperFirst(intl.formatMessage({ id: "trc20_token_info_ths_3" }))}
+            {upperFirst(intl.formatMessage({ id: "lrc20_token_info_ths_3" }))}
           </span>
         </section>
         <section className="table-content">
@@ -99,7 +99,7 @@ class ExchangeTable extends Component {
 
               {unRecomendList.length > 0 && (
                 <div className="risk-token-title">
-                  {intl.formatMessage({ id: "trc20_risk_token" })}
+                  {intl.formatMessage({ id: "lrc20_risk_token" })}
                   <Popover content={risk_token_desc} title="">
                     <Icon
                       type="question-circle"
@@ -174,14 +174,14 @@ class ExchangeTable extends Component {
         </section>
         <section>
           <p className="token-title">
-            {intl.formatMessage({ id: "trc20_token_name" })}
+            {intl.formatMessage({ id: "lrc20_token_name" })}
           </p>
           <p className="token-name">{item.fTokenName}</p>
         </section>
         {item.id != 48 && <section>
           <p className="token-title">
             {item.pairType == 1 || item.pairType == 4
-              ? intl.formatMessage({ id: "trc20_token_id" })
+              ? intl.formatMessage({ id: "lrc20_token_id" })
               : intl.formatMessage({ id: "contract_address" })}
           </p>
           <p>{item.fTokenAddr}</p>
@@ -190,8 +190,8 @@ class ExchangeTable extends Component {
           <a
             href={
               item.pairType == 2 || item.pairType == 3
-                ? `https://tronscan.org/#/token20/${item.fTokenAddr}`
-                : `https://tronscan.org/#/token/${item.fTokenAddr}`
+                ? `https://lindascan.org/#/token20/${item.fTokenAddr}`
+                : `https://lindascan.org/#/token/${item.fTokenAddr}`
             }
             target="_blank"
           >
@@ -203,8 +203,8 @@ class ExchangeTable extends Component {
     // risk=0代表正常 =1是重名 =2 是高风险 source 1来源于推荐 2来源于非推荐 */}
     const riskTest = {
       0: "",
-      1: "trc20_symbol_risk",
-      2: "trc20_hight_risk_token"
+      1: "lrc20_symbol_risk",
+      2: "lrc20_hight_risk_token"
     };
     return (
       <div
@@ -313,17 +313,17 @@ class ExchangeTable extends Component {
               {item.second_token_abbr}
               <br />
               {/* <span className="font-grey">
-                {activeCurrency.toUpperCase() === "TRX" ? (
+                {activeCurrency.toUpperCase() === "LIND" ? (
                   <FormattedNumber
-                    value={Number(record.trxVolume24h / Math.pow(10, record.sPrecision)).toFixed(0)}
+                    value={Number(record.lindVolume24h / Math.pow(10, record.sPrecision)).toFixed(0)}
                   />
                 ) : (
                   <FormattedNumber
                     value={(
                       Number(
-                        price && price.trxToOther && price.usdtToOther
-                          ? record.second_token_id === "TRX"
-                            ? price.trxToOther[activeCurrency]
+                        price && price.lindToOther && price.usdtToOther
+                          ? record.second_token_id === "LIND"
+                            ? price.lindToOther[activeCurrency]
                             : price.usdtToOther[activeCurrency]
                           : ""
                       ) * record.svolume
@@ -343,9 +343,9 @@ class ExchangeTable extends Component {
                   <FormattedNumber
                     value={(
                       Number(
-                        price && price.trxToOther && price.usdtToOther
-                          ? item.second_token_id === "TRX"
-                            ? price.trxToOther["usd"]
+                        price && price.lindToOther && price.usdtToOther
+                          ? item.second_token_id === "LIND"
+                            ? price.lindToOther["usd"]
                             : price.usdtToOther["usd"]
                           : ""
                       ) * item.svolume
@@ -514,11 +514,11 @@ class ExchangeTable extends Component {
 
   onSetUrl(record, type) {
     const { getSelectData } = this.props;
-    const { trxToOther, usdtToOther } = this.state;
+    const { lindToOther, usdtToOther } = this.state;
 
     // if (record.token_type != "dex20") {
     //   this.props.history.push(
-    //     "/exchange/trc10?token=" +
+    //     "/exchange/lrc10?token=" +
     //       record.exchange_name +
     //       "&id=" +
     //       record.exchange_id
@@ -533,7 +533,7 @@ class ExchangeTable extends Component {
 
     if (!type) {
       this.props.history.push(
-        "/exchange/trc20?token=" +
+        "/exchange/lrc20?token=" +
           record.exchange_name +
           "&id=" +
           record.exchange_id
@@ -597,7 +597,7 @@ class ExchangeTable extends Component {
     // });
     // if(this.props.searchAddId){
     //     let record =  _.filter(nextProps.dataSource, (o) => { return o.exchange_id == nextProps.activeIndex; });
-    //     this.props.history.push('/exchange/trc10?token='+ record[0].exchange_name+'&id='+record[0].exchange_id)
+    //     this.props.history.push('/exchange/lrc10?token='+ record[0].exchange_name+'&id='+record[0].exchange_id)
     //     // getSelectData(record[0],true)
     //     this.setState({
     //         activeIndex:nextProps.activeIndex,

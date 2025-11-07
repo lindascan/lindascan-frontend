@@ -2,7 +2,7 @@ import React from "react";
 import xhr from "axios";
 import {API_URL,uuidv4} from "../../../constants";
 import { injectIntl } from "react-intl";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { EnergyConsumeChart } from "../../common/LineCharts";
 
 class Energy extends React.Component {
@@ -37,7 +37,7 @@ class Energy extends React.Component {
     return (
         <main className="container pt-5">
             {
-              energyConsumeData === null ? <TronLoader/> :
+              energyConsumeData === null ? <LindaLoader/> :
               <EnergyConsumeChart 
                 source='singleChart'
                 style={{height: 500}}

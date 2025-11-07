@@ -162,15 +162,15 @@ class BaseInfo extends Component {
     }
 
     setBodyParameter = async(file) => {
-        const { tronWeb } = this.props.account;
+        const { lindaWeb } = this.props.account;
         const { paramData: { author, token_id }, type } = this.state;
         const data  = {
             issuer_addr: author,
             id: token_id,
             type,
         };
-        const hash = tronWeb.toHex(JSON.stringify(data), false);
-        const sig = await tronWeb.trx.sign(hash);
+        const hash = lindaWeb.toHex(JSON.stringify(data), false);
+        const sig = await lindaWeb.lind.sign(hash);
         const body = {
             content: JSON.stringify(data),
             sig
@@ -181,9 +181,9 @@ class BaseInfo extends Component {
     }
 
     render() {
-        const { intl, form: { getFieldDecorator }, state: { isTrc20 } } = this.props;
+        const { intl, form: { getFieldDecorator }, state: { isLrc20 } } = this.props;
         const { type, body, logoUrl, isUpdate } =  this.state;
-        const isTrc10 = type === 'trc10';
+        const isLrc10 = type === 'lrc10';
         const uploadButton = (
             <div>
                 <Icon type={this.state.loading ? 'loading' : 'plus'} />
@@ -245,7 +245,7 @@ class BaseInfo extends Component {
                             { required: true, message: tu('supply_v_required'), whitespace: true }],
                     })(
                         <NumericInput placeholder={intl.formatMessage({ id: 'supply_message' })}
-                            decimal={!!isTrc20} disabled />
+                            decimal={!!isLrc20} disabled />
                     )}
                 </Form.Item>
             </Col>
@@ -266,7 +266,7 @@ class BaseInfo extends Component {
                         ]
                     })(
                         <NumericInput placeholder={intl.formatMessage({ id: 'placeholder_circulation' })}
-                            decimal={!!isTrc20} disabled={isUpdate} />
+                            decimal={!!isLrc20} disabled={isUpdate} />
                     )}
                 </Form.Item>
             </Col>
@@ -291,7 +291,7 @@ class BaseInfo extends Component {
                 <Form.Item label={tu('token_id')} required>
                     {getFieldDecorator('tokenId',{
                         initialValue: 'id',
-                        rules: [{ required: isTrc10, message: tu('token_id_v_required') }],
+                        rules: [{ required: isLrc10, message: tu('token_id_v_required') }],
                     })(
                         <Input disabled/>
                     )}
@@ -305,7 +305,7 @@ class BaseInfo extends Component {
                 <Form.Item label={tu('contract_address')} required>
                     {getFieldDecorator('tokenAddress',{
                         initialValue: 'id',
-                        rules: [{ required: !isTrc10, message: tu('contract_address_required') }],
+                        rules: [{ required: !isLrc10, message: tu('contract_address_required') }],
                     })(
                         <Input disabled/>
                     )}
@@ -356,7 +356,7 @@ class BaseInfo extends Component {
                     {totalSupplyItem}
                     {circulationItem}
                     {issuerAddressItem}
-                    {isTrc10 ? tokenIdItem : addressItem}
+                    {isLrc10 ? tokenIdItem : addressItem}
                     {descriptionItem}
                     {logoItem}
                     <Col  span={24} md={11} className="d-none">

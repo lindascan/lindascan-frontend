@@ -1,13 +1,13 @@
 import Lockr from "lockr";
-import TronWeb from "tronweb";
+import LindaWeb from "lindaweb";
 import SunWeb from "sunweb";
-import TronStationSDK from "tronstation";
+import LindaStationSDK from "lindastation";
 import {
   DISABLE_FLAG,
   ENABLE_FLAG,
   LOGIN,
   LOGIN_ADDRESS,
-  LOGIN_TRONLINK,
+  LOGIN_LINDALINK,
   LOGIN_LEDGER,
   LOGIN_PK,
   LOGOUT,
@@ -23,22 +23,22 @@ import {
 import {
   passwordToAddress,
   pkToAddress
-} from "@tronscan/client/src/utils/crypto";
-import { base64DecodeFromString } from "@tronscan/client/src/lib/code";
+} from "@lindascan/client/src/utils/crypto";
+import { base64DecodeFromString } from "@lindascan/client/src/lib/code";
 import {
   ACCOUNT_ADDRESS,
   ACCOUNT_LEDGER,
   ACCOUNT_PRIVATE_KEY,
   IS_DESKTOP,
-  ACCOUNT_TRONLINK,
+  ACCOUNT_LINDALINK,
   IS_MAINNET,
   SUNWEBCONFIG,
   MAPPINGFEE,
   WITHDRAWFEE,
   DEPOSITFEE,
   RETRYFEE,
-  TRXDEPOSITMIN,
-  TRXWITHDRAWMIN,
+  LINDDEPOSITMIN,
+  LINDWITHDRAWMIN,
   TRCDEPOSITMIN,
   TRCWITHDRAWMIN
 } from "../constants";
@@ -76,11 +76,11 @@ const initialState = {
     isOpen: false,
     address: undefined
   },
-  activeCurrency: Lockr.get("currency", "TRX"),
+  activeCurrency: Lockr.get("currency", "LIND"),
   currencyConversions: [
     {
-      name: "TRX",
-      id: "trx",
+      name: "LIND",
+      id: "lind",
       fractions: 6
     },
     {
@@ -113,10 +113,10 @@ const initialState = {
   fees: {
     retryFee: RETRYFEE,
     mappingFee: MAPPINGFEE,
-    trxDepositMinValue: TRXDEPOSITMIN,
+    lindDepositMinValue: LINDDEPOSITMIN,
     depositFee: DEPOSITFEE,
     withdrawFee: WITHDRAWFEE,
-    trxWithdrawMinValue: TRXWITHDRAWMIN
+    lindWithdrawMinValue: LINDWITHDRAWMIN
   }
 };
 
@@ -191,24 +191,24 @@ export function appReducer(state = initialState, action) {
     case LOGIN_PK: {
       Lockr.set("islogin", 0);
       const ServerNode = SUNWEBCONFIG.MAINFULLNODE;
-      const HttpProvider = TronWeb.providers.HttpProvider; // This provider is optional, you can just use a url for the nodes instead
+      const HttpProvider = LindaWeb.providers.HttpProvider; // This provider is optional, you can just use a url for the nodes instead
       const fullNode = new HttpProvider(ServerNode); // Full node http endpoint
       const solidityNode = new HttpProvider(ServerNode); // Solidity node http endpoint
       const eventServer = ServerNode; // Contract events http endpoint
       const privateKey = action.privateKey;
-      const tronWeb = new TronWeb({
+      const lindaWeb = new LindaWeb({
         fullNode,
         solidityNode,
         eventServer,
         privateKey
       });
-    const mainchain = new TronWeb( {
+    const mainchain = new LindaWeb( {
         fullNode: ServerNode,
         solidityNode: ServerNode,
         eventServer: ServerNode,
         privateKey
     });
-    const sidechain = new TronWeb({
+    const sidechain = new LindaWeb({
         fullNode: SUNWEBCONFIG.SUNFULLNODE,
         solidityNode: SUNWEBCONFIG.SUNSOLIDITYNODE,
         eventServer: SUNWEBCONFIG.SUNEVENTSERVER,
@@ -229,11 +229,11 @@ export function appReducer(state = initialState, action) {
           key: action.privateKey,
           isLoggedIn: true,
           address: pkToAddress(action.privateKey),
-          tronWeb: tronWeb,
+          lindaWeb: lindaWeb,
           sunWeb: sunWeb,
-          tronStationSDK: IS_MAINNET
-            ? new TronStationSDK(tronWeb)
-            : new TronStationSDK(sunWeb.sidechain)
+          lindaStationSDK: IS_MAINNET
+            ? new LindaStationSDK(lindaWeb)
+            : new LindaStationSDK(sunWeb.sidechain)
         },
         wallet: {
           type: ACCOUNT_PRIVATE_KEY,
@@ -260,7 +260,7 @@ export function appReducer(state = initialState, action) {
       };
     }
 
-    case LOGIN_TRONLINK: {
+    case LOGIN_LINDALINK: {
       if (IS_DESKTOP) {
         Lockr.rm("account_key");
         // Lockr.set("account_address", action.address);
@@ -271,14 +271,14 @@ export function appReducer(state = initialState, action) {
           key: false,
           isLoggedIn: true,
           address: action.address,
-          tronWeb: action.tronWeb,
+          lindaWeb: action.lindaWeb,
           sunWeb: action.sunWeb,
-          tronStationSDK: IS_MAINNET
-            ? new TronStationSDK(action.tronWeb, true)
-            : new TronStationSDK(action.sunWeb.sidechain, true)
+          lindaStationSDK: IS_MAINNET
+            ? new LindaStationSDK(action.lindaWeb, true)
+            : new LindaStationSDK(action.sunWeb.sidechain, true)
         },
         wallet: {
-          type: ACCOUNT_TRONLINK,
+          type: ACCOUNT_LINDALINK,
           address: action.address,
           isOpen: true
         }
@@ -307,10 +307,10 @@ export function appReducer(state = initialState, action) {
           key: false,
           isLoggedIn: true,
           address: action.address,
-          tronWeb: action.tronWeb,
+          lindaWeb: action.lindaWeb,
           sunWeb: action.sunWeb,
           pathIndex: action.pathIndex,
-          tronStationSDK: new TronStationSDK(action.tronWeb, true)
+          lindaStationSDK: new LindaStationSDK(action.lindaWeb, true)
         },
         wallet: {
           type: ACCOUNT_LEDGER,

@@ -33,7 +33,7 @@ import queryString from "query-string";
 import { Tooltip } from "reactstrap";
 import { alpha } from "../../../../../utils/str";
 import { Client20 } from "../../../../../services/api";
-import { TronLoader } from "../../../../common/loaders";
+import { LindaLoader } from "../../../../common/loaders";
 
 const Search = Input.Search;
 const TabPane = Tabs.TabPane;
@@ -69,9 +69,9 @@ class ExchangeList extends React.Component {
       sec: "",
       AdClose: true,
       adURL:
-        "https://support.poloniex.org/hc/en-us/articles/360030644412-TRC20-USDT-Reloaded-with-Powerful-Aid-from-TRXMarket-15-000-USD-Awaits-",
+        "https://support.poloniex.org/hc/en-us/articles/360030644412-LRC20-USDT-Reloaded-with-Powerful-Aid-from-LINDMarket-15-000-USD-Awaits-",
       adchURL:
-        "https://support.poloniex.org/hc/zh-cn/articles/360030644412-TRXMarket%E5%8A%A9%E5%8A%9BTRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81",
+        "https://support.poloniex.org/hc/zh-cn/articles/360030644412-LINDMarket%E5%8A%A9%E5%8A%9BLRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81",
       activedId: 0,
       activedTab: "hot",
       priceObj: {},
@@ -92,7 +92,7 @@ class ExchangeList extends React.Component {
       getExchanges20UpDown
     } = this.props;
     //获取各个币的兑换价格
-    await this.getCovert("trx");
+    await this.getCovert("lind");
     await this.getCovert("usdt");
 
     getExchanges20();
@@ -277,16 +277,16 @@ class ExchangeList extends React.Component {
     }
   };
 
-  gotoTrc10 = () => {
+  gotoLrc10 = () => {
     const { tagLock } = this.state;
     const { klineLock } = this.props;
     if (klineLock && tagLock) {
       Lockr.set("DEX", "Main");
-      this.props.history.push("trc10");
+      this.props.history.push("lrc10");
     }
   };
 
-  // https://debug.tronscan.org/#/exchange/trc20?token=TRONdice/TRX&id=30
+  // https://debug.lindascan.org/#/exchange/lrc20?token=LINDAdice/LIND&id=30
 
   render() {
     const {
@@ -425,15 +425,15 @@ class ExchangeList extends React.Component {
                 key="fav"
               />
               <TabPane
-                tab={intl.formatMessage({ id: "trc20_hot" })}
+                tab={intl.formatMessage({ id: "lrc20_hot" })}
                 key="hot"
               />
               <TabPane
-                tab={intl.formatMessage({ id: "trc20_top_Volume" })}
+                tab={intl.formatMessage({ id: "lrc20_top_Volume" })}
                 key="volume"
               />
               <TabPane
-                tab={intl.formatMessage({ id: "trc20_top_Rising" })}
+                tab={intl.formatMessage({ id: "lrc20_top_Rising" })}
                 key="up_and_down"
               />
             </Tabs>
@@ -447,11 +447,11 @@ class ExchangeList extends React.Component {
               {tu("all")}
             </div>
             <div
-              className={"btn btn-sm" + (activedId === "TRX" ? " active" : "")}
-              // onClick={() => this.gotoTrc10()}
-              onClick={() => this.selcetSort("TRX")}
+              className={"btn btn-sm" + (activedId === "LIND" ? " active" : "")}
+              // onClick={() => this.gotoLrc10()}
+              onClick={() => this.selcetSort("LIND")}
             >
-              TRX
+              LIND
             </div>
             <div
               className={"btn btn-sm" + (activedId === "USDT" ? " active" : "")}
@@ -465,7 +465,7 @@ class ExchangeList extends React.Component {
             <div>
               <div className="exchange-list__table">
                 {loading ? (
-                  <TronLoader />
+                  <LindaLoader />
                 ) : (
                   <ExchangeTable dataSource={dataSource} isAdClose={AdClose} />
                 )}
@@ -580,23 +580,23 @@ class ExchangeList extends React.Component {
     let { priceObj } = this.state;
     let data = await Client20.coinMarketCap(type, "ETH");
     let data1 = await Client20.coinMarketCap(type, "EUR");
-    if (type === "trx") {
-      let trxToOther = {};
+    if (type === "lind") {
+      let lindToOther = {};
 
-      trxToOther = {
+      lindToOther = {
         usd: data[0].price_usd,
         btc: data[0].price_btc,
         eth: data[0].price_eth,
         eur: data1[0].price_eur,
-        trx: 1
+        lind: 1
       };
-      priceObj.trxToOther = trxToOther;
+      priceObj.lindToOther = lindToOther;
     } else if (type === "usdt") {
       let usdtToOther = {};
 
-      let data2 = await Client20.coinMarketCap(type, "TRX");
+      let data2 = await Client20.coinMarketCap(type, "LIND");
       usdtToOther = {
-        trx: data2[0].price_trx,
+        lind: data2[0].price_lind,
         btc: data[0].price_btc,
         eth: data[0].price_eth,
         eur: data1[0].price_eur,
@@ -667,7 +667,7 @@ class ExchangeList extends React.Component {
         break;
       case "volume":
         list = list.sort((a, b) => {
-          return b.trxVolume24h - a.trxVolume24h;
+          return b.lindVolume24h - a.lindVolume24h;
         });
         break;
       case "up_and_down":

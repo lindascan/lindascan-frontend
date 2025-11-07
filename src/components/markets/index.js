@@ -3,7 +3,7 @@ import {injectIntl} from "react-intl";
 import {connect} from "react-redux";
 import {loadPriceData} from "../../actions/markets";
 import MarketOverview from "./MarketOverview";
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import {Client} from "../../services/api";
 import {RingPieReact} from "../common/RingPieChart";
 import {Link} from "react-router-dom";
@@ -44,10 +44,10 @@ class Markets extends React.Component {
     let birthday = new Date("2017/10/10");
     let timerBirthday = birthday.getTime();
     let dayNum = Math.floor((timerToday - timerBirthday) / 1000 / 3600 / 24);
-    let {data} = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=TRX&tsym=USD&limit=" + dayNum);
+    let {data} = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=LIND&tsym=USD&limit=" + dayNum);
     let priceStatsTemp = data['Data'];
 
-    let volumeData = await xhr.get("https://server.tron.network/api/v2/node/market_data");
+    let volumeData = await xhr.get("https://server.linda.network/api/v2/node/market_data");
     let volumeUSD = volumeData.data.market_cap_by_available_supply
     let volume = volumeUSD.map(function (v, i) {
       return {
@@ -74,7 +74,7 @@ class Markets extends React.Component {
           rank: val.rank,
           name: val.name,
           pair: val.pair,
-          volumeNative: intl.formatNumber(val.volumeNative) + ' TRX',
+          volumeNative: intl.formatNumber(val.volumeNative) + ' LIND',
           volumePercentage: (intl.formatNumber(val.volumePercentage, {
             maximumFractionDigits: 2,
             minimumFractionDigits: 2
@@ -149,7 +149,7 @@ class Markets extends React.Component {
           <div className="row">
             <div className="col-md-6 mt-3 mt-md-0 ">
               <div className="card" style={styles.card}>
-                <div className="card-header bg-tron-light color-grey-100 text-center pb-0" style={styles.card}>
+                <div className="card-header bg-linda-light color-grey-100 text-center pb-0" style={styles.card}>
                   <h5 className="m-0 lh-150">
                     <Link to="blockchain/stats/priceStats">
                         {tu("average_price")}
@@ -161,7 +161,7 @@ class Markets extends React.Component {
                   <div style={{minWidth:255,height: 200}}>
                       {
                           priceStats === null ?
-                              <TronLoader/> :
+                              <LindaLoader/> :
                               <LineReactHighChartPrice style={{minWidth:255,height: 200}} data={priceStats} intl={intl} source="markets"/>
                       }
                   </div>
@@ -171,7 +171,7 @@ class Markets extends React.Component {
             </div>
             <div className="col-md-6 mt-3 mt-md-0 ">
               <div className="card" style={styles.card}>
-                <div className="card-header bg-tron-light color-grey-100 text-center pb-0" style={styles.card}>
+                <div className="card-header bg-linda-light color-grey-100 text-center pb-0" style={styles.card}>
                   <h5 className="m-0 lh-150">
                     <Link to="blockchain/stats/volumeStats">
                         {tu("volume_24")}
@@ -183,7 +183,7 @@ class Markets extends React.Component {
                   <div style={{minWidth:255,height: 200}}>
                       {
                           volume === null ?
-                              <TronLoader/> :
+                              <LindaLoader/> :
                               <LineReactHighChartVolumeUsd style={{minWidth:255,height: 200}} data={volume} intl={intl} source="markets"/>
                       }
                   </div>

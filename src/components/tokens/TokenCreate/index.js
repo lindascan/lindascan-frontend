@@ -15,8 +15,8 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { Modal, Button } from "antd";
 import NavigationPrompt from "react-router-navigation-prompt";
 import xhr from "axios/index";
-import { API_URL, ONE_TRX } from "../../../constants";
-import { TronLoader } from "../../common/loaders";
+import { API_URL, ONE_LIND } from "../../../constants";
+import { LindaLoader } from "../../common/loaders";
 import { Client } from "../../../services/api";
 import _ from "lodash";
 
@@ -35,7 +35,7 @@ export class TokenCreate extends Component {
     super(props);
     this.state = {
       step: 0,
-      type: "trc20",
+      type: "lrc20",
       modal: null,
       isUpdate: false,
       leave_lock: false,
@@ -59,7 +59,7 @@ export class TokenCreate extends Component {
         email: "",
         white_paper: "",
         github_url: "",
-        trx_amount: "",
+        lind_amount: "",
         token_amount: "",
         participation_type: true,
         participation_start_date: moment()
@@ -176,7 +176,7 @@ export class TokenCreate extends Component {
     this.setState({
       loading: false,
       step: 1,
-      type: "trc10",
+      type: "lrc10",
       isUpdate: true,
       paramData: {
         token_id: id,
@@ -189,7 +189,7 @@ export class TokenCreate extends Component {
         precision: token.precision,
         logo_url: token.imgUrl,
         author: token.ownerAddress,
-        trx_amount: (token.trxNum / ONE_TRX).toString(),
+        lind_amount: (token.lindNum / ONE_LIND).toString(),
         token_amount: (
           token.num.toString() / Math.pow(10, token.precision)
         ).toString(),
@@ -213,8 +213,8 @@ export class TokenCreate extends Component {
   loadToken20 = async id => {
     let { account, intl } = this.props;
     this.setState({ loading: true, isUpdate: true });
-    let result = await xhr.get(API_URL + "/api/token_trc20?contract=" + id);
-    let token = result.data.trc20_tokens[0];
+    let result = await xhr.get(API_URL + "/api/token_lrc20?contract=" + id);
+    let token = result.data.lrc20_tokens[0];
     let contractInfo;
     let new_social_media = [];
     if (!token) {
@@ -278,7 +278,7 @@ export class TokenCreate extends Component {
     this.setState({
       loading: false,
       step: 1,
-      type: "trc20",
+      type: "lrc20",
       isUpdate: true,
       paramData: {
         token_id: id,
@@ -430,7 +430,7 @@ export class TokenCreate extends Component {
         </div>
         {loading ? (
           <div className="card">
-            <TronLoader>{tu("loading_token")}</TronLoader>
+            <LindaLoader>{tu("loading_token")}</LindaLoader>
           </div>
         ) : (
           <div className="row">

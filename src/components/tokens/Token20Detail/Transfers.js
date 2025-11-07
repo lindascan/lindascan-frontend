@@ -3,11 +3,11 @@ import { Client } from "../../../services/api";
 import {
   AddressLink,
   TransactionHashLink,
-  TokenTRC20Link
+  TokenLRC20Link
 } from "../../common/Links";
 import { Icon, Tooltip } from "antd";
-import { TRXPrice } from "../../common/Price";
-import { API_URL, ONE_TRX } from "../../../constants";
+import { LINDPrice } from "../../common/Price";
+import { API_URL, ONE_LIND } from "../../../constants";
 import { tu, t } from "../../../utils/i18n";
 // import TimeAgo from "react-timeago";
 import moment from "moment";
@@ -23,7 +23,7 @@ import {
 } from "react-intl";
 import SmartTable from "../../common/SmartTable";
 import { upperFirst } from "lodash";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import TotalInfo from "../components/TableTotal";
 import DateSelect from "../components/dateSelect";
 import xhr from "axios/index";
@@ -88,7 +88,7 @@ class Transfers extends React.Component {
         end_timestamp: this.end
       };
       countParams = {
-        type: "trc20",
+        type: "lrc20",
         contract: filter.token
       };
     } else {
@@ -99,7 +99,7 @@ class Transfers extends React.Component {
         relatedAddress: searchAddress
       };
       countParams = {
-        type: "trc20",
+        type: "lrc20",
         contract: filter.token,
         address: searchAddress
       };
@@ -114,10 +114,10 @@ class Transfers extends React.Component {
       format: "csv",
       ...params
     });
-    getCsvUrl(`${API_URL}/api/token_trc20/transfers?${query}`);
+    getCsvUrl(`${API_URL}/api/token_lrc20/transfers?${query}`);
 
     const allData = await Promise.all([
-      Client.getTokenTRC20Transfers({
+      Client.getTokenLRC20Transfers({
         limit: pageSize,
         start: (page - 1) * pageSize,
         ...params
@@ -215,7 +215,7 @@ class Transfers extends React.Component {
           >
             {upperFirst(
               intl.formatMessage({
-                id: timeType ? "age" : "trc20_cur_order_header_order_time"
+                id: timeType ? "age" : "lrc20_cur_order_header_order_time"
               })
             )}
             <Icon
@@ -498,7 +498,7 @@ class Transfers extends React.Component {
               marginTop: "-20px"
             }}
           >
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div className="row transfers token20Detail">
@@ -592,14 +592,14 @@ class Transfers extends React.Component {
                             ? new BigNumber(
                                 tokensInfo.transfer.balance
                               ).multipliedBy(
-                                tokensInfo.tokenDetail.market_info?tokensInfo.tokenDetail.market_info.priceInTrx:0
+                                tokensInfo.tokenDetail.market_info?tokensInfo.tokenDetail.market_info.priceInLind:0
                               )
                             : new BigNumber(tokensInfo.transfer.balance)
                                 .dividedBy(
                                   Math.pow(10, tokensInfo.tokenDetail.decimals)
                                 )
                                 .multipliedBy(
-                                  tokensInfo.tokenDetail.market_info?tokensInfo.tokenDetail.market_info.priceInTrx:1
+                                  tokensInfo.tokenDetail.market_info?tokensInfo.tokenDetail.market_info.priceInLind:1
                                 )
                           :0
                         }
@@ -607,7 +607,7 @@ class Transfers extends React.Component {
                         maximumFractionDigits={2}
                       ></FormattedNumber>
                       {' '}
-                      TRX
+                      LIND
                     </span>
                   </div>
                   <p style={descStyle}> {tu("transfersDetailValue")} </p>
@@ -642,7 +642,7 @@ class Transfers extends React.Component {
                   )}
                 </div>
               </div>
-              <div className="trx20tronsfers">
+              <div className="lrc20lindasfers">
                 {transfers.length === 0 ? (
                   <div className="pt-5 pb-5 text-center no-data transfers-bg-white">
                     {tu("no_transfers")}

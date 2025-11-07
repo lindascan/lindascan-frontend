@@ -12,7 +12,7 @@
     #                                                                                #
     ##################################################################################
     #                                                                                #
-    #         Template for translating the tronscan.org website                      #
+    #         Template for translating the lindascan.org website                      #
     #         Version: 2020 Q2                                                      #
     #         Update Date: 04.2020                                                #
     #         Language: Farsi 波斯语                                                  #
@@ -30,5 +30,5 @@ export const lang20Q2 = {
    index_page_price_loading:'Loading',
    index_page_price_time_out:'Time out',
 
-   open_tron_app_on_verify_address: "Please confirm login account on TRON APP",
+   open_linda_app_on_verify_address: "Please confirm login account on LINDA APP",
 }

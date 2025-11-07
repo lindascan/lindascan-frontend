@@ -45,14 +45,14 @@ export default class SRNews extends Component {
                 <div className="card-body">
                   <h5 className="card-title">Super Representative Pages</h5>
                   <p className="card-text">
-                    Super Representatives can publish their information right here on Tronscan to give potential
+                    Super Representatives can publish their information right here on Lindascan to give potential
                     voters more information about their team and their projects.{' '}<br />
                     <Link to="/votes" className="card-link text-primary">Go to vote page</Link><br/>
                   </p>
                   <p className="card-text">
                     As a Super Representative you have the possibility to fully manage your own content
                     and better inform your voters.{' '}<br />
-                    <a href="https://github.com/tronscan/tronsr-template#readme"
+                    <a href="https://github.com/lindascan/lindasr-template#readme"
                        target="_blank" className="card-link text-primary">
                       Read more about publishing a page
                     </a>

@@ -5,27 +5,27 @@ import { Icon } from "antd";
 import { injectIntl } from "react-intl";
 import TokenHolders from "./TokenHolders";
 import { NavLink, Route, Switch } from "react-router-dom";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import Transfers from "./Transfers.js";
 import TokenInfo from "./TokenInfo.js";
 import BTTSupply from "./BTTSupply.js";
 import { Information } from "./Information.js";
-import { ONE_TRX, API_URL, IS_MAINNET,uuidv4 } from "../../../constants";
+import { ONE_LIND, API_URL, IS_MAINNET,uuidv4 } from "../../../constants";
 import { login } from "../../../actions/app";
 import { reloadWallet } from "../../../actions/wallet";
 import { updateTokenInfo } from "../../../actions/tokenInfo";
 import { trim } from "lodash";
 import moment from "moment";
 import { toastr } from "react-redux-toastr";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import { connect } from "react-redux";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { pkToAddress } from "@tronscan/client/src/utils/crypto";
-import { transactionResultManager } from "../../../utils/tron";
+import { pkToAddress } from "@lindascan/client/src/utils/crypto";
+import { transactionResultManager } from "../../../utils/linda";
 import xhr from "axios/index";
 import Lockr from "lockr";
 import BigNumber from "bignumber.js";
-import { withTronWeb } from "../../../utils/tronWeb";
+import { withLindaWeb } from "../../../utils/lindaWeb";
 import { CsvExport } from "../../common/CsvExport";
 import { loadUsdPrice } from "../../../actions/blockchain";
 import ExchangeQuotes from "../ExchangeQuotes";
@@ -38,7 +38,7 @@ import {
 import isMobile from "../../../utils/isMobile";
 import ApiClientMonitor from '../../../services/monitor'
 
-@withTronWeb
+@withLindaWeb
 class TokenDetail extends React.Component {
   constructor() {
     window.performance.mark("start2");
@@ -117,7 +117,7 @@ class TokenDetail extends React.Component {
     }
   }
 
-  loadTotalTRXSupply = async () => {
+  loadTotalLINDSupply = async () => {
     const { funds } = await Client.getBttFundsSupply();
     this.setState({
       currentTotalSupply: parseInt(funds.totalTurnOver),
@@ -142,7 +142,7 @@ class TokenDetail extends React.Component {
 
     token.priceToUsd =
       token && token["market_info"]
-        ? token["market_info"].priceInTrx * priceUSD
+        ? token["market_info"].priceInLind * priceUSD
         : 0;
 
     if (!token) {
@@ -237,7 +237,7 @@ class TokenDetail extends React.Component {
         cmp: () => <BTTSupply token={token} />
       };
       tabs.push(BttSupply);
-      await this.loadTotalTRXSupply();
+      await this.loadTotalLINDSupply();
     }
     this.setState({
       tabs: tabs
@@ -260,7 +260,7 @@ class TokenDetail extends React.Component {
           id: "warning"
         }),
         intl.formatMessage({
-          id: "search_TRC20_error"
+          id: "search_LRC20_error"
         })
       );
       this.setState({
@@ -284,31 +284,31 @@ class TokenDetail extends React.Component {
       )
       .then(res => {
         if (res.data) {
-          let trc10Token = res.data.data;
+          let lrc10Token = res.data.data;
           let balance = 0;
-          if (trc10Token.length > 0) {
-            trc10Token.forEach(res => {
+          if (lrc10Token.length > 0) {
+            lrc10Token.forEach(res => {
               balance += res.balance;
             });
             let accountedFor =
               new BigNumber(balance)
                 .dividedBy(new BigNumber(totalSupply))
                 .toNumber(8) || 0;
-            let trc10TokenObj = {
+            let lrc10TokenObj = {
               srTag: false,
               srName: null,
               addressTag: null,
               holder_address: serchInputVal,
               foundationTag: false,
               balance,
-              name: trc10Token[0].name,
+              name: lrc10Token[0].name,
               accountedFor
             };
 
             this.props.updateTokenInfo({
               transferSearchStatus: true,
               transfer: {
-                ...trc10TokenObj
+                ...lrc10TokenObj
               }
             });
           } else {
@@ -475,10 +475,10 @@ class TokenDetail extends React.Component {
         {alert}{" "}
         {loading ? (
           <div className="card">
-            <TronLoader>
+            <LindaLoader>
               {" "}
               {tu("loading_token")} {token.name}{" "}
-            </TronLoader>{" "}
+            </LindaLoader>{" "}
           </div>
         ) : (
           <div className="row">
@@ -514,7 +514,7 @@ class TokenDetail extends React.Component {
                         </h5>{" "}
                         <p className="card-text"> {token.description} </p>{" "}
                       </div>
-                      <div className="token-sign"> TRC10 </div>{" "}
+                      <div className="token-sign"> LRC10 </div>{" "}
                     </div>{" "}
                   </div>{" "}
                   {token && (
@@ -581,7 +581,7 @@ class TokenDetail extends React.Component {
                             ref={ref => (this.searchAddress = ref)}
                             value={searchAddress}
                             placeholder={intl.formatMessage({
-                              id: "search_TRC20"
+                              id: "search_LRC20"
                             })}
                             style={{
                               border: "none",

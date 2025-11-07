@@ -5,10 +5,10 @@ import { tu } from "../../utils/i18n";
 import { FormattedNumber, injectIntl } from "react-intl";
 import { upperFirst, trim } from "lodash";
 import { AddressLink } from "../common/Links";
-import { CIRCULATING_SUPPLY, ONE_TRX } from "../../constants";
-import { TRXPrice } from "../common/Price";
+import { CIRCULATING_SUPPLY, ONE_LIND } from "../../constants";
+import { LINDPrice } from "../common/Price";
 //import SmartTable from "../common/SmartTable.js";
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 //import { QuestionMark } from "../common/QuestionMark";
 //import xhr from "axios/index";
 import { Client } from "../../services/api";
@@ -156,7 +156,7 @@ class developersReward extends Component {
                   <td className="d-md-table-cell text-nowrap">
                     <FormattedNumber
                       value={
-                        (account.balance / ONE_TRX / CIRCULATING_SUPPLY) * 100
+                        (account.balance / ONE_LIND / CIRCULATING_SUPPLY) * 100
                       }
                       minimumFractionDigits={8}
                       maximumFractionDigits={8}
@@ -164,10 +164,10 @@ class developersReward extends Component {
                     %
                   </td>
                   <td className="text-nowrap d-md-table-cell">
-                    <FormattedNumber value={account.power / ONE_TRX} />
+                    <FormattedNumber value={account.power / ONE_LIND} />
                   </td>
                   <td className="text-nowrap">
-                    <TRXPrice amount={account.balance / ONE_TRX} />
+                    <LINDPrice amount={account.balance / ONE_LIND} />
                   </td>
                 </tr>
               ))}
@@ -288,7 +288,7 @@ class developersReward extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_cur_order_header_action" })
+          intl.formatMessage({ id: "lrc20_cur_order_header_action" })
         ),
         dataIndex: "action",
         key: "action",
@@ -337,7 +337,7 @@ class developersReward extends Component {
         {modal}
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div className="row mt-2">
@@ -349,7 +349,7 @@ class developersReward extends Component {
             ""
           )}
 
-          <div className="col-md-12 table_pos trc20-ad-bg">
+          <div className="col-md-12 table_pos lrc20-ad-bg">
             {total ? (
               <div
                 className="table_pos_info d-none d-md-block"
@@ -381,13 +381,13 @@ class developersReward extends Component {
                 bordered={true}
                 rowClassName={(record, index) => {
                   if (record.index < 6) {
-                    return "trc20-star-ad";
+                    return "lrc20-star-ad";
                   }
                 }}
               />
             </div>
             {/* {total ? (
-              <p className="developers_tip_bottom">{tu("developers_niTron")}</p>
+              <p className="developers_tip_bottom">{tu("developers_niLinda")}</p>
             ) : (
               ""
             )} */}

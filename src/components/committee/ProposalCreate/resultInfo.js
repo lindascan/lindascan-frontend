@@ -52,7 +52,7 @@ export class resultInfo extends Component {
                                     <span>{tu('token_input_failure_reason')}</span>
                                     <div>
                                         {
-                                            (type == 'trc20' && errorInfo)|| (isUpdate && errorInfo)?errorInfo.map((item,index) => {
+                                            (type == 'lrc20' && errorInfo)|| (isUpdate && errorInfo)?errorInfo.map((item,index) => {
                                                     return <p key={index}>{index +1 }. {tu(this.setErrorMsg(item))}</p>
                                                 }):
                                                 <p>{errorInfo ? <span>1.{errorInfo}</span>:'' }</p>
@@ -82,7 +82,7 @@ export class resultInfo extends Component {
                             {/*{tu('token_input_success_tip')}*/}
                         {/*</p>*/}
                         {/*<p className="mt-4 submit-market">*/}
-                            {/*{tu('token_input_success_trx_market')}*/}
+                            {/*{tu('token_input_success_lind_market')}*/}
                         {/*</p>*/}
                         <div className="d-flex mt-3">
                             <button className="btn btn-danger btn-lg" onClick={this.goToProposalsList}>{tu('go_to_proposals_list')}</button>

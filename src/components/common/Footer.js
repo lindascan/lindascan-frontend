@@ -27,12 +27,12 @@ class Footer extends Component {
         },
         {
           icon: "fab fa-twitter",
-          url: "https://twitter.com/TRONSCAN_ORG",
+          url: "https://twitter.com/LINDASCAN_ORG",
           name: "Twitter"
         },
         {
           icon: "fab fa-medium-m",
-          url: "https://medium.com/@TRONSCAN_ORG",
+          url: "https://medium.com/@LINDASCAN_ORG",
           name: "Medium"
         },
         {
@@ -89,12 +89,12 @@ class Footer extends Component {
                       </HrefLink>
                     </li>
                     <li>
-                      <HrefLink href="https://twitter.com/TRONSCAN_ORG">
+                      <HrefLink href="https://twitter.com/LINDASCAN_ORG">
                         <i className="fab fa-twitter mr-1"></i>Twitter
                       </HrefLink>
                     </li>
                     <li>
-                      <HrefLink href="https://medium.com/@TRONSCAN_ORG">
+                      <HrefLink href="https://medium.com/@LINDASCAN_ORG">
                         <i className="fab fa-medium-m mr-1"></i>Medium
                       </HrefLink>
                     </li>
@@ -126,21 +126,21 @@ class Footer extends Component {
                   <h5>{tu("footer_developer_resources")}</h5>
                   <ul className="list-unstyled">
                     <li>
-                      <HrefLink href="https://github.com/tronprotocol">
+                      <HrefLink href="https://github.com/lindaprotocol">
                         Github
                       </HrefLink>
                     </li>
                     <li>
-                      <HrefLink href="https://github.com/tronprotocol/java-tron">
-                        java-tron
+                      <HrefLink href="https://github.com/lindaprotocol/java-linda">
+                        java-linda
                       </HrefLink>
                     </li>
                     <li>
                       <HrefLink
                         href={
                           activeLanguage == "zh"
-                            ? "https://github.com/tronprotocol/documentation-zh"
-                            : "https://github.com/tronprotocol/documentation-en"
+                            ? "https://github.com/lindaprotocol/documentation-zh"
+                            : "https://github.com/lindaprotocol/documentation-en"
                         }
                       >
                         Documentation
@@ -154,12 +154,12 @@ class Footer extends Component {
                   </ul>
                 </div>
                 <div className="col-6 col-md-3">
-                  <h5>{tu("TRON_ecosystem")}</h5>
+                  <h5>{tu("LINDA_ecosystem")}</h5>
                   <ul className="list-unstyled">
                     <li>
                       <HrefLink href="https://tron.network">
                         {" "}
-                        {tu("footer_tron_network")}
+                        {tu("footer_linda_network")}
                       </HrefLink>
                     </li>
                     <li>
@@ -175,7 +175,7 @@ class Footer extends Component {
                     </li>
                     <li>
                       <HrefLink href="https://tronlending.org/?utm_source=TS">
-                        TRONLENDING
+                        LINDALENDING
                       </HrefLink>
                     </li>
                     <li>
@@ -238,7 +238,7 @@ class Footer extends Component {
               {/*</li>*/}
               {/*<li className="list-inline-item">*/}
               {/*<HrefLink*/}
-              {/*href="https://www.reddit.com/r/Tronix"*/}
+              {/*href="https://www.reddit.com/r/Lindaix"*/}
               {/*target="_blank"*/}
               {/*>*/}
               {/*<i className="fab fa-reddit-alien" />*/}
@@ -298,15 +298,15 @@ class Footer extends Component {
           ) : (
             <div>
               <div className="footerContainer">
-                <div className="text-center text-xs-center text-sm-left text-md-left d-flex footerTronSection">
+                <div className="text-center text-xs-center text-sm-left text-md-left d-flex footerLindaSection">
                   <div className="d-flex">
                     <div className="">
-                      <h5>{tu("TRON_ecosystem")}</h5>
+                      <h5>{tu("LINDA_ecosystem")}</h5>
 
                       <ul className="list-unstyled quick-links">
                         <li className="p-2">
                           <HrefLink href="https://tron.network">
-                            {tu("footer_tron_network")}
+                            {tu("footer_linda_network")}
                           </HrefLink>
                         </li>
                         <li className="p-2">
@@ -321,7 +321,7 @@ class Footer extends Component {
                           </HrefLink>
                         </li>
                         <li className="p-2">
-                          <HrefLink href="https://tronlending.org/?utm_source=TS">TRONLENDING</HrefLink>
+                          <HrefLink href="https://tronlending.org/?utm_source=TS">LINDALENDING</HrefLink>
                         </li>
                         <li className="p-2">
                           <HrefLink href="https://tron.app">DApp House</HrefLink>
@@ -338,16 +338,16 @@ class Footer extends Component {
                           </HrefLink>
                         </li>
                         <li className="p-2">
-                          <HrefLink href="https://github.com/tronprotocol/java-tron">
-                            java-tron
+                          <HrefLink href="https://github.com/lindaprotocol/java-linda">
+                            java-linda
                           </HrefLink>
                         </li>
                         <li className="p-2">
                           <HrefLink
                             href={
                               activeLanguage == "zh"
-                                ? "https://github.com/tronprotocol/documentation-zh"
-                                : "https://github.com/tronprotocol/documentation-en"
+                                ? "https://github.com/lindaprotocol/documentation-zh"
+                                : "https://github.com/lindaprotocol/documentation-en"
                             }
                           >
                             Documentation
@@ -424,7 +424,7 @@ class Footer extends Component {
                   </div>
                   <div>
                     <div className="fr footer-slogan">
-                      <img src={require("../../images/footer/TRON.png")} />
+                      <img src={require("../../images/footer/LINDA.png")} />
                       <p className="pt-2">{tu("index_page_tronscan_info")}</p>
                       <ul className="d-flex fr pt-4 mt-4">
                         {links.map((item, ind) => {

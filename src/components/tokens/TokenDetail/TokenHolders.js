@@ -2,12 +2,12 @@ import React, { Fragment } from "react";
 import { tu } from "../../../utils/i18n";
 import { AddressLink } from "../../common/Links";
 import { Client } from "../../../services/api";
-import { ONE_TRX, API_URL } from "../../../constants";
+import { ONE_LIND, API_URL } from "../../../constants";
 import SmartTable from "../../common/SmartTable.js";
 import { FormattedNumber, injectIntl } from "react-intl";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { toastr } from "react-redux-toastr";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import { trim } from "lodash";
 import { upperFirst, upperCase, lowerCase } from "lodash";
 import { Tooltip } from "antd";
@@ -431,7 +431,7 @@ class TokenHolders extends React.Component {
           id: "warning"
         }),
         intl.formatMessage({
-          id: "search_TRC20_error"
+          id: "search_LRC20_error"
         })
       );
       this.setState({
@@ -487,13 +487,13 @@ class TokenHolders extends React.Component {
               marginTop: "-20px"
             }}
           >
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div className="row transfers">
           <div className="col-md-12 table_pos">
             <HolderDistribution
-              trcType={"trc10"}
+              trcType={"lrc10"}
               tokenId={filter.tokenId}
             ></HolderDistribution>
             <div
@@ -564,7 +564,7 @@ class TokenHolders extends React.Component {
                         })
                       }
                       placeholder={intl.formatMessage({
-                        id: "search_TRC20"
+                        id: "search_LRC20"
                       })}
                     />
                     {search ? (

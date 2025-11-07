@@ -5,10 +5,10 @@ import { widget } from "../../../../../lib/charting_library.min";
 import Datafeed from "./udf/index.js";
 import { connect } from "react-redux";
 import { tu, tv } from "../../../../../utils/i18n";
-import { TRXPrice } from "../../../../common/Price";
+import { LINDPrice } from "../../../../common/Price";
 import { Client20 } from "../../../../../services/api";
 import { change10lock, setWidget } from "../../../../../actions/exchange";
-import { TokenTRC20Link } from "../../../../common/Links";
+import { TokenLRC20Link } from "../../../../common/Links";
 import { Icon } from "antd";
 
 class Kline extends React.Component {
@@ -57,7 +57,7 @@ class Kline extends React.Component {
 
   componentWillUnmount() {
     const { setWidget } = this.props;
-    setWidget({ widget: null, type: "trc20" });
+    setWidget({ widget: null, type: "lrc20" });
   }
 
   createWidget(id) {
@@ -290,20 +290,20 @@ class Kline extends React.Component {
         });
       }
 
-      setWidget({ widget: tvWidget, type: "trc20" });
+      setWidget({ widget: tvWidget, type: "lrc20" });
       change10lock(true);
     });
   }
 
   getTokenInfo() {
     const { selectData } = this.props;
-    Client20.gettokenInfo20().then(({ trc20_tokens }) => {
-      if (trc20_tokens) {
-        const newObj = trc20_tokens.filter(
+    Client20.gettokenInfo20().then(({ lrc20_tokens }) => {
+      if (lrc20_tokens) {
+        const newObj = lrc20_tokens.filter(
           o => o.name == selectData.first_token_id
         )[0];
         this.setState({ tokeninfoItem: newObj });
-        this.setState({ tokeninfo: trc20_tokens });
+        this.setState({ tokeninfo: lrc20_tokens });
       }
     });
   }
@@ -327,7 +327,7 @@ function mapStateToProps(state) {
     selectData: state.exchange.data,
     selectStatus: state.exchange.status,
     activeLanguage: state.app.activeLanguage,
-    widget: state.exchange.trc20
+    widget: state.exchange.lrc20
   };
 }
 

@@ -6,15 +6,15 @@ import {TransactionHashLink, BlockNumberLink, AddressLink} from "../../common/Li
 import {FormattedNumber, injectIntl} from "react-intl";
 import {tu} from "../../../utils/i18n";
 // import TimeAgo from "react-timeago";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import {Truncate,TruncateAddress} from "../../common/text";
 import {ContractTypes} from "../../../utils/protocol";
 import SmartTable from "../../common/SmartTable.js"
 import {upperFirst, toUpper} from "lodash";
 import xhr from "axios";
 import {API_URL} from "../../../constants";
-import {TRXPrice} from "../../common/Price";
-import {ONE_TRX} from "../../../constants";
+import {LINDPrice} from "../../common/Price";
+import {ONE_LIND} from "../../../constants";
 import TotalInfo from "../../common/TableTotal";
 import DateSelect from "../../common/dateSelect";
 import {Tooltip,Icon} from 'antd'
@@ -36,9 +36,9 @@ class Transactions extends React.Component {
       transactions: [],
       total: 0,
       emptyState: props.EmptyState || (
-          <TronLoader>
+          <LindaLoader>
             Loading Transactions
-          </TronLoader>
+          </LindaLoader>
       )
     };
   }
@@ -324,7 +324,7 @@ class Transactions extends React.Component {
         width: '120px',
         className: 'ant_table',
         render: (text, record, index) => {
-          return <TRXPrice amount={parseInt(text) / ONE_TRX}/>
+          return <LINDPrice amount={parseInt(text) / ONE_LIND}/>
         }
       },
       // {
@@ -335,7 +335,7 @@ class Transactions extends React.Component {
       //   width: '120px',
       //   className: 'ant_table',
       //   render: (text, record, index) => {
-      //     return  <TRXPrice amount={parseInt(text) / ONE_TRX}/>
+      //     return  <LINDPrice amount={parseInt(text) / ONE_LIND}/>
       //   }
       // }
     ];
@@ -366,7 +366,7 @@ class Transactions extends React.Component {
 
     return (
         <Fragment>
-          {loading && <div className="loading-style" style={{marginTop: '-20px'}}><TronLoader/></div>}
+          {loading && <div className="loading-style" style={{marginTop: '-20px'}}><LindaLoader/></div>}
           <div className="row">
             <div className="col-md-12 table_pos mt-5">
               {!loading && <TotalInfo total={total} rangeTotal={rangeTotal} top="-28px" typeText="transactions_unit" selected/>}

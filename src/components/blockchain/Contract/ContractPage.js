@@ -1,6 +1,6 @@
 import React from "react";
 import { injectIntl } from "react-intl";
-import tronWeb from "tronweb";
+import lindaWeb from "lindaweb";
 import {
   API_URL,
   IS_MAINNET,
@@ -12,7 +12,7 @@ import {
 class ContractShow extends React.Component {
   constructor(props) {
     super(props);
-    this.tronWeb = new tronWeb({
+    this.lindaWeb = new lindaWeb({
       fullNode: SUNWEBCONFIG.MAINFULLNODE,
       solidityNode: SUNWEBCONFIG.MAINSOLIDITYNODE,
       eventServer: SUNWEBCONFIG.MAINEVENTSERVER
@@ -31,7 +31,7 @@ class ContractShow extends React.Component {
   }
 
   async getContractInfos() {
-    let smartcontract = await this.tronWeb.trx.getContract(
+    let smartcontract = await this.lindaWeb.lind.getContract(
       this.props.filter.address
     );
   }

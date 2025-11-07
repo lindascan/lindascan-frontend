@@ -11,9 +11,9 @@ import {Truncate} from "../common/text";
 //import {ContractTypes} from "../../utils/protocol";
 import {upperFirst} from "lodash";
 import SmartTable from "../common/SmartTable.js"
-import {TronLoader} from "../common/loaders";
-import {TRXPrice} from "../common/Price";
-import {ONE_TRX} from "../../constants";
+import {LindaLoader} from "../common/loaders";
+import {LINDPrice} from "../common/Price";
+import {ONE_LIND} from "../../constants";
 import TotalInfo from "../common/TableTotal";
 //import DateRange from "../common/DateRange";
 import moment from 'moment';
@@ -219,7 +219,7 @@ class ContractTrans extends React.Component {
                 align: 'left',
                 className: 'ant_table',
                 render: (text, record, index) => {
-                    return <TRXPrice amount={text / ONE_TRX}/>
+                    return <LINDPrice amount={text / ONE_LIND}/>
                 }
             },
 
@@ -242,7 +242,7 @@ class ContractTrans extends React.Component {
 
         return (
             <main className="container header-overlap pb-3 token_black">
-                {loading && <div className="loading-style"><TronLoader/></div>}
+                {loading && <div className="loading-style"><LindaLoader/></div>}
                 <div className="row">
                     <div className="col-md-12 table_pos">
                         {total ?<TotalInfo total={total} rangeTotal={rangeTotal} typeText="contract_triggers_total" markName="table-question-mark-triggers" isQuestionMark={false} />:""}

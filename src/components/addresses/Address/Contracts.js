@@ -12,13 +12,13 @@ import { AddressLink } from "../../common/Links";
 import { Truncate } from "../../common/text";
 import TotalInfo from "../../common/TableTotal";
 //import SmartTable from "../../common/SmartTable.js";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { upperFirst } from "lodash";
 import { loadTokens } from "../../../actions/tokens";
 //import xhr from "axios/index";
 //import { API_URL, CONTRACT_LICENSES } from "../../../constants";
-import { TRXPrice } from "../../common/Price";
-import { ONE_TRX, IS_MAINNET, WARNING_VERSIONS } from "../../../constants";
+import { LINDPrice } from "../../common/Price";
+import { ONE_LIND, IS_MAINNET, WARNING_VERSIONS } from "../../../constants";
 import { Tooltip, Table, Switch } from "antd";
 import { QuestionMark } from "../../common/QuestionMark.js";
 import { tu } from "../../../utils/i18n";
@@ -89,7 +89,7 @@ class Contracts extends React.Component {
       filters: ["verified", "all"],
       curFilter:"",
       isOpen: false,
-      sort: "-trxCount",
+      sort: "-lindCount",
       emptyState: props.emptyState,
     };
   }
@@ -133,12 +133,12 @@ class Contracts extends React.Component {
   solidityVersions = v => {
     let version;
     switch (v) {
-      case "tron-0.4.24":
-      case "tronbox_soljson_v1":
-      case "tronbox_soljson_v2":
+      case "linda-0.4.24":
+      case "lindabox_soljson_v1":
+      case "lindabox_soljson_v2":
         version = "0.4.24";
         break;
-      case "tronbox_soljson_v3":
+      case "lindabox_soljson_v3":
         version = "0.4.25";
         break;
       default:
@@ -211,8 +211,8 @@ class Contracts extends React.Component {
       },
       {
         title: upperFirst(intl.formatMessage({ id: "contract_token_name" })),
-        dataIndex: "trc20token",
-        key: "trc20token",
+        dataIndex: "lrc20token",
+        key: "lrc20token",
         align: "left",
         className: "ant_table",
         render: (text, record, index) => {
@@ -427,16 +427,16 @@ class Contracts extends React.Component {
         className: "ant_table",
         render: (text, record, index) => {
           return (
-            <TRXPrice
-              amount={text || text == 0 ? parseInt(text) / ONE_TRX : 0}
+            <LINDPrice
+              amount={text || text == 0 ? parseInt(text) / ONE_LIND : 0}
             />
           );
         }
       },
       {
         title: upperFirst(intl.formatMessage({ id: "TxCount" })),
-        dataIndex: "trxCount",
-        key: "trxCount",
+        dataIndex: "lindCount",
+        key: "lindCount",
         sorter: true,
         defaultSortOrder: "descend",
         sortDirections: ["descend", "ascend"],
@@ -521,16 +521,16 @@ class Contracts extends React.Component {
         className: "ant_table",
         render: (text, record, index) => {
           return (
-            <TRXPrice
-              amount={text || text == 0 ? parseInt(text) / ONE_TRX : 0}
+            <LINDPrice
+              amount={text || text == 0 ? parseInt(text) / ONE_LIND : 0}
             />
           );
         }
       },
       {
         title: upperFirst(intl.formatMessage({ id: "TxCount" })),
-        dataIndex: "trxCount",
-        key: "trxCount",
+        dataIndex: "lindCount",
+        key: "lindCount",
         align: "right",
         className: "ant_table",
         render: (text, record, index) => {
@@ -644,7 +644,7 @@ class Contracts extends React.Component {
       <main className="container header-overlap token_black mt-4">
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div className="row contract-list">

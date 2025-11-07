@@ -2,16 +2,16 @@ import React, {Fragment, useState, useEffect} from "react";
 import {tu, t} from "../../../../utils/i18n";
 import { Icon, Tooltip } from "antd";
 import { upperFirst } from "lodash";
-import {AddressLink, ExternalLink, ContractLink, TokenTRC20Link} from "../../../common/Links";
-import {TRXPrice} from "../../../common/Price";
-import {ONE_TRX, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../../constants";
+import {AddressLink, ExternalLink, ContractLink, TokenLRC20Link} from "../../../common/Links";
+import {LINDPrice} from "../../../common/Price";
+import {ONE_LIND, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../../constants";
 import rebuildList from "../../../../utils/rebuildList";
 import BandwidthUsage from './common/BandwidthUsage'
 import SignList from "./common/SignList";
 import {TransationTitle} from './common/Title'
 import {injectIntl} from "react-intl";
 import Field from "../../../tools/TransactionViewer/Field";
-import {toUtf8} from 'tronweb'
+import {toUtf8} from 'lindaweb'
 import { Client } from "../../../../services/api";
 
 async function getContractValue(id) {
@@ -26,28 +26,28 @@ async function getContractValue(id) {
       contract.call_token_value /
       Math.pow(10, tokenInfo.map_token_precision || 6);
     if (contract.call_value) {
-      let trxValue = contract.call_value / 1000000
-      contractValue = `${trxValue} TRX ${value} ${tokenInfo.map_token_name}`;
+      let lindValue = contract.call_value / 1000000
+      contractValue = `${lindValue} LIND ${value} ${tokenInfo.map_token_name}`;
     } else {
       contractValue = `${value} ${tokenInfo.map_token_name}`;
     }
   } else {
     if (contract.call_value) {
-      let trxValue = contract.call_value / 1000000
-      contractValue = `${trxValue} TRX`;
+      let lindValue = contract.call_value / 1000000
+      contractValue = `${lindValue} LIND`;
     } else {
-      contractValue = '0 TRX';
+      contractValue = '0 LIND';
     }
   }
 
   return contractValue;
 }
 const useFetch = (id) => {
-  const [data, updateData] = useState('0 TRX')
+  const [data, updateData] = useState('0 LIND')
 
   async function getData(){
     const value = await getContractValue(id).catch(e=>{
-      updateData('0 TRX') 
+      updateData('0 LIND') 
     })
     updateData(value)
   }

@@ -2,7 +2,7 @@
 import { connect } from "react-redux";
 import React from "react";
 import { tu, t } from "../../../utils/i18n";
-import { generateAccount } from "@tronscan/client/src/utils/account";
+import { generateAccount } from "@lindascan/client/src/utils/account";
 import { encryptKey, encryptString } from "../../../services/secureKey";
 import { downloadStringAsFile } from "../../../services/file";
 import { printPaperWallet } from "../Utils";
@@ -10,12 +10,12 @@ import { Link } from "react-router-dom";
 import { login } from "../../../actions/app";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ReactPasswordStrength from "react-password-strength";
-import { byteArray2hexStr } from "@tronscan/client/src/utils/bytes";
-import { stringToBytes } from "@tronscan/client/src/lib/code";
+import { byteArray2hexStr } from "@lindascan/client/src/utils/bytes";
+import { stringToBytes } from "@lindascan/client/src/lib/code";
 
 const uuidv4 = require("uuid/v4");
 
-const tronLogo = require("../../../images/tron-banner-inverted.png");
+const lindaLogo = require("../../../images/linda-banner-inverted.png");
 
 function WizardStep({ icon, completed = false, first = false }) {
   return (
@@ -307,7 +307,7 @@ class Wizard extends React.PureComponent {
           <div className="text-center p-5 bg-dark">
             <img
               className="wallet-wizard-logo"
-              src={tronLogo}
+              src={lindaLogo}
               onError={e => {
                 e.target.onerror = null;
                 e.target.src = defaultImg;

@@ -7,7 +7,7 @@ import {alpha} from "../../utils/str";
 import {Client} from "../../services/api";
 import _ from "lodash";
 import { Tag } from 'antd';
-import {TokenLink, TokenTRC20Link, HrefLink, AddressLink} from "../common/Links";
+import {TokenLink, TokenLRC20Link, HrefLink, AddressLink} from "../common/Links";
 import {QuestionMark} from "../common/QuestionMark";
 import AppealModal from './AppealModal'
 import xhr from "axios/index";
@@ -57,13 +57,13 @@ class IssuedToken extends React.Component{
 
     // get 20 token transfer amount
     async getToken20Transfer(contract_address){
-      const data = await Client.getTRC20tfs({limit: 0, start: 0, contract_address})
+      const data = await Client.getLRC20tfs({limit: 0, start: 0, contract_address})
       return data.rangeTotal
     }
 
     // get 20 token holder
     async getToken20Holder(contract_address){
-      const {data} = await xhr.get(API_URL +'/api/token_trc20/holders', {params: {limit: 0, start: 0, contract_address}})
+      const {data} = await xhr.get(API_URL +'/api/token_lrc20/holders', {params: {limit: 0, start: 0, contract_address}})
       return data.rangeTotal
     }
 
@@ -71,7 +71,7 @@ class IssuedToken extends React.Component{
     // get 20eoken
     async get20token() {
       const { address } = this.props.account
-      const {data: {data, retCode}} = await xhr.get(CONTRACT_MAINNET_API_URL+'/external/trc20tokens?issuer_addr='+ address)
+      const {data: {data, retCode}} = await xhr.get(CONTRACT_MAINNET_API_URL+'/external/lrc20tokens?issuer_addr='+ address)
       if(retCode == 0){
         let arr = []
         
@@ -544,7 +544,7 @@ class IssuedToken extends React.Component{
         address, modal, marketInfoToken10, marketInfoToken20 } = this.state;
       const { account, intl, currentWallet, unfreezeAssetsConfirmation, sidechains, walletType } = this.props;
 
-      const isPrivateKey =  walletType.type === "ACCOUNT_PRIVATE_KEY" || walletType.type === "ACCOUNT_TRONLINK";
+      const isPrivateKey =  walletType.type === "ACCOUNT_PRIVATE_KEY" || walletType.type === "ACCOUNT_LINDALINK";
       let status10;
       let token10Time;
       if(issuedAsset){
@@ -635,7 +635,7 @@ class IssuedToken extends React.Component{
                 <hr className="my-3"/>
                 <div className="d-flex justify-content-between tf-card__header mb-0 position-relative">
                   <div className="tf-card__header-item">
-                    <div className="tf-card__header-title">{tu('trc20_token_info_Total_Supply')}</div>
+                    <div className="tf-card__header-title">{tu('lrc20_token_info_Total_Supply')}</div>
                     <div className="tf-card__header-text">
                       <FormattedNumber value={issuedAsset.totalSupply / 10 ** issuedAsset.precision} maximumSignificantDigits={18}/>
                     </div>
@@ -796,7 +796,7 @@ class IssuedToken extends React.Component{
                   <div className="mobile-width">
                     <div className="d-flex justify-content-between align-items-center pl-3">
                       <h4 className="m-0 ">
-                        <TokenTRC20Link name={token20Item.name} namePlus={token20Item.name + ' (' + token20Item.symbol + ')'} address={token20Item.contract_address}/>
+                        <TokenLRC20Link name={token20Item.name} namePlus={token20Item.name + ' (' + token20Item.symbol + ')'} address={token20Item.contract_address}/>
                         <span style={{color:"#999", fontSize: '12px'}}>[{token20Item.contract_address}]
                           <CopyToClipboard text={token20Item.contract_address}  onCopy={() => this.setCopied('id'+index)}>
                             <span id={'id'+index} className="ml-1" style={{cursor: 'pointer'}}>
@@ -819,7 +819,7 @@ class IssuedToken extends React.Component{
                     <hr className="my-3"/>
                     <div className="d-flex justify-content-between tf-card__header">
                       <div className="tf-card__header-item">
-                        <div className="tf-card__header-title">{tu('trc20_token_info_Total_Supply')}</div>
+                        <div className="tf-card__header-title">{tu('lrc20_token_info_Total_Supply')}</div>
                         <div className="tf-card__header-text">
                           <FormattedNumber value={token20Item.total_supply / 10 ** token20Item.decimals} maximumSignificantDigits={18}/>
                         </div>
@@ -880,7 +880,7 @@ class IssuedToken extends React.Component{
                             { status20.isFailed && <Tag color="#4a90e2" onClick={() => this.showModal(token20Item.contract_address)}>{tu('Appeal')}</Tag> }
                           </td>
                           <td>
-                            <TokenTRC20Link name={tu('check_token_detail')} address={token20Item.contract_address}/>
+                            <TokenLRC20Link name={tu('check_token_detail')} address={token20Item.contract_address}/>
                           </td>
                         </tr>
                         { status20.isPassed && this.getMarketToken20Html(index, token20Item)}

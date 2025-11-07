@@ -2,12 +2,12 @@ import React, {Fragment} from "react";
 import {FormattedNumber} from "react-intl";
 import {Tooltip} from "reactstrap";
 import {Client} from "../../services/api";
-import {ONE_TRX} from "../../constants";
+import {ONE_LIND} from "../../constants";
 import {alpha} from "../../utils/str";
 import {tu} from "../../utils/i18n";
 import CountUp from 'react-countup';
 
-export class TRXBurned extends React.PureComponent {
+export class LINDBurned extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +22,7 @@ export class TRXBurned extends React.PureComponent {
 
     async loadBurnedNum() {
         let address = await Client.getAddress('TLsV52sRDL79HXGGm9yzwKibb6BeruhUzy');
-        let feeBurnedNum = (Math.abs(this.state.startFeeBurnedNum) - Math.abs(address.balance / ONE_TRX)).toFixed(0);
+        let feeBurnedNum = (Math.abs(this.state.startFeeBurnedNum) - Math.abs(address.balance / ONE_LIND)).toFixed(0);
         let burnedNumTotal = Number(feeBurnedNum) + this.state.independenceDayBurned;
         this.setState((state) => ({
             feeBurnedNum:feeBurnedNum,

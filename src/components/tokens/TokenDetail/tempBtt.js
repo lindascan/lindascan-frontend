@@ -1,12 +1,12 @@
 import React from "react";
 import xhr from "axios/index";
 import {Client} from "../../../services/api";
-import {ONE_TRX} from "../../../constants";
+import {ONE_LIND} from "../../../constants";
 import {connect} from "react-redux";
 import {injectIntl} from "react-intl";
 import {filter, includes} from "lodash";
-import {tronAddresses} from "../../../utils/tron";
-import {TronLoader} from "../../common/loaders";
+import {lindaAddresses} from "../../../utils/linda";
+import {LindaLoader} from "../../common/loaders";
 import LineReact from "../../common/LineChart";
 import {cloneDeep} from "lodash";
 import {tu} from "../../../utils/i18n";
@@ -56,9 +56,9 @@ class BTTSupplyTemp extends React.Component {
   }
 
   componentDidMount() {
-    this.loadTotalTRXSupply();
+    this.loadTotalLINDSupply();
     setInterval(() => {
-      this.loadTotalTRXSupply();
+      this.loadTotalLINDSupply();
     }, 60000);
   }
 
@@ -74,7 +74,7 @@ class BTTSupplyTemp extends React.Component {
     }
   }
 
-  loadTotalTRXSupply = async() =>{
+  loadTotalLINDSupply = async() =>{
     let {intl} = this.props;
     //const {funds} = await Client.getBttFundsSupply();
     const funds = 170421000000;
@@ -83,11 +83,11 @@ class BTTSupplyTemp extends React.Component {
 
     let supplyTypesChartData = result.data;
     let eurBittorrentURL = encodeURI(`https://api.coinmarketcap.com/v1/ticker/bittorrent/?convert=EUR`);
-    let trxPriceData = await xhr.get(`${API_URL}/api/system/proxy?url=${eurBittorrentURL}`);
-    let priceUSD = ((parseFloat(trxPriceData.data[0].price_usd))*1000).toFixed(2);
-    let priceBTC = ((parseFloat(trxPriceData.data[0].price_btc))*1000).toFixed(5);
-   // let marketCapitalization = ((parseFloat(trxPriceData.data[0].price_usd)*(funds.totalTurnOver))).toFixed(2);
-    let marketCapitalization = ((parseFloat(trxPriceData.data[0].price_usd)*(funds))).toFixed(2);
+    let lindPriceData = await xhr.get(`${API_URL}/api/system/proxy?url=${eurBittorrentURL}`);
+    let priceUSD = ((parseFloat(lindPriceData.data[0].price_usd))*1000).toFixed(2);
+    let priceBTC = ((parseFloat(lindPriceData.data[0].price_btc))*1000).toFixed(5);
+   // let marketCapitalization = ((parseFloat(lindPriceData.data[0].price_usd)*(funds.totalTurnOver))).toFixed(2);
+    let marketCapitalization = ((parseFloat(lindPriceData.data[0].price_usd)*(funds))).toFixed(2);
     this.setState({
       supplyTypesChart: supplyTypesChartData,
       genesisNum:intl.formatNumber(total),
@@ -99,7 +99,7 @@ class BTTSupplyTemp extends React.Component {
       priceUSD:priceUSD,
       priceBTC:priceBTC,
       marketCapitalization:marketCapitalization,
-      //foundationFreeze:intl.formatNumber(funds.fundTrx),
+      //foundationFreeze:intl.formatNumber(funds.fundLind),
       //circulatingNum:intl.formatNumber(funds.turnOver)
     });
   }
@@ -142,7 +142,7 @@ class BTTSupplyTemp extends React.Component {
                   <div>
                     {
                       !currentTotalSupply?
-                          <TronLoader/> :
+                          <LindaLoader/> :
                           <div className="row" style={{fontSize : 12,marginRight:0}}>
                             <div className="col-md-12">
                               <div className="table-responsive">

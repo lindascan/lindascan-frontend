@@ -83,7 +83,7 @@ function ExchangeCreateContract({contract,intl}) {
             {toThousands(first_token_balance)}/
             {toThousands(second_token_balance)}
           </Field>
-          <Field label="transaction_fee">1,024 TRX</Field>
+          <Field label="transaction_fee">1,024 LIND</Field>
           {JSON.stringify(contract.cost) != "{}" && (
             <Field label="consume_bandwidth">
               <BandwidthUsage cost={cost} />

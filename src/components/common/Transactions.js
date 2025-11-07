@@ -4,7 +4,7 @@ import {Client} from "../../services/api";
 import {TransactionHashLink, AddressLink, BlockNumberLink} from "./Links";
 import {tu} from "../../utils/i18n";
 // import TimeAgo from "react-timeago";
-import {TronLoader} from "./loaders";
+import {LindaLoader} from "./loaders";
 import {Truncate} from "./text";
 import {ContractTypes} from "../../utils/protocol";
 import SmartTable from "./SmartTable.js"
@@ -36,9 +36,9 @@ class Transactions extends React.Component {
       transactions: [],
       total: 0,
       emptyState: props.EmptyState || (
-          <TronLoader>
+          <LindaLoader>
             Loading Transactions
-          </TronLoader>
+          </LindaLoader>
       )
     };
   }
@@ -238,7 +238,7 @@ class Transactions extends React.Component {
     return column;
   }
 
-  trc20CustomizedColumn = () => {
+  lrc20CustomizedColumn = () => {
     let {intl} = this.props;
     let column = [
       
@@ -411,7 +411,7 @@ class Transactions extends React.Component {
     let {transactions, total, rangeTotal, loading, EmptyState = null} = this.state;
     let {intl, isinternal, isBlock = false, address = false, filter: {contract}} = this.props;
     let column = !isinternal? this.customizedColumn():
-                              this.trc20CustomizedColumn();
+                              this.lrc20CustomizedColumn();
     let tableInfo = intl.formatMessage({id: 'view_total'}) + ' ' + total + ' ' + intl.formatMessage({id: 'transactions_unit'})
 
       // if (!loading && transactions && transactions.length === 0) {
@@ -425,11 +425,11 @@ class Transactions extends React.Component {
 
     return (
       <div className={"token_black table_pos mt-5" }>
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
           
           <div className="d-flex justify-content-between w-100"  style={{position: "absolute", left: 0, top: '-28px'}}>
             {(total && contract && isinternal)? <div className="d-flex align-items-center">
-                <i className="fas fa-exclamation-circle mr-2" style={{color:"#999999"}}></i><span className="flex-1" style={{width: '700px'}}>{tu('interTrx_tip_contract')}</span>
+                <i className="fas fa-exclamation-circle mr-2" style={{color:"#999999"}}></i><span className="flex-1" style={{width: '700px'}}>{tu('interLind_tip_contract')}</span>
             </div>: ''
             }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {FormattedNumber, injectIntl} from "react-intl";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { upperFirst } from 'lodash'
 import convert from 'htmr';
 import CompilerJsoninfo from "./CompilerJsonInfo";
@@ -81,7 +81,7 @@ class CompilerConsole extends React.Component {
                                Broadcast transaction success!&nbsp;
                                <CompilerJsoninfo title='View Broadcast Result' json={JSON.stringify(log.contract)}/>
                                <br/>
-                               Waiting for confirm from Tron blockchain
+                               Waiting for confirm from Linda blockchain
                            </div>
                        }
 

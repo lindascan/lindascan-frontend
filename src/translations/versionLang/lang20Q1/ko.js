@@ -32,11 +32,11 @@ export const lang20Q1 = {
   data_time2: "1일",
   data_time3: "1주",
   data_check: "TOP 10 보기",
-  data_account_send_Trx: "최고 계정-- TRX 전송 수",
-  data_account_send_Trx_items: "최고 계정-- TRX 전송 총 횟수",
-  data_account_receive_Trx: "최고 계정-- TRX 접수 총 수",
-  data_account_receive_Trx_items: "최고 계정-- TRX 접수 총 횟수",
-  data_account_freeze: "최고 계정-- TRX 동결 수",
+  data_account_send_Lind: "최고 계정-- LIND 전송 수",
+  data_account_send_Lind_items: "최고 계정-- LIND 전송 총 횟수",
+  data_account_receive_Lind: "최고 계정-- LIND 접수 총 수",
+  data_account_receive_Lind_items: "최고 계정-- LIND 접수 총 횟수",
+  data_account_freeze: "최고 계정-- LIND 동결 수",
   data_account_vote: "최고 계정-- 투표 수",
   data_range: "랭크",
   data_number: "수량",
@@ -52,7 +52,7 @@ export const lang20Q1 = {
   data_token_transcation_items_total: "최고 토큰-- 거래 총 횟수",
   data_token_transcation_numbers: "최고 토큰-- 거래 총 액",
   data_token_circle_per: "매주",
-  data_contract_trx_number: "최고 계약-- TRX 총 잔액",
+  data_contract_lind_number: "최고 계약-- LIND 총 잔액",
   data_contract_accounts: "최고 계약-- 호출 계정 수",
   data_contract_numbers: "총 잔액",
   data_contract_times: "최고 계약-- 호출 횟수",
@@ -60,8 +60,8 @@ export const lang20Q1 = {
   data_resource_table_title: "에너지 최대 소비",
   data_resource_table_rank: "랭크",
   data_resource_table_account: "계정",
-  data_resource_table_freezingTRX_energy: "TRX 동결에 소비된 에너지",
-  data_resource_table_burningTRX_energy: "TRX 소각에 소비된 대역폭",
+  data_resource_table_freezingLIND_energy: "LIND 동결에 소비된 에너지",
+  data_resource_table_burningLIND_energy: "LIND 소각에 소비된 대역폭",
   data_resource_table_energy_consumed: "소비된 에너지",
   data_resource_table_percentage: "백분율",
   data_resource_table_percentage_tips:
@@ -85,26 +85,26 @@ export const lang20Q1 = {
   data_contract_name: "계약 명칭",
   data_title_chart: "차트",
   // 2020-01-17 overview
-  data_TRX_transfer_total: "TRX 이체 총액",
-  data_TRX_transfer_count: "TRX 이체 횟수",
-  data_TRX_frozen_total: "동결 TRX 총액",
+  data_LIND_transfer_total: "LIND 이체 총액",
+  data_LIND_transfer_count: "LIND 이체 횟수",
+  data_LIND_frozen_total: "동결 LIND 총액",
   data_votes_total: "투표 총수",
-  data_TRON_tokens_total: "TRON 토큰 총수",
-  data_TRC10_tokens_total: "TRC10 토큰 총수",
-  data_TRC20_tokens_total: "TRC20 토큰 총수",
-  data_TRONSCAN_tokens_entered: "TRONSCAN 입력 총수",
-  data_TRONSCAN_TRC10_entries: "TRC10 토큰 입력 수",
-  data_TRONSCAN_TRC20_entries: "TRC20 토큰 입력 수",
-  data_TRX_balance: "TRX 잔액",
+  data_LINDA_tokens_total: "LINDA 토큰 총수",
+  data_LRC10_tokens_total: "LRC10 토큰 총수",
+  data_LRC20_tokens_total: "LRC20 토큰 총수",
+  data_LINDASCAN_tokens_entered: "LINDASCAN 입력 총수",
+  data_LINDASCAN_LRC10_entries: "LRC10 토큰 입력 수",
+  data_LINDASCAN_LRC20_entries: "LRC20 토큰 입력 수",
+  data_LIND_balance: "LIND 잔액",
   data_calling_accounts: "호출 계정수",
   data_calling_number: "호출 횟수",
   data_energy_consumed_total: "소비된 에너지",
-  data_energy_freezed: "TRX 동결에 소비된 에너지",
-  data_energy_burned: "TRX 소각에 소비된 대역폭",
+  data_energy_freezed: "LIND 동결에 소비된 에너지",
+  data_energy_burned: "LIND 소각에 소비된 대역폭",
   data_whole_contract_use: "계약 전개 자로부터의 에너지",
   data_bandwidth_consumed_total: "소비된 총 대역폭",
-  data_bandwidth_freezed: "TRX 동결에 소비된 대역폭",
-  data_bandwidth_burned: "TRX 소각에 소비된 대역폭",
+  data_bandwidth_freezed: "LIND 동결에 소비된 대역폭",
+  data_bandwidth_burned: "LIND 소각에 소비된 대역폭",
   data_area:
     "<a href='https://poloniex.org/'  target='_blank'>POLONI DEX</a> 거래소에 상장 된 토큰 만 계산",
   // index nav
@@ -115,16 +115,16 @@ export const lang20Q1 = {
   index_navigation_proposals: "제안",
 
   // 2020-02-04
-  chart_hold_trx_account: "TRX 보유 계정 통계",
-  chart_hold_trx_account_per: "TRX 보유자 비율",
-  chart_hold_trx_account_per_t: "TRX 보유자 비율",
-  chart_hold_trx_account_per_tip: "TRX 보유 계정수/ 총 계정수",
+  chart_hold_lind_account: "LIND 보유 계정 통계",
+  chart_hold_lind_account_per: "LIND 보유자 비율",
+  chart_hold_lind_account_per_t: "LIND 보유자 비율",
+  chart_hold_lind_account_per_tip: "LIND 보유 계정수/ 총 계정수",
   chart_hold_account_sum: "총 계정수",
-  chart_hold_trx: "TRX 보유 계정수",
-  chart_hold_trx_more: "더 많은 데이터",
-  chart_hold_trx_number: "계정수",
-  chart_resource_user_freeing: "TRX 동결 에너지",
-  chart_resource_user_burning: "TRX 소각 에너지",
+  chart_hold_lind: "LIND 보유 계정수",
+  chart_hold_lind_more: "더 많은 데이터",
+  chart_hold_lind_number: "계정수",
+  chart_resource_user_freeing: "LIND 동결 에너지",
+  chart_resource_user_burning: "LIND 소각 에너지",
   chart_resource_contract_deployer: "계약 배치자가 제공하는 에너지",
 
   // 2020-2-5 leon
@@ -145,7 +145,7 @@ export const lang20Q1 = {
   proposal_apply_super: "이 기능은 SR 만 사용할 수 있습니다.",
   proposal_apply_super_btn: "SR 신청",
   proposal_apply_super_desc:
-    "모든 TRX 보유자는 SR 후보가 될 수 있습니다. 그중 가장 많은 표를 받은 탑 27위는 SR이 되고, 28~127위는 SR 파트너가 됩니다. SR은 거래 포장 및 블록 생성을 담당합니다. 또한 투표 및 블록 생성 보상을 받습니다. SR 파트너는 거래를 포장하거나 블록을 생성하지 않으며 투표 보상 만 받을 수 있습니다. 모든 SR 후보, SR 파트너 및 SR은 TRON 네트워크의 매개 변수를 수정하기 위한 제안을 제기 할 수 있습니다. ",
+    "모든 LIND 보유자는 SR 후보가 될 수 있습니다. 그중 가장 많은 표를 받은 탑 27위는 SR이 되고, 28~127위는 SR 파트너가 됩니다. SR은 거래 포장 및 블록 생성을 담당합니다. 또한 투표 및 블록 생성 보상을 받습니다. SR 파트너는 거래를 포장하거나 블록을 생성하지 않으며 투표 보상 만 받을 수 있습니다. 모든 SR 후보, SR 파트너 및 SR은 LINDA 네트워크의 매개 변수를 수정하기 위한 제안을 제기 할 수 있습니다. ",
   // proposal_apply_super_input_name: "请输入您的名称",
   // proposal_apply_super_input_name_ph: "3-30个字符，设置后不可修改",
   proposal_apply_super_input_website: "URL을 입력하세요",
@@ -181,7 +181,7 @@ export const lang20Q1 = {
   proposal_confirm: "제안 확인",
   proposal_result: "결과",
   proposal_create_info:
-    "TRON 네트워크 매개 변수를 수정하기 위한 제안이 시작되었습니다. 각 SR은 제안을 시작하고 투표 할 권리가 있습니다. 만료일 이전에 19개 이상의 SR로부터 투표를 받으면 제안이 통과 된 것으로 간주되며 다음 유지 보수 기간에 네트워크 매개 변수가 수정됩니다.",
+    "LINDA 네트워크 매개 변수를 수정하기 위한 제안이 시작되었습니다. 각 SR은 제안을 시작하고 투표 할 권리가 있습니다. 만료일 이전에 19개 이상의 SR로부터 투표를 받으면 제안이 통과 된 것으로 간주되며 다음 유지 보수 기간에 네트워크 매개 변수가 수정됩니다.",
   proposal_select_table: "선택",
   proposal_selected_network_parameters: "선택된 네트워크 매개 변수",
   proposal_content: "제안 내용",
@@ -214,7 +214,7 @@ export const lang20Q1 = {
   // 2020-02-19
   chart_energy: "사용 된 에너지",
   getAllowTvmSolidity059_tips:
-    "Three new features of TVM (TRON Virtual Machine) will be opened: support for parallel signature verification, multi signature verification, and judge whether the address is the contract address",
+    "Three new features of TVM (LINDA Virtual Machine) will be opened: support for parallel signature verification, multi signature verification, and judge whether the address is the contract address",
 
   // 0227 torn sr
   sr_vote_team_information: "도급 주다",
@@ -228,17 +228,17 @@ export const lang20Q1 = {
   block_detail_confirmed_over_show: "confirmed by over 200 blocks",
   block_detail_rolled_back: "ROLLED BACK",
 
-  freeze_TRX_error: "Something went wrong while trying to freeze TRX, please try again later.",
+  freeze_LIND_error: "Something went wrong while trying to freeze LIND, please try again later.",
   votes_cannot_exceed_5_SRs: "Votes cannot exceed 5 SRs",
 
   // 2020-03-03 leon
-  account_total_tip: "TRX잔액 기준 상위 10000개의 데이터까지 보여집니다",
+  account_total_tip: "LIND잔액 기준 상위 10000개의 데이터까지 보여집니다",
   account_rank: "일련번호",
   // account_title: "账户",
-  account_balance: "TRX 총 잔액",
+  account_balance: "LIND 총 잔액",
   account_percent: "비율",
-  account_percent_tip: "TRX 보유량 / TRX 총량",
-  account_power: "TRX 동결량(투표권)",
+  account_percent_tip: "LIND 보유량 / LIND 총량",
+  account_power: "LIND 동결량(투표권)",
   account_trade_count: "거래 수량",
   account_trade_count_tip: "본 주소의 거래수량",
   account_more: "더보기",
@@ -285,16 +285,16 @@ export const lang20Q1 = {
   account_representative_owner: "슈퍼대표 리워드",
   account_representative_block_table_res: "자원소비",
   account_representative_block_table_prize: "블록보상",
-  account_representative_block_desc: "누적 {block} 블록 생성으로 {trx} TRX 획득",
+  account_representative_block_desc: "누적 {block} 블록 생성으로 {lind} LIND 획득",
   account_representative_voters_per_tip: "투표자의 투표수 / 총 투표 수",
-  account_representative_transfer_tip: "본 계정의 TRX/TRX10/TRX20 거래횟수 ",
+  account_representative_transfer_tip: "본 계정의 LIND/LRC10/LRC20 거래횟수 ",
   account_representative_unit: "{number} 명에 의해 {votes} 표를 받음",
   account_piechart_title: "자산 분배",
 
   too_many_bytes_to_encode:"Too many bytes to encode",
-  use_TRONlink_or_private_key :"Please login to use this function via TRONlink or private key",
+  use_LINDAlink_or_private_key :"Please login to use this function via LINDAlink or private key",
   
-  // 03-09 tron account  transfers transactions internal-transactions
+  // 03-09 linda account  transfers transactions internal-transactions
   address_account_tab_search_tips: "주소 / 거래 해시 / 토큰",
 
   address_account_table_filter_all: "모두",
@@ -306,7 +306,7 @@ export const lang20Q1 = {
   address_account_table_filter_other: "other",
 
   address_account_table_filter_token_tips:
-    "The token is not included in TRONSCAN",
+    "The token is not included in LINDASCAN",
   current_version: "최신 버전",
   account_block: "블록",
   account_address_total_balance_tip:"계정에있는 모든 토큰의 가치 합계",
@@ -347,10 +347,10 @@ export const lang20Q1 = {
 
   fill_a_valid_ledger_note:'Please confirm that the Transactions Data option in the ledger settings is allowed, otherwise you cannot send notes',
   enter_up_to_50_characters:'Enter up to 50 characters',
-  address_token_less_than_10:'tokens with a value less than 10 TRX',
-  address_total_tron_power:'Total TRON Power',
-  address_total_tron_power_remain:'Available TORN Power',
-  address_total_tron_power_used:'Used TRON Power',
+  address_token_less_than_10:'tokens with a value less than 10 LIND',
+  address_total_linda_power:'Total LINDA Power',
+  address_total_linda_power_remain:'Available TORN Power',
+  address_total_linda_power_used:'Used LINDA Power',
 
   // foundation address
   foundation_address_update_date:'Updated time: 2019/12/31',

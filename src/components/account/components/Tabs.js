@@ -49,7 +49,7 @@ class Tabs extends Component {
                 key={tab.id}
                 onClick={() => this.scrollToAnchorTab(tab.id)}
               >
-                {tab.id == 'tronPower' ? <span>TRON{tu(tab.name)}</span> : tu(tab.name)}
+                {tab.id == 'lindaPower' ? <span>LINDA{tu(tab.name)}</span> : tu(tab.name)}
               </a>
             </li>
           ))}

@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Client } from "../../../services/api";
 import { AddressLink, TransactionHashLink } from "../../common/Links";
-import { TRXPrice } from "../../common/Price";
-import { API_URL, ONE_TRX } from "../../../constants";
+import { LINDPrice } from "../../common/Price";
+import { API_URL, ONE_LIND } from "../../../constants";
 import { tu, t } from "../../../utils/i18n";
 // import TimeAgo from "react-timeago";
 import moment from "moment";
@@ -21,7 +21,7 @@ import { connect } from "react-redux";
 import { updateTokenInfo } from "../../../actions/tokenInfo";
 import SmartTable from "../../common/SmartTable";
 import { upperFirst } from "lodash";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import xhr from "axios/index";
 import { NameWithId } from "../../common/names";
 import TotalInfo from "../components/TableTotal";
@@ -215,7 +215,7 @@ class Transfers extends React.Component {
           >
             {upperFirst(
               intl.formatMessage({
-                id: timeType ? "age" : "trc20_cur_order_header_order_time"
+                id: timeType ? "age" : "lrc20_cur_order_header_order_time"
               })
             )}
             <Icon
@@ -483,7 +483,7 @@ class Transfers extends React.Component {
               marginTop: "-20px"
             }}
           >
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div className="row transfers">
@@ -574,14 +574,14 @@ class Transfers extends React.Component {
                             ? new BigNumber(
                                 tokensInfo.transfer.balance
                               ).multipliedBy(
-                                tokensInfo.tokenDetail.market_info?tokensInfo.tokenDetail.market_info.priceInTrx:1
+                                tokensInfo.tokenDetail.market_info?tokensInfo.tokenDetail.market_info.priceInLind:1
                               )
                             : new BigNumber(tokensInfo.transfer.balance)
                                 .dividedBy(
                                   Math.pow(10, tokensInfo.tokenDetail.precision)
                                 )
                                 .multipliedBy(
-                                  tokensInfo.tokenDetail.market_info? tokensInfo.tokenDetail.market_info.priceInTrx:1
+                                  tokensInfo.tokenDetail.market_info? tokensInfo.tokenDetail.market_info.priceInLind:1
                                  
                                 )
                           :0
@@ -590,7 +590,7 @@ class Transfers extends React.Component {
                         maximumFractionDigits={2}
                       ></FormattedNumber>
                       {' '}
-                      TRX
+                      LIND
                     </span>
                   </div>
                   <p style={descStyle}> {tu("transfersDetailValue")} </p>
@@ -625,7 +625,7 @@ class Transfers extends React.Component {
                 }}
               />
             </div>
-            <div className="trx20tronsfers trx10tronsfers">
+            <div className="lrc20lindasfers lrc10lindasfers">
               {!loading && transfers.length === 0 ? (
                 <div className="pt-5 pb-5 text-center no-data transfers-bg-white">
                   {tu("no_transfers")}

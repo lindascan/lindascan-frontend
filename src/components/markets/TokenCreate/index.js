@@ -11,8 +11,8 @@ import ResultInfo from './ResultInfo';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import NavigationPrompt from 'react-router-navigation-prompt';
 import xhr from 'axios/index';
-import { API_URL, ONE_TRX, TOKENTYPE, MARKET_API_URL, MARKETPAGE } from '../../../constants';
-import { TronLoader } from '../../common/loaders';
+import { API_URL, ONE_LIND, TOKENTYPE, MARKET_API_URL, MARKETPAGE } from '../../../constants';
+import { LindaLoader } from '../../common/loaders';
 import _ from 'lodash';
 
 @connect(
@@ -135,7 +135,7 @@ export class TokenCreate extends Component {
         }
         this.setState({
             loading: false,
-            type: 'trc10',
+            type: 'lrc10',
             paramData: {
                 tokenId: id,
                 tokenName: token.name,
@@ -145,7 +145,7 @@ export class TokenCreate extends Component {
                 precision: token.precision,
                 logo: token.imgUrl,
                 ownerAddress: token.ownerAddress,
-                sprice: (token.trxNum / ONE_TRX).toString(),
+                sprice: (token.lindNum / ONE_LIND).toString(),
                 fprice: (token.num.toString() / Math.pow(10, token.precision)).toString(),
                 home_page: token.url,
                 email: token.email ? token.email : '',
@@ -157,8 +157,8 @@ export class TokenCreate extends Component {
     loadToken20 = async(id) => {
         let { intl } = this.props;
         this.setState({ loading: true, });
-        let result = await xhr.get(API_URL+'/api/token_trc20?contract='+id);
-        let token = result.data.trc20_tokens[0];
+        let result = await xhr.get(API_URL+'/api/token_lrc20?contract='+id);
+        let token = result.data.lrc20_tokens[0];
         if (!token){
             this.setState({
                 loading:false,
@@ -192,7 +192,7 @@ export class TokenCreate extends Component {
         }
         this.setState({
             loading: false,
-            type: 'trc20',
+            type: 'lrc20',
             paramData: {
                 tokenAddress: id,
                 tokenName: token.name,
@@ -347,9 +347,9 @@ export class TokenCreate extends Component {
         // loadItem
         const loadItem = (
             <div className="card">
-                <TronLoader>
+                <LindaLoader>
                     {tu('loading_token')}
-                </TronLoader>
+                </LindaLoader>
             </div>
         );
 

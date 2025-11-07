@@ -8,12 +8,12 @@ class ApiClientToken {
     };
   }
 
-  //get trx/usd price
+  //get lind/usd price
   async getUsdPrice(){
-    // let eurWinkTronbetURL = encodeURI(`https://api.coinmarketcap.com/v1/ticker/tronix/?convert=EUR`);
-    // let trxPriceData = await xhr.get(`${API_URL}/api/system/proxy?url=${eurWinkTronbetURL}`);
-    // let priceUSD = trxPriceData && trxPriceData.data && trxPriceData.data[0] && trxPriceData.data[0].price_usd;
-    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=USD'
+    // let eurWinkLindabetURL = encodeURI(`https://api.coinmarketcap.com/v1/ticker/tronix/?convert=EUR`);
+    // let lindPriceData = await xhr.get(`${API_URL}/api/system/proxy?url=${eurWinkLindabetURL}`);
+    // let priceUSD = lindPriceData && lindPriceData.data && lindPriceData.data[0] && lindPriceData.data[0].price_usd;
+    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=USD'
     let { data } = await xhr({
       method: "post",
       url: `${API_URL}/api/system/proxy`,
@@ -22,10 +22,10 @@ class ApiClientToken {
       }
     });
     let priceUSD = data.data &&
-                    data.data.TRX &&
-                    data.data.TRX.quote &&
-                    data.data.TRX.quote['USD'] && 
-                    data.data.TRX.quote['USD'].price
+                    data.data.LIND &&
+                    data.data.LIND.quote &&
+                    data.data.LIND.quote['USD'] && 
+                    data.data.LIND.quote['USD'].price
     return priceUSD
   }
   //get coinId
@@ -55,7 +55,7 @@ class ApiClientToken {
 
    //get transfer Number
    async getTransferNumber(params){
-    let res = await xhr.get(`${API_URL}/api/token_trc20/transfers`,{
+    let res = await xhr.get(`${API_URL}/api/token_lrc20/transfers`,{
       params:params} );
     return res && res.data
   }

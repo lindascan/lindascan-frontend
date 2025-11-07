@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { tu, t } from "../../../utils/i18n";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { NavLink, Route, Switch } from "react-router-dom";
 import {
   injectIntl,
@@ -318,7 +318,7 @@ class BestData extends React.Component {
                     </div>
                     {loading && (
                       <div className="loading-style">
-                        <TronLoader />
+                        <LindaLoader />
                       </div>
                     )}
                     <Switch>

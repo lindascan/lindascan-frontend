@@ -3,10 +3,10 @@ import { tu } from "../../../utils/i18n";
 import { injectIntl } from "react-intl";
 import { Link } from "react-router-dom";
 import { QuestionMark } from "../../common/QuestionMark";
-import { TRXPrice } from "../../common/Price";
+import { LINDPrice } from "../../common/Price";
 import { HrefLink } from "../../common/Links";
 import { FormattedNumber } from "react-intl";
-import { ONE_TRX,IS_MAINNET } from "../../../constants";
+import { ONE_LIND,IS_MAINNET } from "../../../constants";
 import { Tooltip, Icon } from "antd";
 import { ExternalLink } from "../../common/Links";
 import { NavLink, Route, Switch } from "react-router-dom";
@@ -15,7 +15,7 @@ import ApiClientAccount from "../../../services/accountApi";
 import {
   transactionResultManager,
   transactionResultManagerSun
-} from "../../../utils/tron";
+} from "../../../utils/linda";
 import { connect } from "react-redux";
 import { Piechart } from "../components/Piechart";
 import AddTag from "../../account/components/AddTag";
@@ -70,7 +70,7 @@ class Representative extends React.Component {
   render() {
     let {
       address,
-      TRXBalanceTotal,
+      LINDBalanceTotal,
       balance,
       totalPower,
       walletReward,
@@ -161,20 +161,20 @@ class Representative extends React.Component {
                           className="colorYellow"
                           onClick={this.scrollToAnchor.bind(this)}
                         >
-                          <TRXPrice amount={TRXBalanceTotal} />{" "}
+                          <LINDPrice amount={LINDBalanceTotal} />{" "}
                         </span>
                       </NavLink>
 
                       <span className="small">
                         (
-                        <TRXPrice
-                          amount={TRXBalanceTotal}
+                        <LINDPrice
+                          amount={LINDBalanceTotal}
                           currency="USD"
                           showPopup={false}
                         />
                         )
                       </span>
-                      {TRXBalanceTotal > 0 && (
+                      {LINDBalanceTotal > 0 && (
                         <img
                           src={require("../../../images/address/chart.png")}
                           onClick={this.pieChart.bind(this)}
@@ -213,9 +213,9 @@ class Representative extends React.Component {
                   <li className="d-flex flex-wrap">
                     <span>
                       <FormattedNumber
-                        value={(balance + totalPower) / ONE_TRX}
+                        value={(balance + totalPower) / ONE_LIND}
                       />{" "}
-                      TRX
+                      LIND
                     </span>
                     <div>{this.renderFrozenTokens()}</div>
                   </li>
@@ -231,8 +231,8 @@ class Representative extends React.Component {
               <td>
                 <ul className="list-unstyled m-0">
                   <li className="d-flex flex-wrap">
-                    <TRXPrice
-                      amount={walletReward / ONE_TRX}
+                    <LINDPrice
+                      amount={walletReward / ONE_LIND}
                       showPopup={false}
                     />
                     {account.isLoggedIn &&
@@ -375,18 +375,18 @@ class Representative extends React.Component {
               <td>
                 <span className="d-flex flex-wrap">
                   <span>
-                    <FormattedNumber value={blockReward} /> TRX
+                    <FormattedNumber value={blockReward} /> LIND
                   </span>
                   <span>
                     ({tu("account_representative_voter")}:{" "}
                     <FormattedNumber
                       value={((100 - brokerage) * blockReward) / 100}
                     />{" "}
-                    TRX {tu("account_representative_owner")}:
+                    LIND {tu("account_representative_owner")}:
                     <FormattedNumber
                       value={(brokerage * blockReward) / 100}
                     />{" "}
-                    TRX)
+                    LIND)
                   </span>
                 </span>
               </td>
@@ -399,7 +399,7 @@ class Representative extends React.Component {
                 <span className="ml-1">:</span>
               </th>
               <td>
-                <span>{blockReward} TRX ({tu('account_representative_voter')}: {(100-brokerage)*blockReward} % {tu('account_representative_owner')}: {brokerage*blockReward} %)</span>
+                <span>{blockReward} LIND ({tu('account_representative_voter')}: {(100-brokerage)*blockReward} % {tu('account_representative_owner')}: {brokerage*blockReward} %)</span>
               </td>
             </tr> */}
             <tr>
@@ -460,30 +460,30 @@ class Representative extends React.Component {
       <div style={{ lineHeight: "25px" }}>
         <div style={{ borderBottom: "1px solid #eee", paddingBottom: "5px" }}>
           {tu("address_get_energe")}：
-          <FormattedNumber value={GetEnergy / ONE_TRX} />
-          &nbsp;TRX ({GetEnergyPer}%)
+          <FormattedNumber value={GetEnergy / ONE_LIND} />
+          &nbsp;LIND ({GetEnergyPer}%)
           <br />
           {tu("address_get_bandwith")}：
-          <FormattedNumber value={GetBandWidth / ONE_TRX} />
-          &nbsp;TRX ({GetBandWidthPer}%)
+          <FormattedNumber value={GetBandWidth / ONE_LIND} />
+          &nbsp;LIND ({GetBandWidthPer}%)
         </div>
         <div style={{ paddingTop: "5px" }}>
           {tu("address_freeze_owner")}：
-          <FormattedNumber value={Owner / ONE_TRX} />
-          &nbsp;TRX ({OwnerPer}%)
+          <FormattedNumber value={Owner / ONE_LIND} />
+          &nbsp;LIND ({OwnerPer}%)
           <br />
           {tu("address_freeze_other")}：
-          <FormattedNumber value={Other / ONE_TRX} />
-          &nbsp;TRX ({OtherPer}%)
+          <FormattedNumber value={Other / ONE_LIND} />
+          &nbsp;LIND ({OtherPer}%)
         </div>
       </div>
     );
     return (
       <div>
         <span className="ml-1">(</span>
-        {tu("address_tron_power_remaining")}:{" "}
-        <FormattedNumber value={balance / ONE_TRX} />
-        &nbsp;TRX &nbsp;
+        {tu("address_linda_power_remaining")}:{" "}
+        <FormattedNumber value={balance / ONE_LIND} />
+        &nbsp;LIND &nbsp;
         {tu("freeze")}:{" "}
         <Tooltip placement="top" innerClassName="w-100" title={TooltipText}>
           <NavLink exact to={url + "/freeze"}>
@@ -491,8 +491,8 @@ class Representative extends React.Component {
               style={{ color: "rgb(255, 163, 11)" }}
               onClick={this.scrollToAnchor.bind(this)}
             >
-              <FormattedNumber value={totalPower / ONE_TRX} />
-              &nbsp;TRX&nbsp;
+              <FormattedNumber value={totalPower / ONE_LIND} />
+              &nbsp;LIND&nbsp;
             </span>
           </NavLink>
         </Tooltip>
@@ -510,18 +510,18 @@ class Representative extends React.Component {
     let res, hashid;
     let { account, walletType } = this.props;
 
-    let tronWeb;
+    let lindaWeb;
     if (walletType.type === "ACCOUNT_LEDGER") {
-      tronWeb = this.props.tronWeb();
+      lindaWeb = this.props.lindaWeb();
     } else {
-      tronWeb = account.tronWeb;
+      lindaWeb = account.lindaWeb;
     }
-    const unSignTransaction = await tronWeb.transactionBuilder
+    const unSignTransaction = await lindaWeb.transactionBuilder
       .withdrawBlockRewards(walletType.address)
       .catch(e => false);
     const { result } = await transactionResultManager(
       unSignTransaction,
-      tronWeb
+      lindaWeb
     );
     res = result;
 
@@ -558,7 +558,7 @@ class Representative extends React.Component {
     let { sortTokenBalances } = this.props.data;
     let data = [];
     sortTokenBalances.map(item => {
-      let balance = Number(item.TRXBalance);
+      let balance = Number(item.LINDBalance);
 
       if (balance > 0) {
         let name = item.symbol ? item.symbol : item.map_token_name_abbr;

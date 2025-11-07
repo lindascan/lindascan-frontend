@@ -8,12 +8,12 @@ import { injectIntl } from "react-intl";
 import { tu } from "../../../utils/i18n";
 // import TimeAgo from "react-timeago";
 import moment from "moment";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { Truncate } from "../../common/text";
 import SmartTable from "../../common/SmartTable";
 import { upperFirst, forIn, uniqWith, isEqual } from "lodash";
 import xhr from "axios/index";
-import tronWeb from "tronweb";
+import lindaWeb from "lindaweb";
 import { Select } from "antd";
 import BlockTime from "../../common/blockTime";
 import { API_URL, SUNWEBCONFIG ,uuidv4} from "../../../constants";
@@ -28,7 +28,7 @@ class Transactions extends React.Component {
       transactions: [],
       total: 0,
       emptyState: props.EmptyState || (
-        <TronLoader>Loading Transactions</TronLoader>
+        <LindaLoader>Loading Transactions</LindaLoader>
       )
     };
   }
@@ -55,7 +55,7 @@ class Transactions extends React.Component {
     this.setState({ loading: true });
 
     // let contractEvent = await Client.getContractEvent(filter.address);
-    // let {data} = await xhr.get(`https://api.trongrid.io/event/contract/${filter.address}`);
+    // let {data} = await xhr.get(`https://api.lindagrid.io/event/contract/${filter.address}`);
     let { data } = await xhr.get(
       `${SUNWEBCONFIG.MAINEVENTSERVER}/event/contract/${filter.address}`
     );
@@ -120,19 +120,19 @@ class Transactions extends React.Component {
         return string;
       },
       Text() {
-        return tronWeb.toUtf8(string);
+        return lindaWeb.toUtf8(string);
       },
       Number() {
         return parseInt(string, 16);
       },
       Address() {
-        return tronWeb.address.fromHex(string);
+        return lindaWeb.address.fromHex(string);
       }
     };
     oSele.innerHTML = statusmap[value]();
   }
   getaddress(string) {
-    return tronWeb.address.fromHex(41 + string.split("0x")[1]);
+    return lindaWeb.address.fromHex(41 + string.split("0x")[1]);
   }
 
   customizedColumn = () => {
@@ -285,7 +285,7 @@ class Transactions extends React.Component {
       <Fragment>
         {loading && (
           <div className="loading-style" style={{ marginTop: "-20px" }}>
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div>

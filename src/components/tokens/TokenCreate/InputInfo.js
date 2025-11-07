@@ -5,7 +5,7 @@ import {FormattedNumber, FormattedDate, injectIntl} from "react-intl";
 import SweetAlert from "react-bootstrap-sweetalert";
 import 'moment/min/locales';
 import NumericInput from '../../common/NumericInput';
-import {TRXPrice} from "../../common/Price";
+import {LINDPrice} from "../../common/Price";
 import moment from 'moment';
 import {
   Form, Row, Col, Input, InputNumber, AutoComplete, DatePicker, Icon, Switch
@@ -25,7 +25,7 @@ const AutoCompleteOption = AutoComplete.Option;
       social_current: 4,
       modal: null,
       precision_20: 18,
-      token_trx_order: true,
+      token_lind_order: true,
       ...this.props.state
     };
   }
@@ -115,11 +115,11 @@ const AutoCompleteOption = AutoComplete.Option;
   }
 
   render() {
-    const { autoCompleteResult, type, isUpdate, iconList,modal, precision_20, token_trx_order } = this.state;
+    const { autoCompleteResult, type, isUpdate, iconList,modal, precision_20, token_lind_order } = this.state;
     const {intl, nextStep} = this.props
     const { getFieldDecorator, getFieldsValue } = this.props.form;
-    const isTrc10 = type === 'trc10'
-    const isTrc20 = type === 'trc20'
+    const isLrc10 = type === 'lrc10'
+    const isLrc20 = type === 'lrc20'
 
     const logoOptions = autoCompleteResult.map(logo => (
       <AutoCompleteOption key={logo}>{logo}</AutoCompleteOption>
@@ -129,32 +129,32 @@ const AutoCompleteOption = AutoComplete.Option;
     let last = {}
     let abbrAmount = 0
     const {token_abbr, 
-      trx_amount, 
+      lind_amount, 
       token_amount, 
       freeze_amount,
       participation_type,
-      freeze_type} = getFieldsValue(['token_abbr', 'trx_amount', 'token_amount', 'freeze_amount', 'participation_type', 'freeze_type'])
+      freeze_type} = getFieldsValue(['token_abbr', 'lind_amount', 'token_amount', 'freeze_amount', 'participation_type', 'freeze_type'])
 
-    if(token_trx_order){
+    if(token_lind_order){
       first = {
         abbr: token_abbr,
         name: 'token_amount'
       }
       last = {
-        abbr: 'trx',
-        name: 'trx_amount'
+        abbr: 'lind',
+        name: 'lind_amount'
       }
-      abbrAmount = parseInt((trx_amount / token_amount)*100) / 100
+      abbrAmount = parseInt((lind_amount / token_amount)*100) / 100
     }else{
       first = {
-        abbr: 'trx',
-        name: 'trx_amount'
+        abbr: 'lind',
+        name: 'lind_amount'
       }
       last = {
         abbr: token_abbr,
         name: 'token_amount'
       }
-      abbrAmount = parseInt((token_amount / trx_amount)*100) / 100
+      abbrAmount = parseInt((token_amount / lind_amount)*100) / 100
     }
     return (
         <main className="">
@@ -209,18 +209,18 @@ const AutoCompleteOption = AutoComplete.Option;
                   </Form.Item>
                 </Col>
                 <Col  span={24} md={11}>
-                  <Form.Item label={tu('TRC20_decimals')}>
+                  <Form.Item label={tu('LRC20_decimals')}>
                     {getFieldDecorator('precision',{
                       rules: [{ required: true, message: ''}],
                     })(
-                      <InputNumber min={0} max={ isTrc20? precision_20: 6} className="w-100"/>
+                      <InputNumber min={0} max={ isLrc20? precision_20: 6} className="w-100"/>
                     )}
                   </Form.Item>
                 </Col>
-                <Col  span={24} md={11} className={ isTrc20? 'd-block': 'd-none'}>
+                <Col  span={24} md={11} className={ isLrc20? 'd-block': 'd-none'}>
                   <Form.Item label={tu('token_logo')}>
                     {getFieldDecorator('logo_url', {
-                      rules: [{ required: isTrc20, message: tu('logo_v_required'), whitespace: true},
+                      rules: [{ required: isLrc20, message: tu('logo_v_required'), whitespace: true},
                               {pattern: /\.jpg|\.png$/, message: tu('logo_v_format')}],
                     })(
                       <AutoComplete
@@ -245,14 +245,14 @@ const AutoCompleteOption = AutoComplete.Option;
             </div>
 
             {/* contract info */}
-            <div className={ isTrc20? 'd-block': 'd-none'}>
+            <div className={ isLrc20? 'd-block': 'd-none'}>
              <h4 className="mb-2">{tu('contract_info')}</h4>
              <hr/>
              <Row gutter={24} type="flex" justify="space-between" className="px-2">
                <Col span={24} md={11}>
                  <Form.Item label={tu('contract_address')}>
                    {getFieldDecorator('contract_address', {
-                     rules: [{ required: isTrc20, message: tu('contract_address_required'), whitespace: true},
+                     rules: [{ required: isLrc20, message: tu('contract_address_required'), whitespace: true},
                              {pattern: /^T[a-zA-Z0-9]{33}$/, message: tu('contract_address_format')}],
                    })(
                      <Input placeholder={intl.formatMessage({id: 'contract_address_placeholder'})}/>
@@ -269,7 +269,7 @@ const AutoCompleteOption = AutoComplete.Option;
                <Col  span={24}>
                  <Form.Item label={tu('contract_code')}>
                   {getFieldDecorator('contract_code', {
-                    rules: [{ required: isTrc20, message: tu('contract_address_required'), whitespace: true}],
+                    rules: [{ required: isLrc20, message: tu('contract_address_required'), whitespace: true}],
                   })(
                     <TextArea rows={6}  placeholder={intl.formatMessage({id: 'contract_code_placeholder'})} />
                   )}
@@ -280,29 +280,29 @@ const AutoCompleteOption = AutoComplete.Option;
             </div>
             
             {/* price info */}
-            <div className={ isTrc10? 'd-block': 'd-none'}>
+            <div className={ isLrc10? 'd-block': 'd-none'}>
               <h4 className="mb-2">{tu('price_info')}</h4>
               <hr/>
               <Row gutter={24} type="flex" justify="space-between" className="px-2">
                 <Col span={24}>
                   <Form.Item label={tu('token_price')}  required className="m-0">
                     <div className="d-md-flex">
-                      <span className="mr-3">trx{tu('trc20_last_price')}: <TRXPrice amount={1} currency="USD"/></span>
+                      <span className="mr-3">lind{tu('lrc20_last_price')}: <LINDPrice amount={1} currency="USD"/></span>
                       <div className="d-flex">
                         <Form.Item  className="d-flex align-items-center">
                           {getFieldDecorator(first.name, {
-                            rules: [{ required: isTrc10, message: tu('enter_the_amount'), whitespace: true}]
+                            rules: [{ required: isLrc10, message: tu('enter_the_amount'), whitespace: true}]
                           })(
                             <NumericInput style={{width: '80px'}}/>
                           )}
                           {first.abbr}
                           </Form.Item>
                           
-                        <Icon type="swap" className="mx-2 fix_form ordericon" onClick={() => this.setState({token_trx_order: !token_trx_order})}/>
+                        <Icon type="swap" className="mx-2 fix_form ordericon" onClick={() => this.setState({token_lind_order: !token_lind_order})}/>
 
                         <Form.Item  className="d-flex align-items-center mr-4">
                           {getFieldDecorator(last.name, { 
-                            rules: [{ required: isTrc10, message: tu('enter_the_amount'), whitespace: true}]
+                            rules: [{ required: isLrc10, message: tu('enter_the_amount'), whitespace: true}]
                           })(
                             <NumericInput style={{width: '80px'}} className="mr-2"/>
                           )}
@@ -387,7 +387,7 @@ const AutoCompleteOption = AutoComplete.Option;
               <hr/>
               <Row gutter={24} type="flex" justify="space-between" className="px-2">
                 <Col  span={24} md={11}>
-                  <Form.Item label={tu('trc20_token_info_Website')}>
+                  <Form.Item label={tu('lrc20_token_info_Website')}>
                     {getFieldDecorator('website', {
                       rules: [{ required: true, message: tu('no_url_error'), whitespace: true}],
                     })(
@@ -395,17 +395,17 @@ const AutoCompleteOption = AutoComplete.Option;
                     )}
                   </Form.Item>
                 </Col>
-                <Col  span={24} md={11} className={ isTrc20? 'd-block': 'd-none'}>
+                <Col  span={24} md={11} className={ isLrc20? 'd-block': 'd-none'}>
                   <Form.Item label={tu('email')}>
                     {getFieldDecorator('email', {
-                      rules: [{ required: isTrc20, message: tu('email_v_required'), whitespace: true},
+                      rules: [{ required: isLrc20, message: tu('email_v_required'), whitespace: true},
                               {type: 'email', message: tu('email_v_format')}],
                     })(
                       <Input placeholder={intl.formatMessage({id: 'email_placeholder'})}/>
                     )}
                   </Form.Item>
                 </Col>
-                <Col span={24} className={ isTrc20? 'd-block': 'd-none'}>
+                <Col span={24} className={ isLrc20? 'd-block': 'd-none'}>
                   <Form.Item label={tu('whitepaper_address')}>
                     {getFieldDecorator('white_paper', {})(
                       <Input placeholder={intl.formatMessage({id: 'whitepaper_address'})}/>
@@ -416,7 +416,7 @@ const AutoCompleteOption = AutoComplete.Option;
               </Row>
             </div>
             
-            <div className={ isTrc20? 'd-block px-2 mb-3': 'd-none'}>
+            <div className={ isLrc20? 'd-block px-2 mb-3': 'd-none'}>
               <div className="d-md-flex mb-4">
                 <h5 className="mr-3 mb-md-0">{tu('select_socoal_link')}</h5>
                 <div className="d-flex icon-list">

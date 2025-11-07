@@ -121,7 +121,7 @@ export default {
             },
         }]
     },
-    supplyTypesTRXPieChart: {
+    supplyTypesLINDPieChart: {
         color: [
             '#c84a45',
             '#e7afad',
@@ -1128,7 +1128,7 @@ export default {
         series: []
     },
 
-    HoldTrxAccountChart: {
+    HoldLindAccountChart: {
         chart: {
             type: '',
             zoomType: 'xy'

@@ -10,11 +10,11 @@ export default class OwnerRead extends Component {
     super(props);
   }
   render() {
-    const { ownerPermission, tronWeb } = this.props;
+    const { ownerPermission, lindaWeb } = this.props;
     const { keys, threshold, permission_name } = ownerPermission;
     const tableList = keys.map(item => (
       <tr key={item.address}>
-        <td>{tronWeb.address.fromHex(item.address)}</td>
+        <td>{lindaWeb.address.fromHex(item.address)}</td>
         <td>{item.weight}</td>
       </tr>
     ));

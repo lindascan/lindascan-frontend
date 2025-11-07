@@ -29,39 +29,39 @@ class VerifyContractCode extends Component {
             compilers: [
                 {
                     label:"0.4.25_Odyssey_v3.2.3",
-                    value:"tron-0.4.25_Odyssey_v3.2.3"
+                    value:"linda-0.4.25_Odyssey_v3.2.3"
                 },
                 {
                     label:"0.5.8_Odyssey_v3.6.0",
-                    value:"tron-0.5.8_Odyssey_v3.6.0"
+                    value:"linda-0.5.8_Odyssey_v3.6.0"
                 },
                 {
                     label:"0.5.4_Odyssey_v3.6.0",
-                    value:"tron-0.5.4_Odyssey_v3.6.0"
+                    value:"linda-0.5.4_Odyssey_v3.6.0"
                 },
                 {
-                    label:"tron-0.4.24",
-                    value:"tron-0.4.24"
+                    label:"linda-0.4.24",
+                    value:"linda-0.4.24"
                 },
                 {
-                    label:"tronbox_soljson_v1",
-                    value:"tronbox_soljson_v1"
+                    label:"lindabox_soljson_v1",
+                    value:"lindabox_soljson_v1"
                 },
                 {
-                    label:"tronbox_soljson_v2",
-                    value:"tronbox_soljson_v2"
+                    label:"lindabox_soljson_v2",
+                    value:"lindabox_soljson_v2"
                 },
                 {
-                    label:"tronbox_soljson_v3",
-                    value:"tronbox_soljson_v3"
+                    label:"lindabox_soljson_v3",
+                    value:"lindabox_soljson_v3"
                 },
                 {
                     label:"0.5.9_Odyssey_v3.6.5",
-                    value:"tron-0.5.9_Odyssey_v3.6.5"
+                    value:"linda-0.5.9_Odyssey_v3.6.5"
                 },
                 {
                     label:"0.5.10_Odyssey_v3.6.6",
-                    value:"tron-0.5.10_Odyssey_v3.6.6"
+                    value:"linda-0.5.10_Odyssey_v3.6.6"
                 },
             ],
             licenses:[
@@ -114,7 +114,7 @@ class VerifyContractCode extends Component {
                     value: 12
                 }
             ],
-            deaultCompiler: 'tron-0.4.25_Odyssey_v3.2.3',
+            deaultCompiler: 'linda-0.4.25_Odyssey_v3.2.3',
             contractCode: '',
             captchaCode: null,
             CompileStatus: [],

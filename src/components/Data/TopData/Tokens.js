@@ -27,11 +27,11 @@ class Tokens extends React.Component {
   constructor() {
     super();
     const txnUnit = "Txns";
-    const trxUnit = "TRX";
+    const lindUnit = "LIND";
     this.state = {
-      trxUnit: "TRX",
+      lindUnit: "LIND",
       usdUnit: "USD",
-      UsdToTrx: 0,
+      UsdToLind: 0,
       types: {
         7: {
           title: "data_token_holders",
@@ -76,10 +76,10 @@ class Tokens extends React.Component {
             "data_token_transcation_number",
             "data_token_circle_per"
           ],
-          key: "priceInTrx",
+          key: "priceInLind",
           data: [],
           isUSD: true,
-          unit: trxUnit
+          unit: lindUnit
         }
       }
     };
@@ -95,16 +95,16 @@ class Tokens extends React.Component {
     xhr
       .get(
         API_URL +
-          "/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1"
+          "/api/token_lrc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1"
       )
       .then(res => {
-        let trc20_tokens = res.data.trc20_tokens || [];
-        let UsdToTrx =
-          trc20_tokens && trc20_tokens[0] && trc20_tokens[0].market_info
-            ? trc20_tokens[0].market_info.priceInTrx
+        let lrc20_tokens = res.data.lrc20_tokens || [];
+        let UsdToLind =
+          lrc20_tokens && lrc20_tokens[0] && lrc20_tokens[0].market_info
+            ? lrc20_tokens[0].market_info.priceInLind
             : 0;
         this.setState({
-          UsdToTrx
+          UsdToLind
         });
       });
   }
@@ -178,7 +178,7 @@ class Tokens extends React.Component {
   renderDataTable(data, title, isUsd, type, typeIndex, unit) {
     const defaultImg = require("../../../images/logo_default.png");
 
-    const { trxUnit, usdUnit, UsdToTrx } = this.state;
+    const { lindUnit, usdUnit, UsdToLind } = this.state;
     const { intl, priceUSD } = this.props;
     const titles = title;
     let arr = cloneDeep(data);
@@ -241,7 +241,7 @@ class Tokens extends React.Component {
                   {record.token_id == "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t" ? (
                     <span>
                       <FormattedNumber
-                        value={record.priceInTrx / UsdToTrx}
+                        value={record.priceInLind / UsdToLind}
                         maximumFractionDigits={6}
                       ></FormattedNumber>{" "}
                       USDT
@@ -249,7 +249,7 @@ class Tokens extends React.Component {
                   ) : (
                     <span>
                       <FormattedNumber
-                        value={record.priceInTrx}
+                        value={record.priceInLind}
                         maximumFractionDigits={6}
                       ></FormattedNumber>{" "}
                       {unit}

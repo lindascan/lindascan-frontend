@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Table } from "antd";
 import { AddressLink, TransactionHashLink } from "../../../../common/Links";
 import { FormattedDate, FormattedTime, injectIntl } from "react-intl";
-import { TRXPrice } from "../../../../common/Price";
-import { ONE_TRX } from "../../../../../constants";
+import { LINDPrice } from "../../../../common/Price";
+import { ONE_LIND } from "../../../../../constants";
 import { Truncate } from "../../../../common/text";
 import { tu, tv } from "../../../../../utils/i18n";
 import { Client } from "../../../../../services/api";
@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { upperFirst } from "lodash";
 import { dateFormat } from "../../../../../utils/DateTime";
 import { setLastprice } from "../../../../../actions/exchange";
-import { TronLoader } from "../../../../common/loaders";
+import { LindaLoader } from "../../../../common/loaders";
 import moment from "moment";
 class TranList extends Component {
   constructor(props) {
@@ -99,7 +99,7 @@ class TranList extends Component {
     const columns = [
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_trans_record_header_time" })
+          intl.formatMessage({ id: "lrc20_trans_record_header_time" })
         ),
         dataIndex: "orderTime",
         key: "orderTime",
@@ -121,7 +121,7 @@ class TranList extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_trans_record_header_price" }) +
+          intl.formatMessage({ id: "lrc20_trans_record_header_price" }) +
             second_token
         ),
         dataIndex: "price",
@@ -139,7 +139,7 @@ class TranList extends Component {
       },
       {
         title: upperFirst(
-          intl.formatMessage({ id: "trc20_trans_record_header_amount" }) +
+          intl.formatMessage({ id: "lrc20_trans_record_header_amount" }) +
             first_token
         ),
         dataIndex: "volume",
@@ -156,7 +156,7 @@ class TranList extends Component {
     return (
       <div>
         {isLoading ? (
-          <TronLoader />
+          <LindaLoader />
         ) : (
           <Table
             dataSource={dataSource}

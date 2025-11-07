@@ -39,7 +39,7 @@ class TokenBalanceSelect extends React.Component {
         if (!token && tokenBalances.length > 0) {
             this.setState(
                 {
-                    token: tokenBalances[0].map_token_name + '-' + tokenBalances[0].map_token_id + '-TRC10',
+                    token: tokenBalances[0].map_token_name + '-' + tokenBalances[0].map_token_id + '-LRC10',
                 },
                 () => this.getSelectedTokenBalance())
 
@@ -47,7 +47,7 @@ class TokenBalanceSelect extends React.Component {
         // else if (!token && tokens20.length > 0 && tokenBalances.length === 0) {
         //     this.setState(
         //         {
-        //             token: tokens20[0].name + '-TRC20',
+        //             token: tokens20[0].name + '-LRC20',
         //         },
         //         () => this.getSelectedTokenBalance())
         // }
@@ -74,11 +74,11 @@ class TokenBalanceSelect extends React.Component {
         let {token} = this.state;
         let TokenType =  token.substr(token.length-5,5);
         let list = token.split('-')
-        if (token && TokenType == 'TRC10') {
+        if (token && TokenType == 'LRC10') {
             let TokenName =  list[1];
             let balance = parseFloat(find(tokenBalances, t => t.map_token_id === TokenName).map_amount);
             let TokenDecimals = parseFloat(find(tokenBalances, t => t.map_token_id === TokenName).map_token_precision);
-            if(TokenName == 'TRX'){
+            if(TokenName == 'LIND'){
                 this.setState({
                     decimals: 6,
                     balance:balance
@@ -94,7 +94,7 @@ class TokenBalanceSelect extends React.Component {
                 })
             }
         }
-        // else if(token && TokenType == 'TRC20'){
+        // else if(token && TokenType == 'LRC20'){
         //     let TokenName =  list[0];
         //     let balance = parseFloat(find(tokens20, t => t.name === TokenName).token20_balance_decimals);
         //     let TokenDecimals = parseFloat(find(tokens20, t => t.name === TokenName).decimals);
@@ -117,11 +117,11 @@ class TokenBalanceSelect extends React.Component {
             .filter(tb => tb.map_token_id > 0 || tb.map_token_id == '_')
             .value();
         tokenBalances.map(item =>{
-            item.token_name_type = item.map_token_name + '-' + item.map_token_id + '-TRC10';
+            item.token_name_type = item.map_token_name + '-' + item.map_token_id + '-LRC10';
             return item
         });
         tokens20 && tokens20.map(item =>{
-            item.token_name_type =  item.name + '-TRC20';
+            item.token_name_type =  item.name + '-LRC20';
             return item
         });
         return (
@@ -130,7 +130,7 @@ class TokenBalanceSelect extends React.Component {
                 className={className}
                 value={token}
             >
-                <OptGroup label={tu('TRC10_token')} key="TRC10">
+                <OptGroup label={tu('LRC10_token')} key="LRC10">
                     {
                         tokenBalances.map((tokenBalance, index) => (
                             <Option value={tokenBalance.token_name_type} key={index}>
@@ -146,7 +146,7 @@ class TokenBalanceSelect extends React.Component {
                         ))
                     }
                 </OptGroup>
-                {/*<OptGroup label={tu('TRC20_token')} key="TRC20">*/}
+                {/*<OptGroup label={tu('LRC20_token')} key="LRC20">*/}
                     {/*{*/}
                         {/*tokens20.map((token, index) => (*/}
                             {/*<Option value={token.token_name_type} key={index}>*/}

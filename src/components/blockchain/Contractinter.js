@@ -4,14 +4,14 @@ import {connect} from "react-redux";
 import {Client} from "../../services/api";
 import {Truncate} from "../common/text";
 import SmartTable from "../common/SmartTable.js"
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import {upperFirst, filter} from "lodash";
 import {loadTokens} from "../../actions/tokens";
 import {AddressLink, BlockNumberLink, TransactionHashLink} from "../common/Links";
 // import TimeAgo from "react-timeago";
 import moment from 'moment';
-import {TRXPrice} from "../common/Price";
-import {ONE_TRX} from "../../constants";
+import {LINDPrice} from "../common/Price";
+import {ONE_LIND} from "../../constants";
 import BlockTime from '../common/blockTime'
 
 
@@ -207,9 +207,9 @@ class Contractinter extends React.Component {
             className: 'ant_table',
             render: (text, record, index) => {
                 return  <span>{
-                            record.tokenName.toUpperCase() === 'TRX' ?
+                            record.tokenName.toUpperCase() === 'LIND' ?
                             <Fragment>
-                                <TRXPrice amount={record.amount / ONE_TRX}/>
+                                <LINDPrice amount={record.amount / ONE_LIND}/>
                             </Fragment> :
                             <Fragment>
                                 <FormattedNumber value={record.amount}/> {record.tokenName}
@@ -230,7 +230,7 @@ class Contractinter extends React.Component {
     
         return (
           <main className="container header-overlap pb-3 token_black">
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
           <div className="row">
             <div className="col-md-12 table_pos">
               {total ? <div className="table_pos_info" style={{left: 'auto'}}>{tableInfo}</div> : ''}

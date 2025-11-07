@@ -73,7 +73,7 @@ class HolderDistribution extends React.Component {
   async getDistributionFun() {
     const { trcType, tokenId, tokensInfo } = this.props;
     const totalSupply =
-      trcType === "trc10"
+      trcType === "lrc10"
         ? tokensInfo.tokenDetail.totalSupply
         : tokensInfo.tokenDetail.total_supply_with_decimals;
 

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { loadNodes } from "../../actions/network";
 import { filter, maxBy, sortBy, sumBy } from "lodash";
 import { tu } from "../../utils/i18n";
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 import { NodeMapAsync } from "./NodeMap/async";
 import { getQueryParam } from "../../utils/url";
 import { WidgetIcon } from "../common/Icon";
@@ -66,7 +66,7 @@ class Nodes extends Component {
     if (nodes.length === 0) {
       return (
         <div className="d-flex justify-content-center p-4">
-          <TronLoader />
+          <LindaLoader />
         </div>
       );
     }
@@ -103,7 +103,7 @@ class Nodes extends Component {
       return (
         <main className="container header-overlap">
           <div className="card">
-            <TronLoader>{tu("first_node_sync_message")}</TronLoader>
+            <LindaLoader>{tu("first_node_sync_message")}</LindaLoader>
           </div>
         </main>
       );
@@ -113,7 +113,7 @@ class Nodes extends Component {
       return (
         <main className="container header-overlap">
           <div className="card">
-            <TronLoader>{tu("loading_nodes")}</TronLoader>
+            <LindaLoader>{tu("loading_nodes")}</LindaLoader>
           </div>
         </main>
       );
@@ -165,7 +165,7 @@ class Nodes extends Component {
                 <div style={IS_MAINNET ? { height: 500 } : { height: 250 }}>
                   {}
                   {countries === null ? (
-                    <TronLoader />
+                    <LindaLoader />
                   ) : (
                     <BarReact
                       style={IS_MAINNET ? { height: 500 } : { height: 250 }}

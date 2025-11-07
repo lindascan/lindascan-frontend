@@ -1,12 +1,12 @@
 import React from "react";
 import xhr from "axios/index";
 import {Client} from "../../../services/api";
-import {ONE_TRX} from "../../../constants";
+import {ONE_LIND} from "../../../constants";
 import {connect} from "react-redux";
 import {injectIntl} from "react-intl";
 import {filter, flatten} from "lodash";
-import {tronAddresses} from "../../../utils/tron";
-import {TronLoader} from "../../common/loaders";
+import {lindaAddresses} from "../../../utils/linda";
+import {LindaLoader} from "../../common/loaders";
 import LineReact from "../../common/LineChart";
 import {cloneDeep} from "lodash";
 import {tu} from "../../../utils/i18n";
@@ -56,9 +56,9 @@ class BTTSupply extends React.Component {
     }
 
     componentDidMount() {
-        this.loadTotalTRXSupply();
+        this.loadTotalLINDSupply();
         setInterval(() => {
-            this.loadTotalTRXSupply();
+            this.loadTotalLINDSupply();
         }, 60000);
     }
 
@@ -74,7 +74,7 @@ class BTTSupply extends React.Component {
         }
     }
 
-    loadTotalTRXSupply = async() =>{
+    loadTotalLINDSupply = async() =>{
         let {intl} = this.props;
         //const {funds} = await Client.getBttFundsSupply('wink');
         const {data: funds} = await xhr.get(`${API_URL}/api/wink/fund`)
@@ -82,31 +82,31 @@ class BTTSupply extends React.Component {
         let result=await xhr.get(`${API_URL}/api/wink/graphic`);
         
         let supplyTypesChartData = result.data;
-        let USDWinkTronbetURL = encodeURI(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=WINK&convert=USD`);
-        let BTCWinkTronbetURL = encodeURI(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=WINK&convert=BTC`);
+        let USDWinkLindabetURL = encodeURI(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=WINK&convert=USD`);
+        let BTCWinkLindabetURL = encodeURI(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=WINK&convert=BTC`);
 
-        // let trxPriceData = await xhr.post(`${API_URL}/api/system/proxy?url=${eurWinkTronbetURL}`);
+        // let lindPriceData = await xhr.post(`${API_URL}/api/system/proxy?url=${eurWinkLindabetURL}`);
         let USDData = await xhr.post(`${API_URL}/api/system/proxy`,{
-            url:USDWinkTronbetURL
+            url:USDWinkLindabetURL
         });
         let BTCData= await xhr.post(`${API_URL}/api/system/proxy`,{
-            url:BTCWinkTronbetURL
+            url:BTCWinkLindabetURL
         });
-        let trxPriceDataUSD = USDData.data && 
+        let lindPriceDataUSD = USDData.data && 
         USDData.data.data.WINK && 
         USDData.data.data.WINK.quote &&
         USDData.data.data.WINK.quote.USD &&
         USDData.data.data.WINK.quote.USD.price;
-        let trxPriceDataBTC = BTCData.data && 
+        let lindPriceDataBTC = BTCData.data && 
         BTCData.data.data.WINK && 
         BTCData.data.data.WINK.quote &&
         BTCData.data.data.WINK.quote.BTC &&
         BTCData.data.data.WINK.quote.BTC.price
-        let priceUSD = ((parseFloat(trxPriceDataUSD))*1000).toFixed(3);
-        let  x = new BigNumber(trxPriceDataBTC);
+        let priceUSD = ((parseFloat(lindPriceDataUSD))*1000).toFixed(3);
+        let  x = new BigNumber(lindPriceDataBTC);
         let priceBTC = x.multipliedBy(1000).decimalPlaces(5).toNumber();
     
-        let marketCapitalization = ((parseFloat(trxPriceDataUSD)*(funds.totalTurnOver))).toFixed(2);
+        let marketCapitalization = ((parseFloat(lindPriceDataUSD)*(funds.totalTurnOver))).toFixed(2);
 
         this.setState({
             supplyTypesChart: supplyTypesChartData,
@@ -119,7 +119,7 @@ class BTTSupply extends React.Component {
             priceUSD:priceUSD,
             priceBTC:priceBTC,
             marketCapitalization:marketCapitalization,
-            //foundationFreeze:intl.formatNumber(funds.fundTrx),
+            //foundationFreeze:intl.formatNumber(funds.fundLind),
             //circulatingNum:intl.formatNumber(funds.turnOver)
         });
     }
@@ -186,7 +186,7 @@ class BTTSupply extends React.Component {
                                     <div>
                                         {
                                             !currentTotalSupply?
-                                                <TronLoader/> :
+                                                <LindaLoader/> :
                                                 <div className="row" style={{fontSize : 12,marginRight:0}}>
                                                     <div className="col-md-12">
                                                         <div className="table-responsive">

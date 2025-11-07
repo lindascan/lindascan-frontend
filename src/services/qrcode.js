@@ -3,7 +3,7 @@ import QRCode from 'qrcode'
 export function GenerateQRCode(value, size = 260) {
 
   // var bgImage = new Image();
-  // bgImage.src = tronLogo;
+  // bgImage.src = lindaLogo;
   //
   // bgImage.onload = () => {
   //

@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {loadTokens} from "../../actions/tokens";
 import {login} from "../../actions/app";
 import {filter, trim} from "lodash";
-import {API_URL, ASSET_ISSUE_COST, ONE_TRX} from "../../constants";
+import {API_URL, ASSET_ISSUE_COST, ONE_LIND} from "../../constants";
 import {injectIntl} from "react-intl";
 import {addDays, addHours, isAfter} from "date-fns";
 import "react-datetime/css/react-datetime.css";
@@ -17,13 +17,13 @@ import ExchangeRate from "./ExchangeRate.js"
 import FreezeSupply from "./FreezeSupply.js"
 import Confirm from "./Confirm.js"
 import xhr from "axios/index";
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import {Steps} from 'antd';
-import {transactionResultManager} from "../../utils/tron";
+import {transactionResultManager} from "../../utils/linda";
 import Lockr from "lockr";
-import {withTronWeb} from "../../utils/tronWeb";
+import {withLindaWeb} from "../../utils/lindaWeb";
 
-@withTronWeb
+@withLindaWeb
 
 
 class TokenCreate extends Component {
@@ -45,7 +45,7 @@ class TokenCreate extends Component {
       abbr: "",
       totalSupply: '',
       numberOfCoins: 1,
-      numberOfTron: 1,
+      numberOfLinda: 1,
       startTime: startTime,
       endTime: endTime,
       description: "",
@@ -61,7 +61,7 @@ class TokenCreate extends Component {
         totalSupply: '',
         description: null,
         url: null,
-        tronAmount: null,
+        lindaAmount: null,
         tokenAmount: null,
         startDate: null,
         endDate: null,
@@ -121,8 +121,8 @@ class TokenCreate extends Component {
     let {account, intl} = this.props;
     let {logoData} = this.state;
     let res,createInfo,errorInfo;
-    const tronWebLedger = this.props.tronWeb();
-    const { tronWeb } = this.props.account;
+    const lindaWebLedger = this.props.lindaWeb();
+    const { lindaWeb } = this.props.account;
     this.setState({
       modal:
           <SweetAlert
@@ -132,22 +132,22 @@ class TokenCreate extends Component {
               title={intl.formatMessage({id: 'in_progress'})}
               //style={{marginLeft: '-240px', marginTop: '-195px', width: '450px', height: '300px'}}
           >
-            <TronLoader/>
+            <LindaLoader/>
           </SweetAlert>,
       loading: true
     });
     let frozenSupplyAmount =  this.state.frozenSupply[0].amount * Math.pow(10,Number(this.state.precision));
     let frozenSupply =  [{amount: frozenSupplyAmount, days:  this.state.frozenSupply[0].days}];
-      if (Lockr.get("islogin")||this.props.walletType.type==="ACCOUNT_LEDGER"||this.props.walletType.type==="ACCOUNT_TRONLINK") {
+      if (Lockr.get("islogin")||this.props.walletType.type==="ACCOUNT_LEDGER"||this.props.walletType.type==="ACCOUNT_LINDALINK") {
         if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-          const unSignTransaction = await tronWebLedger.transactionBuilder.createToken({
+          const unSignTransaction = await lindaWebLedger.transactionBuilder.createToken({
             name: trim(this.state.name),
             abbreviation: trim(this.state.abbr),
             description: this.state.description,
             url: this.state.url,
             totalSupply: this.state.totalSupply * Math.pow(10, Number(this.state.precision)),
             tokenRatio: this.state.numberOfCoins * Math.pow(10, Number(this.state.precision)),
-            trxRatio: this.state.numberOfTron * ONE_TRX,
+            lindRatio: this.state.numberOfLinda * ONE_LIND,
             saleStart: Date.parse(this.state.startTime),
             saleEnd: Date.parse(this.state.endTime),
             freeBandwidth: 0,
@@ -155,26 +155,26 @@ class TokenCreate extends Component {
             frozenAmount: frozenSupplyAmount,
             frozenDuration: this.state.frozenSupply[0].days,
             precision: Number(this.state.precision),
-          }, tronWebLedger.defaultAddress.hex).catch(function (e) {
+          }, lindaWebLedger.defaultAddress.hex).catch(function (e) {
             errorInfo = e;
           })
           if (!unSignTransaction) {
             res = false;
           } else {
-            const {result} = await transactionResultManager(unSignTransaction, tronWebLedger);
+            const {result} = await transactionResultManager(unSignTransaction, lindaWebLedger);
             res = result;
           }
         }
 
-        if(this.props.walletType.type === "ACCOUNT_TRONLINK"){
-          const unSignTransaction = await tronWeb.transactionBuilder.createToken({
+        if(this.props.walletType.type === "ACCOUNT_LINDALINK"){
+          const unSignTransaction = await lindaWeb.transactionBuilder.createToken({
             name: trim(this.state.name),
             abbreviation: trim(this.state.abbr),
             description: this.state.description,
             url: this.state.url,
             totalSupply: this.state.totalSupply * Math.pow(10, Number(this.state.precision)),
             tokenRatio: this.state.numberOfCoins*Math.pow(10, Number(this.state.precision)),
-            trxRatio: this.state.numberOfTron * ONE_TRX,
+            lindRatio: this.state.numberOfLinda * ONE_LIND,
             saleStart: Date.parse(this.state.startTime),
             saleEnd: Date.parse(this.state.endTime),
             freeBandwidth: 0,
@@ -182,13 +182,13 @@ class TokenCreate extends Component {
             frozenAmount: frozenSupplyAmount,
             frozenDuration: this.state.frozenSupply[0].days,
             precision: Number(this.state.precision),
-          }, tronWeb.defaultAddress.hex).catch(function (e) {
+          }, lindaWeb.defaultAddress.hex).catch(function (e) {
             errorInfo = e;
           })
           if (!unSignTransaction) {
             res = false;
           } else {
-            const {result} = await transactionResultManager(unSignTransaction, tronWeb);
+            const {result} = await transactionResultManager(unSignTransaction, lindaWeb);
             res = result;
           }
         }
@@ -200,7 +200,7 @@ class TokenCreate extends Component {
               shortName: trim(this.state.abbr),
               totalSupply: this.state.totalSupply * Math.pow(10,Number(this.state.precision)),
               num: this.state.numberOfCoins*Math.pow(10, Number(this.state.precision)),
-              trxNum: this.state.numberOfTron * ONE_TRX,
+              lindNum: this.state.numberOfLinda * ONE_LIND,
               startTime: this.state.startTime?this.state.startTime:"",
               endTime: this.state.endTime?this.state.endTime:"",
               description: this.state.description,
@@ -331,7 +331,7 @@ class TokenCreate extends Component {
                     onConfirm={this.hideModal}
                     style={{marginLeft: '-240px', marginTop: '-195px'}}
                 >
-                  {tu("trx_token_wallet_requirement")}
+                  {tu("lind_token_wallet_requirement")}
                 </SweetAlert>
           }
       );
@@ -347,7 +347,7 @@ class TokenCreate extends Component {
                     onConfirm={this.hideModal}
                     style={{marginLeft: '-240px', marginTop: '-195px'}}
                 >
-                  {tu("trx_token_fee_message")}
+                  {tu("lind_token_fee_message")}
                 </SweetAlert>
           }
       );
@@ -394,7 +394,7 @@ class TokenCreate extends Component {
                 <div className="card">
                   <div className="card-body">
                     <div className="text-center p-3">
-                      {tu("trx_token_account_limit")}
+                      {tu("lind_token_account_limit")}
                     </div>
                   </div>
                 </div>

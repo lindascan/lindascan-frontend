@@ -13,13 +13,13 @@ export const HelpRoutes = [
         component: null,
         showInMenu: false,
         routes: [
-            "TRON",
+            "LINDA",
             {
-                url: "https://dn-peiwo-web.qbox.me/What_is_TRON1.4.pdf",
-                label: "what_is_tron"
+                url: "https://dn-peiwo-web.qbox.me/What_is_LINDA1.4.pdf",
+                label: "what_is_linda"
             },
             "-",
-            "Tronscan",
+            "Lindascan",
             {
                 label: "frequently_asked_questions",
                 component: FaqAsync,
@@ -59,21 +59,21 @@ export const HelpRoutes = [
             "-",
             "Development",
             {
-                url: "https://github.com/tronscan/tronscan-frontend/blob/dev2019/document/api.md",
-                label: "tron_explorer_api"
+                url: "https://github.com/lindascan/lindascan-frontend/blob/dev2019/document/api.md",
+                label: "linda_explorer_api"
             },
             {
-                url: "https://dn-peiwo-web.qbox.me/Design_Book_of_TRON_Architecture1.4.pdf",
-                label: "tron_architechure"
+                url: "https://dn-peiwo-web.qbox.me/Design_Book_of_LINDA_Architecture1.4.pdf",
+                label: "linda_architechure"
             },
             {
-                url: "https://dn-peiwo-web.qbox.me/TRON%20Protobuf%20Protocol%20Document.pdf",
-                label: "tron_protobuf_doc"
+                url: "https://dn-peiwo-web.qbox.me/LINDA%20Protobuf%20Protocol%20Document.pdf",
+                label: "linda_protobuf_doc"
             },
             "-",
             "Feedback",
             {
-                url: "https://github.com/tronscan/tronscan-frontend/issues/new",
+                url: "https://github.com/lindascan/lindascan-frontend/issues/new",
                 label: "report_an_error"
             }
         ]

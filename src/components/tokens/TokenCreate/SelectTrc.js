@@ -43,7 +43,7 @@ export class TokenCreate extends Component {
     const {isLoggedInFn, nextState} = this.props
     nextState({type: type})
     // if(isLoggedInFn()){
-    //   if(type == 'trc10'){
+    //   if(type == 'lrc10'){
     //     if(this.state.issuedAsset){
     //       nextState({type: type})
     //     }else{
@@ -61,12 +61,12 @@ export class TokenCreate extends Component {
     const {type} = this.props.state;
     if(!isLoggedInFn()) return;
     if( isUpdate  && !isAuthorFn(author)) return;
-    if(!issuedAsset && (type == 'trc10')){
-      this.setModal('trx_token_account_limit')
+    if(!issuedAsset && (type == 'lrc10')){
+      this.setModal('lind_token_account_limit')
       return
     }
     // if(wallet.balance < 1024*Math.pow(10,6)){
-    //   this.setModal('trx_token_fee_message')
+    //   this.setModal('lind_token_fee_message')
     //   return
     // }
     nextStep(1)
@@ -92,7 +92,7 @@ export class TokenCreate extends Component {
     if (wallet !== null) {
       Client.getIssuedAsset(wallet.address).then(({token}) => {
         this.setState({issuedAsset: (token == undefined)})
-        // token !== undefined && this.props.nextState({type: 'trc20'})
+        // token !== undefined && this.props.nextState({type: 'lrc20'})
       });
     }
   };
@@ -101,16 +101,16 @@ export class TokenCreate extends Component {
     let {type} = this.props.state
     const { locale } = this.props.intl
     const url = locale == 'zh'?
-    'https://support.tronscan.org/hc/zh-cn/articles/360027103591-%E4%BB%80%E4%B9%88%E6%98%AFTRC10%E5%92%8CTRC20%E9%80%9A%E8%AF%81':
-    'https://support.tronscan.org/hc/en-us/articles/360027103751-What-s-the-differences-between-TRC10-and-TRC20-Tokens-';
+    'https://support.tronscan.org/hc/zh-cn/articles/360027103591-%E4%BB%80%E4%B9%88%E6%98%AFLRC10%E5%92%8CLRC20%E9%80%9A%E8%AF%81':
+    'https://support.tronscan.org/hc/en-us/articles/360027103751-What-s-the-differences-between-LRC10-and-LRC20-Tokens-';
     return (
         <main className="text-center">
           {this.state.modalSelect}
           <h2 className="mb-4 font-weight-bold">{tu('select_type')}</h2>
           <h5 className="f-18 mb-4 d-block">
-            {tu('select_trx_tip1')}
-            <a className="col-red mx-1" href={url} target="_bank">{tu('select_trx_tip2')}</a>
-            {tu('select_trx_tip3')}
+            {tu('select_lind_tip1')}
+            <a className="col-red mx-1" href={url} target="_bank">{tu('select_lind_tip2')}</a>
+            {tu('select_lind_tip3')}
           </h5>
           <p className="text-muted mb-4 font-weight-light">{tu('select_tip1')}<br/>
           {tu('select_tip2')}</p>
@@ -132,7 +132,7 @@ export class TokenCreate extends Component {
             className="btn btn-danger btn-lg btn-w" 
             style={{width: '252px'}}
             onClick={this.goToNextStep}
-         >{tu('trc20_confirm')}</button>
+         >{tu('lrc20_confirm')}</button>
         </main>
     )
   }

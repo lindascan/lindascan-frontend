@@ -3,9 +3,9 @@ import {tu} from "../../utils/i18n";
 import {injectIntl} from "react-intl";
 import {loadTransactions} from "../../actions/blockchain";
 import {connect} from "react-redux";
-import {TronLoader} from "../common/loaders";
-import {ONE_TRX} from "../../constants";
-import {TRXPrice} from "../common/Price";
+import {LindaLoader} from "../common/loaders";
+import {ONE_LIND} from "../../constants";
+import {LINDPrice} from "../common/Price";
 import {AddressLink, TransactionHashLink} from "../common/Links";
 // import TimeAgo from "react-timeago";
 //import moment from 'moment';
@@ -37,7 +37,7 @@ class RecentTransactions extends Component {
     if (transactions === null) {
       return (
           <div className="text-center d-flex justify-content-center">
-            <TronLoader/>
+            <LindaLoader/>
           </div>
       );
     }
@@ -45,7 +45,7 @@ class RecentTransactions extends Component {
     if (transactions.length === 0) {
       return (
           <div className="text-center d-flex justify-content-center">
-            <TronLoader/>
+            <LindaLoader/>
           </div>
       );
     }
@@ -84,7 +84,7 @@ class RecentTransactions extends Component {
                           </div>
                           <div>
                             <i className="fas fa-exchange-alt mr-1"/>
-                            <TRXPrice amount={transaction.amount / ONE_TRX}/>
+                            <LINDPrice amount={transaction.amount / ONE_LIND}/>
                           </div>
                         </div>
                       </div>

@@ -12,7 +12,7 @@ import { injectIntl } from "react-intl";
 export default class ActiveEdit extends Component {
     constructor(props) {
         super(props)
-        const { activePermissions, tronWeb } = this.props;
+        const { activePermissions, lindaWeb } = this.props;
         // activePermissions.forEach(item => {
         //     item.type=2;
         // })
@@ -288,17 +288,17 @@ export default class ActiveEdit extends Component {
         });
     }
     async ifContractAddress(address) {
-        const { tronWeb } = this.props;
+        const { lindaWeb } = this.props;
         let isValid = false;
         try {
-            const contractInstance = await tronWeb.contract().at(tronWeb.address.fromHex(address)).catch()
+            const contractInstance = await lindaWeb.contract().at(lindaWeb.address.fromHex(address)).catch()
         } catch (e) {
             isValid = true;
         }
         return isValid;
     }
     async validKeys(keysItem, keysArr) {
-        const { tronWeb, intl } = this.props;
+        const { lindaWeb, intl } = this.props;
         const { errorMsgModal } = this.state;
         const item = keysItem;
         if (keysArr.length === 0) {
@@ -313,7 +313,7 @@ export default class ActiveEdit extends Component {
 
             return false;
         }
-        if (!tronWeb.isAddress(item.address)) {
+        if (!lindaWeb.isAddress(item.address)) {
 
             errorMsgModal.keys = {
                 msg: intl.formatMessage({
@@ -325,7 +325,7 @@ export default class ActiveEdit extends Component {
             })
             return false;
         }
-        if (!await this.ifContractAddress(tronWeb.address.fromHex(item.address))) {
+        if (!await this.ifContractAddress(lindaWeb.address.fromHex(item.address))) {
             errorMsgModal.keys = {
                 msg: intl.formatMessage({
                     id: 'signature_no_set'
@@ -364,9 +364,9 @@ export default class ActiveEdit extends Component {
     }
     findIsSameKey(itemKey, arr) {
         let count = 0;
-        const { tronWeb } = this.props;
+        const { lindaWeb } = this.props;
         arr.forEach(item => {
-            if (tronWeb.address.fromHex(item.address) === tronWeb.address.fromHex(itemKey.address)) {
+            if (lindaWeb.address.fromHex(item.address) === lindaWeb.address.fromHex(itemKey.address)) {
                 count++;
             }
         })
@@ -487,7 +487,7 @@ export default class ActiveEdit extends Component {
     }
     render() {
         const { activePermissions, modal, permissionModal, allPermissions, hasContractIds, addActiveModal, willAddActive, errorMsgModal } = this.state;
-        const { tronWeb, intl, walletType } = this.props;
+        const { lindaWeb, intl, walletType } = this.props;
         //  以下表单中的
         return (
             <div>
@@ -496,7 +496,7 @@ export default class ActiveEdit extends Component {
                         <span className='permission-title-active'>{tu('signature_active_permissions')}</span><i>({activePermissions.length + '/' + 8})</i>
                         {
                            walletType.type ==  'ACCOUNT_LEDGER'?
-                            <AntdTip title={<span>{tu('use_TRONlink_or_private_key')}</span>}>
+                            <AntdTip title={<span>{tu('use_LINDAlink_or_private_key')}</span>}>
                                 <a className='btn btn-danger ac-permission-add-btn disabled-btn' size='small'><span>+</span><span>{tu('signature_add_permissions')}</span></a>
                             </AntdTip>
                             :
@@ -537,8 +537,8 @@ export default class ActiveEdit extends Component {
                                             {
 
                                                 item.keys.map((itemKey, index) => {
-                                                    if (itemKey.address && tronWeb.isAddress(itemKey.address)) {
-                                                        itemKey.address = tronWeb.address.fromHex(itemKey.address);
+                                                    if (itemKey.address && lindaWeb.isAddress(itemKey.address)) {
+                                                        itemKey.address = lindaWeb.address.fromHex(itemKey.address);
                                                     }
                                                     return <tr key={index} className='edit-tr'>
                                                         <td style={{ paddingLeft: 0 }}><Input value={itemKey.address} onChange={(e) => { this.changeValue(acIndex, index, 1, e) }} /></td>

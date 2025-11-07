@@ -49,7 +49,7 @@ class Resource extends React.Component {
         <div className="">
         <div className="address-circle-bandwidth address-res">
             <div className="d-flex just-con">
-              <span className="title">{tu("tron_power")}</span>
+              <span className="title">{tu("linda_power")}</span>
               <span>
                 {tu("account_resource_remain")}:{" "}
                 <span className="remain">
@@ -287,11 +287,11 @@ class Resource extends React.Component {
     return (
       <div>
         <div>
-          {intl.formatMessage({ id: "address_total_tron_power" }) + " : " + totalPower}
+          {intl.formatMessage({ id: "address_total_linda_power" }) + " : " + totalPower}
         </div>
         <div>
           <span>
-            {intl.formatMessage({ id: "address_total_tron_power_remain" }) +
+            {intl.formatMessage({ id: "address_total_linda_power_remain" }) +
               " : " +
               powerRemaining}
           </span>
@@ -299,7 +299,7 @@ class Resource extends React.Component {
         </div>
         <div>
           <span>
-            {intl.formatMessage({ id: "address_total_tron_power_used" }) + " : " + usedPower}
+            {intl.formatMessage({ id: "address_total_linda_power_used" }) + " : " + usedPower}
           </span>
           &nbsp; ({usedPowerPercentage + " %"})
         </div>

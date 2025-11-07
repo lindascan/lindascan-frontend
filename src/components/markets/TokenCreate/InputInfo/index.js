@@ -12,8 +12,8 @@ export class InputInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isTrc10: false,
-            isTrc20: false,
+            isLrc10: false,
+            isLrc20: false,
             count: 0,
             ...this.props.state
         };
@@ -23,8 +23,8 @@ export class InputInfo extends Component {
         const { type } = this.props.state;
         this.props.nextState({ leave_lock: true });
         this.setState({
-            isTrc10: (type === 'trc10'),
-            isTrc20: (type === 'trc20')
+            isLrc10: (type === 'lrc10'),
+            isLrc20: (type === 'lrc20')
         });
 
     }

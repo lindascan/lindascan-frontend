@@ -31,8 +31,8 @@ class Overview extends React.Component {
     switch (topTime) {
       case 1:
         data = {
-          trx_transfer_amount: topData.last_hour_trx_transfer_amount,
-          trx_transaction_number: topData.last_hour_trx_transaction_number,
+          lind_transfer_amount: topData.last_hour_lind_transfer_amount,
+          lind_transaction_number: topData.last_hour_lind_transaction_number,
           whole_freeze: topData.whole_freeze,
           whole_vote: topData.whole_vote,
           token_sum_transaction: topData.last_hour_token_sum_transaction,
@@ -50,16 +50,16 @@ class Overview extends React.Component {
           whole_net_burn: topData.last_hour_whole_net_burn,
           token_all: topData.token_all,
           token_record: topData.token_record,
-          trc10_all: topData.trc10_all,
-          trc20_all: topData.trc20_all,
-          trc10_record: topData.trc10_record,
-          trc20_record: topData.trc20_record
+          lrc10_all: topData.lrc10_all,
+          lrc20_all: topData.lrc20_all,
+          lrc10_record: topData.lrc10_record,
+          lrc20_record: topData.lrc20_record
         };
         break;
       case 2:
         data = {
-          trx_transfer_amount: topData.last_day_trx_transfer_amount,
-          trx_transaction_number: topData.last_day_trx_transaction_number,
+          lind_transfer_amount: topData.last_day_lind_transfer_amount,
+          lind_transaction_number: topData.last_day_lind_transaction_number,
           whole_freeze: topData.whole_freeze,
           whole_vote: topData.whole_vote,
           token_sum_transaction: topData.last_day_token_sum_transaction,
@@ -77,16 +77,16 @@ class Overview extends React.Component {
           whole_net_burn: topData.last_day_whole_net_burn,
           token_all: topData.token_all,
           token_record: topData.token_record,
-          trc10_all: topData.trc10_all,
-          trc20_all: topData.trc20_all,
-          trc10_record: topData.trc10_record,
-          trc20_record: topData.trc20_record
+          lrc10_all: topData.lrc10_all,
+          lrc20_all: topData.lrc20_all,
+          lrc10_record: topData.lrc10_record,
+          lrc20_record: topData.lrc20_record
         };
         break;
       case 3:
         data = {
-          trx_transfer_amount: topData.last_week_trx_transfer_amount,
-          trx_transaction_number: topData.last_week_trx_transaction_number,
+          lind_transfer_amount: topData.last_week_lind_transfer_amount,
+          lind_transaction_number: topData.last_week_lind_transaction_number,
           whole_freeze: topData.whole_freeze,
           whole_vote: topData.whole_vote,
           token_sum_transaction: topData.last_week_token_sum_transaction,
@@ -103,10 +103,10 @@ class Overview extends React.Component {
           whole_net_burn: topData.last_week_whole_net_burn,
           token_all: topData.token_all,
           token_record: topData.token_record,
-          trc10_all: topData.trc10_all,
-          trc20_all: topData.trc20_all,
-          trc10_record: topData.trc10_record,
-          trc20_record: topData.trc20_record
+          lrc10_all: topData.lrc10_all,
+          lrc20_all: topData.lrc20_all,
+          lrc10_record: topData.lrc10_record,
+          lrc20_record: topData.lrc20_record
         };
         break;
     }
@@ -124,44 +124,44 @@ class Overview extends React.Component {
               <div className="content">
                 <div className="content-item-USD px-3 d-flex justify-content-between border-bottom">
                   <div className="content-item-USD-left">
-                    {tu("data_TRX_transfer_total")}
+                    {tu("data_LIND_transfer_total")}
                   </div>
                   <div className="content-item-USD-right num-font-bold">
                     <span className="d-block">
                       <FormattedNumber
-                        value={data.trx_transfer_amount || 0}
+                        value={data.lind_transfer_amount || 0}
                         maximumFractionDigits={6}
                       ></FormattedNumber>{" "}
-                      TRX
+                      LIND
                     </span>
                     <span className="d-block usd-amount float-right">
                       ≈
                       <FormattedNumber
-                        value={data.trx_transfer_amount * priceUSD || 0}
+                        value={data.lind_transfer_amount * priceUSD || 0}
                       ></FormattedNumber>{" "}
                       USD
                     </span>
                   </div>
                 </div>
                 <div className="content-item px-3 d-flex justify-content-between border-bottom">
-                  <div>{tu("data_TRX_transfer_count")}</div>
+                  <div>{tu("data_LIND_transfer_count")}</div>
                   <div>
                     {" "}
                     <FormattedNumber
-                      value={data.trx_transaction_number || 0}
+                      value={data.lind_transaction_number || 0}
                     ></FormattedNumber>{" "}
                     Txns
                   </div>
                 </div>
                 <div className="content-item px-3 d-flex justify-content-between border-bottom">
-                  <div>{tu("data_TRX_frozen_total")}</div>
+                  <div>{tu("data_LIND_frozen_total")}</div>
                   <div>
                     {" "}
                     <FormattedNumber
                       value={data.whole_freeze || 0}
                       maximumFractionDigits={0}
                     ></FormattedNumber>{" "}
-                    TRX
+                    LIND
                   </div>
                 </div>
                 <div className="content-item px-3 d-flex justify-content-between">
@@ -186,7 +186,7 @@ class Overview extends React.Component {
               <div className="content">
                 <div className="content-detail px-3 border-bottom">
                   <div className="detail-item d-flex justify-content-between">
-                    <div>{tu("data_TRON_tokens_total")}</div>
+                    <div>{tu("data_LINDA_tokens_total")}</div>
                     <div className="font14">
                       {" "}
                       <FormattedNumber
@@ -195,18 +195,18 @@ class Overview extends React.Component {
                     </div>
                   </div>
                   <div className="detail-item d-flex justify-content-between">
-                    <div>{tu("data_TRC10_tokens_total")}</div>
+                    <div>{tu("data_LRC10_tokens_total")}</div>
                     <div>
                       <FormattedNumber
-                        value={data.trc10_all || 0}
+                        value={data.lrc10_all || 0}
                       ></FormattedNumber>
                     </div>
                   </div>
                   <div className="detail-item d-flex justify-content-between">
-                    <div>{tu("data_TRC20_tokens_total")}</div>
+                    <div>{tu("data_LRC20_tokens_total")}</div>
                     <div>
                       <FormattedNumber
-                        value={data.trc20_all || 0}
+                        value={data.lrc20_all || 0}
                       ></FormattedNumber>
                     </div>
                   </div>
@@ -215,7 +215,7 @@ class Overview extends React.Component {
               <div className="content">
                 <div className="content-detail px-3">
                   <div className="detail-item d-flex justify-content-between">
-                    <div>{tu("data_TRONSCAN_tokens_entered")}</div>
+                    <div>{tu("data_LINDASCAN_tokens_entered")}</div>
                     <div className="font14">
                       <FormattedNumber
                         value={data.token_record || 0}
@@ -223,18 +223,18 @@ class Overview extends React.Component {
                     </div>
                   </div>
                   <div className="detail-item d-flex justify-content-between">
-                    <div>{tu("data_TRONSCAN_TRC10_entries")}</div>
+                    <div>{tu("data_LINDASCAN_LRC10_entries")}</div>
                     <div>
                       <FormattedNumber
-                        value={data.trc10_record || 0}
+                        value={data.lrc10_record || 0}
                       ></FormattedNumber>
                     </div>
                   </div>
                   <div className="detail-item d-flex justify-content-between">
-                    <div>{tu("data_TRONSCAN_TRC20_entries")}</div>
+                    <div>{tu("data_LINDASCAN_LRC20_entries")}</div>
                     <div>
                       <FormattedNumber
-                        value={data.trc20_record || 0}
+                        value={data.lrc20_record || 0}
                       ></FormattedNumber>
                     </div>
                   </div>
@@ -253,7 +253,7 @@ class Overview extends React.Component {
               <div className="content">
                 <div className="content-item-USD px-3 d-flex justify-content-between border-bottom">
                   <div className="content-item-USD-left">
-                    {tu("data_TRX_balance")}
+                    {tu("data_LIND_balance")}
                   </div>
                   <div className="content-item-USD-right num-font-bold">
                     <span className="d-block">
@@ -261,7 +261,7 @@ class Overview extends React.Component {
                         value={data.contract_whole_balance || 0}
                         maximumFractionDigits={6}
                       ></FormattedNumber>{" "}
-                      TRX
+                      LIND
                     </span>
                     <span className="d-block usd-amount float-right">
                       ≈

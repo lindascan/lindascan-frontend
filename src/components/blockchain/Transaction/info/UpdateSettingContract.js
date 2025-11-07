@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { AddressLink, ExternalLink, ContractLink, TokenTRC20Link } from "../../../common/Links";
+import { AddressLink, ExternalLink, ContractLink, TokenLRC20Link } from "../../../common/Links";
 import Field from "../../../tools/TransactionViewer/Field";
 import { TransationTitle } from './common/Title'
 import { tu } from "../../../../utils/i18n";

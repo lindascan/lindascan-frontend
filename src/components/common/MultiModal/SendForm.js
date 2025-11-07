@@ -4,22 +4,22 @@ import React, {Fragment} from "react";
 import {FormattedNumber, injectIntl} from "react-intl";
 import {tu} from "../../../utils/i18n";
 import {Client} from "../../../services/api";
-import {isAddressValid} from "@tronscan/client/src/utils/crypto";
+import {isAddressValid} from "@lindascan/client/src/utils/crypto";
 import _, {find, round} from "lodash";
-import { ACCOUNT_TRONLINK, API_URL, ONE_TRX, IS_MAINNET } from "../../../constants";
+import { ACCOUNT_LINDALINK, API_URL, ONE_LIND, IS_MAINNET } from "../../../constants";
 import {Alert} from "reactstrap";
 import {reloadWallet} from "../../../actions/wallet";
 import SweetAlert from "react-bootstrap-sweetalert";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import {login} from "../../../actions/app";
 import Lockr from "lockr";
 import xhr from "axios";
 import qs from 'qs';
 import {Select} from 'antd';
 import isMobile from '../../../utils/isMobile';
-import {withTronWeb} from "../../../utils/tronWeb";
+import {withLindaWeb} from "../../../utils/lindaWeb";
 import { FormatNumberByDecimals,FormatNumberByDecimalsBalance } from '../../../utils/number'
-import { transactionResultManager, transactionResultManagerSun, transactionMultiResultManager } from "../../../utils/tron"
+import { transactionResultManager, transactionResultManagerSun, transactionMultiResultManager } from "../../../utils/linda"
 import { getContractTypesByHex } from "../../../utils/mutiSignHelper"
 import rebuildList from "../../../utils/rebuildList";
 import rebuildToken20List from "../../../utils/rebuildToken20List";
@@ -31,7 +31,7 @@ BigNumber.config({ EXPONENTIAL_AT: [-1e9, 1e9] });
 
 const { Option, OptGroup } = Select;
 
-@withTronWeb
+@withLindaWeb
 class SendForm extends React.Component {
 
   constructor(props) {
@@ -76,10 +76,10 @@ class SendForm extends React.Component {
     let {token} = this.state;
     let TokenType = token.substr(token.length - 5, 5);
     switch (TokenType) {
-      case 'TRC10':
+      case 'LRC10':
         await this.token10Send();
         break;
-      case 'TRC20':
+      case 'LRC20':
         await this.token20Send();
         break;
     }
@@ -91,33 +91,33 @@ class SendForm extends React.Component {
     return typeof d !== "number" ? Number(resultVal) : Number(resultVal.toFixed(parseInt(d)));
   }
   /*
-   * send TRX  and send TRC10
+   * send LIND  and send LRC10
   */
   token10Send = async() => {
     let {to, from, token, amount, decimals, permissionId, permissionTime } = this.state;
     let list = token.split('-');
     let TokenName = list[1];
     let { onSend, wallet} = this.props;
-    let  tronWeb, transactionId;
+    let  lindaWeb, transactionId;
     let result, success;
     this.setState({isLoading: true, modal: null});
     if(IS_MAINNET){
         /*
-        *   MainChain send TRX
+        *   MainChain send LIND
         */
         if (TokenName === "_") {
-            amount = this.Mul(amount,ONE_TRX);
+            amount = this.Mul(amount,ONE_LIND);
             if(this.props.wallet.type==="ACCOUNT_LEDGER") {
-                result = await this.props.tronWeb().trx.sendTransaction(to, amount, {address: wallet.address}, false).catch(function (e) {
+                result = await this.props.lindaWeb().lind.sendTransaction(to, amount, {address: wallet.address}, false).catch(function (e) {
                     console.log(e)
                 });
             }
 
-            if(this.props.wallet.type==="ACCOUNT_TRONLINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY"){
+            if(this.props.wallet.type==="ACCOUNT_LINDALINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY"){
 
                 //create transaction
-                tronWeb = this.props.account.tronWeb;
-                const unSignTransaction = await tronWeb.transactionBuilder.sendTrx(to, amount, from, {'permissionId':permissionId}).catch(function (e) {
+                lindaWeb = this.props.account.lindaWeb;
+                const unSignTransaction = await lindaWeb.transactionBuilder.sendLind(to, amount, from, {'permissionId':permissionId}).catch(function (e) {
                     console.log(e)
                 });
 
@@ -125,7 +125,7 @@ class SendForm extends React.Component {
                 let HexStr = Client.getSendHexStr(TokenName, from, to, amount);
 
                 //sign transaction
-                const SignTransaction = await transactionMultiResultManager(unSignTransaction, tronWeb, permissionId, permissionTime,HexStr);
+                const SignTransaction = await transactionMultiResultManager(unSignTransaction, lindaWeb, permissionId, permissionTime,HexStr);
 
                 // xhr.defaults.headers.common["MainChain"] = 'MainChain';
 
@@ -147,33 +147,33 @@ class SendForm extends React.Component {
 
         } else {
             /*
-            *   MainChain send TRC10
+            *   MainChain send LRC10
             */
             amount = this.Mul(amount,Math.pow(10, decimals));
             if(this.props.wallet.type==="ACCOUNT_LEDGER") {
-                result = await this.props.tronWeb().trx.sendToken(to, amount, TokenName, {address:wallet.address}, false).catch(function (e) {
+                result = await this.props.lindaWeb().lind.sendToken(to, amount, TokenName, {address:wallet.address}, false).catch(function (e) {
                     console.log(e)
                 });
             }
 
 
 
-            if(this.props.wallet.type==="ACCOUNT_TRONLINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY" ){
+            if(this.props.wallet.type==="ACCOUNT_LINDALINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY" ){
                 //create transaction
-                tronWeb = this.props.account.tronWeb;
-                const unSignTransaction = await tronWeb.transactionBuilder.sendToken(to, amount, TokenName, from, {'permissionId':permissionId}).catch(function (e) {
+                lindaWeb = this.props.account.lindaWeb;
+                const unSignTransaction = await lindaWeb.transactionBuilder.sendToken(to, amount, TokenName, from, {'permissionId':permissionId}).catch(function (e) {
                     console.log(e)
                 });
                 //get transaction parameter value to Hex
                 let HexStr = Client.getSendHexStr(TokenName, from, to, amount);
 
                 //sign transaction
-                const SignTransaction = await transactionMultiResultManager(unSignTransaction, tronWeb, permissionId,permissionTime, HexStr);
+                const SignTransaction = await transactionMultiResultManager(unSignTransaction, lindaWeb, permissionId,permissionTime, HexStr);
 
                 // xhr.defaults.headers.common["MainChain"] = 'MainChain';
 
                 //xhr multi-sign transaction api
-                let { data } = await xhr.post("https://list.tronlink.org/api/wallet/multi/transaction", {
+                let { data } = await xhr.post("https://list.lindalink.org/api/wallet/multi/transaction", {
                     "address": wallet.address,
                     "transaction": SignTransaction,
                     "netType":"main_net"
@@ -190,14 +190,14 @@ class SendForm extends React.Component {
     }else{
         //DAppChain
         if (TokenName === "_") {
-            amount = this.Mul(amount,ONE_TRX);
-            result = await this.props.account.sunWeb.sidechain.trx.sendTransaction(to, amount, {address: wallet.address}, false).catch(function (e) {
+            amount = this.Mul(amount,ONE_LIND);
+            result = await this.props.account.sunWeb.sidechain.lind.sendTransaction(to, amount, {address: wallet.address}, false).catch(function (e) {
                 console.log(e)
             });
 
         }else{
             amount = this.Mul(amount,Math.pow(10, decimals));
-            result = await this.props.account.sunWeb.sidechain.trx.sendToken(to, amount, TokenName, {address:wallet.address}, false).catch(function (e) {
+            result = await this.props.account.sunWeb.sidechain.lind.sendToken(to, amount, TokenName, {address:wallet.address}, false).catch(function (e) {
                 console.log(e)
             });
         }
@@ -236,23 +236,23 @@ class SendForm extends React.Component {
     let {from, to, token, amount, tokens20, decimals, permissionId,permissionTime } = this.state;
     let TokenName = token.substring(0, token.length - 6);
     let {onSend,wallet} = this.props;
-    let tronWeb;
+    let lindaWeb;
     let transactionId;
     this.setState({ isLoading: true, modal: null });
     let contractAddress = find(tokens20, t => t.name === TokenName).contract_address;
     if(IS_MAINNET) {
         if (this.props.wallet.type === "ACCOUNT_LEDGER") {
-            tronWeb = this.props.tronWeb();
-            // Send TRC20
-            let unSignTransaction = await tronWeb.transactionBuilder.triggerSmartContract(
-                tronWeb.address.toHex(contractAddress),
+            lindaWeb = this.props.lindaWeb();
+            // Send LRC20
+            let unSignTransaction = await lindaWeb.transactionBuilder.triggerSmartContract(
+                lindaWeb.address.toHex(contractAddress),
                 'transfer(address,uint256)',
                 10000000, 0,
                 [
-                    {type: 'address', value: tronWeb.address.toHex(to)},
+                    {type: 'address', value: lindaWeb.address.toHex(to)},
                     {type: 'uint256', value: new BigNumber(amount).shiftedBy(decimals).toString()}
                 ],
-                tronWeb.address.toHex(this.props.wallet.address),
+                lindaWeb.address.toHex(this.props.wallet.address),
             );
             if (unSignTransaction.transaction !== undefined)
                 unSignTransaction = unSignTransaction.transaction;
@@ -262,19 +262,19 @@ class SendForm extends React.Component {
                 token_name: TokenName,
                 amount: amount,
             }
-            transactionId = await transactionResultManager(unSignTransaction, tronWeb)
-        } else if (this.props.wallet.type === "ACCOUNT_TRONLINK" || this.props.wallet.type === "ACCOUNT_PRIVATE_KEY") {
-             tronWeb = this.props.account.tronWeb;
-            // Send TRC20
-            let unSignTransaction = await tronWeb.transactionBuilder.triggerSmartContract(
-                tronWeb.address.toHex(contractAddress),
+            transactionId = await transactionResultManager(unSignTransaction, lindaWeb)
+        } else if (this.props.wallet.type === "ACCOUNT_LINDALINK" || this.props.wallet.type === "ACCOUNT_PRIVATE_KEY") {
+             lindaWeb = this.props.account.lindaWeb;
+            // Send LRC20
+            let unSignTransaction = await lindaWeb.transactionBuilder.triggerSmartContract(
+                lindaWeb.address.toHex(contractAddress),
                 'transfer(address,uint256)',
                 {'permissionId':permissionId},
                 [
-                    {type: 'address', value: tronWeb.address.toHex(to)},
+                    {type: 'address', value: lindaWeb.address.toHex(to)},
                     {type: 'uint256', value: new BigNumber(amount).shiftedBy(decimals).toString()}
                 ],
-                tronWeb.address.toHex(from),
+                lindaWeb.address.toHex(from),
             );
             if (unSignTransaction.transaction !== undefined)
                 unSignTransaction = unSignTransaction.transaction;
@@ -283,7 +283,7 @@ class SendForm extends React.Component {
             let HexStr = Client.getTriggerSmartContractHexStr(unSignTransaction.raw_data.contract[0].parameter.value);
 
             //sign transaction
-            let SignTransaction = await transactionMultiResultManager(unSignTransaction, tronWeb, permissionId,permissionTime,HexStr);
+            let SignTransaction = await transactionMultiResultManager(unSignTransaction, lindaWeb, permissionId,permissionTime,HexStr);
 
             let { data } = await xhr.post("https://list.tronlink.org/api/wallet/multi/transaction", {
               "address": wallet.address,
@@ -300,7 +300,7 @@ class SendForm extends React.Component {
 
 
     }else{
-         if (this.props.wallet.type === "ACCOUNT_TRONLINK" || this.props.wallet.type === "ACCOUNT_PRIVATE_KEY") {
+         if (this.props.wallet.type === "ACCOUNT_LINDALINK" || this.props.wallet.type === "ACCOUNT_PRIVATE_KEY") {
              let sunWeb = this.props.account.sunWeb;
              let sendNum = new BigNumber(amount).shiftedBy(decimals).toString();
              let sendContractAddress = sunWeb.sidechain.address.toHex(contractAddress)
@@ -338,7 +338,7 @@ class SendForm extends React.Component {
     let TokenName =  list[0];
     let TokenID;
     const style = isMobile? {}: {marginLeft: '-240px', marginTop: '-195px'};
-    if (list[1] !== '_' && list[1] !== 'TRC20') {
+    if (list[1] !== '_' && list[1] !== 'LRC20') {
       TokenID = list[1];
     }
     this.setState({
@@ -475,7 +475,7 @@ class SendForm extends React.Component {
     let list = token.split('-');
     let TokenName =  list[1];
     let TokenType = list[2];
-    if (token && TokenType === 'TRC10') {
+    if (token && TokenType === 'LRC10') {
       if (TokenName === '_') {
         if (amount !== '') {
           amount = parseFloat(amount);
@@ -493,7 +493,7 @@ class SendForm extends React.Component {
           }
         }
       }
-    } else if (token && TokenType === 'TRC20') {
+    } else if (token && TokenType === 'LRC20') {
       if (amount !== '') {
         amount = parseFloat(amount);
         amount = round(amount, decimals);
@@ -511,11 +511,11 @@ class SendForm extends React.Component {
     let {token,tokenBalances,tokens20} = this.state;
     let TokenType =  token.substr(token.length-5,5);
     let list = token.split('-')
-    if (token && TokenType == 'TRC10') {
+    if (token && TokenType == 'LRC10') {
         let TokenName =  list[1];
         let balance = parseFloat(find(tokenBalances, t => t.map_token_id === TokenName).map_amount);
         let TokenDecimals = parseFloat(find(tokenBalances, t => t.map_token_id === TokenName).map_token_precision);
-        if(TokenName == 'TRX'){
+        if(TokenName == 'LIND'){
             this.setState({
                 decimals: 6,
                 balance:balance
@@ -526,7 +526,7 @@ class SendForm extends React.Component {
                 balance:balance
             })
         }
-    }else if(token && TokenType == 'TRC20'){
+    }else if(token && TokenType == 'LRC20'){
         let TokenName =  list[0];
         let balance = parseFloat(find(tokens20, t => t.name === TokenName).token20_balance_decimals);
         let TokenDecimals = parseFloat(find(tokens20, t => t.name === TokenName).decimals);
@@ -577,11 +577,11 @@ class SendForm extends React.Component {
   refreshTokenBalances = async (address) => {
     let {account} = this.props;
     if (account.isLoggedIn && isAddressValid(address)){
-      let {balances, trc20token_balances} = await Client.getAccountByAddressNew(address);
+      let {balances, lrc20token_balances} = await Client.getAccountByAddressNew(address);
       let balances_new = rebuildList(balances, 'name', 'balance');
-      let trc20token_balances_new  = rebuildToken20List(trc20token_balances, 'contract_address', 'balance');
+      let lrc20token_balances_new  = rebuildToken20List(lrc20token_balances, 'contract_address', 'balance');
 
-      trc20token_balances_new && trc20token_balances_new.map(item => {
+      lrc20token_balances_new && lrc20token_balances_new.map(item => {
           item.token20_name = item.name + '(' + item.symbol + ')';
           item.token20_balance = FormatNumberByDecimals(item.balance, item.decimals);
           item.token20_balance_decimals = FormatNumberByDecimalsBalance(item.balance, item.decimals);
@@ -590,7 +590,7 @@ class SendForm extends React.Component {
 
       this.setState({
           tokenBalances: balances_new,
-          tokens20: trc20token_balances_new
+          tokens20: lrc20token_balances_new
       });
     }
 
@@ -605,14 +605,14 @@ class SendForm extends React.Component {
     if (!token && tokenBalances.length > 0) {
       this.setState(
         {
-          token: tokenBalances[0].map_token_name + '-' + tokenBalances[0].map_token_id + '-TRC10',
+          token: tokenBalances[0].map_token_name + '-' + tokenBalances[0].map_token_id + '-LRC10',
         },
         () => this.getSelectedTokenBalance())
 
     } else if (!token && tokens20.length > 0 && tokenBalances.length === 0) {
       this.setState(
         {
-          token: tokens20[0].name + '-TRC20',
+          token: tokens20[0].name + '-LRC20',
         },
         () => this.getSelectedTokenBalance())
     }
@@ -650,12 +650,12 @@ class SendForm extends React.Component {
         <button
             type="button"
             className="btn btn-default mr-2"
-            onClick={onClose}>{tu("trc20_cancel")}</button>
+            onClick={onClose}>{tu("lrc20_cancel")}</button>
           <button
               type="button"
               disabled={!this.isValid() || isLoading}
               className="btn btn-primary"
-              onClick={this.onMultiSignSend}>{tu("trc20_confirm")}</button>
+              onClick={this.onMultiSignSend}>{tu("lrc20_confirm")}</button>
         </Fragment>
     )
   }
@@ -732,18 +732,18 @@ class SendForm extends React.Component {
       });
   }
 
-  async getTRC20Tokens(){
+  async getLRC20Tokens(){
       let {account} = this.props;
-      let result = await xhr.get(API_URL+"/api/token_trc20?sort=issue_time&start=0&limit=50");
-      let tokens20 = result.data.trc20_tokens;
-      const tronWebLedger = this.props.tronWeb();
-      const { tronWeb } = this.props.account;
+      let result = await xhr.get(API_URL+"/api/token_lrc20?sort=issue_time&start=0&limit=50");
+      let tokens20 = result.data.lrc20_tokens;
+      const lindaWebLedger = this.props.lindaWeb();
+      const { lindaWeb } = this.props.account;
       if (this.props.wallet.type === "ACCOUNT_LEDGER"){
           for (let i = 0; i < tokens20.length; i++) {
               const item = tokens20[i];
               item.token20_name = item.name + '(' + item.symbol + ')';
-              item.token_name_type = item.name + '-TRC20';
-              let  contractInstance = await tronWebLedger.contract().at(item.contract_address);
+              item.token_name_type = item.name + '-LRC20';
+              let  contractInstance = await lindaWebLedger.contract().at(item.contract_address);
               let  balanceData = await contractInstance.balanceOf(account.address).call();
               if(balanceData.balance){
                   item.balance = parseFloat(balanceData.balance.toString()) / Math.pow(10,item.decimals);
@@ -760,12 +760,12 @@ class SendForm extends React.Component {
               tokens20: tokens
           });
       }
-      if(this.props.wallet.type === "ACCOUNT_TRONLINK" || this.props.wallet.type === "ACCOUNT_PRIVATE_KEY"){
+      if(this.props.wallet.type === "ACCOUNT_LINDALINK" || this.props.wallet.type === "ACCOUNT_PRIVATE_KEY"){
           for (let i = 0; i < tokens20.length; i++) {
               const item = tokens20[i];
               item.token20_name = item.name + '(' + item.symbol + ')';
-              item.token_name_type = item.name + '-TRC20';
-              let  contractInstance = await tronWeb.contract().at(item.contract_address);
+              item.token_name_type = item.name + '-LRC20';
+              let  contractInstance = await lindaWeb.contract().at(item.contract_address);
               let  balanceData = await contractInstance.balanceOf(account.address).call();
               if(balanceData.balance){
 
@@ -796,11 +796,11 @@ class SendForm extends React.Component {
         .filter(tb => tb.map_token_id > 0 || tb.map_token_id == '_')
         .value();
     tokenBalances.map(item =>{
-        item.token_name_type = item.map_token_name + '-' + item.map_token_id + '-TRC10';
+        item.token_name_type = item.map_token_name + '-' + item.map_token_id + '-LRC10';
         return item
     });
     tokens20.map(item =>{
-        item.token_name_type =  item.name + '-TRC20';
+        item.token_name_type =  item.name + '-LRC20';
         return item
     });
     let placeholder = '0.000000';
@@ -831,7 +831,7 @@ class SendForm extends React.Component {
     return (
         <form className="send-form">
           {modal}
-          {isLoading && <TronLoader/>}
+          {isLoading && <LindaLoader/>}
 
           {/*sender*/}
           <div className="form-group">
@@ -928,7 +928,7 @@ class SendForm extends React.Component {
                   {/*onChange={this.handleTokenChange}*/}
                   {/*value={token}*/}
               {/*>*/}
-                {/*<OptGroup label={tu('TRC10_token')} key="TRC10">*/}
+                {/*<OptGroup label={tu('LRC10_token')} key="LRC10">*/}
                     {/*{*/}
                         {/*tokenBalances.map((tokenBalance, index) => (*/}
                             {/*<Option value={tokenBalance.token_name_type} key={index}>*/}
@@ -945,7 +945,7 @@ class SendForm extends React.Component {
                     {/*}*/}
                 {/*</OptGroup>*/}
 
-                {/*<OptGroup label={tu('TRC20_token')} key="TRC20">*/}
+                {/*<OptGroup label={tu('LRC20_token')} key="LRC20">*/}
                     {/*{*/}
                         {/*tokens20.map((token, index) => (*/}
                             {/*<Option value={token.token_name_type} key={index}>*/}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { t, tu } from '../../../../utils/i18n';
 import 'moment/min/locales';
-import { TRXPrice } from '../../../common/Price';
+import { LINDPrice } from '../../../common/Price';
 import {
     Form, Row, Col, Icon, Input
 } from 'antd';
@@ -11,15 +11,15 @@ export class PriceInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            token_trx_order: true,
+            token_lind_order: true,
             ...this.props.state
         };
     }
 
     render() {
         const { getFieldDecorator, getFieldsValue } = this.props.form;
-        const { token_trx_order, isUpdate } = this.state;
-        const { isTrc10 } =  this.props.state;
+        const { token_lind_order, isUpdate } = this.state;
+        const { isLrc10 } =  this.props.state;
 
         let first = {};
         let last = {};
@@ -30,23 +30,23 @@ export class PriceInfo extends Component {
             sprice,
         } = getFieldsValue(['tokenSymbol', 'fprice', 'sprice']);
 
-        if (token_trx_order){
+        if (token_lind_order){
             first = {
                 abbr: tokenSymbol,
                 name: 'fprice',
                 disabled: true,
             };
             last = {
-                abbr: 'TRX',
+                abbr: 'LIND',
                 name: 'sprice',
                 disabled: false,
             };
             abbrAmount = parseInt((sprice / fprice)*100) / 100;
         } else {
             first = {
-                abbr: 'TRX',
+                abbr: 'LIND',
                 name: 'sprice',
-                disabled: isTrc10,
+                disabled: isLrc10,
             };
             last = {
                 abbr: tokenSymbol,
@@ -60,7 +60,7 @@ export class PriceInfo extends Component {
         const pairItem = (
             <div className="pair-box">
                 <p className="pair-trading">{tu('pair_trading')}</p>
-                <div className="pair">TRX</div>
+                <div className="pair">LIND</div>
             </div>
         );
 
@@ -91,7 +91,7 @@ export class PriceInfo extends Component {
                         }, message: tu('initial_price_v_format'), whitespace: true }
                     ]
                 })(
-                    <Input type="number" style={{ width: '200px' }} className="mr-2" disabled={!!isTrc10 || isUpdate ? true : last.disabled } />
+                    <Input type="number" style={{ width: '200px' }} className="mr-2" disabled={!!isLrc10 || isUpdate ? true : last.disabled } />
                 )}
                 {last.abbr}
             </Form.Item>);
@@ -102,13 +102,13 @@ export class PriceInfo extends Component {
                 <div className="d-flex" style={{ flexWrap: 'wrap'}}>
                     {tokenPriceLeftItem}
                     <Icon type="swap" className="mx-2 fix_form ordericon"
-                        onClick={() => this.setState({ token_trx_order: !token_trx_order })}/>
+                        onClick={() => this.setState({ token_lind_order: !token_lind_order })}/>
                     {tokenPriceRightItem}
                     <span className={isNaN(abbrAmount)? 'd-none': ''} style={{ color: '#9e9e9e' }}>
                         (1 {first.abbr} = {`${abbrAmount} ${last.abbr}`})
                     </span>
                     <span className="mr-3">
-                        TRX{tu('trc20_last_price')}: <TRXPrice amount={1} currency="USD"/>
+                        LIND{tu('lrc20_last_price')}: <LINDPrice amount={1} currency="USD"/>
                     </span>
                 </div>
             </Form.Item>

@@ -2,7 +2,7 @@ import React from "react";
 import {tu} from "../../../utils/i18n";
 import {FormattedNumber} from "react-intl";
 import {AddressLink} from "../../common/Links";
-import {ONE_TRX} from "../../../constants";
+import {ONE_LIND} from "../../../constants";
 
 
 export function Transactions({transactions}) {
@@ -35,7 +35,7 @@ export function Transactions({transactions}) {
               <AddressLink address={transaction.transferToAddress} />
             </td>
             <td className="text-nowrap">
-              <FormattedNumber value={transaction.amount / ONE_TRX} />&nbsp; TRX
+              <FormattedNumber value={transaction.amount / ONE_LIND} />&nbsp; LIND
             </td>
           </tr>
         ))

@@ -6,7 +6,7 @@ import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import {tu, t} from "../../utils/i18n";
 import {FormattedNumber} from "react-intl";
 import {reloadWallet} from "../../actions/wallet";
-import {withTronWeb} from "../../utils/tronWeb";
+import {withLindaWeb} from "../../utils/lindaWeb";
 import { Tooltip } from 'antd';
 import {upperFirst} from "lodash";
 import {HrefLink} from "../common/Links";
@@ -16,14 +16,14 @@ import SmartTable from "../common/SmartTable.js"
         account: state.app.account,
         wallet: state.app.wallet,
         tokenBalances: state.account.tokens,
-        trxBalance: state.account.trxBalance || state.account.balance
+        lindBalance: state.account.lindBalance || state.account.balance
     }),
     {
         reloadWallet
     }
 )
 @injectIntl
-@withTronWeb
+@withLindaWeb
 export default class NoteModal extends React.PureComponent {
 
     constructor(props) {

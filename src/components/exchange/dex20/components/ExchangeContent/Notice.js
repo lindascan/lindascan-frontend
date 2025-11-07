@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { injectIntl } from "react-intl";
 import { Client, Client20 } from "../../../../../services/api";
 import { tu } from "../../../../../utils/i18n";
-// import { TronLoader } from "../common/loaders";
+// import { LindaLoader } from "../common/loaders";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 
-// import Trc10 from "./dex10/index";
-// import Trc20 from "./dex20/index";
+// import Lrc10 from "./dex10/index";
+// import Lrc20 from "./dex20/index";
 
 class Notice extends React.Component {
   constructor() {
@@ -90,8 +90,8 @@ class Notice extends React.Component {
 function mapStateToProps(state) {
   return {
     activeLanguage: state.app.activeLanguage
-    // widget10: state.exchange.trc10,
-    // widget20: state.exchange.trc20
+    // widget10: state.exchange.lrc10,
+    // widget20: state.exchange.lrc20
   };
 }
 

@@ -6,14 +6,14 @@ import {
   FormattedTime,
   injectIntl
 } from "react-intl";
-import { ONE_TRX } from "../../../constants";
+import { ONE_LIND } from "../../../constants";
 import { tu, t } from "../../../utils/i18n";
 import { Client } from "../../../services/api";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { connect } from "react-redux";
-import { transactionResultManager } from "../../../utils/tron";
+import { transactionResultManager } from "../../../utils/linda";
 import Lockr from "lockr";
-import { withTronWeb } from "../../../utils/tronWeb";
+import { withLindaWeb } from "../../../utils/lindaWeb";
 import { reloadWallet } from "../../../actions/wallet";
 
 @connect(
@@ -31,7 +31,7 @@ import { reloadWallet } from "../../../actions/wallet";
 )
 @injectIntl
 // @withTimers
-@withTronWeb
+@withLindaWeb
 class Participate extends React.Component {
   constructor(props) {
     super(props);
@@ -63,7 +63,7 @@ class Participate extends React.Component {
     let { buyAmount } = this.state;
     let { currentWallet, wallet, intl } = this.props;
     let price =
-      ((token.trxNum / token.num) * Math.pow(10, token.precision)) / ONE_TRX;
+      ((token.lindNum / token.num) * Math.pow(10, token.precision)) / ONE_LIND;
     if (!wallet.isOpen) {
       this.setState({
         alert: (
@@ -119,7 +119,7 @@ class Participate extends React.Component {
                 <i className="fa fa-times" aria-hidden="true"></i>
               </a>
               <p className="token-price mt-2">
-                1{token.name} ≈ {price} TRX
+                1{token.name} ≈ {price} LIND
               </p>
               <p className="token-number">{tu("token_enter_number")}</p>
               {token.remaining === 0 && <span> {tu("no_token_to_buy")}</span>}
@@ -136,9 +136,9 @@ class Participate extends React.Component {
                   onChange={e => {
                     this.onBuyInputChange(
                       e.target.value,
-                      ((token.trxNum / token.num) *
+                      ((token.lindNum / token.num) *
                         Math.pow(10, token.precision)) /
-                        ONE_TRX,
+                        ONE_LIND,
                       token.remaining
                     );
                   }}
@@ -146,7 +146,7 @@ class Participate extends React.Component {
               </div>
               <div className="mt-2">
                 <b>
-                 {tu('token_estimated_cost')}  <span className="token-estminated" ref={ref => (this.priceTRX = ref)}>0</span> TRX
+                 {tu('token_estimated_cost')}  <span className="token-estminated" ref={ref => (this.priceLIND = ref)}>0</span> LIND
                 </b>
               </div>
               <button
@@ -165,15 +165,15 @@ class Participate extends React.Component {
   };
 
   buyTokens = token => {
-    let price = (token.trxNum / token.num) * Math.pow(10, token.precision);
+    let price = (token.lindNum / token.num) * Math.pow(10, token.precision);
     let { buyAmount } = this.state;
     if (buyAmount <= 0) {
       return;
     }
     let { currentWallet, wallet } = this.props;
-    let tokenCosts = buyAmount * (price / ONE_TRX);
+    let tokenCosts = buyAmount * (price / ONE_LIND);
 
-    if (currentWallet.balance / ONE_TRX < tokenCosts) {
+    if (currentWallet.balance / ONE_LIND < tokenCosts) {
       this.setState({
         alert: (
           <SweetAlert
@@ -190,7 +190,7 @@ class Participate extends React.Component {
               >
                 <i className="fa fa-times" aria-hidden="true"></i>
               </a>
-              <span>{tu("not_enough_trx_message")}</span>
+              <span>{tu("not_enough_lind_message")}</span>
               <button
                 className="btn btn-danger btn-block mt-3"
                 onClick={() => {
@@ -225,7 +225,7 @@ class Participate extends React.Component {
               </p>
               <span>
                 {buyAmount} {token.name} {t("for")}{" "}
-                {parseFloat((buyAmount * (price / ONE_TRX)).toFixed(6))} TRX?
+                {parseFloat((buyAmount * (price / ONE_LIND)).toFixed(6))} LIND?
               </span>
               <button
                 className="btn btn-danger btn-block mt-3"
@@ -249,8 +249,8 @@ class Participate extends React.Component {
     value = value.replace(/^0|[^\d*]/g, "");
     this.setState({ buyAmount: value });
     this.buyAmount.value = value;
-    let priceTRX = value * price;
-    this.priceTRX.innerHTML = intl.formatNumber(priceTRX, {
+    let priceLIND = value * price;
+    this.priceLIND.innerHTML = intl.formatNumber(priceLIND, {
       maximumFractionDigits: 6
     });
   };
@@ -321,7 +321,7 @@ class Participate extends React.Component {
     }
   };
   submit = async token => {
-    let price = (token.trxNum / token.num) * Math.pow(10, token.precision);
+    let price = (token.lindNum / token.num) * Math.pow(10, token.precision);
     let { account, currentWallet } = this.props;
     let { buyAmount, privateKey } = this.state;
 
@@ -329,13 +329,13 @@ class Participate extends React.Component {
     if (
       Lockr.get("islogin") ||
       this.props.walletType.type === "ACCOUNT_LEDGER" ||
-      this.props.walletType.type === "ACCOUNT_TRONLINK"
+      this.props.walletType.type === "ACCOUNT_LINDALINK"
     ) {
-      const tronWebLedger = this.props.tronWeb();
-      const { tronWeb } = this.props.account;
+      const lindaWebLedger = this.props.lindaWeb();
+      const { lindaWeb } = this.props.account;
       try {
         if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-          const unSignTransaction = await tronWebLedger.transactionBuilder
+          const unSignTransaction = await lindaWebLedger.transactionBuilder
             .purchaseToken(
               token.ownerAddress,
               token.id + "",
@@ -345,22 +345,22 @@ class Participate extends React.Component {
             .catch(e => false);
           const { result } = await transactionResultManager(
             unSignTransaction,
-            tronWebLedger
+            lindaWebLedger
           );
           res = result;
         }
-        if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-          const unSignTransaction = await tronWeb.transactionBuilder
+        if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+          const unSignTransaction = await lindaWeb.transactionBuilder
             .purchaseToken(
               token.ownerAddress,
               token.id + "",
               parseInt((buyAmount * price).toFixed(0)),
-              tronWeb.defaultAddress.hex
+              lindaWeb.defaultAddress.hex
             )
             .catch(e => false);
           const { result } = await transactionResultManager(
             unSignTransaction,
-            tronWeb
+            lindaWeb
           );
           res = result;
         }

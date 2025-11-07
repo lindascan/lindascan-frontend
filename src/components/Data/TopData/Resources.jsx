@@ -87,7 +87,7 @@ class DataResources extends React.Component {
       {
         title: upperFirst(
           intl.formatMessage({
-            id: "data_resource_table_freezingTRX_energy"
+            id: "data_resource_table_freezingLIND_energy"
           })
         ),
         dataIndex: "energy_use",
@@ -105,7 +105,7 @@ class DataResources extends React.Component {
       {
         title: upperFirst(
           intl.formatMessage({
-            id: "data_resource_table_burningTRX_energy"
+            id: "data_resource_table_burningLIND_energy"
           })
         ),
         dataIndex: "energy_burn",

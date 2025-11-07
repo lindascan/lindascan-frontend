@@ -5,7 +5,7 @@ import { Table } from 'antd';
 import _,{upperFirst} from 'lodash'
 import {Client} from "../../services/api";
 import {Link} from "react-router-dom";
-import {ONE_TRX,IS_MAINNET} from "../../constants";
+import {ONE_LIND,IS_MAINNET} from "../../constants";
 
 class Committee extends React.Component {
 
@@ -40,13 +40,13 @@ class Committee extends React.Component {
 
     async getChainparameters() {
         if(IS_MAINNET){
-            let { tronParameters } = await Client.getChainparameters();
-            if(!tronParameters){
+            let { lindaParameters } = await Client.getChainparameters();
+            if(!lindaParameters){
                 return
             }
             // let EnergyLimitNew   = {key: "getShieldedTransactionCreateAccountFee", value: 1000000};
-            // tronParameters.splice(19, 0, EnergyLimitNew);
-            tronParameters.map(item => {
+            // lindaParameters.splice(19, 0, EnergyLimitNew);
+            lindaParameters.map(item => {
                 switch (item['key']){
                     case "getMaintenanceTimeInterval":
                         item.name = 'propose_1';
@@ -120,7 +120,7 @@ class Committee extends React.Component {
                     //     item.name = 'propose_18';
                     //     item.id = '17';
                     //     break;
-                    case "getAllowTvmTransferTrc10":
+                    case "getAllowTvmTransferLrc10":
                         item.name = 'propose_19';
                         item.id = '18';
                         break;
@@ -200,18 +200,18 @@ class Committee extends React.Component {
                         break;           
                 }
             });
-            let tronParametersNew = [];
-            tronParameters.map(item => {
+            let lindaParametersNew = [];
+            lindaParameters.map(item => {
                 if(item.name){
-                    tronParametersNew.push(item)
+                    lindaParametersNew.push(item)
                 }
             })
             this.setState({
-                dataSource: _(tronParametersNew).sortBy(tb => Number(tb.id)).value()
+                dataSource: _(lindaParametersNew).sortBy(tb => Number(tb.id)).value()
             })
         }else{
-            let { tronParameters } = await Client.getChainparameters();
-            if(!tronParameters){
+            let { lindaParameters } = await Client.getChainparameters();
+            if(!lindaParameters){
                 return
             }
 
@@ -226,7 +226,7 @@ class Committee extends React.Component {
                 'getPercentToPayWitness',
             ]
 
-            let sunsideparameters = tronParameters.filter(function(v){
+            let sunsideparameters = lindaParameters.filter(function(v){
                 return sunside.indexOf(v.key)!==-1
             })
             sunsideparameters.map(item => {
@@ -265,15 +265,15 @@ class Committee extends React.Component {
                         break;
                 }
             });
-            let tronParametersNew = [];
+            let lindaParametersNew = [];
             sunsideparameters.map(item => {
                 if(item.name){
-                    tronParametersNew.push(item)
+                    lindaParametersNew.push(item)
                 }
             })
 
             this.setState({
-                dataSource: tronParametersNew.slice(0,2)
+                dataSource: lindaParametersNew.slice(0,2)
             })
 
         }
@@ -324,25 +324,25 @@ class Committee extends React.Component {
                                         }</span></div>
                                     }
                                     {
-                                        record.key == 'getAccountUpgradeCost' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                        record.key == 'getAccountUpgradeCost' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                     }
                                     {
-                                        record.key == 'getCreateAccountFee' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                        record.key == 'getCreateAccountFee' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                     }
                                     {
                                         record.key == 'getTransactionFee' && <div><span>{text}</span> &nbsp;<span>Sun/byte</span></div>
                                     }
                                     {
-                                        record.key == 'getAssetIssueFee' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                        record.key == 'getAssetIssueFee' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                     }
                                     {
-                                        record.key == 'getWitnessPayPerBlock' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                        record.key == 'getWitnessPayPerBlock' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                     }
                                     {
-                                        record.key == 'getWitnessStandbyAllowance' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                        record.key == 'getWitnessStandbyAllowance' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                     }
                                     {/*{*/}
-                                        {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>*/}
+                                        {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>*/}
                                     {/*}*/}
                                     {/*{*/}
                                         {/*record.key == 'getCreateNewAccountBandwidthRate' && <div><span>{text}</span> &nbsp;<span>bandwith/byte</span></div>*/}
@@ -364,14 +364,14 @@ class Committee extends React.Component {
                                     {
                                         record.key == 'getEnergyFee' && <div>
                                             {
-                                                <span>{text / ONE_TRX} TRX</span>
+                                                <span>{text / ONE_LIND} LIND</span>
                                             }
                                         </div>
                                     }
                                     {
                                         record.key == 'getExchangeCreateFee' && <div>
                                             {
-                                                <span>{text / ONE_TRX} TRX</span>
+                                                <span>{text / ONE_LIND} LIND</span>
                                             }
                                         </div>
                                     }
@@ -415,7 +415,7 @@ class Committee extends React.Component {
                                         </div>
                                     }
                                     {
-                                        record.key == 'getAllowTvmTransferTrc10' && <div>
+                                        record.key == 'getAllowTvmTransferLrc10' && <div>
                                             {
                                                 text? <span>{tu('propose_allowed')}</span>:
                                                     <span>{tu('propose_not_allowed')}</span>
@@ -469,13 +469,13 @@ class Committee extends React.Component {
                                     }
                                     {
                                         record.key == 'getUpdateAccountPermissionFee' && <div>
-                                            <span>{text / ONE_TRX}</span> &nbsp;
-                                            <span>TRX</span></div>
+                                            <span>{text / ONE_LIND}</span> &nbsp;
+                                            <span>LIND</span></div>
                                     }
                                     {
                                         record.key == 'getMultiSignFee' && <div>
-                                            <span>{text / ONE_TRX}</span> &nbsp;
-                                            <span>TRX</span></div>
+                                            <span>{text / ONE_LIND}</span> &nbsp;
+                                            <span>LIND</span></div>
                                     }
 
                                     {
@@ -504,7 +504,7 @@ class Committee extends React.Component {
                                     }
                                     {                       
                                         record.key == 'getShieldedTransactionFee' && <div>
-                                            <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                            <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         </div>
                                     }
                                     {                       
@@ -524,7 +524,7 @@ class Committee extends React.Component {
                                     {
                                         record.key == 'getWitness127PayPerBlock' &&
                                             <div>
-                                                <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                                <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                             </div>
                                     }
                                     {
@@ -543,7 +543,7 @@ class Committee extends React.Component {
                                     {
                                         record.key == 'getShieldedTransactionCreateAccountFee' &&
                                             <div>
-                                                <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                                <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                             </div>
                                     }
                                     {
@@ -684,7 +684,7 @@ class Committee extends React.Component {
                 <div className="network-parameters pb-4">
                     <h4 className="pt-4">
                         <span className="text-uppercase">
-                            <span>{tu('TRON_network_parameters')}</span>
+                            <span>{tu('LINDA_network_parameters')}</span>
                         </span> &nbsp;&nbsp;
                     </h4>
                     <div className="mt-4">

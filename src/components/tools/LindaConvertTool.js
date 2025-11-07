@@ -4,9 +4,9 @@ import {tu} from "../../utils/i18n";
 import {connect} from "react-redux";
 import {BlockNumberLink} from "../common/Links";
 import {FormattedNumber} from "react-intl";
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 
-class TronConvertTool extends Component {
+class LindaConvertTool extends Component {
 
   constructor(props) {
     super(props);
@@ -43,15 +43,15 @@ class TronConvertTool extends Component {
             <div className="row" style={{justifyContent: 'center'}}>
               {
                 <div className={this.state.loader ? "loader-hidden col-md-12" : "show col-md-12"}>
-                  <TronLoader/>
+                  <LindaLoader/>
                 </div>
               }
               {
                 <div className={this.state.loader ? "show col-md-12" : "hidden col-md-12"}
                      style={{width: '100%', height: '100%', minHeight: '750px', paddingTop: '15px', border: 0}}>
-                  <iframe id="convertTool" title="TronConvertTool"
+                  <iframe id="convertTool" title="LindaConvertTool"
                           style={{width: '100%', height: '100%', minHeight: '750px', paddingTop: '15px', border: 0}}
-                          src="https://tronscan.org/TronConvertTool/"></iframe>
+                          src="https://tronscan.org/LindaConvertTool/"></iframe>
                 </div>
               }
             </div>
@@ -67,4 +67,4 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(TronConvertTool)
+export default connect(mapStateToProps, mapDispatchToProps)(LindaConvertTool)

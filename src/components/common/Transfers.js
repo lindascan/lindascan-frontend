@@ -8,7 +8,7 @@ import {Truncate,TruncateAddress} from "./text";
 import {withTimers} from "../../utils/timing";
 import SmartTable from "./SmartTable.js"
 import {upperFirst,upperCase} from "lodash";
-import {TronLoader} from "./loaders";
+import {LindaLoader} from "./loaders";
 import rebuildList from "../../utils/rebuildList";
 import {SwitchToken} from "./Switch";
 import TotalInfo from "./TableTotal";
@@ -59,8 +59,8 @@ class Transfers extends React.Component {
   };
 
   load = async (page, pageSize) => {
-    let transfersTRX;
-    let {filter, istrc20=false} = this.props;
+    let transfersLIND;
+    let {filter, islrc20=false} = this.props;
     let {showTotal,hideSmallCurrency,tokenName} = this.state;
     this.setState(
         {
@@ -97,16 +97,16 @@ class Transfers extends React.Component {
     })
 
     if(hideSmallCurrency){
-        transfersTRX = _(transfers)
-            .filter(tb => tb.tokenName === "_" || upperCase(tb.tokenName) === "TRX")
+        transfersLIND = _(transfers)
+            .filter(tb => tb.tokenName === "_" || upperCase(tb.tokenName) === "LIND")
             .value();
     }else{
-        transfersTRX = transfers
+        transfersLIND = transfers
     }
    
     this.setState({
       page,
-      transfers:transfersTRX,
+      transfers:transfersLIND,
       total:total,
       rangeTotal:range,
       loading: false,
@@ -242,7 +242,7 @@ class Transfers extends React.Component {
 
     let {transfers, page, total, rangeTotal = 0, pageSize, loading, emptyState: EmptyState = null} = this.state;
     let column = this.customizedColumn();
-    let {intl, istrc20, address = false} = this.props;
+    let {intl, islrc20, address = false} = this.props;
 
     let tableInfo = intl.formatMessage({id: 'view_total'}) + ' ' + total + ' ' + intl.formatMessage({id: 'transfers_unit'})
     let locale  = {emptyText: intl.formatMessage({id: 'no_transfers'})}
@@ -258,12 +258,12 @@ class Transfers extends React.Component {
 
     return (
         <div className="token_black table_pos">
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
             {
                 transfers.length? <div className="d-flex justify-content-between" style={{left: 'auto'}}>
                   <TotalInfo total={total} rangeTotal={rangeTotal} typeText="transfers_unit" common={!address} divClass="table_pos_info_addr"/>
                   <div className="table_pos_switch d-md-block table_pos_switch_addr table_pos_switch_addr_transfers">
-                    <SwitchToken  handleSwitch={this.handleSwitch} text="only_TRX_transfers" isHide={false}/>
+                    <SwitchToken  handleSwitch={this.handleSwitch} text="only_LIND_transfers" isHide={false}/>
                   </div>
                     {
                         address ?  <div className="transactions-rangePicker table_pos_picker transfers_pos_picker" style={{width: "360px"}}>
@@ -274,7 +274,7 @@ class Transfers extends React.Component {
                   {/*<div className="table_pos_info d-md-block table_pos_info_addr2">{tableInfo}<span> <QuestionMark placement="top" text="to_provide_a_better_experience"></QuestionMark></span></div>*/}
                     <TotalInfo total={total} rangeTotal={rangeTotal} typeText="transfers_unit" common={!address} divClass="table_pos_info_addr2"/>
                   <div className="table_pos_switch d-md-block table_pos_switch_addr2">
-                    <SwitchToken  handleSwitch={this.handleSwitch} text="only_TRX_transfers" isHide={false}/>
+                    <SwitchToken  handleSwitch={this.handleSwitch} text="only_LIND_transfers" isHide={false}/>
                   </div>
                     {
                         address ?  <div className="transactions-rangePicker table_pos_picker" style={{width: "360px"}}>

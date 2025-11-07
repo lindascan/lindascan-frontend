@@ -6,22 +6,22 @@ import {
   FormattedTime,
   injectIntl
 } from "react-intl";
-import { ONE_TRX } from "../../../constants";
+import { ONE_LIND } from "../../../constants";
 import { tu, t } from "../../../utils/i18n";
 import { withTimers } from "../../../utils/timing";
 import { Client } from "../../../services/api";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { connect } from "react-redux";
-import { transactionResultManager } from "../../../utils/tron";
+import { transactionResultManager } from "../../../utils/linda";
 import Lockr from "lockr";
-import { withTronWeb } from "../../../utils/tronWeb";
+import { withLindaWeb } from "../../../utils/lindaWeb";
 import { reloadWallet } from "../../../actions/wallet";
 import { isEqual } from "lodash";
 import Participate from "./Participate";
 import ApiClientToken from "../../../services/tokenApi";
 
 // @withTimers
-@withTronWeb
+@withLindaWeb
 class TokenInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +34,7 @@ class TokenInfo extends React.Component {
   }
 
   componentDidMount() {
-    this.loadTotalTRXSupply();
+    this.loadTotalLINDSupply();
     this.loadParticipateassetissue();
   }
   // shouldComponentUpdate(nextProps) {
@@ -58,7 +58,7 @@ class TokenInfo extends React.Component {
       participateassetissueTotal: data && data.total
     });
   }
-  loadTotalTRXSupply = async () => {
+  loadTotalLINDSupply = async () => {
     const { funds } = await Client.getBttFundsSupply();
     this.setState({
       currentTotalSupply: parseInt(funds.totalTurnOver)
@@ -163,7 +163,7 @@ class TokenInfo extends React.Component {
                     value={0.00447261}
                     maximumFractionDigits={8}
                   />{" "}
-                  TRX <br />
+                  LIND <br />
                   <FormattedNumber
                     value={0.00001824}
                     maximumFractionDigits={8}
@@ -174,13 +174,13 @@ class TokenInfo extends React.Component {
                 <td>
                   <FormattedNumber
                     value={
-                      ((token.trxNum / token.num) *
+                      ((token.lindNum / token.num) *
                         Math.pow(10, token.precision)) /
-                      ONE_TRX
+                      ONE_LIND
                     }
                     maximumFractionDigits={6}
                   />{" "}
-                  TRX
+                  LIND
                 </td>
               )}
             </tr>
@@ -202,11 +202,11 @@ class TokenInfo extends React.Component {
               <th>{tu("fund_raised")}:</th>
               {token.id == "1002000" ? (
                 <td>
-                  <FormattedNumber value={159403820.4} /> TRX
+                  <FormattedNumber value={159403820.4} /> LIND
                 </td>
               ) : (
                 <td>
-                  <FormattedNumber value={token.participated / ONE_TRX} /> TRX
+                  <FormattedNumber value={token.participated / ONE_LIND} /> LIND
                 </td>
               )}
             </tr>
@@ -214,7 +214,7 @@ class TokenInfo extends React.Component {
             {/*<td colSpan="2">*/}
             {/*<i className="fa fa-exclamation-circle" aria-hidden="true"*/}
             {/*style={{color: '#999999', marginRight: '10px'}}></i>*/}
-            {/*<span style={{color: '#999999', fontSize: '12px'}}>{tu('change_info')}</span>&nbsp;<a href='mailto:token@tronscan.org' style={{color:'red',fontSize: '12px'}}>{tu('contact_us')}</a></td>*/}
+            {/*<span style={{color: '#999999', fontSize: '12px'}}>{tu('change_info')}</span>&nbsp;<a href='mailto:token@lindascan.org' style={{color:'red',fontSize: '12px'}}>{tu('contact_us')}</a></td>*/}
             {/*</tr>*/}
           </tbody>
         </table>

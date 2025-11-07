@@ -10,10 +10,10 @@ import { widget } from "../../../../../lib/charting_library.min";
 import Datafeed from "./udf/index.js";
 import { connect } from "react-redux";
 import { tu, tv } from "../../../../../utils/i18n";
-import { TRXPrice } from "../../../../common/Price";
+import { LINDPrice } from "../../../../common/Price";
 import { Client20 } from "../../../../../services/api";
 import { change10lock, setWidget } from "../../../../../actions/exchange";
-import { TokenTRC20Link } from "../../../../common/Links";
+import { TokenLRC20Link } from "../../../../common/Links";
 import { Icon, Modal } from "antd";
 import { toThousands } from "../../../../../utils/number";
 import { Popover } from "antd";
@@ -32,14 +32,14 @@ class Tokeninfo extends React.Component {
         id: [],
         linkUrl: {
           en:
-            "https://support.poloniex.org/hc/en-us/articles/360030644412-TRC20-USDT-Reloaded-with-Powerful-Aid-from-TRXMarket-15-000-USD-Awaits-",
+            "https://support.poloniex.org/hc/en-us/articles/360030644412-LRC20-USDT-Reloaded-with-Powerful-Aid-from-LINDMarket-15-000-USD-Awaits-",
           zh:
-            "https://support.poloniex.org/hc/zh-cn/articles/360030644412-TRXMarket%E5%8A%A9%E5%8A%9BTRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81"
+            "https://support.poloniex.org/hc/zh-cn/articles/360030644412-LINDMarket%E5%8A%A9%E5%8A%9BLRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81"
         },
         text: {
           en:
-            "TRC20-USDT Returns with Generous Rewards from Poloni DEX - 15,000 USDT Awaits!",
-          zh: "Poloni DEX助力TRC20-USDT重装上阵，惊喜放送10万人民币"
+            "LRC20-USDT Returns with Generous Rewards from Poloni DEX - 15,000 USDT Awaits!",
+          zh: "Poloni DEX助力LRC20-USDT重装上阵，惊喜放送10万人民币"
         }
       }
     };
@@ -76,31 +76,31 @@ class Tokeninfo extends React.Component {
 
   getTokenInfo() {
     const { selectData } = this.props;
-    // Client20.gettokenInfo20().then(({ trc20_tokens }) => {
-    //   if (trc20_tokens) {
-    //     const newObj = trc20_tokens.filter(
+    // Client20.gettokenInfo20().then(({ lrc20_tokens }) => {
+    //   if (lrc20_tokens) {
+    //     const newObj = lrc20_tokens.filter(
     //       o => o.name == selectData.first_token_id
     //     )[0];
     //     this.setState({ tokeninfoItem: newObj });
-    //     this.setState({ tokeninfo: trc20_tokens });
+    //     this.setState({ tokeninfo: lrc20_tokens });
     //   }
     // });
     // const { selectData } = this.props;
     // let newObj = {};
 
-    if (selectData.fShortName == "TRX") {
+    if (selectData.fShortName == "LIND") {
       const newObj = {
         icon_url: "http://coin.top/production/js/20190506075825.png"
       };
       newObj["description"] =
-        "TRON is dedicated to building the infrastructure for a truly decentralized Internet. The TRON Protocol, one of the largest blockchain-based operating systems in the world which offers scalability, high-availability, and high-throughput computing (HTC) support that serves as the foundation for all decentralized applications in the TRON ecosystem. It also provides better compatibility for Ethereum smart contracts through an innovative, pluggable smart contract platform. Since July 24th, 2018, TRON acquired BitTorrent Inc. which is an Internet technology company based in San Francisco. It designs distributed technologies that scale efficiently, keep intelligence at the edge, and keep creators and consumers in control of their content and data. Every month more than 170 million people use BitTorrent Inc. developed products. Its protocols move as much as 40% of the world's Internet traffic on a daily basis.";
+        "LINDA is dedicated to building the infrastructure for a truly decentralized Internet. The LINDA Protocol, one of the largest blockchain-based operating systems in the world which offers scalability, high-availability, and high-throughput computing (HTC) support that serves as the foundation for all decentralized applications in the LINDA ecosystem. It also provides better compatibility for Ethereum smart contracts through an innovative, pluggable smart contract platform. Since July 24th, 2018, LINDA acquired BitTorrent Inc. which is an Internet technology company based in San Francisco. It designs distributed technologies that scale efficiently, keep intelligence at the edge, and keep creators and consumers in control of their content and data. Every month more than 170 million people use BitTorrent Inc. developed products. Its protocols move as much as 40% of the world's Internet traffic on a daily basis.";
       newObj["totalSupply"] = "100000000000000000";
       newObj["issued"] = "66766249779296000";
       newObj["nrOfTokenHolders"] = "";
       newObj["startTime"] = 1498838400000;
-      newObj["url"] = "http://tron.network";
+      newObj["url"] = "http://linda.network";
       newObj["white_paper"] =
-        "https://tron.network/static/doc/white_paper_v_2_0.pdf";
+        "https://linda.network/static/doc/white_paper_v_2_0.pdf";
       newObj["precision"] = 6;
       this.setState({ tokeninfoItem: newObj });
       return;
@@ -112,17 +112,17 @@ class Tokeninfo extends React.Component {
       return;
     }
     Client20.getTokenInfoItem(fTokenAddr, selectData.pairType).then(res => {
-      const { trc20_tokens } = res;
-      if (trc20_tokens && trc20_tokens[0]) {
-        const newObj = trc20_tokens[0];
-        newObj["description"] = trc20_tokens[0].token_desc;
-        newObj["totalSupply"] = trc20_tokens[0].total_supply_with_decimals;
-        newObj["issued"] = trc20_tokens[0].total_supply_with_decimals;
+      const { lrc20_tokens } = res;
+      if (lrc20_tokens && lrc20_tokens[0]) {
+        const newObj = lrc20_tokens[0];
+        newObj["description"] = lrc20_tokens[0].token_desc;
+        newObj["totalSupply"] = lrc20_tokens[0].total_supply_with_decimals;
+        newObj["issued"] = lrc20_tokens[0].total_supply_with_decimals;
         newObj["nrOfTokenHolders"] = "";
-        newObj["startTime"] = trc20_tokens[0].issue_time;
-        newObj["url"] = trc20_tokens[0].home_page;
-        newObj["white_paper"] = trc20_tokens[0].white_paper;
-        newObj["precision"] = trc20_tokens[0].decimals;
+        newObj["startTime"] = lrc20_tokens[0].issue_time;
+        newObj["url"] = lrc20_tokens[0].home_page;
+        newObj["white_paper"] = lrc20_tokens[0].white_paper;
+        newObj["precision"] = lrc20_tokens[0].decimals;
         this.setState({ tokeninfoItem: newObj });
         return;
       }
@@ -153,15 +153,15 @@ class Tokeninfo extends React.Component {
     let price_convert = 0;
     if (
       price &&
-      price[selectData.sShortName == "TRX" ? "trxToOther" : "usdtToOther"]
+      price[selectData.sShortName == "LIND" ? "lindToOther" : "usdtToOther"]
     ) {
       // price_convert = (
-      //   price[selectData.sShortName == "TRX" ? "trxToOther" : "usdtToOther"][
+      //   price[selectData.sShortName == "LIND" ? "lindToOther" : "usdtToOther"][
       //     activeCurrency && activeCurrency.toLocaleLowerCase()
       //   ] * selectData.price
-      // ).toFixed(activeCurrency == "trx" ? 6 : 8);
+      // ).toFixed(activeCurrency == "lind" ? 6 : 8);
       price_convert = (
-        price[selectData.sShortName == "TRX" ? "trxToOther" : "usdtToOther"][
+        price[selectData.sShortName == "LIND" ? "lindToOther" : "usdtToOther"][
           "usd"
         ] * selectData.price
       ).toFixed(8);
@@ -250,15 +250,15 @@ class Tokeninfo extends React.Component {
               </p>
             </div>
             <div className="item">
-              <p>{tu("trc20_24h_h")}</p>
+              <p>{tu("lrc20_24h_h")}</p>
               <p>{selectData.high}</p>
             </div>
             <div className="item">
-              <p>{tu("trc20_24h_l")}</p>
+              <p>{tu("lrc20_24h_l")}</p>
               <p>{selectData.low}</p>
             </div>
             <div className="item">
-              <p>{tu("trc20_24H_Total")}</p>
+              <p>{tu("lrc20_24H_Total")}</p>
               <p>
                 {toThousands(selectData.volume)} {selectData.fShortName}
               </p>
@@ -290,7 +290,7 @@ class Tokeninfo extends React.Component {
             <hr />
             <div className="info-list">
               <div>
-                <span>{tu("trc20_token_info_Total_Supply")}</span>
+                <span>{tu("lrc20_token_info_Total_Supply")}</span>
                 <span>
                   {tokeninfoItem.totalSupply ? (
                     <FormattedNumber
@@ -305,7 +305,7 @@ class Tokeninfo extends React.Component {
                 </span>
               </div>
               <div>
-                <span>{tu("trc20_token_info_Circulating_Supply")}</span>
+                <span>{tu("lrc20_token_info_Circulating_Supply")}</span>
                 <span>
                   {tokeninfoItem.issued ? (
                     <FormattedNumber
@@ -351,7 +351,7 @@ class Tokeninfo extends React.Component {
                 </span>
               </div>
               <div>
-                <span>{tu("trc20_token_info_Website")}</span>
+                <span>{tu("lrc20_token_info_Website")}</span>
                 <span>
                   {tokeninfoItem.url == "no_message" ||
                   tokeninfoItem.url == "" ? (
@@ -378,15 +378,15 @@ class Tokeninfo extends React.Component {
                 </span>
               </div>
             </div>
-            {selectData.fShortName != "TRX" && (
+            {selectData.fShortName != "LIND" && (
               <div className="info-more">
                 <a
                   href={
                     selectData.pairType == 2 || selectData.pairType == 3
-                      ? `https://tronscan.org/#/token20/${
+                      ? `https://lindascan.org/#/token20/${
                           tokeninfoItem.contract_address
                         }`
-                      : `https://tronscan.org/#/token/${tokeninfoItem.id}`
+                      : `https://lindascan.org/#/token/${tokeninfoItem.id}`
                   }
                   target="_blank"
                 >

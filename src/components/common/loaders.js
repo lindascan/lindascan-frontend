@@ -15,7 +15,7 @@ export function PropagateLoader(props = {}) {
     )
 }
 
-export function TronLoader({options = {}, children = null, height = 70, ...props}) {
+export function LindaLoader({options = {}, children = null, height = 70, ...props}) {
 
     return (
         <div className="p-3 text-center">

@@ -4,12 +4,12 @@ import { AddressLink } from "../../common/Links";
 import { Client } from "../../../services/api";
 import SmartTable from "../../common/SmartTable";
 import { FormattedNumber, injectIntl } from "react-intl";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { upperFirst, lowerCase } from "lodash";
 import xhr from "axios/index";
-import { API_URL, ONE_TRX } from "../../../constants";
+import { API_URL, ONE_LIND } from "../../../constants";
 import { toastr } from "react-redux-toastr";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import { trim } from "lodash";
 import { FormatNumberByDecimals } from "../../../utils/number";
 import { connect } from "react-redux";
@@ -65,11 +65,11 @@ class TokenHolders extends React.Component {
       format: "csv",
       ...params
     });
-    getCsvUrl(`${API_URL}/api/token_trc20/holders?${query}`);
-    let { data } = await xhr.get(API_URL + "/api/token_trc20/holders", {
+    getCsvUrl(`${API_URL}/api/token_lrc20/holders?${query}`);
+    let { data } = await xhr.get(API_URL + "/api/token_lrc20/holders", {
       params
     });
-    let addresses = data.trc20_tokens;
+    let addresses = data.lrc20_tokens;
     let total = data.total;
     let rangeTotal = data.rangeTotal;
     let contractMap = data.contractMap;
@@ -319,13 +319,13 @@ class TokenHolders extends React.Component {
     if (isAddressValid(search)) {
       let result = await xhr.get(
         API_URL +
-          "/api/token_trc20/holders?contract_address=" +
+          "/api/token_lrc20/holders?contract_address=" +
           filter.token +
           "&holder_address=" +
           search
       );
       let exchangeFlag = await Client.getTagNameList();
-      let addresses = result.data.trc20_tokens;
+      let addresses = result.data.lrc20_tokens;
       let rangeTotal = result.data.rangeTotal;
       if (addresses.length) {
         addresses.map(item => {
@@ -390,7 +390,7 @@ class TokenHolders extends React.Component {
           id: "warning"
         }),
         intl.formatMessage({
-          id: "search_TRC20_error"
+          id: "search_LRC20_error"
         })
       );
       this.setState({
@@ -449,13 +449,13 @@ class TokenHolders extends React.Component {
               marginTop: "-20px"
             }}
           >
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div className="row transfers holder-transfers">
           <div className="col-md-12 table_pos">
             <HolderDistribution
-              trcType={"trc20"}
+              trcType={"lrc20"}
               tokenId={filter.token}
             ></HolderDistribution>
             <div
@@ -483,7 +483,7 @@ class TokenHolders extends React.Component {
                         })
                       }
                       placeholder={intl.formatMessage({
-                        id: "search_TRC20"
+                        id: "search_LRC20"
                       })}
                     />
                     {search ? (

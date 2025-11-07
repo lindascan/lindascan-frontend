@@ -1,12 +1,12 @@
 import React, {Fragment} from "react";
-import {ONE_TRX, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../../constants";
-import {AddressLink, ExternalLink, ContractLink, TokenTRC20Link} from "../../../common/Links";
+import {ONE_LIND, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../../constants";
+import {AddressLink, ExternalLink, ContractLink, TokenLRC20Link} from "../../../common/Links";
 import Field from "../../../tools/TransactionViewer/Field";
-import {TRXPrice} from "../../../common/Price";
+import {LINDPrice} from "../../../common/Price";
 import {tu} from "../../../../utils/i18n";
 import {FormattedNumber, FormattedDate, injectIntl} from "react-intl";
 import rebuildList from "../../../../utils/rebuildList";
-import {toUtf8} from 'tronweb'
+import {toUtf8} from 'lindaweb'
 import { NameWithId } from '../../../common/names';
 import UpdateSettingContract from './UpdateSettingContract'
 import ExchangeCreateContract from './ExchangeCreateContract'

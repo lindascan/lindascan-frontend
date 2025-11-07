@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import TronWeb from "tronweb";
-import { TransferAssetContract } from "@tronscan/client/src/protocol/core/Contract_pb";
+import LindaWeb from "lindaweb";
+import { TransferAssetContract } from "@lindascan/client/src/protocol/core/Contract_pb";
 import LedgerBridge from "../hw/ledger/LedgerBridge";
-import { transactionJsonToProtoBuf } from "@tronscan/client/src/utils/tronWeb";
-import { byteArray2hexStr } from "@tronscan/client/src/utils/bytes";
+import { transactionJsonToProtoBuf } from "@lindascan/client/src/utils/lindaWeb";
+import { byteArray2hexStr } from "@lindascan/client/src/utils/bytes";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { PulseLoader } from "react-spinners";
 import Contract from "../hw/ledger/TransactionConfirmation";
-import { ACCOUNT_LEDGER, ACCOUNT_PRIVATE_KEY, ACCOUNT_TRONLINK, SUNWEBCONFIG, API_URL } from "../constants";
+import { ACCOUNT_LEDGER, ACCOUNT_PRIVATE_KEY, ACCOUNT_LINDALINK, SUNWEBCONFIG, API_URL } from "../constants";
 import { deepCopy } from "ethers/utils";
 import { Client } from "../services/api";
 import injectpromise from 'injectpromise';
@@ -18,7 +18,7 @@ import xhr from "axios/index";
 let ledgerTokenList = Lockr.get("ledgerTokenList");
 let ledgerExchangeList = Lockr.get("ledgerExchangeList");
 
-export function withTronWeb(InnerComponent) {
+export function withLindaWeb(InnerComponent) {
  
   const wrappedComponent = class extends React.Component {
 
@@ -28,26 +28,26 @@ export function withTronWeb(InnerComponent) {
     };
     injectPromise = injectpromise.bind(this);
 
-    getTronWeb = () => {
+    getLindaWeb = () => {
 
-      // if (typeof window.tronWeb === 'undefined') {
+      // if (typeof window.lindaWeb === 'undefined') {
       const networkUrl = SUNWEBCONFIG.MAINFULLNODE
 
-      const tronWeb = new TronWeb(
+      const lindaWeb = new LindaWeb(
         networkUrl,
         networkUrl,
         networkUrl);
 
-      tronWeb.trx.sign = this.buildTransactionSigner(tronWeb, false);
-      tronWeb.trx.multiSign = this.buildTransactionSigner(tronWeb, true);
-      return tronWeb;
+      lindaWeb.lind.sign = this.buildTransactionSigner(lindaWeb, false);
+      lindaWeb.lind.multiSign = this.buildTransactionSigner(lindaWeb, true);
+      return lindaWeb;
       // }
 
-      //return window.tronWeb;
+      //return window.lindaWeb;
     };
     
     parameter2ValueDataHex = async( data, contractType) =>{
-      let contractData = await xhr.post(`https://tronexapi.tronscan.org/api/contract/convert`, {
+      let contractData = await xhr.post(`https://tronexapi.lindascan.org/api/contract/convert`, {
         "outType":"hex",
         "data":data,
         "contractType":contractType
@@ -59,7 +59,7 @@ export function withTronWeb(InnerComponent) {
 
   
 
-    buildTransactionSigner(tronWeb, isMulti) {
+    buildTransactionSigner(lindaWeb, isMulti) {
       const { account, wallet } = this.props;
       return async (transaction, privateKey = false, permissionId = false, callback = false) => {
         if (!wallet.isOpen) {
@@ -91,7 +91,7 @@ export function withTronWeb(InnerComponent) {
                     }
                   break;  
                   case 2: // Transfer Assets
-                    const ID = tronWeb.toUtf8(
+                    const ID = lindaWeb.toUtf8(
                       transaction.raw_data.contract[0].parameter.value.asset_name
                     );
                     // get token info
@@ -137,7 +137,7 @@ export function withTronWeb(InnerComponent) {
                   case 42: //ExchangeInjectContract
                     const exchangeDepositID = transaction.raw_data.contract[0].parameter.value.exchange_id;
                     const exchangeDeposit = this.getLedgerExchangeInfo(exchangeDepositID);
-                    const exchangeDepositToken = this.getLedgerTokenInfo(tronWeb.toUtf8(
+                    const exchangeDepositToken = this.getLedgerTokenInfo(lindaWeb.toUtf8(
                       transaction.raw_data.contract[0].parameter.value.token_id)
                     );
                     // get exchange info
@@ -151,7 +151,7 @@ export function withTronWeb(InnerComponent) {
                   case 43: //ExchangeWithdrawContract
                     const exchangeWithdrawID = transaction.raw_data.contract[0].parameter.value.exchange_id;
                     const exchangeWithdraw = this.getLedgerExchangeInfo(exchangeWithdrawID);
-                    const exchangeWithdrawToken = this.getLedgerTokenInfo(tronWeb.toUtf8(
+                    const exchangeWithdrawToken = this.getLedgerTokenInfo(lindaWeb.toUtf8(
                       transaction.raw_data.contract[0].parameter.value.token_id)
                     );
                     // get exchange info
@@ -219,9 +219,9 @@ export function withTronWeb(InnerComponent) {
               break;
 
             case ACCOUNT_PRIVATE_KEY:
-              return tronWeb.utils.crypto.signTransaction(account.key, transaction);
-            case ACCOUNT_TRONLINK:
-              return tronWeb.trx.sign(transaction);
+              return lindaWeb.utils.crypto.signTransaction(account.key, transaction);
+            case ACCOUNT_LINDALINK:
+              return lindaWeb.lind.sign(transaction);
 
           }
 
@@ -235,9 +235,9 @@ export function withTronWeb(InnerComponent) {
     async getTokenExtraInfo(ID) {
       let tokenID = ID;
       if (typeof tokenID !== "number") {
-        tokenID = TronWeb.toUtf8(tokenID);
+        tokenID = LindaWeb.toUtf8(tokenID);
         if (tokenID === "_")
-          return { id: 0, decimals: 6, token_name: "TRX" };
+          return { id: 0, decimals: 6, token_name: "LIND" };
         else
           tokenID = parseInt(tokenID);
       }
@@ -316,7 +316,7 @@ export function withTronWeb(InnerComponent) {
         <React.Fragment>
           {modal}
           <InnerComponent
-            tronWeb={this.getTronWeb}
+            lindaWeb={this.getLindaWeb}
             {...this.props}
           />
         </React.Fragment>

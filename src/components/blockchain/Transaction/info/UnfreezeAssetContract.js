@@ -6,8 +6,8 @@ import React, { Fragment } from "react";
 import { tu } from "../../../../utils/i18n";
 import Field from "../../../tools/TransactionViewer/Field";
 import { AddressLink } from "../../../common/Links";
-import { TRXPrice } from "../../../common/Price";
-import { ONE_TRX } from "../../../../constants";
+import { LINDPrice } from "../../../common/Price";
+import { ONE_LIND } from "../../../../constants";
 import { TransationTitle } from "./common/Title";
 import { NameWithId } from "../../../common/names";
 import BandwidthUsage from "./common/BandwidthUsage";
@@ -65,8 +65,8 @@ class UnfreezeAssetContract extends React.Component {
                   }
                 </span>
               </Field>
-              {/* <Field label="amount">{contract.amount / ONE_TRX || 0}</Field> */}
-              <Field label="trc20_token_id">{contract.token_id}</Field>
+              {/* <Field label="amount">{contract.amount / ONE_LIND || 0}</Field> */}
+              <Field label="lrc20_token_id">{contract.token_id}</Field>
               <Field label="token">
                 <Link to={`/token/${contract.token_id}`}>{contract.abbr}</Link>
               </Field>

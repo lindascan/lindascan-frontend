@@ -8,7 +8,7 @@ import { API_URL } from "../../constants";
 import moment from "moment";
 import SmartTable from "./SmartTable.js";
 import { upperFirst } from "lodash";
-import { TronLoader } from "./loaders";
+import { LindaLoader } from "./loaders";
 import qs from "qs";
 import BlockTime from "../common/blockTime";
 import { Table, Input, Button, Icon } from "antd";
@@ -103,7 +103,7 @@ class Blocks extends React.Component {
           >
             {upperFirst(
               intl.formatMessage({
-                id: timeType ? "age" : "trc20_cur_order_header_order_time"
+                id: timeType ? "age" : "lrc20_cur_order_header_order_time"
               })
             )}
             <Icon
@@ -144,8 +144,8 @@ class Blocks extends React.Component {
       },
       {
         title: upperFirst(intl.formatMessage({ id: "transaction" })),
-        dataIndex: "nrOfTrx",
-        key: "nrOfTrx",
+        dataIndex: "nrOfLind",
+        key: "nrOfLind",
         align: "left",
         width:'150px',
         className: "ant_table",
@@ -185,7 +185,7 @@ class Blocks extends React.Component {
         align: "left",
         className: "ant_table",
         render: (text, record, index) => {
-          return <span><FormattedNumber value={text} /> TRX</span>;
+          return <span><FormattedNumber value={text} /> LIND</span>;
         }
       }
     ];
@@ -203,7 +203,7 @@ class Blocks extends React.Component {
     let column = this.customizedColumn();
     let { intl } = this.props;
     let tableInfo = 
-      intl.formatMessage({ id: "account_representative_block_desc" },{block:total,trx:this.props.blockReward});
+      intl.formatMessage({ id: "account_representative_block_desc" },{block:total,lind:this.props.blockReward});
 
     if (!loading && blocks.length === 0) {
       if (!EmptyState) {
@@ -219,7 +219,7 @@ class Blocks extends React.Component {
       <div className="token_black table_pos">
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         {total ? (

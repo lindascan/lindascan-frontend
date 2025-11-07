@@ -2,12 +2,12 @@ import React, {Fragment} from "react";
 import {tu,t} from "../../../utils/i18n";
 import {Client} from "../../../services/api";
 import {FormattedDate, FormattedTime, injectIntl} from "react-intl";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import {AddressLink} from "../../common/Links";
 import {QuestionMark} from "../../common/QuestionMark";
-import {ONE_TRX,IS_MAINNET} from "../../../constants";
+import {ONE_LIND,IS_MAINNET} from "../../../constants";
 import { Link } from "react-router-dom";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 
 class ProposalDetail extends React.Component {
 
@@ -46,7 +46,7 @@ class ProposalDetail extends React.Component {
             'getAllowSameTokenName',
             'getAllowDelegateResource',
             'getTotalEnergyLimit',
-            'getAllowTvmTransferTrc10',
+            'getAllowTvmTransferLrc10',
             'getTotalEnergyLimitNew',
             'getAllowMultiSign',
             //'getTotalEnergyCurrentLimit',
@@ -138,9 +138,9 @@ class ProposalDetail extends React.Component {
                     <div className="col-md-12 ">
                         {
                             loading ? <div className="card">
-                                    <TronLoader>
+                                    <LindaLoader>
                                         {tu("loading_address")} #{match.params.id}
-                                    </TronLoader>
+                                    </LindaLoader>
                                 </div> :
                                 <Fragment>
                                     <div className="card list-style-header">
@@ -191,8 +191,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_2'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span className='col-green'>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span className='col-green'>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -200,8 +200,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_3'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span className='col-green'>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span className='col-green'>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -218,8 +218,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_5'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span className='col-green'>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span className='col-green'>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -228,8 +228,8 @@ class ProposalDetail extends React.Component {
                                                                                         <div className="proposal-message">
                                                                                             <span>{ intl.formatMessage({id: 'propose_6'})}</span>
                                                                                             <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                            <span className='col-green'>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                            <span>TRX</span>
+                                                                                            <span className='col-green'>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                            <span>LIND</span>
                                                                                         </div>
                                                                                     </div>
 
@@ -239,16 +239,16 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_7'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span className='col-green'>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span></div>
+                                                                                        <span className='col-green'>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span></div>
                                                                                 }
                                                                                 {
                                                                                     item.proposalKey == 'getCreateNewAccountFeeInSystemContract' &&
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_8'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span className='col-green'>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span></div>
+                                                                                        <span className='col-green'>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span></div>
                                                                                 }
                                                                                 {
                                                                                     item.proposalKey == 'getCreateNewAccountBandwidthRate' &&
@@ -277,7 +277,7 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_12'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span className='col-green'>{item.proposalVal / ONE_TRX} TRX</span>
+                                                                                        <span className='col-green'>{item.proposalVal / ONE_LIND} LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -285,7 +285,7 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_13'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span className='col-green'>{item.proposalVal / ONE_TRX} TRX</span>
+                                                                                        <span className='col-green'>{item.proposalVal / ONE_LIND} LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -338,7 +338,7 @@ class ProposalDetail extends React.Component {
                                                                                     </div>
                                                                                 }
                                                                                 {
-                                                                                    item.proposalKey == 'getAllowTvmTransferTrc10' &&
+                                                                                    item.proposalKey == 'getAllowTvmTransferLrc10' &&
                                                                                     <div className="proposal-message">
                                                                                         <span>{ intl.formatMessage({id: 'propose_19'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
@@ -411,8 +411,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div>
                                                                                         <span>{ intl.formatMessage({id: 'propose_25'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -420,8 +420,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div>
                                                                                         <span>{ intl.formatMessage({id: 'propose_26'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -463,8 +463,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div>
                                                                                         <span>{ intl.formatMessage({id: 'propose_28_1'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {
@@ -492,8 +492,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="">
                                                                                         <span>{ intl.formatMessage({id: 'propose_31'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
 
                                                                                 }
@@ -510,15 +510,15 @@ class ProposalDetail extends React.Component {
                                                                                         <br/>
                                                                                         <div>
                                                                                             {tu('getAllowTvmSolidity059_tips')}
-                                                                                            <a className="ml-2" href="https://github.com/tronprotocol/tips/blob/master/proposal/proposal-32.md" target="_blank">{tu("learn_more")}></a>
+                                                                                            <a className="ml-2" href="https://github.com/lindaprotocol/tips/blob/master/proposal/proposal-32.md" target="_blank">{tu("learn_more")}></a>
                                                                                         </div>
                                                                                     
                                                                                         <div>
-                                                                                            tronprotocol/tips:
-                                                                                            <a className="ml-2" href="https://github.com/tronprotocol/tips/blob/master/tip-43.md" target="_blank">{tu("#tip43")}</a>
-                                                                                            <a className="ml-2" href="https://github.com/tronprotocol/tips/blob/master/tip-44.md" target="_blank">{tu("#tip44")}</a>
-                                                                                            <a className="ml-2" href="https://github.com/tronprotocol/tips/blob/master/tip-54.md" target="_blank">{tu("#tip54")}</a>
-                                                                                            <a className="ml-2" href="https://github.com/tronprotocol/tips/blob/master/tip-60.md" target="_blank">{tu("#tip60")}</a>
+                                                                                            lindaprotocol/tips:
+                                                                                            <a className="ml-2" href="https://github.com/lindaprotocol/tips/blob/master/tip-43.md" target="_blank">{tu("#tip43")}</a>
+                                                                                            <a className="ml-2" href="https://github.com/lindaprotocol/tips/blob/master/tip-44.md" target="_blank">{tu("#tip44")}</a>
+                                                                                            <a className="ml-2" href="https://github.com/lindaprotocol/tips/blob/master/tip-54.md" target="_blank">{tu("#tip54")}</a>
+                                                                                            <a className="ml-2" href="https://github.com/lindaprotocol/tips/blob/master/tip-60.md" target="_blank">{tu("#tip60")}</a>
                                                                                         </div>
                                                                                     </div>
                                                                                 }
@@ -535,8 +535,8 @@ class ProposalDetail extends React.Component {
                                                                                     <div className="mt-1">
                                                                                         <span>{ intl.formatMessage({id: 'propose_34'})}</span>
                                                                                         <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                                                        <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                                                        <span>TRX</span>
+                                                                                        <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                                                        <span>LIND</span>
                                                                                     </div>
                                                                                 }
                                                                                 {

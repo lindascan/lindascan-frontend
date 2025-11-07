@@ -7,7 +7,7 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { tu } from "../../../../../utils/i18n";
 import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
-import { ONE_TRX } from "../../../../../constants";
+import { ONE_LIND } from "../../../../../constants";
 import { find } from "lodash";
 import { TW } from "../../TW";
 import { Slider } from "antd";
@@ -21,7 +21,7 @@ import {
   getDecimalsNum,
   onlyInputNumAndPoint
 } from "../../../../../utils/number";
-import { withTronWeb } from "../../../../../utils/tronWeb";
+import { withLindaWeb } from "../../../../../utils/lindaWeb";
 import { fixed } from "../../TokenPre";
 
 const marks = {
@@ -38,7 +38,7 @@ function formatter(value) {
 
 const FormItem = Form.Item;
 
-@withTronWeb
+@withLindaWeb
 class Sell extends Component {
   constructor(props) {
     super(props);
@@ -202,7 +202,7 @@ class Sell extends Component {
     const content = (
       <div style={{ width: 200 }}>
         {intl.formatMessage({
-          id: "trc20_vena_tip"
+          id: "lrc20_vena_tip"
         })}
       </div>
     );
@@ -223,10 +223,10 @@ class Sell extends Component {
           <FormItem className="no-padding">
             {getFieldDecorator("first_quant_sell")(
               <NumericInput
-                addonBefore={intl.formatMessage({ id: "trc20_price" })}
+                addonBefore={intl.formatMessage({ id: "lrc20_price" })}
                 addonAfter={exchangeData.sShortName}
                 placeholder={intl.formatMessage({
-                  id: "trc20_enter_the_trading_price"
+                  id: "lrc20_enter_the_trading_price"
                 })}
                 size="large"
                 type="text"
@@ -245,10 +245,10 @@ class Sell extends Component {
           <FormItem className="no-padding">
             {getFieldDecorator("second_quant_sell")(
               <NumericInput
-                addonBefore={intl.formatMessage({ id: "trc20_amount" })}
+                addonBefore={intl.formatMessage({ id: "lrc20_amount" })}
                 addonAfter={exchangeData.fShortName}
                 placeholder={intl.formatMessage({
-                  id: "trc20_enter_the_trading_amount"
+                  id: "lrc20_enter_the_trading_amount"
                 })}
                 size="large"
                 type="text"
@@ -264,7 +264,7 @@ class Sell extends Component {
           <div className="mb-3">
             {
               <span>
-                {tu("trc20_available_balance")}{" "}
+                {tu("lrc20_available_balance")}{" "}
                 <span className="tx-question-mark">
                   {firstBalance} {exchangeData.fShortName}
                 </span>
@@ -292,7 +292,7 @@ class Sell extends Component {
 
           <div className="d-flex justify-content-between tran-amount mb-3">
             <p className="text">
-              {tu("trc20_volume")}：{total}
+              {tu("lrc20_volume")}：{total}
             </p>
             <b className="text-lg">{exchangeData.sShortName}</b>
           </div>
@@ -309,9 +309,9 @@ class Sell extends Component {
             onClick={this.handleSubmit}
             loading={buttonLoading}
           >
-            {tu("trc20_SELL")}&nbsp; {exchangeData.fShortName}
+            {tu("lrc20_SELL")}&nbsp; {exchangeData.fShortName}
           </Button>
-          <div className="txt-center">{tu("trc20_free_orders")}</div>
+          <div className="txt-center">{tu("lrc20_free_orders")}</div>
           {/* </FormItem> */}
         </Form>
       </div>
@@ -335,14 +335,14 @@ class Sell extends Component {
     if (pairType == 1 || pairType == 2) {
       if (price * amount < 10) {
         this.setState({
-          secondError: intl.formatMessage({ id: "trc20_enter_10" })
+          secondError: intl.formatMessage({ id: "lrc20_enter_10" })
         });
         return;
       }
     } else {
       if (price * amount < 1) {
         this.setState({
-          secondError: intl.formatMessage({ id: "trc20_enter_1" })
+          secondError: intl.formatMessage({ id: "lrc20_enter_1" })
         });
         return;
       }
@@ -353,7 +353,7 @@ class Sell extends Component {
     }
     if (amount > +firstBalance) {
       this.setState({
-        secondError: intl.formatMessage({ id: "trc20_balance_tip" })
+        secondError: intl.formatMessage({ id: "lrc20_balance_tip" })
       });
       return;
     }
@@ -403,14 +403,14 @@ class Sell extends Component {
     let { exchangeData, account, walletType } = this.props;
     let { amount, price } = this.state;
 
-    let tronWebOBJ;
+    let lindaWebOBJ;
     if (walletType.type === "ACCOUNT_LEDGER") {
-      tronWebOBJ = this.props.tronWeb();
+      lindaWebOBJ = this.props.lindaWeb();
     } else if (
-      walletType.type === "ACCOUNT_TRONLINK" ||
+      walletType.type === "ACCOUNT_LINDALINK" ||
       walletType.type === "ACCOUNT_PRIVATE_KEY"
     ) {
-      tronWebOBJ = account.tronWeb;
+      lindaWebOBJ = account.lindaWeb;
     }
 
     const amountB = (amountA * price * secondPrecision) / firstPrecision;
@@ -422,7 +422,7 @@ class Sell extends Component {
       _tokenB: tokenB,
       _amountB: amountB,
       _pairType: pairType,
-      tronWeb: tronWebOBJ
+      lindaWeb: lindaWebOBJ
     };
 
     try {
@@ -432,10 +432,10 @@ class Sell extends Component {
           modal: (
             <SweetAlert
               success
-              title={tu("trc20_order_success")}
+              title={tu("lrc20_order_success")}
               onConfirm={this.hideModal}
             >
-              {/* {tu("trc20_trade_win_content")} */}
+              {/* {tu("lrc20_trade_win_content")} */}
             </SweetAlert>
           ),
           buttonLoading: false
@@ -446,7 +446,7 @@ class Sell extends Component {
       // if (id) {
       //   let _times = 0;
       //   const timer = setInterval(async () => {
-      //     const event = await tronWebOBJ
+      //     const event = await lindaWebOBJ
       //       .getEventByTransactionID(id)
       //       .catch(e => {
       //         if (_times > 20) {
@@ -458,10 +458,10 @@ class Sell extends Component {
       //             modal: (
       //               <SweetAlert
       //                 error
-      //                 title={tu("trc20_trade_win_content")}
+      //                 title={tu("lrc20_trade_win_content")}
       //                 onConfirm={this.hideModal}
       //               >
-      //                 {/* {tu("trc20_trade_win_content")} */}
+      //                 {/* {tu("lrc20_trade_win_content")} */}
       //               </SweetAlert>
       //             )
       //           });
@@ -479,10 +479,10 @@ class Sell extends Component {
       //             modal: (
       //               <SweetAlert
       //                 success
-      //                 title={tu("trc20_order_success")}
+      //                 title={tu("lrc20_order_success")}
       //                 onConfirm={this.hideModal}
       //               >
-      //                 {/*{tu("trc20_order_success")}*/}
+      //                 {/*{tu("lrc20_order_success")}*/}
       //               </SweetAlert>
       //             )
       //           });
@@ -499,7 +499,7 @@ class Sell extends Component {
       //                 channelId: "10000"
       //               },
       //               {
-      //                 Key: "Tron@123456"
+      //                 Key: "Linda@123456"
       //               }
       //             ).then(res => {});
       //           }
@@ -515,10 +515,10 @@ class Sell extends Component {
       //           modal: (
       //             <SweetAlert
       //               error
-      //               title={tu("trc20_trade_win_content")}
+      //               title={tu("lrc20_trade_win_content")}
       //               onConfirm={this.hideModal}
       //             >
-      //               {/* {tu("trc20_trade_win_content")} */}
+      //               {/* {tu("lrc20_trade_win_content")} */}
       //             </SweetAlert>
       //           )
       //         });
@@ -532,10 +532,10 @@ class Sell extends Component {
       //   //   modal: (
       //   //     <SweetAlert
       //   //       success
-      //   //       title={tu("trc20_order_success")}
+      //   //       title={tu("lrc20_order_success")}
       //   //       onConfirm={this.hideModal}
       //   //     >
-      //   //       {/*{tu("trc20_order_success")}*/}
+      //   //       {/*{tu("lrc20_order_success")}*/}
       //   //     </SweetAlert>
       //   //   )
       //   // });
@@ -550,24 +550,24 @@ class Sell extends Component {
       //   // this.setState({
       //   //   balanceTimer: timer
       //   // });
-      //   // let tronWeb;
+      //   // let lindaWeb;
       //   // if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-      //   //   tronWeb = this.props.tronWeb();
+      //   //   lindaWeb = this.props.lindaWeb();
       //   // } else if (
-      //   //   this.props.walletType.type === "ACCOUNT_TRONLINK" ||
+      //   //   this.props.walletType.type === "ACCOUNT_LINDALINK" ||
       //   //   this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"
       //   // ) {
-      //   //   tronWeb = account.tronWeb;
+      //   //   lindaWeb = account.lindaWeb;
       //   // }
 
       //   // let _times = 0;
       //   // const timer2 = setInterval(async () => {
-      //   //   const info = await tronWeb.trx.getTransactionInfo(id);
+      //   //   const info = await lindaWeb.lind.getTransactionInfo(id);
       //   //   _times += 1;
       //   //   if (info.log && info.log.length > 0) {
       //   //     let c_id;
       //   //     for (let i = 0; i < info.log.length; i++) {
-      //   //       const _addr = tronWeb.address.fromHex("41" + info.log[i].address);
+      //   //       const _addr = lindaWeb.address.fromHex("41" + info.log[i].address);
       //   //       if (
       //   //         _addr === "TSMbPm5mUsaTDSEjHCd55ZJaib3Ysvjyc5" ||
       //   //         _addr === "THnCkTX1GfDArAuyzzv2nGpDt4vChm8t2e"
@@ -585,7 +585,7 @@ class Sell extends Component {
       //   //               channelId: "10000"
       //   //             },
       //   //             {
-      //   //               Key: "Tron@123456"
+      //   //               Key: "Linda@123456"
       //   //             }
       //   //           ).then(res => {});
       //   //         }
@@ -613,7 +613,7 @@ class Sell extends Component {
             title={tu("transaction_error")}
             onConfirm={this.hideModal}
           >
-            {tu("trc20_order_fail")}
+            {tu("lrc20_order_fail")}
           </SweetAlert>
         )
       });
@@ -628,14 +628,14 @@ class Sell extends Component {
     let { account, exchangeData, walletType, currentWallet } = this.props;
     let { firstBalance, balanceTimer, empty } = this.state;
 
-    let tronWebOBJ;
+    let lindaWebOBJ;
     if (walletType.type === "ACCOUNT_LEDGER") {
-      tronWebOBJ = this.props.tronWeb();
+      lindaWebOBJ = this.props.lindaWeb();
     } else if (
-      walletType.type === "ACCOUNT_TRONLINK" ||
+      walletType.type === "ACCOUNT_LINDALINK" ||
       walletType.type === "ACCOUNT_PRIVATE_KEY"
     ) {
-      tronWebOBJ = account.tronWeb;
+      lindaWebOBJ = account.lindaWeb;
     }
 
     // let _b = 0;
@@ -643,7 +643,7 @@ class Sell extends Component {
     // if (account.address && exchangeData.fTokenAddr) {
     //   if (exchangeData.fTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
     //     _b =
-    //       (await tronWebOBJ.trx.getUnconfirmedBalance(this.address)) /
+    //       (await lindaWebOBJ.lind.getUnconfirmedBalance(this.address)) /
     //       Math.pow(10, exchangeData.fPrecision);
     //   } else {
     //     if (exchangeData.pairType === 1 || exchangeData.pairType === 4) {
@@ -652,7 +652,7 @@ class Sell extends Component {
     //           _tokenA: exchangeData.fTokenAddr,
     //           _uToken: account.address,
     //           _precision: exchangeData.fPrecision,
-    //           tronWeb: tronWebOBJ
+    //           lindaWeb: lindaWebOBJ
     //         });
     //       }
     //     } else {
@@ -661,7 +661,7 @@ class Sell extends Component {
     //           _tokenA: exchangeData.fTokenAddr,
     //           _uToken: account.address,
     //           _precision: exchangeData.fPrecision,
-    //           tronWeb: tronWebOBJ
+    //           lindaWeb: lindaWebOBJ
     //         });
     //       }
     //     }
@@ -679,7 +679,7 @@ class Sell extends Component {
     if (account.address && exchangeData.fTokenAddr) {
       if (exchangeData.fTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
         _b =
-          (await tronWebOBJ.trx.getUnconfirmedBalance(account.address)) /
+          (await lindaWebOBJ.lind.getUnconfirmedBalance(account.address)) /
           Math.pow(10, exchangeData.fPrecision);
         if (exchangeData.fTokenAddr !== "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
           _b = empty;
@@ -691,14 +691,14 @@ class Sell extends Component {
             _tokenA: exchangeData.fTokenAddr,
             _uToken: account.address,
             _precision: exchangeData.fPrecision,
-            tronWeb: tronWebOBJ
+            lindaWeb: lindaWebOBJ
           });
         } else {
           _b = await TW.getBalance({
             _tokenA: exchangeData.fTokenAddr,
             _uToken: account.address,
             _precision: exchangeData.fPrecision,
-            tronWeb: tronWebOBJ
+            lindaWeb: lindaWebOBJ
           });
         }
 
@@ -807,14 +807,14 @@ class Sell extends Component {
     if (!e.target.value) {
       type === 1
         ? (firstError = intl.formatMessage({
-            id: "trc20_enter_the_trading_price"
+            id: "lrc20_enter_the_trading_price"
           })) && this.setState({ firstError: firstError })
         : (secondError = intl.formatMessage({
-            id: "trc20_enter_the_trading_amount"
+            id: "lrc20_enter_the_trading_amount"
           })) && this.setState({ secondError: secondError });
     } else {
       if (amount > firstBalance) {
-        secondError = intl.formatMessage({ id: "trc20_balance_tip" });
+        secondError = intl.formatMessage({ id: "lrc20_balance_tip" });
         this.setState({ secondError: secondError });
       }
       if (

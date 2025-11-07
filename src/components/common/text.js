@@ -1,5 +1,5 @@
 import React from "react";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 
 export function Truncate({children}) {
     return (

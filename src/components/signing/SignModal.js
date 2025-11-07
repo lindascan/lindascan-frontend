@@ -2,7 +2,7 @@ import React from "react";
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import {ExternalSigner} from "../../services/externalSigner";
 import {Client} from "../../services/api";
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import QRCode from "qrcode.react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Link} from "react-router-dom";
@@ -119,9 +119,9 @@ class SignModal extends React.Component {
           }}>
             <ModalHeader className="text-center">Signing Transaction on External Device</ModalHeader>
             <ModalBody>
-              <TronLoader>
+              <LindaLoader>
                 Waiting for signed response from external device
-              </TronLoader>
+              </LindaLoader>
             </ModalBody>
           </Modal>
       )

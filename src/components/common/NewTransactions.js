@@ -7,7 +7,7 @@ import {Client} from "../../services/api";
 import {TransactionHashLink, AddressLink, BlockNumberLink} from "./Links";
 import {tu} from "../../utils/i18n";
 // import TimeAgo from "react-timeago";
-import {TronLoader} from "./loaders";
+import {LindaLoader} from "./loaders";
 import {Truncate} from "./text";
 import {ContractTypes} from "../../utils/protocol";
 import SmartTable from "./SmartTable.js"
@@ -39,9 +39,9 @@ class NewTransactions extends React.Component {
             transactions: [],
             total: 0,
             emptyState: props.EmptyState || (
-                <TronLoader>
+                <LindaLoader>
                     Loading Transactions
-                </TronLoader>
+                </LindaLoader>
             )
         };
     }
@@ -322,7 +322,7 @@ class NewTransactions extends React.Component {
         return column;
     }
 
-    trc20CustomizedColumn = () => {
+    lrc20CustomizedColumn = () => {
         let {intl} = this.props;
        
         let column = [
@@ -381,7 +381,7 @@ class NewTransactions extends React.Component {
                 }
             },
             {
-                title: upperFirst(intl.formatMessage({id: 'trc20_my_trans_header_status'})),
+                title: upperFirst(intl.formatMessage({id: 'lrc20_my_trans_header_status'})),
                 dataIndex: 'rejected',
                 key: 'rejected',
                 align: 'left',
@@ -435,7 +435,7 @@ class NewTransactions extends React.Component {
         let {intl, isinternal, address = false,activeLanguage} = this.props;
        
         let column = !isinternal? this.customizedColumn(activeLanguage):
-            this.trc20CustomizedColumn();
+            this.lrc20CustomizedColumn();
        // let tableInfo = intl.formatMessage({id: 'view_total'}) + ' ' + total + ' ' + intl.formatMessage({id: 'transactions_unit'})
 
         // if (!loading && transactions && transactions.length === 0) {
@@ -451,7 +451,7 @@ class NewTransactions extends React.Component {
           <div className={"token_black table_pos " + (address ? "mt-5" : "")}>
             {loading && (
               <div className="loading-style">
-                <TronLoader />
+                <LindaLoader />
               </div>
             )}
             {!loading && (

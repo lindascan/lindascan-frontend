@@ -6,8 +6,8 @@ import React, { Fragment } from "react";
 import { tu } from "../../../../utils/i18n";
 import Field from "../../../tools/TransactionViewer/Field";
 import { AddressLink } from "../../../common/Links";
-import { TRXPrice } from "../../../common/Price";
-import { ONE_TRX } from "../../../../constants";
+import { LINDPrice } from "../../../common/Price";
+import { ONE_LIND } from "../../../../constants";
 import { NameWithId } from "../../../common/names";
 import { TransationTitle } from "./common/Title";
 import BandwidthUsage from "./common/BandwidthUsage";
@@ -99,9 +99,9 @@ class ParticipateAssetIssueContract extends React.Component {
                 </span>
               </Field>
               <Field label="amount">
-                <TRXPrice amount={contract.amount / ONE_TRX} />
+                <LINDPrice amount={contract.amount / ONE_LIND} />
               </Field>
-              <Field label="trc20_token_id">{contract.asset_name || "-"}</Field>
+              <Field label="lrc20_token_id">{contract.asset_name || "-"}</Field>
               <Field label="token">
                 <NameWithId
                   value={contract}

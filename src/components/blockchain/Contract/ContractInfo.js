@@ -2,7 +2,7 @@ import React from "react";
 import { CopyText } from "../../common/Copy";
 import { tu } from "../../../utils/i18n";
 import { Client } from "../../../services/api";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { Base64 } from "js-base64";
 import MonacoEditor from "react-monaco-editor";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
@@ -213,7 +213,7 @@ export default class Code extends React.Component {
       <main className="container pl-0 pr-0">
         {loading && (
           <div className="loading-style" style={{ marginTop: "-20px" }}>
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         {interfaceAbi && contractNameItem}

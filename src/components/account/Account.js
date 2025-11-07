@@ -1,16 +1,16 @@
 import React, {Component, Fragment} from 'react';
 import {t, tu} from "../../utils/i18n";
 import isMobile from "../../utils/isMobile";
-import {transactionResultManager, transactionResultManagerSun} from "../../utils/tron";
+import {transactionResultManager, transactionResultManagerSun} from "../../utils/linda";
 import xhr from "axios";
 import {FormattedDate, FormattedNumber, FormattedRelative, FormattedTime, injectIntl} from "react-intl";
 import {Link} from "react-router-dom";
-import {TRXPrice} from "../common/Price";
+import {LINDPrice} from "../common/Price";
 import {SwitchToken} from "../common/Switch";
 import FreezeBalanceModal from "./FreezeBalanceModal";
-import {AddressLink, HrefLink, TokenLink, TokenTRC20Link} from "../common/Links";
+import {AddressLink, HrefLink, TokenLink, TokenLRC20Link} from "../common/Links";
 import SweetAlert from "react-bootstrap-sweetalert";
-import {API_URL, CONTRACT_MAINNET_API_URL, IS_TESTNET, ONE_TRX, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, IS_SUNNET, CURRENCYTYPE, IS_MAINNET, NETURL } from "../../constants";
+import {API_URL, CONTRACT_MAINNET_API_URL, IS_TESTNET, ONE_LIND, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, IS_SUNNET, CURRENCYTYPE, IS_MAINNET, NETURL } from "../../constants";
 import {Client} from "../../services/api";
 import ApplyForDelegate from "./ApplyForDelegate";
 import _, {trim} from "lodash";
@@ -21,10 +21,10 @@ import CreateTxnPairModal from "./CreateTxnPairModal";
 import OperateTxnPairModal from "./OperateTxnPairModal";
 import {addDays, getTime} from "date-fns";
 import Transactions from "../common/Transactions";
-import {decode58Check, pkToAddress, isAddressValid} from "@tronscan/client/src/utils/crypto";
+import {decode58Check, pkToAddress, isAddressValid} from "@lindascan/client/src/utils/crypto";
 import {QuestionMark} from "../common/QuestionMark";
 import Lockr from "lockr";
-import {withTronWeb} from "../../utils/tronWeb";
+import {withLindaWeb} from "../../utils/lindaWeb";
 import { login, loadSideChains, loadFees } from "../../actions/app";
 import {loadRecentTransactions} from "../../actions/account";
 import {reloadWallet} from "../../actions/wallet";
@@ -32,7 +32,7 @@ import {loadVoteTimer} from "../../actions/votes";
 import {connect} from "react-redux";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import QRCode from "qrcode.react";
-import {byteArray2hexStr} from "@tronscan/client/src/utils/bytes";
+import {byteArray2hexStr} from "@lindascan/client/src/utils/bytes";
 import { FormatNumberByDecimals } from '../../utils/number'
 import { getQueryString } from "../../utils/url";
 import IssuedToken from './IssuedToken';
@@ -61,7 +61,7 @@ import Tags from './components/Tags'
       delegated: state.account.delegated,
       wallet: state.wallet,
       currentWallet: state.wallet.current,
-      trxBalance: state.account.trxBalance,
+      lindBalance: state.account.lindBalance,
       voteTimer: state.voting.voteTimer,
     }},
     {
@@ -74,7 +74,7 @@ import Tags from './components/Tags'
     }
 )
 @injectIntl
-@withTronWeb
+@withLindaWeb
 export default class Account extends Component {
   constructor(props) {
     super(props);
@@ -89,19 +89,19 @@ export default class Account extends Component {
       temporaryName: "",
       selectedResource: null,
       hideSmallCurrency: false,
-      tokenTRC10: false,
+      tokenLRC10: false,
       tokens20: [],
-      dealPairTrxLimit: 100000,
-      isTronLink: 0,
+      dealPairLindLimit: 100000,
+      isLindaLink: 0,
       delegateType: 0,
       delegate: false,
       delegateValue: '',
       isShowPledgeModal: false,
       isShowMappingModal: false,
       isShowSignModal: false,
-      type: CURRENCYTYPE.TRX10,
-      tokenTRX: true,
-      trx20MappingAddress: [],
+      type: CURRENCYTYPE.LRC10,
+      tokenLIND: true,
+      lrc20MappingAddress: [],
       reward:false,
       accountReward:0,
       errorMess:'',
@@ -131,11 +131,11 @@ export default class Account extends Component {
         },
         {
           name: 'power',
-          id: 'tronPower'
+          id: 'lindaPower'
         },
         {
           name: 'muti_sign',
-          id: 'tronMultisign'
+          id: 'lindaMultisign'
         },
         {
           name: 'Super Representatives',
@@ -166,11 +166,11 @@ export default class Account extends Component {
         },
         {
           name: 'power',
-          id: 'tronPower'
+          id: 'lindaPower'
         },
         {
           name: 'muti_sign',
-          id: 'tronMultisign'
+          id: 'lindaMultisign'
         },
         {
           name: 'Super Representatives',
@@ -205,11 +205,11 @@ export default class Account extends Component {
         },
         {
           name: 'power',
-          id: 'tronPower'
+          id: 'lindaPower'
         },
         {
           name: 'muti_sign',
-          id: 'tronMultisign'
+          id: 'lindaMultisign'
         },
         {
           name: 'Super Representatives',
@@ -236,7 +236,7 @@ export default class Account extends Component {
         },
         {
           name: 'power',
-          id: 'tronPower'
+          id: 'lindaPower'
         },
         {
           name: 'Super Representatives',
@@ -255,21 +255,21 @@ export default class Account extends Component {
 
     let { account,match,walletType,currentWallet } = this.props;
 
-    const isPrivateKey =  walletType.type === "ACCOUNT_PRIVATE_KEY" || walletType.type === "ACCOUNT_TRONLINK";
+    const isPrivateKey =  walletType.type === "ACCOUNT_PRIVATE_KEY" || walletType.type === "ACCOUNT_LINDALINK";
     this.setState({
       isPrivateKey
     })
 
     if (account.isLoggedIn) {
       this.setState({
-          isTronLink: Lockr.get("islogin"),
+          isLindaLink: Lockr.get("islogin"),
       });
       this.reloadTokens();
       this.loadAccount(); 
       this.getAddressReward();
       this.getAddressRewardBok();
 
-      if(getQueryString('from') == 'tronlink' && getQueryString('type') == 'frozen'){
+      if(getQueryString('from') == 'lindalink' && getQueryString('type') == 'frozen'){
           setTimeout(()=>{
               this.scrollToAnchor()
           },3000)
@@ -352,16 +352,16 @@ export default class Account extends Component {
           this.getScrollsIds()
       }
 
-      this.setState({isTronLink: Lockr.get("islogin")});
+      this.setState({isLindaLink: Lockr.get("islogin")});
       this.reloadTokens();
       this.loadAccount();
       this.getAddressReward();
       this.getAddressRewardBok();
-      //this.getTRC20Tokens();
+      //this.getLRC20Tokens();
       let isActivate =  await this.isActivateAccount(account.address)
 
       // gets the list of side chains
-      const isPrivateKey =  walletType.type === "ACCOUNT_PRIVATE_KEY" || walletType.type === "ACCOUNT_TRONLINK";
+      const isPrivateKey =  walletType.type === "ACCOUNT_PRIVATE_KEY" || walletType.type === "ACCOUNT_LINDALINK";
       this.setState({
         isPrivateKey,
         isActivate
@@ -415,8 +415,8 @@ export default class Account extends Component {
 
   getAddressReward = async () => {
       let { account } = this.props;
-      let tronWeb = account.tronWeb;
-      const  reward  =  await tronWeb.trx.getReward(tronWeb.defaultAddress.base58)
+      let lindaWeb = account.lindaWeb;
+      const  reward  =  await lindaWeb.lind.getReward(lindaWeb.defaultAddress.base58)
       this.setState({
           accountReward:reward
       });
@@ -424,8 +424,8 @@ export default class Account extends Component {
 
   getSRBrokerage = async () =>{
       let { account } = this.props;
-      let tronWeb = account.tronWeb;
-      const  brokerage  =  await tronWeb.trx.getBrokerage(tronWeb.defaultAddress.base58)
+      let lindaWeb = account.lindaWeb;
+      const  brokerage  =  await lindaWeb.lind.getBrokerage(lindaWeb.defaultAddress.base58)
       this.setState({
           brokerageValue:(100 - brokerage)
       });
@@ -434,13 +434,13 @@ export default class Account extends Component {
 
   scrollToAnchor = () => {
 
-      let anchorElement = document.getElementById('tronPower');
+      let anchorElement = document.getElementById('lindaPower');
       if(anchorElement) { anchorElement.scrollIntoView(); }
 
   }
   scrollToMultisign = () => {
 
-        let anchorElement = document.getElementById('tronMultisign');
+        let anchorElement = document.getElementById('lindaMultisign');
         if(anchorElement) { anchorElement.scrollIntoView(); }
 
   }
@@ -493,17 +493,17 @@ export default class Account extends Component {
   };
 
 
-  async getTRC20Tokens() {
+  async getLRC20Tokens() {
     let {account} = this.props;
-    let result = await xhr.get(API_URL + "/api/token_trc20?sort=issue_time&start=0&limit=50");
-    let tokens20 = result.data.trc20_tokens;
-    const tronWebLedger = this.props.tronWeb();
-    const { tronWeb } = this.props.account;
+    let result = await xhr.get(API_URL + "/api/token_lrc20?sort=issue_time&start=0&limit=50");
+    let tokens20 = result.data.lrc20_tokens;
+    const lindaWebLedger = this.props.lindaWeb();
+    const { lindaWeb } = this.props.account;
     if (this.props.walletType.type === "ACCOUNT_LEDGER") {
       tokens20 && tokens20.map(async item => {
         item.token20_name = item.name + '(' + item.symbol + ')';
 
-        let contractInstance = await tronWebLedger.contract().at(item.contract_address);
+        let contractInstance = await lindaWebLedger.contract().at(item.contract_address);
         let balanceData = await contractInstance.balanceOf(this.props.walletType.address).call();
         if (balanceData.balance) {
           item.token20_balance = parseFloat(balanceData.balance.toString()) / Math.pow(10, item.decimals);
@@ -516,10 +516,10 @@ export default class Account extends Component {
         tokens20: tokens20
       });
     }
-    if (this.props.walletType.type === "ACCOUNT_TRONLINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY") {
+    if (this.props.walletType.type === "ACCOUNT_LINDALINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY") {
       tokens20 && tokens20.map(async item => {
         item.token20_name = item.name + '(' + item.symbol + ')';
-        let contractInstance = await tronWeb.contract().at(item.contract_address);
+        let contractInstance = await lindaWeb.contract().at(item.contract_address);
         let balanceData = await contractInstance.balanceOf(account.address).call();
         if (balanceData.balance) {
           //item.token20_balance = parseFloat(balanceData.balance.toString()) / Math.pow(10, item.decimals);
@@ -537,7 +537,7 @@ export default class Account extends Component {
     }
   }
 
-  renderTRC20Tokens() {
+  renderLRC20Tokens() {
     let { hideSmallCurrency, isPrivateKey } = this.state;
     let { tokens20 } = this.props;
     if (hideSmallCurrency) {
@@ -565,10 +565,10 @@ export default class Account extends Component {
 
     // pledgeItem
     const pledgeItem = (address, currency, balance, precision) => {
-      const option = { address, currency, balance, precision, type: CURRENCYTYPE.TRX20 };
+      const option = { address, currency, balance, precision, type: CURRENCYTYPE.LRC20 };
       return <td className="text-right">
               <button className="btn btn-danger"
-                onClick={IS_SUNNET ? () => this.openSignModal(option) : () => this.getTrx20MappingSideChains(option)}>
+                onClick={IS_SUNNET ? () => this.openSignModal(option) : () => this.getLrc20MappingSideChains(option)}>
                 {IS_SUNNET ? tu('sidechain_account_sign_btn') : tu('sidechain_account_pledge_btn')}
               </button>
             </td>
@@ -580,7 +580,7 @@ export default class Account extends Component {
           <tr>
             <th>{tu("name")}</th>
             <th className="text-right">{tu("balance")}</th>
-            {isPrivateKey && <th className="text-right">{tu("trc20_cur_order_header_action")}</th>}
+            {isPrivateKey && <th className="text-right">{tu("lrc20_cur_order_header_action")}</th>}
           </tr>
           </thead>
           <tbody>
@@ -591,10 +591,10 @@ export default class Account extends Component {
 
                       {
                           token.contract_address == CONTRACT_ADDRESS_USDT || token.contract_address == CONTRACT_ADDRESS_WIN  || token.contract_address ==CONTRACT_ADDRESS_GGC?<div className="map-token-top">
-                            <TokenTRC20Link name={token.name} address={token.contract_address}
+                            <TokenLRC20Link name={token.name} address={token.contract_address}
                                             namePlus={token.name + ' (' + token.symbol + ')'}/>
                             <i></i>
-                            </div>:<TokenTRC20Link name={token.name} address={token.contract_address}
+                            </div>:<TokenLRC20Link name={token.name} address={token.contract_address}
                                                    namePlus={token.name + ' (' + token.symbol + ')'}/>
                       }
                   </td>
@@ -635,7 +635,7 @@ export default class Account extends Component {
 
     // pledgeItem
     const pledgeItem = (id, currency, balance, precision) => {
-      const option = { id, currency, balance, precision, type: CURRENCYTYPE.TRX10 };
+      const option = { id, currency, balance, precision, type: CURRENCYTYPE.LRC10 };
       return <td className="text-right">
               <button className="btn btn-danger"
                 onClick={IS_SUNNET ? () => this.openSignModal(option) : () => this.openPledgeModel(option)}>
@@ -650,9 +650,9 @@ export default class Account extends Component {
           <tr>
             <th width="40%">{tu("name")}</th>
             <th>ID</th>
-            <th>{tu("TRC20_decimals")}</th>
+            <th>{tu("LRC20_decimals")}</th>
             <th className="text-right">{tu("balance")}</th>
-            {isPrivateKey && <th className="text-right">{tu('trc20_cur_order_header_action')}</th>}
+            {isPrivateKey && <th className="text-right">{tu('lrc20_cur_order_header_action')}</th>}
           </tr>
           </thead>
           <tbody>
@@ -687,7 +687,7 @@ export default class Account extends Component {
     )
   }
 
-  renderTRX() {
+  renderLIND() {
     let {hideSmallCurrency, isPrivateKey} = this.state;
     let {tokenBalances = [],intl} = this.props;
     if (hideSmallCurrency) {
@@ -711,7 +711,7 @@ export default class Account extends Component {
 
     // pledgeItem
     const pledgeItem = (id, currency, balance, precision) => {
-      const option = { id, currency, balance, precision, type: CURRENCYTYPE.TRX };
+      const option = { id, currency, balance, precision, type: CURRENCYTYPE.LIND };
       return <td className="text-right">
               <button className="btn btn-danger"
                 onClick={IS_SUNNET ? () => this.openSignModal(option) : () => this.openPledgeModel(option)}>
@@ -726,9 +726,9 @@ export default class Account extends Component {
           <tr>
             <th width="40%">{tu("name")}</th>
             <th>ID</th>
-            <th>{tu("TRC20_decimals")}</th>
+            <th>{tu("LRC20_decimals")}</th>
             <th className="text-right">{tu("balance")}</th>
-            {isPrivateKey && <th className="text-right">{tu('trc20_cur_order_header_action')}</th>}
+            {isPrivateKey && <th className="text-right">{tu('lrc20_cur_order_header_action')}</th>}
           </tr>
           </thead>
           <tbody>
@@ -746,9 +746,9 @@ export default class Account extends Component {
                         {
                           IS_MAINNET ? 
                           intl.locale == 'zh'?
-                          <a href={window.location.origin === NETURL.MAINNET ?`https://just.tronscan.org/?lang=zh-CN`:`https://just.tronscan.io/?lang=zh-CN`} className="ml-4 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline'}}>{t("pledge_to_get_USDJ")}</span>></a>
+                          <a href={window.location.origin === NETURL.MAINNET ?`https://just.lindascan.org/?lang=zh-CN`:`https://just.lindascan.io/?lang=zh-CN`} className="ml-4 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline'}}>{t("pledge_to_get_USDJ")}</span>></a>
                           :
-                          <a href={window.location.origin === NETURL.MAINNET ?`https://just.tronscan.org/?lang=en-US`:`https://just.tronscan.io/?lang=en-US`} className="ml-4 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline'}}>{t("pledge_to_get_USDJ")}</span>></a>
+                          <a href={window.location.origin === NETURL.MAINNET ?`https://just.lindascan.org/?lang=en-US`:`https://just.lindascan.io/?lang=en-US`} className="ml-4 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline'}}>{t("pledge_to_get_USDJ")}</span>></a>
                           :''
                         }
                       </div>
@@ -913,13 +913,13 @@ export default class Account extends Component {
                 {tu('bandwidth')}
               </td>
               <td>
-                <TRXPrice amount={receiveDelegateBandwidth / ONE_TRX}/>
+                <LINDPrice amount={receiveDelegateBandwidth / ONE_LIND}/>
               </td>
               <td>
-                <TRXPrice amount={frozenBandwidth / ONE_TRX}/>
+                <LINDPrice amount={frozenBandwidth / ONE_LIND}/>
               </td>
               <td>
-                <TRXPrice amount={(receiveDelegateBandwidth+frozenBandwidth) / ONE_TRX}/>
+                <LINDPrice amount={(receiveDelegateBandwidth+frozenBandwidth) / ONE_LIND}/>
               </td>
               {frozen.balances.length > 0 ? <td className="text-right">
                 <span className="mr-1">{tu('After')}</span>
@@ -945,13 +945,13 @@ export default class Account extends Component {
                 {tu('energy')}
               </td>
               <td>
-                <TRXPrice amount={receiveDelegateResource / ONE_TRX}/>
+                <LINDPrice amount={receiveDelegateResource / ONE_LIND}/>
               </td>
               <td>
-                <TRXPrice amount={frozenEnergy / ONE_TRX}/>
+                <LINDPrice amount={frozenEnergy / ONE_LIND}/>
               </td>
               <td>
-                <TRXPrice amount={(frozenEnergy+receiveDelegateResource) / ONE_TRX}/>
+                <LINDPrice amount={(frozenEnergy+receiveDelegateResource) / ONE_LIND}/>
               </td>
               {accountResource.frozen_balance > 0?<td className="text-right">
                 <span className="mr-1">{tu('After')}</span>
@@ -1003,14 +1003,14 @@ export default class Account extends Component {
               return <tr key={index}>
                 <td>
                   <AddressLink address={item.to} truncate={false}>
-                    <span className="color-tron-100">{item.to}</span>
+                    <span className="color-linda-100">{item.to}</span>
                   </AddressLink>
                 </td>
                 <td>
                   {tu('bandwidth')}
                 </td>
                 <td>
-                  <TRXPrice amount={item.frozen_balance_for_bandwidth / ONE_TRX}/>
+                  <LINDPrice amount={item.frozen_balance_for_bandwidth / ONE_LIND}/>
                 </td>
                 <td className="text-right">
                   <span className="mr-1">{tu('After')}</span>
@@ -1037,14 +1037,14 @@ export default class Account extends Component {
               return <tr key={index}>
                 <td>
                   <AddressLink address={item.to} truncate={false}>
-                    <span className="color-tron-100">{item.to}</span>
+                    <span className="color-linda-100">{item.to}</span>
                   </AddressLink>
                 </td>
                 <td>
                   {tu('energy')}
                 </td>
                 <td>
-                  <TRXPrice amount={item.frozen_balance_for_energy / ONE_TRX}/>
+                  <LINDPrice amount={item.frozen_balance_for_energy / ONE_LIND}/>
                 </td>
                 <td className="text-right">
                   <span className="mr-1">{tu('After')}</span>
@@ -1168,12 +1168,12 @@ export default class Account extends Component {
 
     let {privateKey} = this.state;
 
-    let {trxBalance, currentWallet} = this.props;
-    if (trxBalance === 0) {
+    let {lindBalance, currentWallet} = this.props;
+    if (lindBalance === 0) {
       this.setState({
         modal: (
-            <SweetAlert warning title={tu("not_enough_trx")} onConfirm={this.hideModal}>
-              {tu("freeze_trx_least")}
+            <SweetAlert warning title={tu("not_enough_lind")} onConfirm={this.hideModal}>
+              {tu("freeze_lind_least")}
             </SweetAlert>
         )
       });
@@ -1184,14 +1184,14 @@ export default class Account extends Component {
     this.setState({
       modal: (
           <FreezeBalanceModal
-              frozenTrx={currentWallet.frozenTrx}
+              frozenLind={currentWallet.frozenLind}
               privateKey={privateKey}
               onHide={this.hideModal}
               onError={() => {
                 this.setState({
                   modal: (
                       <SweetAlert warning title={tu("Error")} onConfirm={this.hideModal}>
-                          {tu('freeze_TRX_error')}
+                          {tu('freeze_LIND_error')}
                       </SweetAlert>
                   )
                 });
@@ -1233,7 +1233,7 @@ export default class Account extends Component {
               confirmBtnBsStyle="danger"
               cancelBtnBsStyle="default"
               cancelBtnText={tu("cancel")}
-              title={tu("unfreeze_trx_confirm_message")}
+              title={tu("unfreeze_lind_confirm_message")}
               onConfirm={this.unfreeze}
               onCancel={this.hideFreezeModal}
               style={{height: '300px'}}
@@ -1278,11 +1278,11 @@ export default class Account extends Component {
     let res;
     this.hideModal();
     if(IS_MAINNET){
-        if (Lockr.get("islogin") || this.props.walletType.type === "ACCOUNT_LEDGER" || this.props.walletType.type === "ACCOUNT_TRONLINK") {
-            const tronWebLedger = this.props.tronWeb();
+        if (Lockr.get("islogin") || this.props.walletType.type === "ACCOUNT_LEDGER" || this.props.walletType.type === "ACCOUNT_LINDALINK") {
+            const lindaWebLedger = this.props.lindaWeb();
 
 
-            const {tronWeb} = this.props.account;
+            const {lindaWeb} = this.props.account;
 
             if (!delegateType) {
                 delegateType = 'BANDWIDTH';
@@ -1294,21 +1294,21 @@ export default class Account extends Component {
                 if (this.props.walletType.type === "ACCOUNT_LEDGER") {
                     let unSignTransaction;
                     if(!delegate) {
-                        unSignTransaction = await tronWebLedger.transactionBuilder.unfreezeBalance(delegateType, walletType.address).catch(e => false);
+                        unSignTransaction = await lindaWebLedger.transactionBuilder.unfreezeBalance(delegateType, walletType.address).catch(e => false);
                     }else{
-                        unSignTransaction = await tronWebLedger.transactionBuilder.unfreezeBalance(delegateType, walletType.address, delegateValue).catch(e => false);
+                        unSignTransaction = await lindaWebLedger.transactionBuilder.unfreezeBalance(delegateType, walletType.address, delegateValue).catch(e => false);
                     }
-                    const {result} = await transactionResultManager(unSignTransaction, tronWebLedger);
+                    const {result} = await transactionResultManager(unSignTransaction, lindaWebLedger);
                     res = result;
                 }
-                if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
+                if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
                     let unSignTransaction;
                     if(!delegate) {
-                        unSignTransaction = await tronWeb.transactionBuilder.unfreezeBalance(delegateType, tronWeb.defaultAddress.base58).catch(e => false);
+                        unSignTransaction = await lindaWeb.transactionBuilder.unfreezeBalance(delegateType, lindaWeb.defaultAddress.base58).catch(e => false);
                     }else{
-                        unSignTransaction = await tronWeb.transactionBuilder.unfreezeBalance(delegateType, tronWeb.defaultAddress.base58,delegateValue).catch(e => false);
+                        unSignTransaction = await lindaWeb.transactionBuilder.unfreezeBalance(delegateType, lindaWeb.defaultAddress.base58,delegateValue).catch(e => false);
                     }
-                    const {result} = await transactionResultManager(unSignTransaction, tronWeb);
+                    const {result} = await transactionResultManager(unSignTransaction, lindaWeb);
                     res = result;
                 }
 
@@ -1333,7 +1333,7 @@ export default class Account extends Component {
         }
         try {
 
-            if(this.props.wallet.type==="ACCOUNT_TRONLINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY"){
+            if(this.props.wallet.type==="ACCOUNT_LINDALINK" || this.props.wallet.type==="ACCOUNT_PRIVATE_KEY"){
                 let unSignTransaction;
                 if(!delegate) {
                     unSignTransaction = await sunWeb.sidechain.transactionBuilder.unfreezeBalance(delegateType, sunWeb.sidechain.defaultAddress.base58).catch(e => false);
@@ -1353,8 +1353,8 @@ export default class Account extends Component {
     if (res) {
       this.setState({
         modal: (
-            <SweetAlert success title="TRX Unfrozen" onConfirm={this.hideFreezeModal}>
-              {tu("success_unfrozen_trx")}
+            <SweetAlert success title="LIND Unfrozen" onConfirm={this.hideFreezeModal}>
+              {tu("success_unfrozen_lind")}
             </SweetAlert>
         )
       });
@@ -1363,7 +1363,7 @@ export default class Account extends Component {
       this.setState({
         modal: (
             <SweetAlert warning title={tu("unable_to_unfreeze")} onConfirm={this.hideFreezeModal}>
-              {tu("unable_unfreeze_trx_message")}
+              {tu("unable_unfreeze_lind_message")}
             </SweetAlert>
         ),
       });
@@ -1375,17 +1375,17 @@ export default class Account extends Component {
     let {privateKey} = this.state;
     let res;
     this.hideModal();
-    if (this.state.isTronLink === 1) {
-      let tronWeb;
+    if (this.state.isLindaLink === 1) {
+      let lindaWeb;
       if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-        tronWeb = this.props.tronWeb();
-      } else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-        tronWeb = account.tronWeb;
+        lindaWeb = this.props.lindaWeb();
+      } else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+        lindaWeb = account.lindaWeb;
       }
-      const unSignTransaction = await tronWeb.fullNode.request('wallet/unfreezeasset', {
-        owner_address: tronWeb.defaultAddress.hex,
+      const unSignTransaction = await lindaWeb.fullNode.request('wallet/unfreezeasset', {
+        owner_address: lindaWeb.defaultAddress.hex,
       }, 'post').catch(e => false);
-      const {result} = await transactionResultManager(unSignTransaction, tronWeb)
+      const {result} = await transactionResultManager(unSignTransaction, lindaWeb)
       res = result;
     } else {
       let {success} = await Client.unfreezeAssets(account.address)(account.key);
@@ -1419,7 +1419,7 @@ export default class Account extends Component {
     this.setState({
       modal: (
           <SweetAlert success title={tu("tokens_frozen")} onConfirm={this.hideModal}>
-            {tu("successfully_frozen")} {amount} TRX
+            {tu("successfully_frozen")} {amount} LIND
           </SweetAlert>
       )
     });
@@ -1434,19 +1434,19 @@ export default class Account extends Component {
     if(IS_MAINNET) {
         try {
             if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-                let tronWebLedger = this.props.tronWeb();
+                let lindaWebLedger = this.props.lindaWeb();
 
-                const unSignTransaction = await tronWebLedger.transactionBuilder.updateAccount(name, this.props.walletType.address);
-                const {result} = await transactionResultManager(unSignTransaction, tronWebLedger);
+                const unSignTransaction = await lindaWebLedger.transactionBuilder.updateAccount(name, this.props.walletType.address);
+                const {result} = await transactionResultManager(unSignTransaction, lindaWebLedger);
                 res = result;
 
-            } else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-                let tronWeb = account.tronWeb;
-                const unSignTransaction = await tronWeb.fullNode.request('wallet/updateaccount', {
-                    account_name: tronWeb.fromUtf8(name),
-                    owner_address: tronWeb.defaultAddress.hex
+            } else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+                let lindaWeb = account.lindaWeb;
+                const unSignTransaction = await lindaWeb.fullNode.request('wallet/updateaccount', {
+                    account_name: lindaWeb.fromUtf8(name),
+                    owner_address: lindaWeb.defaultAddress.hex
                 }, 'post').catch(e => false);
-                const {result} = await  transactionResultManager(unSignTransaction, tronWeb);
+                const {result} = await  transactionResultManager(unSignTransaction, lindaWeb);
                 res = result;
             } else {
                 let {success} = await Client.updateAccountName(currentWallet.address, name)(account.key);
@@ -1458,7 +1458,7 @@ export default class Account extends Component {
         }
     } else{
       try{
-          if (this.props.walletType.type === "ACCOUNT_PRIVATE_KEY" || this.props.wallet.type==="ACCOUNT_TRONLINK") {
+          if (this.props.walletType.type === "ACCOUNT_PRIVATE_KEY" || this.props.wallet.type==="ACCOUNT_LINDALINK") {
               let sunWeb = account.sunWeb;
               const unSignTransaction = await sunWeb.sidechain.fullNode.request('wallet/updateaccount', {
                   account_name: sunWeb.sidechain.fromUtf8(name),
@@ -1496,19 +1496,19 @@ export default class Account extends Component {
   updateWebsite = async (url) => {
     let res;
     let {account, currentWallet} = this.props;
-    if (this.state.isTronLink === 1) {
-      let tronWeb;
+    if (this.state.isLindaLink === 1) {
+      let lindaWeb;
       if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-        tronWeb = this.props.tronWeb();
-      } else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-        tronWeb = account.tronWeb;
+        lindaWeb = this.props.lindaWeb();
+      } else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+        lindaWeb = account.lindaWeb;
       }
-      const unSignTransaction = await tronWeb.fullNode.request('wallet/updatewitness', {
-            update_url: tronWeb.fromUtf8(url),
-            owner_address: tronWeb.defaultAddress.hex
+      const unSignTransaction = await lindaWeb.fullNode.request('wallet/updatewitness', {
+            update_url: lindaWeb.fromUtf8(url),
+            owner_address: lindaWeb.defaultAddress.hex
           },
           'post');
-      const {result} = await transactionResultManager(unSignTransaction, tronWeb);
+      const {result} = await transactionResultManager(unSignTransaction, lindaWeb);
       res = result;
     } else {
       let {success} = await Client.updateWitnessUrl(currentWallet.address, url)(account.key);
@@ -1540,14 +1540,14 @@ export default class Account extends Component {
     let res;
     let {account, currentWallet} = this.props;
     if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-      const tronWeb = this.props.tronWeb();
-      const unSignTransaction = await tronWeb.transactionBuilder.createTRXExchange(firstTokenId, firstTokenBalance, secondTokenBalance, currentWallet.address).catch(e => false);
-      const {result} = await  transactionResultManager(unSignTransaction, tronWeb);
+      const lindaWeb = this.props.lindaWeb();
+      const unSignTransaction = await lindaWeb.transactionBuilder.createLINDExchange(firstTokenId, firstTokenBalance, secondTokenBalance, currentWallet.address).catch(e => false);
+      const {result} = await  transactionResultManager(unSignTransaction, lindaWeb);
       res = result;
-    }else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-      const tronWeb = account.tronWeb;
-      const unSignTransaction = await tronWeb.transactionBuilder.createTRXExchange(firstTokenId, firstTokenBalance, secondTokenBalance, tronWeb.defaultAddress.hex).catch(e => false);
-      const {result} = await  transactionResultManager(unSignTransaction, tronWeb);
+    }else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+      const lindaWeb = account.lindaWeb;
+      const unSignTransaction = await lindaWeb.transactionBuilder.createLINDExchange(firstTokenId, firstTokenBalance, secondTokenBalance, lindaWeb.defaultAddress.hex).catch(e => false);
+      const {result} = await  transactionResultManager(unSignTransaction, lindaWeb);
       res = result;
     }else {
       const {success} = await Client.createExchange(currentWallet.address, firstTokenId, secondTokenId, firstTokenBalance, secondTokenBalance)(account.key);
@@ -1580,14 +1580,14 @@ export default class Account extends Component {
     let res;
     let {account, currentWallet} = this.props;
     if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-      const tronWeb = this.props.tronWeb();
-      const unSignTransaction = await tronWeb.transactionBuilder.injectExchangeTokens(exchangeId, tokenId, quant, currentWallet.address).catch(e => false);
-      const {result} = await  transactionResultManager(unSignTransaction, tronWeb);
+      const lindaWeb = this.props.lindaWeb();
+      const unSignTransaction = await lindaWeb.transactionBuilder.injectExchangeTokens(exchangeId, tokenId, quant, currentWallet.address).catch(e => false);
+      const {result} = await  transactionResultManager(unSignTransaction, lindaWeb);
       res = result;
-    }else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-      const tronWeb = account.tronWeb;
-      const unSignTransaction = await tronWeb.transactionBuilder.injectExchangeTokens(exchangeId, tokenId, quant, tronWeb.defaultAddress.hex).catch(e => false);
-      const {result} = await  transactionResultManager(unSignTransaction, tronWeb);
+    }else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+      const lindaWeb = account.lindaWeb;
+      const unSignTransaction = await lindaWeb.transactionBuilder.injectExchangeTokens(exchangeId, tokenId, quant, lindaWeb.defaultAddress.hex).catch(e => false);
+      const {result} = await  transactionResultManager(unSignTransaction, lindaWeb);
       res = result;
     } else {
       const {success} = await Client.injectExchange(currentWallet.address, exchangeId, tokenId, quant)(account.key);
@@ -1619,14 +1619,14 @@ export default class Account extends Component {
     let res;
     let {account, currentWallet} = this.props;
     if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-      const tronWeb = this.props.tronWeb();
-      const unSignTransaction = await tronWeb.transactionBuilder.withdrawExchangeTokens(exchangeId, tokenId, quant, currentWallet.address).catch(e => false);
-      const {result} = await  transactionResultManager(unSignTransaction, tronWeb);
+      const lindaWeb = this.props.lindaWeb();
+      const unSignTransaction = await lindaWeb.transactionBuilder.withdrawExchangeTokens(exchangeId, tokenId, quant, currentWallet.address).catch(e => false);
+      const {result} = await  transactionResultManager(unSignTransaction, lindaWeb);
       res = result;
-    }else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-      const tronWeb = account.tronWeb;
-      const unSignTransaction = await tronWeb.transactionBuilder.withdrawExchangeTokens(exchangeId, tokenId, quant, tronWeb.defaultAddress.hex).catch(e => false);
-      const {result} = await  transactionResultManager(unSignTransaction, tronWeb);
+    }else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+      const lindaWeb = account.lindaWeb;
+      const unSignTransaction = await lindaWeb.transactionBuilder.withdrawExchangeTokens(exchangeId, tokenId, quant, lindaWeb.defaultAddress.hex).catch(e => false);
+      const {result} = await  transactionResultManager(unSignTransaction, lindaWeb);
       res = result;
     } else {
       const {success} = await Client.withdrawExchange(currentWallet.address, exchangeId, tokenId, quant)(account.key);
@@ -1670,7 +1670,7 @@ export default class Account extends Component {
           <CreateTxnPairModal
               onCreate={(firstTokenId, secondTokenId, firstTokenBalance, secondTokenBalance) => this.createTxnPair(firstTokenId, secondTokenId, firstTokenBalance, secondTokenBalance)}
               onCancel={this.hideModal}
-              dealPairTrxLimit={this.state.dealPairTrxLimit}
+              dealPairLindLimit={this.state.dealPairLindLimit}
           />
       )
     })
@@ -1697,7 +1697,7 @@ export default class Account extends Component {
               onCancel={this.hideModal}
               exchange={exchange}
               inject={false}
-              dealPairTrxLimit={this.state.dealPairTrxLimit}
+              dealPairLindLimit={this.state.dealPairLindLimit}
           />
       )
     })
@@ -1707,7 +1707,7 @@ export default class Account extends Component {
   changeGithubURL = async () => {
     this.setState({
       modal: (
-          this.state.isTronLink === 1 ?
+          this.state.isLindaLink === 1 ?
               <SweetAlert onCancel={this.hideModal} onConfirm={this.hideModal}>
                 {tu("change_login_method")}
               </SweetAlert>
@@ -1719,7 +1719,7 @@ export default class Account extends Component {
                   cancelBtnText={tu("cancel")}
                   confirmBtnText={tu("link_github")}
                   title={tu("link_to_github")}
-                  placeHolder="github username or https://github.com/{username}/tronsr-template"
+                  placeHolder="github username or https://github.com/{username}/lindasr-template"
                   onCancel={this.hideModal}
                   validationMsg={tu("you_must_enter_a_url")}
                   onConfirm={async (name) => {
@@ -1760,7 +1760,7 @@ export default class Account extends Component {
   detectGithubUrl = async (input) => {
 
     let urls = [
-      `https://raw.githubusercontent.com/${input}/tronsr-template/master/logo.png`,
+      `https://raw.githubusercontent.com/${input}/lindasr-template/master/logo.png`,
       `https://raw.githubusercontent.com/${input}/master/logo.png`,
     ];
 
@@ -1781,11 +1781,11 @@ export default class Account extends Component {
     let {account, currentWallet} = this.props;
     let key = await Client.auth(account.key);
     let [name, repo] = url.split("/");
-    let githubLink = name + "/" + (repo || "tronsr-template");
-    if (this.state.isTronLink === 1) {
-      // const tronWeb = this.props.tronWeb();
-      // const unSignTransaction = await tronWeb.transactionBuilder.withdrawExchangeTokens(exchangeId, tokenId, quant, tronWeb.defaultAddress.hex);
-      // await transactionResultManager(unSignTransaction,tronWeb)
+    let githubLink = name + "/" + (repo || "lindasr-template");
+    if (this.state.isLindaLink === 1) {
+      // const lindaWeb = this.props.lindaWeb();
+      // const unSignTransaction = await lindaWeb.transactionBuilder.withdrawExchangeTokens(exchangeId, tokenId, quant, lindaWeb.defaultAddress.hex);
+      // await transactionResultManager(unSignTransaction,lindaWeb)
       return;
     } else {
       await Client.updateSuperRepresentative(key, {
@@ -1819,7 +1819,7 @@ export default class Account extends Component {
     this.setState({
       modal: (
           <ApplyForDelegate
-              isTronLink={this.state.isTronLink}
+              isLindaLink={this.state.isLindaLink}
               privateKey={privateKey}
               onCancel={this.hideModal}
               onConfirm={() => {
@@ -1877,20 +1877,20 @@ export default class Account extends Component {
     this.setState({hideSmallCurrency: val});
   }
 
-  handleTRC10Token = () => {
+  handleLRC10Token = () => {
     // todo wangyan
-    // this.setState({tokenTRC10: true});
-    this.setState({tokenTRC10: true, tokenTRX: false});
+    // this.setState({tokenLRC10: true});
+    this.setState({tokenLRC10: true, tokenLIND: false});
   }
 
-  handleTRC20Token = () => {
+  handleLRC20Token = () => {
     // todo wangyan
-    // this.setState({tokenTRC10: false});
-    this.setState({tokenTRC10: false, tokenTRX: false});
+    // this.setState({tokenLRC10: false});
+    this.setState({tokenLRC10: false, tokenLIND: false});
   }
 
-  handleTRXToken = () => {
-    this.setState({tokenTRX: true});
+  handleLINDToken = () => {
+    this.setState({tokenLIND: true});
   }
 
   /**
@@ -1978,10 +1978,10 @@ export default class Account extends Component {
       const { account: { sunWeb },intl} = this.props;
       let data;
       if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-          let tronWebLedger = this.props.tronWeb();
-          data  = await tronWebLedger.trx.getUnconfirmedAccount(address);
+          let lindaWebLedger = this.props.lindaWeb();
+          data  = await lindaWebLedger.lind.getUnconfirmedAccount(address);
       }else {
-          data = await sunWeb.mainchain.trx.getUnconfirmedAccount(address);
+          data = await sunWeb.mainchain.lind.getUnconfirmedAccount(address);
       }
       let isAccount = JSON.stringify(data) == "{}";
       if (isAccount) {
@@ -2017,9 +2017,9 @@ export default class Account extends Component {
   }
 
   /**
-   * trx20 get map address
+   * lrc20 get map address
    */
-  getTrx20MappingSideChains = async (option) => {
+  getLrc20MappingSideChains = async (option) => {
     const { address } = option;
     const sideChains = await xhr.get(`${CONTRACT_MAINNET_API_URL}/external/sidechain/getMappingByMainchainAddress?mainchainAddress=${address}`);
     const { data: { retCode, data }  } = sideChains;
@@ -2027,7 +2027,7 @@ export default class Account extends Component {
       const { sidechains } = data;
       if (sidechains && sidechains.length > 0) {
         this.setState({
-          trx20MappingAddress: sidechains,
+          lrc20MappingAddress: sidechains,
         });
         this.openPledgeModel(option);
       } else {
@@ -2064,18 +2064,18 @@ export default class Account extends Component {
 
     // update brokerage
     brokerageUpdate = async () => {
-        let res,tronWeb;
+        let res,lindaWeb;
         let {account, currentWallet} = this.props;
         let {brokerageValue} = this.state;
         if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-            tronWeb = this.props.tronWeb();
-        } else if (this.props.walletType.type === "ACCOUNT_TRONLINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY") {
-            tronWeb = account.tronWeb;
+            lindaWeb = this.props.lindaWeb();
+        } else if (this.props.walletType.type === "ACCOUNT_LINDALINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY") {
+            lindaWeb = account.lindaWeb;
         }
         let value = 100 - brokerageValue;
         // updateBrokerage
-        const unSignTransaction = await tronWeb.transactionBuilder.updateBrokerage(value,tronWeb.defaultAddress.base58).catch(e => false);
-        const {result} = await transactionResultManager(unSignTransaction, tronWeb)
+        const unSignTransaction = await lindaWeb.transactionBuilder.updateBrokerage(value,lindaWeb.defaultAddress.base58).catch(e => false);
+        const {result} = await transactionResultManager(unSignTransaction, lindaWeb)
         res = result;
         if (res) {
             this.setState({
@@ -2103,15 +2103,15 @@ export default class Account extends Component {
             return
         }
         let {account, currentWallet, walletType} = this.props;
-        if (this.state.isTronLink === 1 || this.props.walletType.type === "ACCOUNT_LEDGER") {
-            let tronWeb;
+        if (this.state.isLindaLink === 1 || this.props.walletType.type === "ACCOUNT_LEDGER") {
+            let lindaWeb;
             if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-                tronWeb = this.props.tronWeb();
-            } else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-                tronWeb = account.tronWeb;
+                lindaWeb = this.props.lindaWeb();
+            } else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+                lindaWeb = account.lindaWeb;
             }
-            const unSignTransaction = await tronWeb.transactionBuilder.withdrawBlockRewards(walletType.address).catch(e => false);
-            const {result} = await transactionResultManager(unSignTransaction, tronWeb)
+            const unSignTransaction = await lindaWeb.transactionBuilder.withdrawBlockRewards(walletType.address).catch(e => false);
+            const {result} = await transactionResultManager(unSignTransaction, lindaWeb)
             res = result;
         } else {
             let {success, code} = await Client.withdrawBalance(currentWallet.address)(account.key);
@@ -2145,15 +2145,15 @@ export default class Account extends Component {
            return
         }
 
-        //let tronWeb = account.tronWeb;
-        let tronWeb;
+        //let lindaWeb = account.lindaWeb;
+        let lindaWeb;
         if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-            tronWeb = this.props.tronWeb();
+            lindaWeb = this.props.lindaWeb();
         } else {
-            tronWeb = account.tronWeb;
+            lindaWeb = account.lindaWeb;
         }
-        const unSignTransaction = await tronWeb.transactionBuilder.withdrawBlockRewards(walletType.address).catch(e => false);
-        const {result} = await transactionResultManager(unSignTransaction, tronWeb)
+        const unSignTransaction = await lindaWeb.transactionBuilder.withdrawBlockRewards(walletType.address).catch(e => false);
+        const {result} = await transactionResultManager(unSignTransaction, lindaWeb)
         res = result;
         //hashid = txid
 
@@ -2235,22 +2235,22 @@ export default class Account extends Component {
     }
 
   render() {
-    let { modal, sr, issuedAsset, showBandwidth, showBuyTokens, temporaryName, hideSmallCurrency, tokenTRC10,
+    let { modal, sr, issuedAsset, showBandwidth, showBuyTokens, temporaryName, hideSmallCurrency, tokenLRC10,
         isShowPledgeModal, isShowMappingModal, address, currency, balance, precision, id, type, isShowSignModal,
-        tokenTRX, trx20MappingAddress,brokerageValue, errorMess, reward, rewardData, accountReward,isInMyPermission,
+        tokenLIND, lrc20MappingAddress,brokerageValue, errorMess, reward, rewardData, accountReward,isInMyPermission,
         isInMySignature, mySignatureType,tabs,scrollsId,hasToken20} = this.state;
 
-    let {account, frozen, totalTransactions, currentWallet, wallet, accountResource, trxBalance, intl} = this.props;
+    let {account, frozen, totalTransactions, currentWallet, wallet, accountResource, lindBalance, intl} = this.props;
 
     let energyRemaining = currentWallet && currentWallet.bandwidth.energyRemaining;
 
-    let trxBalanceRemaining = currentWallet && currentWallet.balance / ONE_TRX;
+    let lindBalanceRemaining = currentWallet && currentWallet.balance / ONE_LIND;
 
-    let tronWeb;
+    let lindaWeb;
     if(wallet.type==='ACCOUNT_LEDGER'){
-      tronWeb = this.props.tronWeb();
+      lindaWeb = this.props.lindaWeb();
     }else{
-      tronWeb = account.tronWeb;
+      lindaWeb = account.lindaWeb;
     }
       // pledge param
       const option = {
@@ -2260,9 +2260,9 @@ export default class Account extends Component {
           precision,
           id,
           type,
-          trx20MappingAddress,
+          lrc20MappingAddress,
           energyRemaining,
-          trxBalanceRemaining
+          lindBalanceRemaining
       };
     if (!wallet.isOpen || !currentWallet) {
       return (
@@ -2281,10 +2281,10 @@ export default class Account extends Component {
     }
     let hasFrozen = frozen.balances.length > 0;
     let hasResourceFrozen = accountResource.frozen_balance > 0
-    let url = 'https://support.poloniex.org/hc/en-us/articles/360030644412-TRC20-USDT-Reloaded-with-Powerful-Aid-from-TRXMarket-15-000-USD-Awaits-'
-    let title = 'TRC20-USDT Returns with Generous Rewards from Poloni DEX - 15,000 USDT Awaits!'
+    let url = 'https://support.poloniex.org/hc/en-us/articles/360030644412-LRC20-USDT-Reloaded-with-Powerful-Aid-from-LINDMarket-15-000-USD-Awaits-'
+    let title = 'LRC20-USDT Returns with Generous Rewards from Poloni DEX - 15,000 USDT Awaits!'
     if(intl.locale == 'zh'){
-      url = 'https://support.poloniex.org/hc/zh-cn/articles/360030644412-TRXMarket%E5%8A%A9%E5%8A%9BTRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81'
+      url = 'https://support.poloniex.org/hc/zh-cn/articles/360030644412-LINDMarket%E5%8A%A9%E5%8A%9BLRC20-USDT%E9%87%8D%E8%A3%85%E4%B8%8A%E9%98%B5-%E6%83%8A%E5%96%9C%E6%94%BE%E9%80%8110%E4%B8%87%E4%BA%BA%E6%B0%91%E5%B8%81'
       title = 'Poloni DEX-USDT重装上阵，惊喜放送10万人民币'
     }
 
@@ -2340,9 +2340,9 @@ export default class Account extends Component {
               <div className="card h-100 bg-line_yellow bg-image_vote">
                 <div className="card-body">
                   <h3 style={{color: '#E0AE5C'}}>
-                    <FormattedNumber value={currentWallet.frozenTrx / ONE_TRX}/>
+                    <FormattedNumber value={currentWallet.frozenLind / ONE_LIND}/>
                   </h3>
-                  TRON {tu("power")}
+                  LINDA {tu("power")}
                   <span className="ml-2">
                       <QuestionMark placement="top" text="power_tip"/>
                   </span>
@@ -2354,15 +2354,15 @@ export default class Account extends Component {
               <div className="card h-100 bg-line_green bg-image_balance">
                 <div className="card-body">
                   <h3 style={{color: '#93C54B'}}>
-                    <TRXPrice amount={currentWallet.balance / ONE_TRX}/>
+                    <LINDPrice amount={currentWallet.balance / ONE_LIND}/>
                   </h3>
                   {tu("available_balance")}
                   {
                       IS_MAINNET ? 
                       intl.locale == 'zh'?
-                      <a href={window.location.origin === NETURL.MAINNET ?`https://just.tronscan.org/?lang=zh-CN`:`https://just.tronscan.io/?lang=zh-CN`} className="ml-2 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline', fontSize: '12px'}}>{t("pledge_to_get_USDJ")}</span>></a>
+                      <a href={window.location.origin === NETURL.MAINNET ?`https://just.lindascan.org/?lang=zh-CN`:`https://just.lindascan.io/?lang=zh-CN`} className="ml-2 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline', fontSize: '12px'}}>{t("pledge_to_get_USDJ")}</span>></a>
                       :
-                      <a href={window.location.origin === NETURL.MAINNET ?`https://just.tronscan.org/?lang=en-US`:`https://just.tronscan.io/?lang=en-US`} className="ml-2 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline', fontSize: '12px'}}>{t("pledge_to_get_USDJ")}</span>></a>
+                      <a href={window.location.origin === NETURL.MAINNET ?`https://just.lindascan.org/?lang=en-US`:`https://just.lindascan.io/?lang=en-US`} className="ml-2 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline', fontSize: '12px'}}>{t("pledge_to_get_USDJ")}</span>></a>
                       :''
                   }
                  
@@ -2388,7 +2388,7 @@ export default class Account extends Component {
                         <td style={{border: 'none'}}>
                           {currentWallet.name || temporaryName || "-"}
                           {
-                            (trim(currentWallet.name) === "" && (currentWallet.balance > 0 || currentWallet.frozenTrx > 0)) &&
+                            (trim(currentWallet.name) === "" && (currentWallet.balance > 0 || currentWallet.frozenLind > 0)) &&
                             <a href="javascript:" className="float-right text-primary btn btn-default btn-sm"
                                onClick={() => {
                                  this.changeName()
@@ -2445,7 +2445,7 @@ export default class Account extends Component {
                         (!currentWallet.representative.enabled  && IS_MAINNET) && <tr>
                           <th >{tu("SR_vote_for_reward")}:</th>
                           <td>
-                            <TRXPrice amount={accountReward / ONE_TRX}/>
+                            <LINDPrice amount={accountReward / ONE_LIND}/>
                               {
                                   accountReward == 0 ?  <AntdTip title={<span>{tu('no_rewards_available_yet')}</span>}>
                                                             <a href="javascript:;"
@@ -2602,7 +2602,7 @@ export default class Account extends Component {
                     <div className="d-flex align-items-center">
                       <button className="btn btn-danger btn-lg mb-3 mr-3" onClick={this.toissuedAsset}
                             style={{minWidth: '120px'}}>{tu('token_detail')}</button>
-                      <p style={{color: 'rgb(153, 153, 153)',fontSize: '12px'}}>{tu("Have_questions")} <a href="https://t.me/tronscan_org" target="_bank">{tu("Please_contact_us")}</a></p>
+                      <p style={{color: 'rgb(153, 153, 153)',fontSize: '12px'}}>{tu("Have_questions")} <a href="https://t.me/lindascan_org" target="_bank">{tu("Please_contact_us")}</a></p>
                     </div>
                     
                   </div>
@@ -2623,19 +2623,19 @@ export default class Account extends Component {
                   </div>
                   <div className="account-token-tab">
                     <a href="javascript:;"
-                       className={"btn btn-default btn-sm" + (tokenTRX ? ' active' : '')}
-                       onClick={this.handleTRXToken}>
-                      TRX
+                       className={"btn btn-default btn-sm" + (tokenLIND ? ' active' : '')}
+                       onClick={this.handleLINDToken}>
+                      LIND
                     </a>
                     <a href="javascript:;"
-                       className={"btn btn-default btn-sm ml-2" + (tokenTRC10 && !tokenTRX ? ' active' : '')}
-                       onClick={this.handleTRC10Token}>
-                      {tu("TRC10_token")}
+                       className={"btn btn-default btn-sm ml-2" + (tokenLRC10 && !tokenLIND ? ' active' : '')}
+                       onClick={this.handleLRC10Token}>
+                      {tu("LRC10_token")}
                     </a>
                     <a href="javascript:;"
-                       className={"btn btn-default btn-sm ml-2" + (tokenTRC10 || tokenTRX ? '' : ' active')}
-                       onClick={this.handleTRC20Token}>
-                      {tu("TRC20_token")}
+                       className={"btn btn-default btn-sm ml-2" + (tokenLRC10 || tokenLIND ? '' : ' active')}
+                       onClick={this.handleLRC20Token}>
+                      {tu("LRC20_token")}
                     </a>
                       {
                           IS_MAINNET?  <a href={`https://poloniex.org`} className="ml-2 float-right" target="_blank"><span className="mr-1"  style={{textDecoration: 'underline'}}>{t("Trade_on_Poloni DEX")}</span>></a>
@@ -2643,25 +2643,25 @@ export default class Account extends Component {
                       }
                   </div>
                   {/* {
-                    tokenTRC10 ? <div className="table-responsive-token">
+                    tokenLRC10 ? <div className="table-responsive-token">
                           {this.renderTokens()}
                         </div>
                         :
                         <div className="table-responsive-token">
-                          {this.renderTRC20Tokens()}
+                          {this.renderLRC20Tokens()}
                         </div>
                   } */}
                   {
-                    tokenTRC10 && !tokenTRX
+                    tokenLRC10 && !tokenLIND
                       ? <div className="table-responsive-token">
                           {this.renderTokens()}
                         </div>
-                      : (!tokenTRX
+                      : (!tokenLIND
                             ? <div className="table-responsive-token">
-                                {this.renderTRC20Tokens()}
+                                {this.renderLRC20Tokens()}
                               </div>
                             : <div className="table-responsive-token">
-                              {this.renderTRX()}
+                              {this.renderLIND()}
                             </div>
                       )
                   }
@@ -2687,7 +2687,7 @@ export default class Account extends Component {
                       <p className="card-text">
                         <a href="javascript:;"
                           style={{color:'#c23631'}}
-                          className={trxBalance >= this.state.dealPairTrxLimit ? "btn btn-default btn-sm btn-plus-square" : "float-right btn btn-default btn-sm btn-plus-square disabled"}
+                          className={lindBalance >= this.state.dealPairLindLimit ? "btn btn-default btn-sm btn-plus-square" : "float-right btn btn-default btn-sm btn-plus-square disabled"}
                           onClick={() => {
                             this.changeTxnPair()
                           }}>
@@ -2712,7 +2712,7 @@ export default class Account extends Component {
                             return (
                                 <tr key={index}>
                                   <td style={{position: 'relative'}}>
-                                    {exchange.map_token_name === "_" ? "TRX" : exchange.map_token_name}/{exchange.map_token_name1 === "_" ? "TRX" : exchange.map_token_name1}
+                                    {exchange.map_token_name === "_" ? "LIND" : exchange.map_token_name}/{exchange.map_token_name1 === "_" ? "LIND" : exchange.map_token_name1}
                                     <div style={{
                                       fontSize: 12,
                                       color: '#999',
@@ -2795,23 +2795,23 @@ export default class Account extends Component {
               </div>
             </div>
           </div>
-          <div className="row mt-3" id="tronPower">
+          <div className="row mt-3" id="lindaPower">
             <div className="col-md-12">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title text-center m-0">
-                    TRON {tu("power")}
+                    LINDA {tu("power")}
                   </h5>
 
                   <div className="card-body px-0 d-lg-flex justify-content-lg-between">
-                    <p className="card-text freeze-trx-premessage">
-                      {tu("freeze_trx_premessage_0")}
-                      <Link to="/sr/votes">{t("freeze_trx_premessage_link")}</Link>
-                      {tu("freeze_trx_gain_bandwith_energy")}
+                    <p className="card-text freeze-lind-premessage">
+                      {tu("freeze_lind_premessage_0")}
+                      <Link to="/sr/votes">{t("freeze_lind_premessage_link")}</Link>
+                      {tu("freeze_lind_gain_bandwith_energy")}
                       <br/>
-                      <br/>{tu("freeze_trx_premessage_1")}
+                      <br/>{tu("freeze_lind_premessage_1")}
                       <br/>
-                      <br/>{tu("freeze_trx_premessage_2")}
+                      <br/>{tu("freeze_lind_premessage_2")}
                     </p>
                     <div>
                       <button className="btn btn-primary" onClick={() => {
@@ -2832,7 +2832,7 @@ export default class Account extends Component {
 
 
           {
-          IS_MAINNET&&<div className="row mt-3" id="tronMultisign">
+          IS_MAINNET&&<div className="row mt-3" id="lindaMultisign">
             <div className="col-md-12">
                 <div className="card">
                   <div className="card-body">
@@ -2853,7 +2853,7 @@ export default class Account extends Component {
                       
                       <div className='muti-sign-content'>
                          <div className='muti-sign-my-permission' style={{display:isInMyPermission?'block':'none'}}>
-                            <MyPermission tronWeb={tronWeb}/>
+                            <MyPermission lindaWeb={lindaWeb}/>
                          </div>
                          <div className='muti-sign-my-signature' style={{display:isInMySignature?'block':'none'}}>
                             <MySignature type={mySignatureType} handleType={this.changeMySignatureType.bind(this)}/>
@@ -2946,7 +2946,7 @@ export default class Account extends Component {
                                     </th>
                                     <td style={{border: 'none',paddingRight:0}}>
                                        <span className="d-inline-block" style={{width:'50%',paddingRight:0}}>
-                                         <TRXPrice amount={currentWallet.representative.allowance / ONE_TRX} className="font-weight-bold"/>
+                                         <LINDPrice amount={currentWallet.representative.allowance / ONE_LIND} className="font-weight-bold"/>
                                            &nbsp; {tu('SR_reward_available')}
                                       </span>
                                         {
@@ -3001,7 +3001,7 @@ export default class Account extends Component {
                           {/*{*/}
                             {/*currentWallet.representative.allowance > 0 ?*/}
                                 {/*<p className="m-0 mt-3 text-success">*/}
-                                  {/*Claimable Rewards: <TRXPrice amount={currentWallet.representative.allowance / ONE_TRX}*/}
+                                  {/*Claimable Rewards: <LINDPrice amount={currentWallet.representative.allowance / ONE_LIND}*/}
                                                                {/*className="font-weight-bold"/>*/}
                                 {/*</p> :*/}
                                 {/*<p className="m-0 mt-3 font-weight-bold" style={{color: '#D0AC6E'}}>*/}
@@ -3019,7 +3019,7 @@ export default class Account extends Component {
                           </p>
                           <p className="float-right">
                             <HrefLink className="btn btn-success"
-                                      href="https://github.com/tronscan/tronsr-template#readme">
+                                      href="https://github.com/lindascan/lindasr-template#readme">
                               {tu("SR_set_github_learn_more")}
                             </HrefLink>
                           </p>

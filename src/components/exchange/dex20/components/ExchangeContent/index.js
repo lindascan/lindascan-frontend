@@ -46,8 +46,8 @@ class ExchangeContent extends React.Component {
                     style={{ width: 100 }}
                     onChange={this.handleChange}
                   >
-                    <Option value="kchart">{tu("trc20_kchart")}</Option>
-                    <Option value="depth">{tu("trc20_depth")}</Option>
+                    <Option value="kchart">{tu("lrc20_kchart")}</Option>
+                    <Option value="depth">{tu("lrc20_depth")}</Option>
                   </Select>
                 </div>
                 {select === "kchart" ? <Kline /> : <Depth />}

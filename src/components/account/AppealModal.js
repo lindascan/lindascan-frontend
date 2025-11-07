@@ -53,7 +53,7 @@ class ChangeNameModal extends Component {
   }
 
   async submitAppeal(contenttext){
-    const { toAppealing, account: {address,tronWeb} } = this.props
+    const { toAppealing, account: {address,lindaWeb} } = this.props
     const {appealInfo} = this.state
    
     let content = {
@@ -63,8 +63,8 @@ class ChangeNameModal extends Component {
       timestamp: new Date().getTime()
     }
     const content_str = JSON.stringify(content)
-    let hash = tronWeb.toHex(content_str);
-    let sig =  await tronWeb.trx.sign(hash)
+    let hash = lindaWeb.toHex(content_str);
+    let sig =  await lindaWeb.lind.sign(hash)
 
     const { data } = await xhr.post(CONTRACT_MAINNET_API_URL+`/external/trc_appeals/${appealInfo.id}/update`, {
       content: content_str,

@@ -9,7 +9,7 @@ import { injectIntl } from "react-intl";
 export default class OwnerEdit extends Component{
     constructor(props){
         super(props)
-        const { ownerPermission,tronWeb } = this.props;
+        const { ownerPermission,lindaWeb } = this.props;
         const {keys,threshold,permission_name} = ownerPermission;
         this.state={
             keys:cloneDeep(keys),
@@ -82,11 +82,11 @@ export default class OwnerEdit extends Component{
     }
 
     render(){
-        const {tronWeb,intl } = this.props;
+        const {lindaWeb,intl } = this.props;
         let {keys,threshold,permission_name} = this.state;
         keys = keys.map(item=>{
-            if(item.address && tronWeb.isAddress(item.address)){
-                item.address = tronWeb.address.fromHex(item.address);
+            if(item.address && lindaWeb.isAddress(item.address)){
+                item.address = lindaWeb.address.fromHex(item.address);
             }
             return item;
         })

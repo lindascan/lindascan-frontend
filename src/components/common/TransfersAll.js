@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import { injectIntl} from "react-intl";
 import {Client} from "../../services/api";
-import {AddressLink, TransactionHashLink, BlockNumberLink, TokenLink, TokenTRC20Link} from "./Links";
+import {AddressLink, TransactionHashLink, BlockNumberLink, TokenLink, TokenLRC20Link} from "./Links";
 import {tu, tv} from "../../utils/i18n";
 import {connect} from "react-redux";
 
@@ -10,7 +10,7 @@ import {Truncate,TruncateAddress} from "./text";
 import {withTimers} from "../../utils/timing";
 import SmartTable from "./SmartTable.js"
 import {upperFirst} from "lodash";
-import {TronLoader} from "./loaders";
+import {LindaLoader} from "./loaders";
 import rebuildList from "../../utils/rebuildList";
 import rebuildToken20List from "../../utils/rebuildToken20List";
 // import {SwitchToken} from "./Switch";
@@ -20,7 +20,7 @@ import moment from 'moment';
 import { toThousands } from '../../utils/number'
 import _ from "lodash";
 import { Radio } from 'antd';
-import {isAddressValid} from "@tronscan/client/src/utils/crypto";
+import {isAddressValid} from "@lindascan/client/src/utils/crypto";
 import { CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC } from "../../constants";
 import qs from 'qs'
 import DateSelect from './dateSelect'
@@ -72,8 +72,8 @@ class TransfersAll extends React.Component {
     };
 
     load = async (page = 1, pageSize = 20) => {
-        let transfersTRX;
-        let {id,istrc20=false, getCsvUrl} = this.props;
+        let transfersLIND;
+        let {id,islrc20=false, getCsvUrl} = this.props;
         let {showTotal,hideSmallCurrency,tokenNam,filter} = this.state;
         const params = {
             sort: '-timestamp',
@@ -90,7 +90,7 @@ class TransfersAll extends React.Component {
             pageSize: pageSize,
         });
         const query = qs.stringify({ format: 'csv',...params})
-        getCsvUrl(`${API_URL}/api/trc10trc20-transfer?${query}`)
+        getCsvUrl(`${API_URL}/api/lrc10lrc20-transfer?${query}`)
         let list,total,range = 0;
 
         const allData = await Promise.all([
@@ -100,7 +100,7 @@ class TransfersAll extends React.Component {
                 ...params,
             }),
             Client.getCountByType({
-                type: 'trc10trc20', 
+                type: 'lrc10lrc20', 
                 ...filter,
                 ...id,})
         ]).catch(e => {
@@ -117,12 +117,12 @@ class TransfersAll extends React.Component {
                 item.amount_str = item.amount;
             }
         })
-        let transfersTRC10 = _(transfers).filter(tb => tb.type === "trc10" ).value();
-        let transfersTRC20 = _(transfers).filter(tb => tb.type === "trc20" ).value();
+        let transfersLRC10 = _(transfers).filter(tb => tb.type === "lrc10" ).value();
+        let transfersLRC20 = _(transfers).filter(tb => tb.type === "lrc20" ).value();
 
-        let rebuildRransfersTRC10 = rebuildList(transfersTRC10, 'token_id', 'amount_str');
-        let rebuildRransfersTRC20  = rebuildToken20List(transfersTRC20, 'contract_address', 'amount_str');
-        let rebuildRransfers = rebuildRransfersTRC10.concat(rebuildRransfersTRC20);
+        let rebuildRransfersLRC10 = rebuildList(transfersLRC10, 'token_id', 'amount_str');
+        let rebuildRransfersLRC20  = rebuildToken20List(transfersLRC20, 'contract_address', 'amount_str');
+        let rebuildRransfers = rebuildRransfersLRC10.concat(rebuildRransfersLRC20);
         rebuildRransfers =  _(rebuildRransfers).sortBy(tb => -tb.date_created).value();
         rebuildRransfers.map( item => {
             if(item.map_token_id === '_'){
@@ -130,7 +130,7 @@ class TransfersAll extends React.Component {
                 //item.type = '-';
             }
             if(id.address){
-                if(item.type == 'trc10'){
+                if(item.type == 'lrc10'){
                     item.fromtip = !(item.owner_address == id.address)
                     item.totip = !(item.to_address == id.address)
                 }else{
@@ -145,7 +145,7 @@ class TransfersAll extends React.Component {
         })
         rebuildRransfers.forEach(item=>{
             if(contractMap){
-                if(item.type == 'trc10'){
+                if(item.type == 'lrc10'){
                     contractMap[item.owner_address]? (item.ownerIsContract = true) :  (item.ownerIsContract = false)
                 }else{
                     contractMap[item.from_address]? (item.ownerIsContract = true) :  (item.ownerIsContract = false)
@@ -287,14 +287,14 @@ class TransfersAll extends React.Component {
                                     />
                                 </Tooltip>
                                 {record.fromtip ?
-                                    <AddressLink address={record.type == 'trc10'?text:record.from_address} isContract={true}>{record.type == 'trc10'?text:record.from_address}</AddressLink>
+                                    <AddressLink address={record.type == 'lrc10'?text:record.from_address} isContract={true}>{record.type == 'lrc10'?text:record.from_address}</AddressLink>
                                     :
-                                    <TruncateAddress address={record.type == 'trc10'?text:record.from_address}>{record.type == 'trc10'?text:record.from_address}</TruncateAddress>}
+                                    <TruncateAddress address={record.type == 'lrc10'?text:record.from_address}>{record.type == 'lrc10'?text:record.from_address}</TruncateAddress>}
                             </span>
                             ) : (
                                 record.fromtip ?
-                                    <AddressLink address={record.type == 'trc10'?text:record.from_address}>{record.type == 'trc10'?text:record.from_address}</AddressLink>:
-                                    <TruncateAddress address={record.type == 'trc10'?text:record.from_address}>{record.type == 'trc10'?text:record.from_address}</TruncateAddress>
+                                    <AddressLink address={record.type == 'lrc10'?text:record.from_address}>{record.type == 'lrc10'?text:record.from_address}</AddressLink>:
+                                    <TruncateAddress address={record.type == 'lrc10'?text:record.from_address}>{record.type == 'lrc10'?text:record.from_address}</TruncateAddress>
                             )
                         }
                     </span>
@@ -393,8 +393,8 @@ class TransfersAll extends React.Component {
                                 style={{ width: 10, height: 10, bottom: -5 }}
                               ></i>
                             </b>
-                            {record.type == "trc20" ? (
-                              <TokenTRC20Link
+                            {record.type == "lrc20" ? (
+                              <TokenLRC20Link
                                 name={record.map_token_id}
                                 address={record.contract_address}
                                 namePlus={record.map_token_name_abbr}
@@ -424,8 +424,8 @@ class TransfersAll extends React.Component {
                                     e.target.src = defaultImg;
                                   }}
                                 />
-                                {record.type == "trc20" ? (
-                                  <TokenTRC20Link
+                                {record.type == "lrc20" ? (
+                                  <TokenLRC20Link
                                     name={record.map_token_id}
                                     address={record.contract_address}
                                     namePlus={record.map_token_name_abbr}
@@ -519,7 +519,7 @@ class TransfersAll extends React.Component {
     render() {
 
         let {transfers, filter, total, rangeTotal = 0, loading, emptyState: EmptyState = null} = this.state;
-        let {intl, istrc20, address = false,activeLanguage} = this.props;
+        let {intl, islrc20, address = false,activeLanguage} = this.props;
         let column = this.customizedColumn(activeLanguage);
         let tableInfo = intl.formatMessage({id: 'view_total'}) + ' ' + total + ' ' + intl.formatMessage({id: 'transfers_unit'})
         let locale  = {emptyText: intl.formatMessage({id: 'no_transfers'})}
@@ -535,7 +535,7 @@ class TransfersAll extends React.Component {
 
         return (
             <div className="token_black table_pos transfers-Container">
-                {loading && <div className="loading-style"><TronLoader/></div>}
+                {loading && <div className="loading-style"><LindaLoader/></div>}
                 <div className="d-flex justify-content-between" style={{right: 'auto'}}>
                     {!loading && <TotalInfo total={total} rangeTotal={rangeTotal} typeText="transactions_unit" divClass="table_pos_info_addr" selected/> }
                     {

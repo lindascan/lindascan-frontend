@@ -1,12 +1,12 @@
 import React, {Fragment} from "react";
-import {ONE_TRX, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../constants";
-import {AddressLink, ExternalLink, ContractLink, TokenTRC20Link} from "../../common/Links";
+import {ONE_LIND, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, TRADINGMAP, SUNWEBCONFIG, IS_SUNNET} from "../../../constants";
+import {AddressLink, ExternalLink, ContractLink, TokenLRC20Link} from "../../common/Links";
 import Field from "./Field";
-import {TRXPrice} from "../../common/Price";
+import {LINDPrice} from "../../common/Price";
 import {tu} from "../../../utils/i18n";
 import {FormattedNumber, FormattedDate, injectIntl} from "react-intl";
 import rebuildList from "../../../utils/rebuildList";
-import {toUtf8} from 'tronweb'
+import {toUtf8} from 'lindaweb'
 import { NameWithId } from '../../common/names';
 
 /**
@@ -96,7 +96,7 @@ export default function Contract({contract}) {
                             <h5>
                                 <i className="fa fa-exchange-alt"></i>
                                 {tu("transfer_contract")}
-                                <small>{tu("TRX_transfer_between_addresses")}</small>
+                                <small>{tu("LIND_transfer_between_addresses")}</small>
                             </h5>
                         </div>
                         <div className="table-responsive">
@@ -104,7 +104,7 @@ export default function Contract({contract}) {
                                 <tbody>
                                 <Field label="from"><AddressLink address={contract['owner_address']}>{contract['owner_address']}</AddressLink></Field>
                                 <Field label="to"><AddressLink address={contract['to_address']}>{contract['to_address']}</AddressLink></Field>
-                                <Field label="amount"><TRXPrice amount={contract.amount / ONE_TRX}/></Field>
+                                <Field label="amount"><LINDPrice amount={contract.amount / ONE_LIND}/></Field>
                                 {contract.contract_note &&
                                 <Field label="note">{decodeURIComponent(contract.contract_note)}</Field>
                                 }
@@ -152,7 +152,7 @@ export default function Contract({contract}) {
                                 <tbody>
                                 <Field label="to"><AddressLink address={contract['owner_address']}>{contract['owner_address']}</AddressLink></Field>
                                 <Field label="issuer"><AddressLink address={contract['to_address']}>{contract['to_address']}</AddressLink></Field>
-                                <Field label="amount">{contract.amount / ONE_TRX}</Field>
+                                <Field label="amount">{contract.amount / ONE_LIND}</Field>
                                 <Field label="token"><NameWithId value={contract} notamount totoken/></Field>
                                 </tbody>
                             </table>
@@ -257,7 +257,7 @@ export default function Contract({contract}) {
                             <h5>
                                 <i className="fa fa-exchange-alt"></i>
                                 {tu("freeze_balance_contract")}
-                                <small>{tu("freeze_TRX")}</small>
+                                <small>{tu("freeze_LIND")}</small>
                             </h5>
                         </div>
                         <table className="table">
@@ -265,7 +265,7 @@ export default function Contract({contract}) {
                             <Field label="owner_address"><AddressLink address={contract['owner_address']}/></Field>
                             {contract['receiver_address']&&<Field label="receive_list"><AddressLink address={contract['receiver_address']}/></Field>}
                             {contract['resource']?<Field label="type">{contract['resource']}</Field>:<Field label="type">Bandwidth</Field>}
-                            <Field label="frozen_balance">{contract['frozen_balance'] / ONE_TRX}</Field>
+                            <Field label="frozen_balance">{contract['frozen_balance'] / ONE_LIND}</Field>
                             <Field label="frozen_days">{contract['frozen_duration']}</Field>
                             </tbody>
                         </table>
@@ -279,7 +279,7 @@ export default function Contract({contract}) {
                             <h5>
                                 <i className="fa fa-exchange-alt"></i>
                                 {tu("unfreeze_balance_contract")}
-                                <small>{tu("unfreeze_TRX")}</small>
+                                <small>{tu("unfreeze_LIND")}</small>
                             </h5>
                         </div>
                         <table className="table">
@@ -339,7 +339,7 @@ export default function Contract({contract}) {
                             <Field label="owner_address"><AddressLink address={contract['owner_address']}/></Field>
                             <Field label="token_name">{toUtf8(contract.name)}</Field>
                             <Field label="total_supply"><FormattedNumber value={contract.total_supply/ (contract.precision?Math.pow(10,contract.precision):1)}/></Field>
-                            <Field label="TRX_exchange_rate">{contract.trx_num / ONE_TRX} : {contract.num}</Field>
+                            <Field label="LIND_exchange_rate">{contract.lind_num / ONE_LIND} : {contract.num}</Field>
                             <Field label="start_time">
                                 {contract.end_time - contract.start_time > 1000 ?  <FormattedDate value={contract.start_time}/> : "-"}
                             </Field>
@@ -433,11 +433,11 @@ export default function Contract({contract}) {
                                     {tu("value")}:
                                   </div>
                                   {contract["call_value"] ? (
-                                    <TRXPrice
-                                      amount={contract["call_value"] / ONE_TRX}
+                                    <LINDPrice
+                                      amount={contract["call_value"] / ONE_LIND}
                                     />
                                   ) : (
-                                    <TRXPrice amount={0} />
+                                    <LINDPrice amount={0} />
                                   )}
                                 </div>
                               </div>
@@ -449,7 +449,7 @@ export default function Contract({contract}) {
                                 undefined && (
                                 <div className="d-flex border-bottom pt-2">
                                   <div className="content_box_name">
-                                    {tu("TRC20_transfers")}
+                                    {tu("LRC20_transfers")}
                                   </div>
                                   <div className="flex1">
                                     <div className="d-flex border-bottom content_item">
@@ -573,7 +573,7 @@ export default function Contract({contract}) {
                                             }}
                                           />
                                         )}
-                                        <TokenTRC20Link
+                                        <TokenLRC20Link
                                           name={
                                             contract.tokenTransferInfo["name"]
                                           }
@@ -701,7 +701,7 @@ export default function Contract({contract}) {
                                           {tu(c)}:
                                         </div>
                                         <div className="flex1">
-                                          {contract.cost[c] / 1000000} TRX
+                                          {contract.cost[c] / 1000000} LIND
                                         </div>
                                       </div>
                                     ) : (
@@ -794,8 +794,8 @@ export default function Contract({contract}) {
                                             <div className="content_name">{tu('value')}:</div>
                                             {
                                                 contract['call_value']?
-                                                    <TRXPrice amount={contract['call_value'] / ONE_TRX}/>
-                                                    :<TRXPrice amount={0}/>
+                                                    <LINDPrice amount={contract['call_value'] / ONE_LIND}/>
+                                                    :<LINDPrice amount={0}/>
                                             }
                                         </div>
                                     </div>
@@ -811,7 +811,7 @@ export default function Contract({contract}) {
                                                 return (c==='energy_fee'||c==='net_fee')?
                                                     <div className="d-flex border-bottom content_item" key={c}>
                                                         <div className="content_name mr-2" style={{width: 'auto'}}>{tu(c)}:</div>
-                                                        <div className="flex1">{contract.cost[c]/1000000} TRX</div>
+                                                        <div className="flex1">{contract.cost[c]/1000000} LIND</div>
                                                     </div>:
                                                     <div className="d-flex border-bottom content_item" key={c}>
                                                         <div className="content_name mr-2" style={{width: 'auto'}}>{tu(c)}:</div>

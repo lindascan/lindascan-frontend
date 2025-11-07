@@ -1,7 +1,7 @@
 import {
     SystemAsync,
     TransactionViewerAsync,
-    TronConvertToolAsync,
+    LindaConvertToolAsync,
     FaqAsync,
     LedgerHelpAsync
 } from "../components/async";
@@ -19,22 +19,22 @@ export const MoreRoutes = [
                 {
                     url: "https://tron.network/static/doc/white_paper_v_2_0.pdf",
                     // icon: "fa fa-globe",
-                    label: "what_is_tron"
+                    label: "what_is_linda"
                 },
                 {
-                    url: "https://dn-peiwo-web.qbox.me/Design_Book_of_TRON_Architecture1.4.pdf",
+                    url: "https://dn-peiwo-web.qbox.me/Design_Book_of_LINDA_Architecture1.4.pdf",
                     // icon: "fa fa-outdent",
-                    label: "tron_architechure"
+                    label: "linda_architechure"
                 },
                 {
-                    url: "https://github.com/tronscan/tronscan-frontend/blob/dev2019/document/api.md",
+                    url: "https://github.com/lindascan/lindascan-frontend/blob/dev2019/document/api.md",
                     // icon: "fa fa-building",
-                    label: "tron_explorer_api"
+                    label: "linda_explorer_api"
                 },
                 {
-                    url: "https://dn-peiwo-web.qbox.me/TRON%20Protobuf%20Protocol%20Document.pdf",
+                    url: "https://dn-peiwo-web.qbox.me/LINDA%20Protobuf%20Protocol%20Document.pdf",
                     // icon: "fa fa-book",
-                    label: "tron_protobuf_doc"
+                    label: "linda_protobuf_doc"
                 },
 
                 {
@@ -62,17 +62,17 @@ export const MoreRoutes = [
                 //     path: "/help/ledger"
                 // },
                 // {
-                //     url: "https://t.me/tronscan",
+                //     url: "https://t.me/lindascan",
                 //     label: "telegram_updates"
                 // },
-                // {   url: "https://www.reddit.com/r/tronix",
+                // {   url: "https://www.reddit.com/r/lindaix",
                 //     label: "reddit"
                 // },
-                // {   url: "https://t.me/tronscantalk",
+                // {   url: "https://t.me/lindascantalk",
                 //     label: "telegram"
                 // },
                 // {
-                //     url: "https://github.com/tronscan/tronscan-frontend/issues/new",
+                //     url: "https://github.com/lindascan/lindascan-frontend/issues/new",
                 //     label: "report_an_error"
                 // }
             ],
@@ -91,13 +91,13 @@ export const MoreRoutes = [
                     component: TransactionViewerAsync
                 },
                 {
-                    label: "tron_convert_tool",
-                    path: "/tools/tron-convert-tool",
+                    label: "linda_convert_tool",
+                    path: "/tools/linda-convert-tool",
                     // icon: "fa fa-random",
-                    component: TronConvertToolAsync
+                    component: LindaConvertToolAsync
                 },
                 {
-                    url: "https://shasta.tronscan.org",
+                    url: "https://shasta.lindascan.org",
                     // icon: "fa fa-link",
                     label: "link_test_server",
                     sidechain: false
@@ -109,7 +109,7 @@ export const MoreRoutes = [
                 //   component: NodeTesterAsync
                 // }
                 // {
-                //     url: "https://github.com/tronscan/tronscan-desktop/releases",
+                //     url: "https://github.com/lindascan/lindascan-desktop/releases",
                 //     icon: "fa fa-download",
                 //     label: "desktop_explorer"
                 // },
@@ -138,8 +138,8 @@ export const MoreRoutes = [
                     linkHref: true
                 },
                 {
-                    path: "/more/list_trx",
-                    label: "list_trx",
+                    path: "/more/list_lind",
+                    label: "list_lind",
                     // icon: "fa fa-plus",
                     enurl: "https://tron.network/exchangesList?lng=en",
                     zhurl: "https://tron.network/exchangesList?lng=zh",
@@ -173,8 +173,8 @@ export const MoreRoutes = [
     //       linkHref: true
     //     },
     //     {
-    //       path: "/more/list_trx",
-    //       label: "list_trx",
+    //       path: "/more/list_lind",
+    //       label: "list_lind",
     //       icon: "fa fa-plus",
     //       enurl: "https://tron.network/exchangesList?lng=en",
     //       zhurl: "https://tron.network/exchangesList?lng=zh",
@@ -197,8 +197,8 @@ export const MoreRoutes = [
     //             linkHref: true
     //         },
     //         {
-    //             path: "/more/list_trx",
-    //             label: "list_trx",
+    //             path: "/more/list_lind",
+    //             label: "list_lind",
     //             icon: "fa fa-plus",
     //             enurl: "https://tron.network/exchangesList?lng=en",
     //             zhurl: "https://tron.network/exchangesList?lng=zh",

@@ -406,7 +406,7 @@ class VerifyContractCode extends Component {
                   </p>
                   <p>
                     2. {tu("contract_notes_2_1")}
-                    <a href="https://github.com/tronprotocol/tron-studio">
+                    <a href="https://github.com/lindaprotocol/linda-studio">
                         {tu("contract_notes_2_2")}
                     </a>
                       {t("contract_notes_2_3")}

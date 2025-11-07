@@ -3,10 +3,10 @@ import {tu,t} from "../../../utils/i18n";
 import { connect } from 'react-redux';
 import {Client, proposalApi} from "../../../services/api";
 import {FormattedDate, FormattedTime, injectIntl} from "react-intl";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import {AddressLink} from "../../common/Links";
 import {QuestionMark} from "../../common/QuestionMark";
-import {ONE_TRX,IS_MAINNET} from "../../../constants";
+import {ONE_LIND,IS_MAINNET} from "../../../constants";
 import {NavLink, Route, Switch, Link, withRouter} from "react-router-dom";
 import {upperFirst} from 'lodash'
 import MyInitiated from './MyInitiated'
@@ -74,8 +74,8 @@ class MyProposals extends React.Component {
       <main className="container header-overlap committee">
           {
             loading ? <div className="card">
-                  <TronLoader>
-                  </TronLoader>
+                  <LindaLoader>
+                  </LindaLoader>
                 </div> :
                 <div>
                   {
@@ -111,9 +111,9 @@ class MyProposals extends React.Component {
                     </div>
                     :
                     <div className="my-proposals-empty">
-                      <img src={require('../../../images/proposals/tron-empty.svg')} alt=""/>
+                      <img src={require('../../../images/proposals/linda-empty.svg')} alt=""/>
                       <div>
-                        {t('trc20_no_data')},
+                        {t('lrc20_no_data')},
                         {t('proposal_go')}
                         <Link to="/proposalscreate">{t('proposal_create')}</Link>
                         {t('proposal_or')}

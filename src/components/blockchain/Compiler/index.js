@@ -408,10 +408,10 @@ class ContractCompiler extends React.Component {
      * 点击部署确认
      */
     deploy = async(options) => {
-        const { account: { tronWeb,sunWeb } } = this.props;
+        const { account: { lindaWeb,sunWeb } } = this.props;
        
         const { name } = options;
-        const tron = IS_MAINNET ? tronWeb : sunWeb.sidechain
+        const linda = IS_MAINNET ? lindaWeb : sunWeb.sidechain
         // 统计代码
         this.gTagHandler('deploy');
 
@@ -437,8 +437,8 @@ class ContractCompiler extends React.Component {
                 compileLoading: false
             });
             
-            const unsigned = await tron.transactionBuilder.createSmartContract(options);
-            // const unsigned = await tronWeb.transactionBuilder.createSmartContract(options);
+            const unsigned = await linda.transactionBuilder.createSmartContract(options);
+            // const unsigned = await lindaWeb.transactionBuilder.createSmartContract(options);
             
 
             infoData = [{
@@ -454,8 +454,8 @@ class ContractCompiler extends React.Component {
                 CompileStatus,
             });
 
-            const signed = await tron.trx.sign(unsigned)
-            // const signed = await tronWeb.sidechain.trx.sign(unsigned);
+            const signed = await linda.lind.sign(unsigned)
+            // const signed = await lindaWeb.sidechain.lind.sign(unsigned);
             infoData = [{
                 type: 'info',
                 class: 'signed',
@@ -469,8 +469,8 @@ class ContractCompiler extends React.Component {
                 CompileStatus,
             });
 
-            const broadcastResult = await tron.trx.sendRawTransaction(signed);
-            // const broadcastResult = await tronWeb.sidechain.trx.sendRawTransaction(signed);
+            const broadcastResult = await linda.lind.sendRawTransaction(signed);
+            // const broadcastResult = await lindaWeb.sidechain.lind.sendRawTransaction(signed);
 
             this.setState({
                 txID: signed.txID,
@@ -498,7 +498,7 @@ class ContractCompiler extends React.Component {
                 infoData = [{
                     type: 'error',
                     content: `FAILED to broadcast ${name} deploy transaction \n${
-                        broadcastResult.code}\n${tronWeb.toUtf8(broadcastResult.message)}./>`
+                        broadcastResult.code}\n${lindaWeb.toUtf8(broadcastResult.message)}./>`
                 }];
                 CompileStatus.push.apply(CompileStatus,infoData);
                 this.setState({
@@ -530,7 +530,7 @@ class ContractCompiler extends React.Component {
      * 部署并更新合约
      */
     deployContract = async(optionsParam) => {
-        const { account: { tronWeb,sunWeb } } = this.props;
+        const { account: { lindaWeb,sunWeb } } = this.props;
         let { txID, currentContractName, optimizer, runs, compilerVersion, options,
             CompileStatus, signed } = this.state;
         const { bytecode, abi, name } = optionsParam || options;
@@ -539,14 +539,14 @@ class ContractCompiler extends React.Component {
         let infoData = [];
 
         let transactionInfo = {};
-        const tron = IS_MAINNET ? tronWeb : sunWeb.sidechain
+        const linda = IS_MAINNET ? lindaWeb : sunWeb.sidechain
 
         do {
 
             // 部署合约
             await this.timeout(20000);
            
-            transactionInfo = await tron.trx.getTransactionInfo(txID)
+            transactionInfo = await linda.lind.getTransactionInfo(txID)
                 .catch (e => {
                     infoData = [{
                         type: 'error',
@@ -576,7 +576,7 @@ class ContractCompiler extends React.Component {
                             receipt.energy_fee
                                 ? toThousands(receipt.energy_fee / 1000000)
                                 : 0
-                        } TRX, ${
+                        } LIND, ${
                             receipt.energy_usage
                                 ? toThousands(receipt.energy_usage)
                                 : 0
@@ -584,7 +584,7 @@ class ContractCompiler extends React.Component {
                             id}" target='_blank' class="info_link">${id}</a>`
                     }];
                     CompileStatus.push.apply(CompileStatus, infoData);
-                    const base58Adress = tronWeb.address.fromHex(signed.contract_address);
+                    const base58Adress = lindaWeb.address.fromHex(signed.contract_address);
                     infoData = [{
                         type: 'success',
                         class: 'deploy',
@@ -622,8 +622,8 @@ class ContractCompiler extends React.Component {
                             receipt.energy_fee
                                 ? toThousands(receipt.energy_fee / 1000000)
                                 : 0
-                        } TRX\nReason: ${
-                            tronWeb.toUtf8(resMessage)}. Transaction here <a href="/#/transaction/${
+                        } LIND\nReason: ${
+                            lindaWeb.toUtf8(resMessage)}. Transaction here <a href="/#/transaction/${
                             id}" class="info_link" target='_blank'>${id}</a>`
                     }];
                     CompileStatus.push.apply(CompileStatus, infoData);

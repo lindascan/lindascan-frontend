@@ -3,7 +3,7 @@ import {
   AddressLink,
   ExternalLink,
   ContractLink,
-  TokenTRC20Link
+  TokenLRC20Link
 } from "../../../common/Links";
 import Field from "../../../tools/TransactionViewer/Field";
 import SignList from "./common/SignList";

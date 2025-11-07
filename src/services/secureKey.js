@@ -1,6 +1,6 @@
 import pbkdf2 from 'pbkdf2';
 import aesjs from "aes-js";
-import {isAddressValid, pkToAddress} from "@tronscan/client/src/utils/crypto";
+import {isAddressValid, pkToAddress} from "@lindascan/client/src/utils/crypto";
 
 export function encryptKey(password, salt) {
   return pbkdf2.pbkdf2Sync(password, salt, 1, 256 / 8, 'sha512');

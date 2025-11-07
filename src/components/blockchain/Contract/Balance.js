@@ -30,35 +30,35 @@ class Balances extends React.Component {
           if(item.map_token_id === '_'){
               item.map_amount_logo = 'https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png'
               item.tokenType = '-';
-              item.priceInTrx = 1
+              item.priceInLind = 1
           }else{
-              item.tokenType = 'TRC10'
+              item.tokenType = 'LRC10'
           }
 
-          if(item.priceInTrx){
+          if(item.priceInLind){
               x= new BigNumber(item.map_amount);
-              item.TRXBalance = (x.multipliedBy(item.priceInTrx)).decimalPlaces(6);
-              item.TRXBalance_toThousands = toThousands((x.multipliedBy(item.priceInTrx)).decimalPlaces(6));
+              item.LINDBalance = (x.multipliedBy(item.priceInLind)).decimalPlaces(6);
+              item.LINDBalance_toThousands = toThousands((x.multipliedBy(item.priceInLind)).decimalPlaces(6));
 
           }else{
-              item.TRXBalance = 0
+              item.LINDBalance = 0
           }
       })
 
-      let trc20token_balances_new  = rebuildToken20List(address.trc20token_balances, 'contract_address', 'balance');
+      let lrc20token_balances_new  = rebuildToken20List(address.lrc20token_balances, 'contract_address', 'balance');
       let y;
-      trc20token_balances_new && trc20token_balances_new.map(item => {
-          item.tokenType = 'TRC20'
+      lrc20token_balances_new && lrc20token_balances_new.map(item => {
+          item.tokenType = 'LRC20'
           item.token20_name = item.name + '(' + item.symbol + ')';
           item.token20_balance = FormatNumberByDecimals(item.balance, item.decimals);
           item.token20_balance_decimals = FormatNumberByDecimalsBalance(item.balance, item.decimals);
           item.map_amount = FormatNumberByDecimalsBalance(item.balance, item.decimals);
-          if(item.priceInTrx){
+          if(item.priceInLind){
               y = new BigNumber(item.token20_balance_decimals);
-              item.TRXBalance = (y.multipliedBy(item.priceInTrx)).decimalPlaces(6);
-              item.TRXBalance_toThousands = toThousands((y.multipliedBy(item.priceInTrx)).decimalPlaces(6));
+              item.LINDBalance = (y.multipliedBy(item.priceInLind)).decimalPlaces(6);
+              item.LINDBalance_toThousands = toThousands((y.multipliedBy(item.priceInLind)).decimalPlaces(6));
           }else{
-              item.TRXBalance = 0
+              item.LINDBalance = 0
           }
 
           return item
@@ -66,7 +66,7 @@ class Balances extends React.Component {
 
 
 
-      let tokenBalances = balances.concat(trc20token_balances_new)
+      let tokenBalances = balances.concat(lrc20token_balances_new)
 
     this.setState({
       address: tokenBalances

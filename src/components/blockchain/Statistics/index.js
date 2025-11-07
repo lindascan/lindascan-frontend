@@ -2,11 +2,11 @@ import React from "react";
 import xhr from "axios/index";
 import { tu } from "../../../utils/i18n";
 import { Client } from "../../../services/api";
-import { ONE_TRX,IS_MAINNET } from "../../../constants";
+import { ONE_LIND,IS_MAINNET } from "../../../constants";
 import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
 import { filter, includes } from "lodash";
-import { tronAddresses } from "../../../utils/tron";
+import { lindaAddresses } from "../../../utils/linda";
 import { Link } from "react-router-dom"
 import { loadPriceData } from "../../../actions/markets";
 import $ from 'jquery';
@@ -74,11 +74,11 @@ class StatsCharts extends React.Component {
     });
 
     this.setState({
-      accounts: filter(accounts, account => !includes(tronAddresses, account.address))
+      accounts: filter(accounts, account => !includes(lindaAddresses, account.address))
         .slice(0, 10)
         .map(account => ({
           name: account.address,
-          value: account.balance / ONE_TRX,
+          value: account.balance / ONE_LIND,
         }))
     });
   }
@@ -104,7 +104,7 @@ class StatsCharts extends React.Component {
 
     let valueStats = stats.value.map(row => ({
       timestamp: row.timestamp,
-      value: row.value / ONE_TRX,
+      value: row.value / ONE_LIND,
     }));
 
     blockStats = blockStats.map(row => ({
@@ -129,11 +129,11 @@ class StatsCharts extends React.Component {
     var dayNum = Math.floor((timerToday - timerBirthday) / 1000 / 3600 / 24);
 
 
-    let { data } = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=TRX&tsym=USD&limit=" + dayNum);
+    let { data } = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=LIND&tsym=USD&limit=" + dayNum);
 
     let priceStatsTemp = data['Data'];
 
-    let volumeData = await xhr.get("https://server.tron.network/api/v2/node/market_data");
+    let volumeData = await xhr.get("https://server.linda.network/api/v2/node/market_data");
     let volumeUSD = volumeData.data.market_cap_by_available_supply
     let volume = volumeUSD.map(function (v, i) {
       return {
@@ -160,8 +160,8 @@ class StatsCharts extends React.Component {
       })
     }
     let random = Math.random();
-    let balanceData = await xhr.get("https://server.tron.network/api/v2/node/balance_info?random=" + random);
-    let TRONFoundationTotal = balanceData.data.total;
+    let balanceData = await xhr.get("https://server.linda.network/api/v2/node/balance_info?random=" + random);
+    let LINDAFoundationTotal = balanceData.data.total;
     let { blocks } = await Client.getBlocks({
       limit: 1,
       sort: '-number',
@@ -171,13 +171,13 @@ class StatsCharts extends React.Component {
     let blockProduceRewardsNum = blockHeight * 32;
     let address = await Client.getAddress('TLsV52sRDL79HXGGm9yzwKibb6BeruhUzy');
     let startFeeBurnedNum = Math.abs(-9223372036854.775808)
-    let feeBurnedNum = (startFeeBurnedNum - Math.abs(address.balance / ONE_TRX)).toFixed(2);
+    let feeBurnedNum = (startFeeBurnedNum - Math.abs(address.balance / ONE_LIND)).toFixed(2);
     let genesisNum = 100000000000;
     let independenceDayBurned = 1000000000;
     let currentTotalSupply = genesisNum + blockProduceRewardsNum + nodeRewardsNum - independenceDayBurned - feeBurnedNum;
-    let circulatingNum = (currentTotalSupply - TRONFoundationTotal).toFixed(2);
+    let circulatingNum = (currentTotalSupply - LINDAFoundationTotal).toFixed(2);
     let supplyTypesChartData = [
-      { value: TRONFoundationTotal, name: 'foundation_freeze', selected: true },
+      { value: LINDAFoundationTotal, name: 'foundation_freeze', selected: true },
       { value: circulatingNum, name: 'circulating_supply', selected: true },
     ]
 
@@ -412,7 +412,7 @@ class StatsCharts extends React.Component {
                       <span className="ml-5">
                         {tu("charts_average_price")}
                       </span>
-                      <img src={require("../../../images/chart/Average-TRX-Price.png")}
+                      <img src={require("../../../images/chart/Average-LIND-Price.png")}
                         style={{ width: 240, filter: 'grayscale(100%)' }}
                         className="ml-5 mt-2"
                       />
@@ -423,9 +423,9 @@ class StatsCharts extends React.Component {
                   <div className="card-chart">
                     <Link className="card-title" to="/data/stats/supply">
                       <span className="ml-5">
-                        {tu("charts_total_TRX_supply")}
+                        {tu("charts_total_LIND_supply")}
                       </span>
-                      <img src={require("../../../images/chart/Total-TRX-Supply.png")}
+                      <img src={require("../../../images/chart/Total-LIND-Supply.png")}
                         style={{ width: 240, filter: 'grayscale(100%)' }}
                         className="ml-5 mt-2"
                       />
@@ -448,9 +448,9 @@ class StatsCharts extends React.Component {
                   <div className="card-chart">
                     <Link className="card-title" to="/data/charts/supply">
                       <span className="ml-5">
-                        {tu("Supply_TRX_total_chart")}
+                        {tu("Supply_LIND_total_chart")}
                       </span>
-                      <img src={require("../../../images/chart/Total-TRX-Supply-Worth.png")}
+                      <img src={require("../../../images/chart/Total-LIND-Supply-Worth.png")}
                         style={{ width: 240, filter: 'grayscale(100%)' }}
                         className="ml-5 mt-2"
                       />
@@ -487,11 +487,11 @@ class StatsCharts extends React.Component {
                 </div>
                 <div className="col-md-4">
                   <div className="card-chart">
-                    <Link className="card-title" to="/data/charts/HoldTrxAccount">
+                    <Link className="card-title" to="/data/charts/HoldLindAccount">
                       <span className="ml-5">
-                        {tu("chart_hold_trx_account")}
+                        {tu("chart_hold_lind_account")}
                       </span>
-                      <img src={require("../../../images/chart/Accounts_holding_TRX.png")}
+                      <img src={require("../../../images/chart/Accounts_holding_LIND.png")}
                         style={{ width: 240, filter: 'grayscale(100%)' }}
                         className="ml-5 mt-2" />
                     </Link>

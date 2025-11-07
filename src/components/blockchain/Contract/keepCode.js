@@ -3,7 +3,7 @@ import {CopyText} from "../../common/Copy";
 import {tu} from "../../../utils/i18n";
 import {Client} from "../../../services/api";
 // import { AddressLink} from "../../common/Links";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 
 
 export default class Code extends React.Component {
@@ -64,7 +64,7 @@ export default class Code extends React.Component {
 
     return (
         <main className="container">
-           {loading && <div className="loading-style" style={{marginTop: '-20px'}}><TronLoader/></div>}
+           {loading && <div className="loading-style" style={{marginTop: '-20px'}}><LindaLoader/></div>}
           <div className="row">
             <div className="col-md-12 contract-header">
               {/*<br/>*/}

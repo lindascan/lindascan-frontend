@@ -15,7 +15,7 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/block/latest
 
 # 3
 **/api/account/list**
-Desc: List all the accounts in the blockchain (only 10,000 accounts are displayed, sorted by TRX balance from high to low)
+Desc: List all the accounts in the blockchain (only 10,000 accounts are displayed, sorted by LIND balance from high to low)
 Demo: curl -X Get  https://apilist.tronscan.org/api/account/list?sort=-balance&limit=20&start=0&address=TMuA6YqfCeX8EhbfYEg5y7S4DqzSJireY9
 @param sort: define the sequence of the records return;
 @param limit: page size for pagination;
@@ -126,7 +126,7 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/transfer?sort=-timestamp&cou
 @param count: total number of records;
 @param start_timestamp: query date range;
 @param end_timestamp: query date range;
-@param token: '_' shows only TRX transfers;
+@param token: '_' shows only LIND transfers;
 @param address: transfers related address;
 @return: transfers list related to an specified account;
 
@@ -154,10 +154,10 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/fund?page_index=1&per_page=2
 
 # 17
 **/api/funds**
-Desc: List TRX number overview info
+Desc: List LIND number overview info
 Demo: curl -X Get  https://apilist.tronscan.org/api/funds
 @param: null;
-@return: TRX number overview info;
+@return: LIND number overview info;
 
 # 18
 **/api/contracts**
@@ -197,31 +197,31 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/contracts/trigger?limit=20&s
 
 # 22
 **/api/tokens/overview**
-Desc: List all the tokens in the blockchain (including trc10 and trc20 tokens)
-Demo: curl -X Get  https://apilist.tronscan.org/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=volume24hInTrx&order_current=descend
+Desc: List all the tokens in the blockchain (including lrc10 and lrc20 tokens)
+Demo: curl -X Get  https://apilist.tronscan.org/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=volume24hInLind&order_current=descend
 @param limit: page size for pagination;
 @param start: query index for pagination;
 @param order: define the sequence order of the records return;
 @param start_timestamp: query date range;
 @param end_timestamp: query date range;
 @param sort: define the sorting rule;
-@param filter: define the tokens return. "trc10" for trc10 tokens, "trc20" for trc20 tokens; "all" for all trc10 and trc20 tokens
+@param filter: define the tokens return. "lrc10" for lrc10 tokens, "lrc20" for lrc20 tokens; "all" for all lrc10 and lrc20 tokens
 @return: tokens list;
 
 # 23
-**/api/token_trc20**
-Desc: List a single trc20 token's detail
-Demo: curl -X Get  https://apilist.tronscan.org/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1
+**/api/token_lrc20**
+Desc: List a single lrc20 token's detail
+Demo: curl -X Get  https://apilist.tronscan.org/api/token_lrc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1
 @param contract: token address
-@return: a single trc20 token's detail;
+@return: a single lrc20 token's detail;
 
 # 24
 **/api/token**
-Desc: List a single trc10 token's detail
+Desc: List a single lrc10 token's detail
 Demo: curl -X Get  https://apilist.tronscan.org/api/token?id=1001761&showAll=1
 @param id: token id;
 @param showAll: if equals 1, audited and Unaudited tokens can both be returned;
-@return: a single trc10 token's detail;
+@return: a single lrc10 token's detail;
 
 # 25
 **/api/witness**
@@ -367,7 +367,7 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/internal-transaction?limit=2
 
 # 41
 **/api/asset/transfer**
-Desc: List the transfers related to a specified TRC10 token(only display the latest 2,000 data records in the query time range)
+Desc: List the transfers related to a specified LRC10 token(only display the latest 2,000 data records in the query time range)
 Demo: curl -X Get  https://apilist.tronscan.org/api/asset/transfer?limit=20&start=0&name=IGG&issueAddress=TSbhZijH2t7Qn1UAHAu7PBHQdVAvRwSyYr&start_timestamp=1529856000000&end_timestamp=1552549912537
 @param limit: page size for pagination;
 @param start: query index for pagination;
@@ -375,16 +375,16 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/asset/transfer?limit=20&star
 @param issueAddress: token creation address;
 @param start_timestamp: query date range;
 @param end_timestamp: query date range;
-@return: TRC10 token transfers list;
+@return: LRC10 token transfers list;
 
 # 42
-**/api/token_trc20/transfers**
-Desc: List the transfers related to a specified TRC20 token(only display the latest 2,000 data records in the query time range)
-Demo: curl -X Get  https://apilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&contract_address=TCN77KWWyUyi2A4Cu7vrh5dnmRyvUuME1E&start_timestamp=1529856000000&end_timestamp=1552550375474
+**/api/token_lrc20/transfers**
+Desc: List the transfers related to a specified LRC20 token(only display the latest 2,000 data records in the query time range)
+Demo: curl -X Get  https://apilist.tronscan.org/api/token_lrc20/transfers?limit=20&start=0&contract_address=TCN77KWWyUyi2A4Cu7vrh5dnmRyvUuME1E&start_timestamp=1529856000000&end_timestamp=1552550375474
 @param limit: page size for pagination;
 @param start: query index for pagination;
 @param contract_address: contract address;
 @param start_timestamp: query date range;
 @param end_timestamp: query date range;
-@return: TRC20 token transfers list;
+@return: LRC20 token transfers list;
 

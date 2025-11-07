@@ -10,7 +10,7 @@ import { API_URL } from "../../constants";
 let myTime = 0;
 let errorMyTime = 0;
 let errortMyClear = null;
-class NavTRXPrice extends React.Component {
+class NavLINDPrice extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +75,7 @@ class NavTRXPrice extends React.Component {
     let USD_Price,
       myClear = null;
     await xhr
-      .get(`${API_URL}/api/token/price?token=trx`)
+      .get(`${API_URL}/api/token/price?token=lind`)
       .then((res) => {
         if (res && res.data && res.data.price_in_usd) {
           USD_Price = parseFloat(res.data.price_in_usd);
@@ -132,9 +132,9 @@ class NavTRXPrice extends React.Component {
     } = this.state;
     return (
       <span className="nav-price-wrapper">
-        <span className="trxTitle">TRX:</span>
+        <span className="lindTitle">LIND:</span>
         {timeoutState ? (
-          <span className="currentTrxPirce currentTrxPirceNoResult">
+          <span className="currentLindPirce currentLindPirceNoResult">
             <span style={{ margin: "0 4px"}}>
               {tu("index_page_price_time_out")}
             </span>
@@ -146,9 +146,9 @@ class NavTRXPrice extends React.Component {
             />
           </span>
         ) : (
-          <span className="currentTrxPirceNoTimeout">
+          <span className="currentLindPirceNoTimeout">
             {isLoading ? (
-              <span className="currentTrxPirce currentTrxPirceNoResult">
+              <span className="currentLindPirce currentLindPirceNoResult">
                 <span style={{ margin: "0 4px 0 6px",}}>
                   {tu("index_page_price_loading")}
                 </span>
@@ -163,19 +163,19 @@ class NavTRXPrice extends React.Component {
                 />
               </span>
             ) : (
-              <span className='normalCurrentTrxPirce'>
+              <span className='normalCurrentLindPirce'>
                 <Tooltip
                   placement="bottom"
                   title={intl.formatMessage({
-                    id: "tooltip_trxPrice",
+                    id: "tooltip_lindPrice",
                   })}
                 >
                   <HrefLink
-                    href="https://coinmarketcap.com/currencies/tron/"
+                    href="https://coinmarketcap.com/currencies/linda/"
                     target="_blank"
                     className="erhvr-underline-white text-muted"
                   >
-                    <span className="currentTrxPirce showPirce">
+                    <span className="currentLindPirce showPirce">
                       <FormattedNumber value={USD_Price}></FormattedNumber>
                     </span>
                     <span className="currentCurrency currentCurrencyMobile">
@@ -208,4 +208,4 @@ class NavTRXPrice extends React.Component {
   }
 }
 
-export default injectIntl(NavTRXPrice);
+export default injectIntl(NavLINDPrice);

@@ -2,7 +2,7 @@
 
 import React, {Fragment} from "react";
 import {t,tv, tu} from "../../../../../utils/i18n";
-import {ONE_TRX,IS_MAINNET} from "../../../../../constants";
+import {ONE_LIND,IS_MAINNET} from "../../../../../constants";
 import {injectIntl} from "react-intl";
 
 function setValue(item,intl){
@@ -32,8 +32,8 @@ function setValue(item,intl){
       return (
         <span>
           <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-          <span>{item.value / ONE_TRX}</span> &nbsp;
-          <span>TRX</span>
+          <span>{item.value / ONE_LIND}</span> &nbsp;
+          <span>LIND</span>
         </span>
       )
       break;

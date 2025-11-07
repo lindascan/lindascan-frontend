@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {ONE_TRX} from "../../constants";
+import {ONE_LIND} from "../../constants";
 import {AddressLink} from "../common/Links";
 //import {Divider} from 'antd';
 import {getNotifyPermission, requestNotifyPermissions, sendNotification} from "../../services/notifications";
@@ -15,8 +15,8 @@ function Notification({account, notification}) {
     case "transfer":
 
       let amount = notification.amount;
-      if (notification.tokenName.toUpperCase() === "TRX") {
-        amount = amount / ONE_TRX;
+      if (notification.tokenName.toUpperCase() === "LIND") {
+        amount = amount / ONE_LIND;
       }
 
       if (notification.transferFromAddress === account.address) {
@@ -97,41 +97,41 @@ class Notifications extends React.Component {
     }
 
     // this.listener = channel("/address-" + wallet.current.address,{ forceNew:true });
-    // this.listener.on("transfer", trx => {
+    // this.listener.on("transfer", lind => {
 
     if(wsdata && wsdata.type=== 'transfer'){
-     const trx = rebuildList([wsdata.data], 'token_id', 'amount')[0]
+     const lind = rebuildList([wsdata.data], 'token_id', 'amount')[0]
 
-      trx.timestamp = trx.date_created
-      trx.tokenName = trx.token_name
-      trx.transactionHash = trx.hash
-      trx.transferFromAddress = trx.owner_address
-      trx.transferToAddress = trx.to_address
+      lind.timestamp = lind.date_created
+      lind.tokenName = lind.token_name
+      lind.transactionHash = lind.hash
+      lind.transferFromAddress = lind.owner_address
+      lind.transferToAddress = lind.to_address
      
       
-      let amount = trx.amount;
-      if (trx.tokenName.toUpperCase() === "TRX") {
-        amount = amount / ONE_TRX;
+      let amount = lind.amount;
+      if (lind.tokenName.toUpperCase() === "LIND") {
+        amount = amount / ONE_LIND;
       }else{
-        amount = amount / Math.pow(10,trx.map_token_precision);
+        amount = amount / Math.pow(10,lind.map_token_precision);
       }
 
-      if (trx.transferToAddress === wallet.current.address) {
-        sendNotification(`Received ${amount} ${trx.tokenName} from ${trx.transferFromAddress}`, {
-          icon: require("../../images/tron-logo.jpg")
+      if (lind.transferToAddress === wallet.current.address) {
+        sendNotification(`Received ${amount} ${lind.tokenName} from ${lind.transferFromAddress}`, {
+          icon: require("../../images/linda-logo.jpg")
         });
       }
 
       
       this.setState(state => {
         const list = [{
-          id: trx.transactionHash,
+          id: lind.transactionHash,
           type: "transfer",
-          ...trx,
+          ...lind,
         }, ...this.state.notifications.slice(0, 9)]
-        const newtrx = list
+        const newlind = list
         return {
-          notifications: newtrx
+          notifications: newlind
         }
       });
       this.props.reloadWallet();
@@ -141,7 +141,7 @@ class Notifications extends React.Component {
     // this.listener.on("vote", vote => {
     //   if (vote.candidateAddress === wallet.current.address) {
     //     sendNotification(`Received ${vote.votes} votes from ${vote.voterAddress}`, {
-    //       icon: require("../../images/tron-logo.jpg")
+    //       icon: require("../../images/linda-logo.jpg")
     //     });
     //     this.setState(state => ({
     //       notifications: [{

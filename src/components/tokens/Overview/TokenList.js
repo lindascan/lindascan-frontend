@@ -17,19 +17,19 @@ import { getQueryParam } from "../../../utils/url";
 import SearchInput from "../../../utils/SearchInput";
 import { toastr } from "react-redux-toastr";
 import SmartTable from "../../common/SmartTable.js";
-import { API_URL, ONE_TRX } from "../../../constants";
+import { API_URL, ONE_LIND } from "../../../constants";
 import { login } from "../../../actions/app";
 import { reloadWallet } from "../../../actions/wallet";
 import { upperFirst, toLower } from "lodash";
-import { TronLoader } from "../../common/loaders";
-import { transactionResultManager } from "../../../utils/tron";
+import { LindaLoader } from "../../common/loaders";
+import { transactionResultManager } from "../../../utils/linda";
 import xhr from "axios/index";
 import Lockr from "lockr";
 
-import { withTronWeb } from "../../../utils/tronWeb";
+import { withLindaWeb } from "../../../utils/lindaWeb";
 import { Link } from "react-router-dom";
 
-@withTronWeb
+@withLindaWeb
 class TokenList extends Component {
   constructor(props) {
     super(props);
@@ -160,8 +160,8 @@ class TokenList extends Component {
     value = value.replace(/^0|[^\d*]/g, "");
     this.setState({ buyAmount: value });
     this.buyAmount.value = value;
-    let priceTRX = value * price;
-    this.priceTRX.innerHTML = intl.formatNumber(priceTRX, {
+    let priceLIND = value * price;
+    this.priceLIND.innerHTML = intl.formatNumber(priceLIND, {
       maximumFractionDigits: 6
     });
   };
@@ -235,9 +235,9 @@ class TokenList extends Component {
                   onChange={e => {
                     this.onBuyInputChange(
                       e.target.value,
-                      ((token.trxNum / token.num) *
+                      ((token.lindNum / token.num) *
                         Math.pow(10, token.precision)) /
-                        ONE_TRX,
+                        ONE_LIND,
                       token.remaining
                     );
                   }}
@@ -245,7 +245,7 @@ class TokenList extends Component {
               </div>
               <div className="text-center mt-3 text-muted">
                 <b>
-                  = <span ref={ref => (this.priceTRX = ref)}>0</span> TRX
+                  = <span ref={ref => (this.priceLIND = ref)}>0</span> LIND
                 </b>
               </div>
               <button
@@ -264,15 +264,15 @@ class TokenList extends Component {
   };
 
   buyTokens = token => {
-    let price = (token.trxNum / token.num) * Math.pow(10, token.precision);
+    let price = (token.lindNum / token.num) * Math.pow(10, token.precision);
     let { buyAmount } = this.state;
     if (buyAmount <= 0) {
       return;
     }
     let { currentWallet, wallet } = this.props;
-    let tokenCosts = buyAmount * (price / ONE_TRX);
+    let tokenCosts = buyAmount * (price / ONE_LIND);
 
-    if (currentWallet.balance / ONE_TRX < tokenCosts) {
+    if (currentWallet.balance / ONE_LIND < tokenCosts) {
       this.setState({
         alert: (
           <SweetAlert
@@ -294,7 +294,7 @@ class TokenList extends Component {
               >
                 <i className="fa fa-times" ariaHidden="true"></i>
               </a>
-              <span>{tu("not_enough_trx_message")}</span>
+              <span>{tu("not_enough_lind_message")}</span>
               <button
                 className="btn btn-danger btn-block mt-3"
                 onClick={() => {
@@ -334,7 +334,7 @@ class TokenList extends Component {
               </p>
               <span>
                 {buyAmount} {token.name} {t("for")}{" "}
-                {parseFloat((buyAmount * (price / ONE_TRX)).toFixed(6))} TRX?
+                {parseFloat((buyAmount * (price / ONE_LIND)).toFixed(6))} LIND?
               </span>
               <button
                 className="btn btn-danger btn-block mt-3"
@@ -351,20 +351,20 @@ class TokenList extends Component {
     }
   };
   submit = async token => {
-    let price = (token.trxNum / token.num) * Math.pow(10, token.precision);
+    let price = (token.lindNum / token.num) * Math.pow(10, token.precision);
     let { account, currentWallet } = this.props;
     let { buyAmount } = this.state;
     let res;
     if (
       Lockr.get("islogin") ||
       this.props.walletType.type === "ACCOUNT_LEDGER" ||
-      this.props.walletType.type === "ACCOUNT_TRONLINK"
+      this.props.walletType.type === "ACCOUNT_LINDALINK"
     ) {
-      const tronWebLedger = this.props.tronWeb();
-      const { tronWeb } = this.props.account;
+      const lindaWebLedger = this.props.lindaWeb();
+      const { lindaWeb } = this.props.account;
       try {
         if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-          const unSignTransaction = await tronWebLedger.transactionBuilder
+          const unSignTransaction = await lindaWebLedger.transactionBuilder
             .purchaseToken(
               token.ownerAddress,
               token.id + "",
@@ -374,22 +374,22 @@ class TokenList extends Component {
             .catch(e => false);
           const { result } = await transactionResultManager(
             unSignTransaction,
-            tronWebLedger
+            lindaWebLedger
           );
           res = result;
         }
-        if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
-          const unSignTransaction = await tronWeb.transactionBuilder
+        if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
+          const unSignTransaction = await lindaWeb.transactionBuilder
             .purchaseToken(
               token.ownerAddress,
               token.id + "",
               parseInt((buyAmount * price).toFixed(0)),
-              tronWeb.defaultAddress.hex
+              lindaWeb.defaultAddress.hex
             )
             .catch(e => false);
           const { result } = await transactionResultManager(
             unSignTransaction,
-            tronWeb
+            lindaWeb
           );
           res = result;
         }
@@ -582,10 +582,10 @@ class TokenList extends Component {
           return (
             <div>
               <FormattedNumber
-                value={record.participated / ONE_TRX}
+                value={record.participated / ONE_LIND}
                 maximumFractionDigits={1}
               />{" "}
-              TRX
+              LIND
             </div>
           );
         },
@@ -680,7 +680,7 @@ class TokenList extends Component {
         {alert}
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         {
@@ -695,12 +695,12 @@ class TokenList extends Component {
                   <span>
                     <QuestionMark
                       placement="top"
-                      text="newly_issued_token_by_tronscan"
+                      text="newly_issued_token_by_lindascan"
                       className="token-list-info"
                     ></QuestionMark>
                   </span>{" "}
                   &nbsp;&nbsp;{" "}
-                  <Link to="/exchange/trc10">{t("Trade_on_Poloni DEX")}></Link>
+                  <Link to="/exchange/lrc10">{t("Trade_on_Poloni DEX")}></Link>
                 </div>
               ) : (
                 ""

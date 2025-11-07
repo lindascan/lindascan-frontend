@@ -129,7 +129,7 @@ export class LineReactHighChartHomeAddress extends React.Component {
                     _config.series[0].data.push(tempTotal);
 
                 })
-                _config.series[0].name =  intl.formatMessage({id: 'TRON'});
+                _config.series[0].name =  intl.formatMessage({id: 'LINDA'});
             }
             if (data && data.length > 0) {
                 _config.xAxis.categories = [];
@@ -409,7 +409,7 @@ export class LineReactHighChartHomeTx extends React.Component {
                     _config.xAxis.categories.push(moment(val.date).format('M/D'));
                     _config.series[0].data.push(tempTotal);
                 })
-                _config.series[0].name =  intl.formatMessage({id: 'TRON'});
+                _config.series[0].name =  intl.formatMessage({id: 'LINDA'});
             }
             if (data && data.length > 0) {
                 //_config.xAxis.categories = [];
@@ -746,7 +746,7 @@ export class LineReactHighChartTotalTxns extends React.Component {
             _config.tooltip.formatter = function () {
                 let date = intl.formatDate(this.point.x);
                 return (
-                    intl.formatMessage({id: 'TRON'}) + '<br/>' +
+                    intl.formatMessage({id: 'LINDA'}) + '<br/>' +
                     intl.formatMessage({id: 'date'}) + ' : ' + date + '<br/>' +
                     intl.formatMessage({id: 'total_transactions'}) + ' : ' + this.point.y
                 )
@@ -1120,7 +1120,7 @@ export class LineReactHighChartVolumeUsd extends React.Component {
     }
 }
 
-export class LineReactHighChartTRXVolumeContract extends React.Component {
+export class LineReactHighChartLINDVolumeContract extends React.Component {
 
     constructor(props) {
         super(props)
@@ -1170,12 +1170,12 @@ export class LineReactHighChartTRXVolumeContract extends React.Component {
             }
             _config.chart.zoomType = 'x';
             _config.chart.marginTop = 80;
-            _config.title.text = intl.formatMessage({id: 'TRX_historical_data'});
+            _config.title.text = intl.formatMessage({id: 'LIND_historical_data'});
             _config.subtitle.text = intl.formatMessage({id: 'HighChart_tip'});
-            _config.exporting.filename = intl.formatMessage({id: 'TRX_historical_data'});
+            _config.exporting.filename = intl.formatMessage({id: 'LIND_historical_data'});
             _config.xAxis.tickPixelInterval = 100;
             // _config.xAxis.minRange=24 * 3600 * 1000
-            _config.yAxis.title.text = intl.formatMessage({id: 'TRX_historical_data_y_text'});
+            _config.yAxis.title.text = intl.formatMessage({id: 'LIND_historical_data_y_text'});
             _config.yAxis.tickAmount = 6;
             _config.yAxis.min = 0;
             _config.series[0].marker.enabled = false;
@@ -1185,7 +1185,7 @@ export class LineReactHighChartTRXVolumeContract extends React.Component {
                 let date = intl.formatDate((parseInt(this.point.x)));
                 return (
                     intl.formatMessage({id: 'date'}) + ' : ' + date + '<br/>' +
-                    intl.formatMessage({id: 'TRX_historical_data_tip'}) + ' : ' + this.point.y +'<br>'
+                    intl.formatMessage({id: 'LIND_historical_data_tip'}) + ' : ' + this.point.y +'<br>'
                 )
             }
         }
@@ -1806,7 +1806,7 @@ export class EnergyConsumeChart extends React.Component {
                 ])
                 chartData[1].data.push([
                     item.day,
-                    Number(item.trx)
+                    Number(item.lind)
                 ])
                 chartData[2].data.push([
                     item.day,
@@ -2084,7 +2084,7 @@ export class EnergyConsumeDistributionChart extends React.Component {
         var chartdata = data.slice(0).map(o => {
             totalUsedEnergy += Number(o.total_energy)
             freezingEnergy += Number(o.energy)
-            burningEnergy += Number(o.trx)
+            burningEnergy += Number(o.lind)
             userBurningEnergy += Number(o.contract_supplied)
             return {
                 name: o.contract_address,
@@ -2487,9 +2487,9 @@ export class OverallFreezingRateChart extends React.Component {
     }
 }
 /**
- * TRX Supply 2019-12-31
+ * LIND Supply 2019-12-31
  */
-export class LineTRXSupplyChart extends React.Component {
+export class LineLINDSupplyChart extends React.Component {
 
     constructor(props) {
         super(props)
@@ -2534,13 +2534,13 @@ export class LineTRXSupplyChart extends React.Component {
                 
                 },
                 title: {
-                    text: intl.formatMessage({id: 'Supply_TRX_total_chart'})
+                    text: intl.formatMessage({id: 'Supply_LIND_total_chart'})
                 },
                 exporting: {
                     enabled: true,
                     sourceWidth: 1072,
                     sourceHeight: 580,
-                    filename:intl.formatMessage({id: 'Supply_TRX_total_chart'})
+                    filename:intl.formatMessage({id: 'Supply_LIND_total_chart'})
                 },
                 rangeSelector: {
                     inputDateFormat: '%Y-%m-%d',
@@ -2654,7 +2654,7 @@ export class LineTRXSupplyChart extends React.Component {
                     },
                     { // Thirdary yAxis
                         title: {
-                          text: intl.formatMessage({id: 'Supply_amount_TRX_burned_y_title'}),
+                          text: intl.formatMessage({id: 'Supply_amount_LIND_burned_y_title'}),
                           style: {
                             color: "#999999"
                           }
@@ -2796,7 +2796,7 @@ export class LineTRXSupplyChart extends React.Component {
                                 //     });
                                 // });
                                 // let yVis0 = true;
-                                // if(series[index].name == intl.formatMessage({id: 'Supply_TRX_total'})) {
+                                // if(series[index].name == intl.formatMessage({id: 'Supply_LIND_total'})) {
                                 //     yVis0 = !yVis0;
                                 //     this.chart.yAxis[0].update({
                                 //         visible: yVis0
@@ -2845,9 +2845,9 @@ export class LineTRXSupplyChart extends React.Component {
                         for (let index = 0; index < pointsLength; index += 1) {
                             s += '<tr><td style="padding-top:4px;padding-bottom:4px;border-top:1px solid #D5D8DC;color:' + points[index].series.color + ';" valign="top">' + '<span style="color:' + points[index].series.color + ';font-size: 15px !important;">\u25A0</span> ' + intl.formatMessage({id: points[index].series.name })+ '</td>' +
                                 '<td align="right" style="padding-top:5px;padding-left:10px;padding-bottom:4px;border-top:1px solid #D5D8DC;"><span ><b style="color:' + points[index].series.color + ';">' +
-                                (points[index].series.name == intl.formatMessage({id: 'Supply_TRX_total'}) || points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_net_new'}) ? toThousands((new BigNumber(points[index].y)).decimalPlaces(6)) + '</b>' : (points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_TRX_burned'})) ?  ("-" + toThousands((new BigNumber((Math.abs(points[index].y)))).decimalPlaces(6))) + '</b>':Highcharts.numberFormat(points[index].y, 0, '.', ',') + '</b>')
+                                (points[index].series.name == intl.formatMessage({id: 'Supply_LIND_total'}) || points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_net_new'}) ? toThousands((new BigNumber(points[index].y)).decimalPlaces(6)) + '</b>' : (points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_LIND_burned'})) ?  ("-" + toThousands((new BigNumber((Math.abs(points[index].y)))).decimalPlaces(6))) + '</b>':Highcharts.numberFormat(points[index].y, 0, '.', ',') + '</b>')
                                 + '</span>'
-                                + (points[index].series.name == intl.formatMessage({id: 'Supply_amount_TRX_produced'})? '<br/><span>'+ intl.formatMessage({id: 'Supply_block_rewards'})+'（'+toThousands(points[index].point.node)+'） + '+ intl.formatMessage({id: 'Supply_voting_rewards'})+'（'+toThousands(points[index].point.vote)+'）</span>':"")
+                                + (points[index].series.name == intl.formatMessage({id: 'Supply_amount_LIND_produced'})? '<br/><span>'+ intl.formatMessage({id: 'Supply_block_rewards'})+'（'+toThousands(points[index].point.node)+'） + '+ intl.formatMessage({id: 'Supply_voting_rewards'})+'（'+toThousands(points[index].point.vote)+'）</span>':"")
                                 + (points[index].series.name == intl.formatMessage({id: 'Supply_amount_net_new'})? '<br/><span>'+ intl.formatMessage({id: 'Supply_amount_net_new_tip'})+'</span>':"")
                                 + '</td></tr>'
                         }
@@ -2857,7 +2857,7 @@ export class LineTRXSupplyChart extends React.Component {
 
                 },
                 series: [{
-                    name: intl.formatMessage({id: 'Supply_TRX_total'}),
+                    name: intl.formatMessage({id: 'Supply_LIND_total'}),
                     type: 'spline',
                    // yAxis: 0,
                     color: "#DA8885",
@@ -2873,7 +2873,7 @@ export class LineTRXSupplyChart extends React.Component {
                     },
                     softThreshold:true,
                 }, {
-                    name: intl.formatMessage({id: 'Supply_amount_TRX_produced'}),
+                    name: intl.formatMessage({id: 'Supply_amount_LIND_produced'}),
                     type: 'spline',
                     yAxis: 1,
                     color: "#EDB92B",
@@ -2891,7 +2891,7 @@ export class LineTRXSupplyChart extends React.Component {
                     visible: isMobile?false:true,
                 },
                 {
-                    name: intl.formatMessage({id: 'Supply_amount_TRX_burned'}),
+                    name: intl.formatMessage({id: 'Supply_amount_LIND_burned'}),
                     type: 'spline',
                     yAxis: 2,
                     color: "#999999",
@@ -2974,8 +2974,8 @@ export class LineTxOverviewStatsType extends React.Component {
         let newData = cloneDeep(data);
         let totalTxns = [];
         let triggersTxns= [];
-        let trxTransferTxns  = [];
-        let trc10TransferTxns = [];
+        let lindTransferTxns  = [];
+        let lrc10TransferTxns = [];
         let freezeTxns= [];
         let voteTxns= [];
         let otherTxns=[];
@@ -2985,8 +2985,8 @@ export class LineTxOverviewStatsType extends React.Component {
         newData.map((val) => {
             totalTxns.push(val['newTransactionSeen_num']);
             triggersTxns.push(val['triggers_num']);
-            trxTransferTxns.push(val['trx_transfer_num']);
-            trc10TransferTxns.push(val['trc10_transfer_num']);
+            lindTransferTxns.push(val['lind_transfer_num']);
+            lrc10TransferTxns.push(val['lrc10_transfer_num']);
             freezeTxns.push(val['freeze_transaction_num']);
             voteTxns.push(val['vote_transaction_num']);
             otherTxns.push(val['other_transaction_num']);
@@ -3113,9 +3113,9 @@ export class LineTxOverviewStatsType extends React.Component {
                         for (let index = 0; index < pointsLength; index += 1) {
                             s += '<tr><td style="padding-top:4px;padding-bottom:4px;border-top:1px solid #D5D8DC;color:' + points[index].series.color + ';" valign="top">' + '<span style="color:' + points[index].series.color + ';font-size: 15px !important;">\u25A0</span> ' + intl.formatMessage({id: points[index].series.name })+ '</td>' +
                                 '<td align="right" style="padding-top:5px;padding-left:10px;padding-bottom:4px;border-top:1px solid #D5D8DC;"><span ><b style="color:' + points[index].series.color + ';">' +
-                                (points[index].series.name == intl.formatMessage({id: 'Supply_TRX_total'}) || points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_net_new'}) ? toThousands((new BigNumber(points[index].y)).decimalPlaces(6)) + '</b>' : (points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_TRX_burned'})) ?  ("-" + toThousands((new BigNumber((Math.abs(points[index].y)))).decimalPlaces(6))) + '</b>':Highcharts.numberFormat(points[index].y, 0, '.', ',') + '</b>')
+                                (points[index].series.name == intl.formatMessage({id: 'Supply_LIND_total'}) || points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_net_new'}) ? toThousands((new BigNumber(points[index].y)).decimalPlaces(6)) + '</b>' : (points[index].series.name ==  intl.formatMessage({id: 'Supply_amount_LIND_burned'})) ?  ("-" + toThousands((new BigNumber((Math.abs(points[index].y)))).decimalPlaces(6))) + '</b>':Highcharts.numberFormat(points[index].y, 0, '.', ',') + '</b>')
                                 + '</span>'
-                                + (points[index].series.name == intl.formatMessage({id: 'Supply_amount_TRX_produced'})? '<br/><span>'+ intl.formatMessage({id: 'Supply_block_rewards'})+'（'+toThousands(points[index].point.node)+'） + '+ intl.formatMessage({id: 'Supply_voting_rewards'})+'（'+toThousands(points[index].point.vote)+'）</span>':"")
+                                + (points[index].series.name == intl.formatMessage({id: 'Supply_amount_LIND_produced'})? '<br/><span>'+ intl.formatMessage({id: 'Supply_block_rewards'})+'（'+toThousands(points[index].point.node)+'） + '+ intl.formatMessage({id: 'Supply_voting_rewards'})+'（'+toThousands(points[index].point.vote)+'）</span>':"")
                                 + (points[index].series.name == intl.formatMessage({id: 'Supply_amount_net_new'})? '<br/><span>'+ intl.formatMessage({id: 'Supply_amount_net_new_tip'})+'</span>':"")
                                 + '</td></tr>'
                         }
@@ -3146,21 +3146,21 @@ export class LineTxOverviewStatsType extends React.Component {
                     visible: false,
                 },
                 {
-                    name: intl.formatMessage({id: 'txns_TRX_transfers'}),
+                    name: intl.formatMessage({id: 'txns_LIND_transfers'}),
                     type: 'spline',
                     yAxis: 1,
                     color: colors[2],
-                    data: trxTransferTxns,
+                    data: lindTransferTxns,
                     pointStart: pointsStart,
                     pointInterval: pointsInterval , // one day
                     visible: false,
                 },
                 {
-                    name: intl.formatMessage({id: 'txns_TRC10_transfers'}),
+                    name: intl.formatMessage({id: 'txns_LRC10_transfers'}),
                     type: 'spline',
                     yAxis: 1,
                     color: colors[3],
-                    data: trc10TransferTxns,
+                    data: lrc10TransferTxns,
                     pointStart: pointsStart,
                     pointInterval: pointsInterval , // one day
                     visible: false,
@@ -3239,29 +3239,29 @@ export class LineTxOverviewStatsType extends React.Component {
 
 
 /**
- * hold trx account
+ * hold lind account
  */
-export class HoldTrxAccountChart extends React.Component {
+export class HoldLindAccountChart extends React.Component {
 
     constructor(props) {
         super(props)
         this.myChart = null;
         let id = ('_' + Math.random()).replace('.', '_');
         this.state = {
-            lineId: 'HoldTrxAccountChart' + id
+            lineId: 'HoldLindAccountChart' + id
         }
     }
 
     initLine(id) {
-        let _config = cloneDeep(config.HoldTrxAccountChart);
+        let _config = cloneDeep(config.HoldLindAccountChart);
         let {intl, data} = this.props;
         let newData = cloneDeep(data)
-        let holdTrxRate = [];
+        let holdLindRate = [];
         let holdTotal = [];
         let accountTotal = [];
         let timestamp = []
         newData.map((val) => {
-            holdTrxRate.push(val['hold_trx_rate']);
+            holdLindRate.push(val['hold_lind_rate']);
             holdTotal.push(val['hold_total']);
             accountTotal.push(val['account_total']);
             timestamp.push(val['timestamp'])
@@ -3276,13 +3276,13 @@ export class HoldTrxAccountChart extends React.Component {
             let options =  {
                 
                 title: {
-                    text: intl.formatMessage({id: 'chart_hold_trx_account'})
+                    text: intl.formatMessage({id: 'chart_hold_lind_account'})
                 },
                 exporting: {
                     enabled: true,
                     sourceWidth: 1072,
                     sourceHeight: 580,
-                    filename:intl.formatMessage({id: 'chart_hold_trx_account'})
+                    filename:intl.formatMessage({id: 'chart_hold_lind_account'})
                 },
                 rangeSelector: {
                     inputDateFormat: '%Y-%m-%d',
@@ -3368,7 +3368,7 @@ export class HoldTrxAccountChart extends React.Component {
                         }
                       },
                       title: {
-                        text:  intl.formatMessage({id: 'chart_hold_trx_account_per'}) ,
+                        text:  intl.formatMessage({id: 'chart_hold_lind_account_per'}) ,
                         style: {
                             color: "#434343"
                         }
@@ -3377,7 +3377,7 @@ export class HoldTrxAccountChart extends React.Component {
                       min:0
                     }, { // Secondary yAxis
                       title: {
-                        text: intl.formatMessage({id: 'chart_hold_trx_number'}),
+                        text: intl.formatMessage({id: 'chart_hold_lind_number'}),
                         style: {
                           color: "#C64844"
                         }
@@ -3450,7 +3450,7 @@ export class HoldTrxAccountChart extends React.Component {
                         enabled: false
                     }
                 }, {
-                    name: intl.formatMessage({id: 'chart_hold_trx'}),
+                    name: intl.formatMessage({id: 'chart_hold_lind'}),
                     type: 'column',
                     yAxis: 1,
                     color: "#C64844",
@@ -3465,10 +3465,10 @@ export class HoldTrxAccountChart extends React.Component {
                         enabled: false
                     }
                 }, {
-                    name: intl.formatMessage({id: 'chart_hold_trx_account_per'}),
+                    name: intl.formatMessage({id: 'chart_hold_lind_account_per'}),
                     type: 'spline',
                     color: "#5A5A5A",     
-                    data:holdTrxRate,
+                    data:holdLindRate,
                     pointStart: pointStart,
 			        pointInterval:pointInterval , // one day
                     marker: {

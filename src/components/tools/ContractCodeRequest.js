@@ -9,7 +9,7 @@ class TestNetRequest extends Component {
         this.state = {
             modal: null,
             verificationCode: null,
-            waitingForTrx: false,
+            waitingForLind: false,
         };
     }
 
@@ -30,11 +30,11 @@ class TestNetRequest extends Component {
 
     };
 
-    requestTrx = async () => {
+    requestLind = async () => {
         // let {account, onRequested} = this.props;
         // let {verificationCode} = this.state;
         //
-        // this.setState({waitingForTrx: true});
+        // this.setState({waitingForLind: true});
         //
         // try {
         //
@@ -51,8 +51,8 @@ class TestNetRequest extends Component {
         //         this.setState({
         //             success: true,
         //             modal: (
-        //                 <SweetAlert success title={tu("trx_received")} onConfirm={this.hideModal}>
-        //                     <FormattedNumber value={amount / ONE_TRX}/> TRX {tu("have_been_added_to_your_account")}
+        //                 <SweetAlert success title={tu("lind_received")} onConfirm={this.hideModal}>
+        //                     <FormattedNumber value={amount / ONE_LIND}/> LIND {tu("have_been_added_to_your_account")}
         //                 </SweetAlert>
         //             )
         //         });
@@ -61,7 +61,7 @@ class TestNetRequest extends Component {
         //             verificationCode: null,
         //             modal: (
         //                 <SweetAlert danger title={tu("error")} onConfirm={this.hideModal}>
-        //                     {tu("test_trx_temporarily_unavailable_message")}
+        //                     {tu("test_lind_temporarily_unavailable_message")}
         //                 </SweetAlert>
         //             )
         //         });
@@ -82,7 +82,7 @@ class TestNetRequest extends Component {
         //     this.setState({
         //         verificationCode: null,
         //         modal: (
-        //             <SweetAlert danger title="TRX Received" onConfirm={this.hideModal}>
+        //             <SweetAlert danger title="LIND Received" onConfirm={this.hideModal}>
         //                 {tu("An_unknown_error_occurred,_please_try_again_in_a_few_minutes")}
         //             </SweetAlert>
         //         )
@@ -90,14 +90,14 @@ class TestNetRequest extends Component {
         // }
         // finally {
         //     this.setState({
-        //         waitingForTrx: false,
+        //         waitingForLind: false,
         //     });
         // }
     };
 
     // canRequest = () => {
-    //     let {verificationCode, waitingForTrx} = this.state;
-    //     return !waitingForTrx && !!verificationCode;
+    //     let {verificationCode, waitingForLind} = this.state;
+    //     return !waitingForLind && !!verificationCode;
     // };
 
     canRequest = () => {
@@ -117,13 +117,13 @@ class TestNetRequest extends Component {
                         verifyCallback={this.onVerify}/>
                 </div>
                 {/*<button className="btn btn-secondary"*/}
-                        {/*onClick={this.requestTrx}*/}
+                        {/*onClick={this.requestLind}*/}
                         {/*disabled={!this.canRequest()}>*/}
-                    {/*{tu("request_trx_for_testing")}*/}
+                    {/*{tu("request_lind_for_testing")}*/}
                 {/*</button>*/}
                 {/*<button type="button"*/}
                         {/*className="btn btn-lg btn-verify text-capitalize mt-3 mb-4"*/}
-                        {/*onClick={this.requestTrx}*/}
+                        {/*onClick={this.requestLind}*/}
                         {/*disabled={!this.canRequest()}>{tu('verify_and_publish')}</button>*/}
                 {/*<button type="button" className="btn btn-lg ml-3 btn-reset text-capitalize  mt-3 mb-4">{tu('reset')}</button>*/}
             </React.Fragment>

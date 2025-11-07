@@ -1,13 +1,13 @@
 import crypto from 'crypto';
 import bip39 from 'bip39';
 import bip32 from 'bip32';
-import TronWeb from 'tronweb';
+import LindaWeb from 'tronweb';
 import pbkdf2 from 'pbkdf2';
 import aesjs from "aes-js";
 import {
     isAddressValid,
     pkToAddress
-} from "@tronscan/client/src/utils/crypto";
+} from "@lindascan/client/src/utils/crypto";
 import {
     utils
 } from 'ethers';
@@ -150,7 +150,7 @@ const Utils = {
         const node = bip32.fromSeed(seed);
         const child = node.derivePath(`m/44'/195'/${ index }'/0/0`);
         const privateKey = child.privateKey.toString('hex');
-        const address = TronWeb.address.fromPrivateKey(privateKey);
+        const address = LindaWeb.address.fromPrivateKey(privateKey);
 
         return {
             privateKey,
@@ -288,7 +288,7 @@ const Utils = {
     decodeParams(message, abiCode, function_selector) {
         const cutArr = function_selector.match(/(.+)\((.*)\)/);
         if (cutArr[2] !== '') {
-            const byteArray = TronWeb.utils.code.hexStr2byteArray(message);
+            const byteArray = LindaWeb.utils.code.hexStr2byteArray(message);
             const abi = abiCode.filter(({
                 name
             }) => name === cutArr[1]);
@@ -299,11 +299,11 @@ const Utils = {
                 let value;
                 const array = byteArray.filter((v, index) => index >= 32 * i && index < 32 * (i + 1));
                 if (type === 'address') {
-                    value = TronWeb.address.fromHex('41' + TronWeb.utils.code.byteArray2hexStr(array.filter((v, i) => i > 11)));
+                    value = LindaWeb.address.fromHex('41' + LindaWeb.utils.code.byteArray2hexStr(array.filter((v, i) => i > 11)));
                 } else if (type === 'trcToken') {
-                    value = TronWeb.toDecimal('0x' + TronWeb.utils.code.byteArray2hexStr(array));
+                    value = LindaWeb.toDecimal('0x' + LindaWeb.utils.code.byteArray2hexStr(array));
                 } else {
-                    value = TronWeb.toDecimal('0x' + TronWeb.utils.code.byteArray2hexStr(array));
+                    value = LindaWeb.toDecimal('0x' + LindaWeb.utils.code.byteArray2hexStr(array));
                 }
                 return {
                     name,

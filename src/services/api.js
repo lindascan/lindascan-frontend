@@ -1,15 +1,15 @@
-import { Client as ApiClient } from "@tronscan/client";
+import { Client as ApiClient } from "@lindascan/client";
 import io from "socket.io-client";
-import TronWeb from "tronweb";
+import LindaWeb from "lindaweb";
 import xhr from "axios/index";
 import { API_URL,API_URL_SUNNET } from "../constants.js";
 import { setLoginWithAddress } from "../actions/app.js";
 const ServerNode = "https://api.trongrid.io";
-const HttpProvider = TronWeb.providers.HttpProvider; // This provider is optional, you can just use a url for the nodes instead
+const HttpProvider = LindaWeb.providers.HttpProvider; // This provider is optional, you can just use a url for the nodes instead
 const fullNode = new HttpProvider(ServerNode); // Full node http endpoint
 const solidityNode = new HttpProvider(ServerNode); // Solidity node http endpoint
 const eventServer = ServerNode; // Contract events http endpoint
-export const tronWeb = new TronWeb(fullNode, solidityNode, eventServer);
+export const lindaWeb = new LindaWeb(fullNode, solidityNode, eventServer);
 
 export const Client = new ApiClient(API_URL);
 
@@ -26,7 +26,7 @@ export function channel(path, options) {
 class ApiClient20 {
   constructor() {
     this.apiUrl = "https://api.poloniex.org";
-    // this.apiUrl = "https://testapi.trx.market";
+    // this.apiUrl = "https://testapi.lind.market";
     // this.apiUrl = "http://13.58.63.31:21111";
     this.ZDUrl = "https://tron274.zendesk.com";
     this.SCANUrl = "https://tronscanorg.zendesk.com";
@@ -96,7 +96,7 @@ class ApiClient20 {
   }
 
   async gettokenInfo20(query) {
-    let { data } = await xhr.get(`${API_URL}/api/token_trc20`, {
+    let { data } = await xhr.get(`${API_URL}/api/token_lrc20`, {
       params: {
         sort: "issue_time",
         start: 0,
@@ -108,9 +108,9 @@ class ApiClient20 {
   }
 
   async getTokenInfoItem(contract, type) {
-    // https://apilist.tronscan.org/api/token_trc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
+    // https://apilist.tronscan.org/api/token_lrc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
     let params = {};
-    let url = `${API_URL}/api/token_trc20`;
+    let url = `${API_URL}/api/token_lrc20`;
     switch (type) {
       case 1:
         params = {
@@ -194,9 +194,9 @@ class ApiClient20 {
   }
 
   /**
-   * 获取zendesk TRONSCAN消息系统
+   * 获取zendesk LINDASCAN消息系统
    */
-  async getTRONNotice(lan, query) {
+  async getLINDANotice(lan, query) {
     let langauage = "en-us";
     let id = "360001621692";
     lan == "zh" ? (langauage = "zh-cn") : (langauage = "en-us");
@@ -214,7 +214,7 @@ class ApiClient20 {
     if (secend_token === "usdt") {
       type = "tether";
     }
-    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=USD'
+    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=USD'
     let { data } = await xhr({
       method: "post",
       url: `${API_URL}/api/system/proxy`,

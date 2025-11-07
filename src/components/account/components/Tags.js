@@ -3,7 +3,7 @@ import { tu } from "../../../utils/i18n";
 import { upperFirst } from "lodash";
 import { injectIntl } from "react-intl";
 import { Table, Icon, Tooltip } from "antd";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import AddTag from "./AddTag";
 import ApiClientAccount from "../../../services/accountApi";
 import { AddressLink } from "../../common/Links";
@@ -294,7 +294,7 @@ class Tags extends Component {
           <div className="token_black table_pos">
             {loading && (
               <div className="loading-style">
-                <TronLoader />
+                <LindaLoader />
               </div>
             )}
             {total ? (
@@ -319,7 +319,7 @@ class Tags extends Component {
             ) : (
               <div className="no-data">
                 <img src={require("../../../images/logo_default.png")} />
-                <p className="text-muted">{tu("trc20_no_data")}</p>
+                <p className="text-muted">{tu("lrc20_no_data")}</p>
               </div>
             )}
           </div>

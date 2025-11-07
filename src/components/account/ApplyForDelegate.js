@@ -6,7 +6,7 @@ import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import SweetAlert from "react-bootstrap-sweetalert";
 import {WITNESS_CREATE_COST, IS_MAINNET} from "../../constants";
 import {FormattedNumber} from "react-intl";
-import {transactionResultManager, transactionResultManagerSun} from "../../utils/tron";
+import {transactionResultManager, transactionResultManagerSun} from "../../utils/linda";
 
 const {isWebUri} = require('valid-url');
 
@@ -36,20 +36,20 @@ class ApplyForDelegate extends Component {
 
   doApply = async () => {
     let res;
-    let {account, isTronLink} = this.props;
+    let {account, isLindaLink} = this.props;
     let {url} = this.state;
     this.setState({ loading: true });
     if(IS_MAINNET){
-        if (isTronLink === 1) {
-            let tronWeb;
+        if (isLindaLink === 1) {
+            let lindaWeb;
             if (this.props.walletType.type === "ACCOUNT_LEDGER"){
-                tronWeb = this.props.tronWeb();
-            }else if(this.props.walletType.type === "ACCOUNT_TRONLINK"){
-                tronWeb = account.tronWeb;
+                lindaWeb = this.props.lindaWeb();
+            }else if(this.props.walletType.type === "ACCOUNT_LINDALINK"){
+                lindaWeb = account.lindaWeb;
             }
 
-            const unSignTransaction = await tronWeb.transactionBuilder.applyForSR(tronWeb.defaultAddress.hex, url);
-            const {result} = await transactionResultManager(unSignTransaction, tronWeb);
+            const unSignTransaction = await lindaWeb.transactionBuilder.applyForSR(lindaWeb.defaultAddress.hex, url);
+            const {result} = await transactionResultManager(unSignTransaction, lindaWeb);
 
             res = result;
         } else {
@@ -57,8 +57,8 @@ class ApplyForDelegate extends Component {
            res = success;
         }
     }else{
-        if (isTronLink === 1) {
-            //tronlink
+        if (isLindaLink === 1) {
+            //lindalink
             const unSignTransaction = await account.sunWeb.sidechain.transactionBuilder.applyForSR(account.sunWeb.sidechain.defaultAddress.hex, url).catch(e => console.log(e));
             const {result} = await transactionResultManagerSun(unSignTransaction, account.sunWeb);
             res = result;
@@ -137,8 +137,8 @@ class ApplyForDelegate extends Component {
                        checked={check}
                        onChange={(ev) => this.setState({check: ev.target.checked})}/>
                 <label className="form-check-label _apply">
-                  {tu("understand_tron_sr_message_0")}
-                  <b> <FormattedNumber value={WITNESS_CREATE_COST}/> TRX</b> {t("understand_tron_sr_message_1")}
+                  {tu("understand_linda_sr_message_0")}
+                  <b> <FormattedNumber value={WITNESS_CREATE_COST}/> LIND</b> {t("understand_linda_sr_message_1")}
                 </label>
               </div>
             </div>

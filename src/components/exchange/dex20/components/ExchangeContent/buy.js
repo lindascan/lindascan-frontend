@@ -17,7 +17,7 @@ import {
   getDecimalsNum,
   onlyInputNumAndPoint
 } from "../../../../../utils/number";
-import { withTronWeb } from "../../../../../utils/tronWeb";
+import { withLindaWeb } from "../../../../../utils/lindaWeb";
 import { fixed } from "../../TokenPre";
 import Lockr from "lockr";
 
@@ -35,7 +35,7 @@ function formatter(value) {
 
 const FormItem = Form.Item;
 
-@withTronWeb
+@withLindaWeb
 class Buy extends Component {
   constructor(props) {
     super(props);
@@ -201,10 +201,10 @@ class Buy extends Component {
           <FormItem className="no-padding">
             {getFieldDecorator("first_quant_buy")(
               <NumericInput
-                addonBefore={intl.formatMessage({ id: "trc20_price" })}
+                addonBefore={intl.formatMessage({ id: "lrc20_price" })}
                 addonAfter={exchangeData.sShortName}
                 placeholder={intl.formatMessage({
-                  id: "trc20_enter_the_trading_price"
+                  id: "lrc20_enter_the_trading_price"
                 })}
                 size="large"
                 type="text"
@@ -224,10 +224,10 @@ class Buy extends Component {
           <FormItem className="no-padding">
             {getFieldDecorator("second_quant_buy")(
               <NumericInput
-                addonBefore={intl.formatMessage({ id: "trc20_amount" })}
+                addonBefore={intl.formatMessage({ id: "lrc20_amount" })}
                 addonAfter={exchangeData.fShortName}
                 placeholder={intl.formatMessage({
-                  id: "trc20_enter_the_trading_amount"
+                  id: "lrc20_enter_the_trading_amount"
                 })}
                 size="large"
                 type="text"
@@ -244,7 +244,7 @@ class Buy extends Component {
           <div className="mb-3">
             {
               <span>
-                {tu("trc20_available_balance")}{" "}
+                {tu("lrc20_available_balance")}{" "}
                 <span className="tx-question-mark">
                   {account.address ? firstBalance : 0} {exchangeData.sShortName}
                 </span>
@@ -265,7 +265,7 @@ class Buy extends Component {
 
           <div className="d-flex justify-content-between tran-amount mb-3">
             <p className="text">
-              {tu("trc20_volume")}：{total}
+              {tu("lrc20_volume")}：{total}
             </p>
             <b className="text-lg">{exchangeData.sShortName}</b>
           </div>
@@ -284,7 +284,7 @@ class Buy extends Component {
           >
             {tu("BUY")} &nbsp;{exchangeData.fShortName}
           </Button>
-          <div className="txt-center">{tu("trc20_free_orders")}</div>
+          <div className="txt-center">{tu("lrc20_free_orders")}</div>
           {/* </FormItem> */}
         </Form>
       </div>
@@ -306,14 +306,14 @@ class Buy extends Component {
     if (pairType == 1 || pairType == 2) {
       if (price * amount < 10) {
         this.setState({
-          secondError: intl.formatMessage({ id: "trc20_enter_10" })
+          secondError: intl.formatMessage({ id: "lrc20_enter_10" })
         });
         return;
       }
     } else {
       if (price * amount < 1) {
         this.setState({
-          secondError: intl.formatMessage({ id: "trc20_enter_1" })
+          secondError: intl.formatMessage({ id: "lrc20_enter_1" })
         });
         return;
       }
@@ -324,14 +324,14 @@ class Buy extends Component {
     }
     if (price * amount > this.balance) {
       this.setState({
-        secondError: intl.formatMessage({ id: "trc20_balance_tip" })
+        secondError: intl.formatMessage({ id: "lrc20_balance_tip" })
       });
       return;
     }
     if (!amount) {
       this.setState({
         secondError: intl.formatMessage({
-          id: "trc20_enter_the_trading_amount"
+          id: "lrc20_enter_the_trading_amount"
         })
       });
       return;
@@ -349,14 +349,14 @@ class Buy extends Component {
     let tokenA = exchangeData.fTokenAddr;
     let tokenB = exchangeData.sTokenAddr;
     let pairType = exchangeData.pairType;
-    let tronWeb;
+    let lindaWeb;
     if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-      tronWeb = this.props.tronWeb();
+      lindaWeb = this.props.lindaWeb();
     } else if (
-      this.props.walletType.type === "ACCOUNT_TRONLINK" ||
+      this.props.walletType.type === "ACCOUNT_LINDALINK" ||
       this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"
     ) {
-      tronWeb = account.tronWeb;
+      lindaWeb = account.lindaWeb;
     }
 
     const firstPrecision = Math.pow(10, exchangeData.fPrecision || 0);
@@ -370,7 +370,7 @@ class Buy extends Component {
       _price: price * secondPrecision,
       _amountB: amount * price * secondPrecision,
       _pairType: pairType,
-      tronWeb: tronWeb
+      lindaWeb: lindaWeb
     };
 
     let id;
@@ -382,10 +382,10 @@ class Buy extends Component {
           modal: (
             <SweetAlert
               success
-              title={tu("trc20_order_success")}
+              title={tu("lrc20_order_success")}
               onConfirm={this.hideModal}
             >
-              {/* {tu("trc20_trade_win_content")} */}
+              {/* {tu("lrc20_trade_win_content")} */}
             </SweetAlert>
           ),
           buttonLoading: false
@@ -396,7 +396,7 @@ class Buy extends Component {
         // 读取事件服务器处理交易返回结果
         // let _times = 0;
         // const timer = setInterval(async () => {
-        //   const event = await tronWeb.getEventByTransactionID(id).catch(e => {
+        //   const event = await lindaWeb.getEventByTransactionID(id).catch(e => {
         //     if (_times > 20) {
         //       clearInterval(timer);
         //       // this.$alert(this.$t("exchange.trade_win.content"), "", {
@@ -406,10 +406,10 @@ class Buy extends Component {
         //         modal: (
         //           <SweetAlert
         //             error
-        //             title={tu("trc20_trade_win_content")}
+        //             title={tu("lrc20_trade_win_content")}
         //             onConfirm={this.hideModal}
         //           >
-        //             {/* {tu("trc20_trade_win_content")} */}
+        //             {/* {tu("lrc20_trade_win_content")} */}
         //           </SweetAlert>
         //         )
         //       });
@@ -429,10 +429,10 @@ class Buy extends Component {
         //         modal: (
         //           <SweetAlert
         //             success
-        //             title={tu("trc20_order_success")}
+        //             title={tu("lrc20_order_success")}
         //             onConfirm={this.hideModal}
         //           >
-        //             {/*{tu("trc20_order_success")}*/}
+        //             {/*{tu("lrc20_order_success")}*/}
         //           </SweetAlert>
         //         )
         //       });
@@ -449,7 +449,7 @@ class Buy extends Component {
         //             channelId: "10000"
         //           },
         //           {
-        //             Key: "Tron@123456"
+        //             Key: "Linda@123456"
         //           }
         //         ).then(res => {});
         //       }
@@ -465,10 +465,10 @@ class Buy extends Component {
         //       modal: (
         //         <SweetAlert
         //           error
-        //           title={tu("trc20_trade_win_content")}
+        //           title={tu("lrc20_trade_win_content")}
         //           onConfirm={this.hideModal}
         //         >
-        //           {/* {tu("trc20_trade_win_content")} */}
+        //           {/* {tu("lrc20_trade_win_content")} */}
         //         </SweetAlert>
         //       )
         //     });
@@ -499,17 +499,17 @@ class Buy extends Component {
         //   let _times = 0;
 
         //   let { account } = this.props;
-        //   let tronWeb;
+        //   let lindaWeb;
         //   if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-        //     tronWeb = this.props.tronWeb();
+        //     lindaWeb = this.props.lindaWeb();
         //   } else if (
-        //     this.props.walletType.type === "ACCOUNT_TRONLINK" ||
+        //     this.props.walletType.type === "ACCOUNT_LINDALINK" ||
         //     this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"
         //   ) {
-        //     tronWeb = account.tronWeb;
+        //     lindaWeb = account.lindaWeb;
         //   }
         //   const timer2 = setInterval(async () => {
-        //     const info = await tronWeb.trx.getTransactionInfo(id);
+        //     const info = await lindaWeb.lind.getTransactionInfo(id);
         //     _times += 1;
         //     if (info.log && info.log[0].data) {
         //       const c_id = parseInt(
@@ -525,7 +525,7 @@ class Buy extends Component {
         //             channelId: "10000"
         //           },
         //           {
-        //             Key: "Tron@123456"
+        //             Key: "Linda@123456"
         //           }
         //         ).then(res => {});
         //       }
@@ -549,7 +549,7 @@ class Buy extends Component {
             title={tu("transaction_error")}
             onConfirm={this.hideModal}
           >
-            {tu("trc20_order_fail")}
+            {tu("lrc20_order_fail")}
           </SweetAlert>
         )
       });
@@ -563,28 +563,28 @@ class Buy extends Component {
   async setBalance() {
     let { account, exchangeData } = this.props;
     let { firstBalance, balanceTimer, empty } = this.state;
-    let tronWeb;
+    let lindaWeb;
     if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-      tronWeb = this.props.tronWeb();
+      lindaWeb = this.props.lindaWeb();
     } else if (
-      this.props.walletType.type === "ACCOUNT_TRONLINK" ||
+      this.props.walletType.type === "ACCOUNT_LINDALINK" ||
       this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"
     ) {
-      tronWeb = account.tronWeb;
+      lindaWeb = account.lindaWeb;
     }
 
     // let _b = 0;
     // if (account.address && exchangeData.sTokenAddr) {
     //   if (exchangeData.sTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
     //     _b =
-    //       (await tronWeb.trx.getUnconfirmedBalance(account.address)) /
+    //       (await lindaWeb.lind.getUnconfirmedBalance(account.address)) /
     //       Math.pow(10, exchangeData.sPrecision);
     //   } else {
     //     _b = await TW.getBalance({
     //       _tokenA: exchangeData.sTokenAddr,
     //       _uToken: account.address,
     //       _precision: exchangeData.sPrecision,
-    //       tronWeb: tronWeb
+    //       lindaWeb: lindaWeb
     //     });
     //   }
     // }
@@ -598,7 +598,7 @@ class Buy extends Component {
     if (account.address && exchangeData.sTokenAddr) {
       if (exchangeData.sTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
         _b =
-          (await tronWeb.trx.getUnconfirmedBalance(account.address)) /
+          (await lindaWeb.lind.getUnconfirmedBalance(account.address)) /
           Math.pow(10, exchangeData.sPrecision);
         if (exchangeData.sTokenAddr !== "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
           _b = empty;
@@ -609,7 +609,7 @@ class Buy extends Component {
           _tokenA: exchangeData.sTokenAddr,
           _uToken: account.address,
           _precision: exchangeData.sPrecision,
-          tronWeb: tronWeb
+          lindaWeb: lindaWeb
         });
         if (exchangeData.sTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
           _b = empty;
@@ -717,14 +717,14 @@ class Buy extends Component {
     if (!e.target.value) {
       type === 1
         ? (firstError = intl.formatMessage({
-            id: "trc20_enter_the_trading_price"
+            id: "lrc20_enter_the_trading_price"
           })) && this.setState({ firstError: firstError })
         : (secondError = intl.formatMessage({
-            id: "trc20_enter_the_trading_amount"
+            id: "lrc20_enter_the_trading_amount"
           })) && this.setState({ secondError: secondError });
     } else {
       if (price * amount > firstBalance) {
-        secondError = intl.formatMessage({ id: "trc20_balance_tip" });
+        secondError = intl.formatMessage({ id: "lrc20_balance_tip" });
         this.setState({ secondError: secondError });
       }
       if (

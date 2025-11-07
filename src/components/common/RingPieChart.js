@@ -203,7 +203,7 @@ export class RepresentativesRingPieReact extends React.Component {
   }
 }
 
-export class SupplyTypesTRXPieChart extends React.Component {
+export class SupplyTypesLINDPieChart extends React.Component {
     constructor(props) {
         super(props)
         let id = ('_' + Math.random()).replace('.', '_');
@@ -229,16 +229,16 @@ export class SupplyTypesTRXPieChart extends React.Component {
         _config.exporting.filename = intl.formatMessage({id: message.id});
         _config.tooltip.formatter = function () {
             return (
-                intl.formatMessage({id: this.point.name}) + ' (' + intl.formatNumber(this.point.y) + ' TRX)<br/>' +
+                intl.formatMessage({id: this.point.name}) + ' (' + intl.formatNumber(this.point.y) + ' LIND)<br/>' +
                 intl.formatMessage({id: '_percentage'}) + ' : ' + this.point.percentage.toFixed(2) + '%'
             )
         }
 
         // if(source==='singleChart'){
         //     let seriesCenter = ['50%', '50%'];
-        //     config.supplyTypesTRXPieChart.legend.show = true;
-        //     config.supplyTypesTRXPieChart.series[0].center = seriesCenter;
-        //     config.supplyTypesTRXPieChart.toolbox.feature = {
+        //     config.supplyTypesLINDPieChart.legend.show = true;
+        //     config.supplyTypesLINDPieChart.series[0].center = seriesCenter;
+        //     config.supplyTypesLINDPieChart.toolbox.feature = {
         //         restore: {
         //             show: false,
         //             title: 'restore'
@@ -250,9 +250,9 @@ export class SupplyTypesTRXPieChart extends React.Component {
         //     }
         // }else{
         //     let seriesCenter = ['50%', '60%'];
-        //     config.supplyTypesTRXPieChart.legend.show = false;
-        //     config.supplyTypesTRXPieChart.series[0].center = seriesCenter;
-        //     config.supplyTypesTRXPieChart.toolbox.feature = {
+        //     config.supplyTypesLINDPieChart.legend.show = false;
+        //     config.supplyTypesLINDPieChart.series[0].center = seriesCenter;
+        //     config.supplyTypesLINDPieChart.toolbox.feature = {
         //         restore: {
         //             show: false,
         //             title: 'restore'

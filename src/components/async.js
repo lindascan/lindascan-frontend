@@ -59,8 +59,8 @@ export const NodeTesterAsync = loadable(() =>
   import(/* webpackChunkName: "NodeTester" */ "./tools/NodeTester/index")
 );
 
-export const TronConvertToolAsync = loadable(() =>
-  import(/* webpackChunkName: "TronConvertTool" */ "./tools/TronConvertTool")
+export const LindaConvertToolAsync = loadable(() =>
+  import(/* webpackChunkName: "LindaConvertTool" */ "./tools/LindaConvertTool")
 );
 
 export const SystemAsync = loadable(() =>
@@ -79,8 +79,8 @@ export const MyTokenAsync = loadable(() =>
   import(/* webpackChunkName: "MyToken" */ "./Pages/MyToken")
 );
 
-export const TRONRatingAsync = loadable(() =>
-  import(/* webpackChunkName: "TRONRating" */ "./Pages/TRONRating")
+export const LINDARatingAsync = loadable(() =>
+  import(/* webpackChunkName: "LINDARating" */ "./Pages/LINDARating")
 );
 
 export const CopyrightAsync = loadable(() =>
@@ -99,9 +99,9 @@ export const TokenListAsync = loadable(() =>
   import(/* webpackChunkName: "TokenList" */ "./tokens/Overview/TokenList")
 );
 
-export const TokenTRC20ListAsync = loadable(() =>
+export const TokenLRC20ListAsync = loadable(() =>
   import(
-    /* webpackChunkName: "TokenListTRC20" */ "./tokens/Overview/TokenListTRC20"
+    /* webpackChunkName: "TokenListLRC20" */ "./tokens/Overview/TokenListLRC20"
   )
 );
 

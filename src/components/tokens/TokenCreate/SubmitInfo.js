@@ -12,18 +12,18 @@ import Lockr from "lockr";
 import _ from "lodash";
 import { filter, trim } from "lodash";
 import { Client } from "../../../services/api";
-import { withTronWeb } from "../../../utils/tronWeb";
-import { transactionResultManager } from "../../../utils/tron";
+import { withLindaWeb } from "../../../utils/lindaWeb";
+import { transactionResultManager } from "../../../utils/linda";
 import { t, tu } from "../../../utils/i18n";
-import { TronLoader } from "../../common/loaders";
-import { API_URL, ASSET_ISSUE_COST, ONE_TRX } from "../../../constants";
+import { LindaLoader } from "../../common/loaders";
+import { API_URL, ASSET_ISSUE_COST, ONE_LIND } from "../../../constants";
 import BigNumber from "bignumber.js";
 
 import { Form, Row, Col, Input, Button, Icon } from "antd";
 
 const { TextArea } = Input;
 BigNumber.config({ EXPONENTIAL_AT: [-1e9, 1e9] });
-@withTronWeb
+@withLindaWeb
 class SubmitInfo extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +67,7 @@ class SubmitInfo extends Component {
         contract_created_date,
         contract_code,
         token_amount,
-        trx_amount,
+        lind_amount,
         freeze_amount,
         freeze_date,
         freeze_type,
@@ -99,7 +99,7 @@ class SubmitInfo extends Component {
       description: token_introduction,
       url: website,
       totalSupply: token_supply * Math.pow(10, Number(precision)),
-      totalSupplyTRC20: new BigNumber(token_supply)
+      totalSupplyLRC20: new BigNumber(token_supply)
         .shiftedBy(precision)
         .toString(),
       address: author,
@@ -111,7 +111,7 @@ class SubmitInfo extends Component {
         : "",
       contractCode: contract_code,
       tokenRatio: token_amount * Math.pow(10, Number(precision)),
-      trxRatio: trx_amount * ONE_TRX,
+      lindRatio: lind_amount * ONE_LIND,
       saleStart: participation_start_date.valueOf(),
       saleEnd: participation_end_date.valueOf(),
       startTime: participation_start_date.toDate(),
@@ -174,7 +174,7 @@ class SubmitInfo extends Component {
             onConfirm={this.hideModal}
             style={{ marginLeft: "-240px", marginTop: "-195px" }}
           >
-            {tu("trx_token_wallet_requirement")}
+            {tu("lind_token_wallet_requirement")}
           </SweetAlert>
         )
       });
@@ -190,7 +190,7 @@ class SubmitInfo extends Component {
             onConfirm={this.hideModal}
             style={{ marginLeft: "-240px", marginTop: "-195px" }}
           >
-            {tu("trx_token_fee_message")}
+            {tu("lind_token_fee_message")}
           </SweetAlert>
         )
       });
@@ -203,7 +203,7 @@ class SubmitInfo extends Component {
   confirmSubmit = () => {
     let { intl } = this.props;
     let { isUpdate, type } = this.state;
-    if (!this.renderSubmit() && !isUpdate && type == "trc10") {
+    if (!this.renderSubmit() && !isUpdate && type == "lrc10") {
       return;
     }
     this.setState({
@@ -230,7 +230,7 @@ class SubmitInfo extends Component {
     };
     let { checkbox, type, isUpdate } = this.state;
     let { intl } = this.props;
-    if (type == "trc10") {
+    if (type == "lrc10") {
       if (!isUpdate) {
         if (checkbox) this.confirmSubmit();
         else {
@@ -240,7 +240,7 @@ class SubmitInfo extends Component {
       } else {
         this.confirmSubmit();
       }
-    } else if (type == "trc20") {
+    } else if (type == "lrc20") {
       this.confirmSubmit();
     }
   };
@@ -249,8 +249,8 @@ class SubmitInfo extends Component {
     let { account, intl } = this.props;
     let { type } = this.state;
     let res, createInfo, errorInfo;
-    const tronWebLedger = this.props.tronWeb();
-    const { tronWeb } = this.props.account;
+    const lindaWebLedger = this.props.lindaWeb();
+    const { lindaWeb } = this.props.account;
     this.setState({
       modal: (
         <SweetAlert
@@ -260,23 +260,23 @@ class SubmitInfo extends Component {
           title={intl.formatMessage({ id: "in_progress" })}
           //style={{marginLeft: '-240px', marginTop: '-195px', width: '450px', height: '300px'}}
         >
-          <TronLoader />
+          <LindaLoader />
         </SweetAlert>
       ),
       loading: true
     });
     switch (type) {
-      case "trc10":
+      case "lrc10":
         if (account.isLoggedIn) {
           if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-            // const unSignTransaction = await tronWebLedger.transactionBuilder.createToken({
+            // const unSignTransaction = await lindaWebLedger.transactionBuilder.createToken({
             //     name: this.tokenState('name'),
             //     abbreviation: this.tokenState('abbreviation'),
             //     description: this.tokenState('description'),
             //     url: this.tokenState('url'),
             //     totalSupply: this.tokenState('totalSupply'),
             //     tokenRatio: this.tokenState('tokenRatio'),
-            //     trxRatio: this.tokenState('trxRatio'),
+            //     lindRatio: this.tokenState('lindRatio'),
             //     saleStart: this.tokenState('saleStart'),
             //     saleEnd: this.tokenState('saleEnd'),
             //     freeBandwidth: 1,
@@ -284,16 +284,16 @@ class SubmitInfo extends Component {
             //     frozenAmount: this.tokenState('frozenAmount'),
             //     frozenDuration: this.tokenState('frozenDuration'),
             //     precision:  this.tokenState('precision'),
-            // }, tronWebLedger.defaultAddress.hex).catch(function (e) {
+            // }, lindaWebLedger.defaultAddress.hex).catch(function (e) {
             //     errorInfo = e;
             // })
             // if (!unSignTransaction) {
             //     res = false;
             // } else {
-            //     const {result} = await transactionResultManager(unSignTransaction, tronWebLedger);
+            //     const {result} = await transactionResultManager(unSignTransaction, lindaWebLedger);
             //     res = result;
             // }
-          } else if (this.props.walletType.type === "ACCOUNT_TRONLINK") {
+          } else if (this.props.walletType.type === "ACCOUNT_LINDALINK") {
             let unSignTransaction = "";
             if (this.state.isUpdate) {
               //Update
@@ -310,8 +310,8 @@ class SubmitInfo extends Component {
                 timestamp: this.tokenState("issueTime"),
                 file_name: this.tokenState("fileName")
               };
-              let hash = tronWeb.toHex(JSON.stringify(data), false);
-              let sig = await tronWeb.trx.sign(hash);
+              let hash = lindaWeb.toHex(JSON.stringify(data), false);
+              let sig = await lindaWeb.lind.sign(hash);
               unSignTransaction = await Client.updateToken10({
                 content: JSON.stringify(data),
                 sig: sig
@@ -325,7 +325,7 @@ class SubmitInfo extends Component {
             } else {
               //Create
 
-              unSignTransaction = await tronWeb.transactionBuilder
+              unSignTransaction = await lindaWeb.transactionBuilder
                 .createToken(
                   {
                     name: this.tokenState("name"),
@@ -334,7 +334,7 @@ class SubmitInfo extends Component {
                     url: this.tokenState("url"),
                     totalSupply: this.tokenState("totalSupply"),
                     tokenRatio: this.tokenState("tokenRatio"),
-                    trxRatio: this.tokenState("trxRatio"),
+                    lindRatio: this.tokenState("lindRatio"),
                     saleStart: this.tokenState("saleStart"),
                     saleEnd: this.tokenState("saleEnd"),
                     freeBandwidth: 0,
@@ -343,7 +343,7 @@ class SubmitInfo extends Component {
                     frozenDuration: this.tokenState("frozenDuration"),
                     precision: this.tokenState("precision")
                   },
-                  tronWeb.defaultAddress.hex
+                  lindaWeb.defaultAddress.hex
                 )
                 .catch(function(e) {
                   errorInfo = e.indexOf(":") != -1 ? e.split(":")[1] : e;
@@ -353,7 +353,7 @@ class SubmitInfo extends Component {
               } else {
                 const { result } = await transactionResultManager(
                   unSignTransaction,
-                  tronWeb
+                  lindaWeb
                 );
                 res = result;
               }
@@ -374,8 +374,8 @@ class SubmitInfo extends Component {
                 timestamp: this.tokenState("issueTime"),
                 file_name: this.tokenState("fileName")
               };
-              let hash = tronWeb.toHex(JSON.stringify(data), false);
-              let sig = await tronWeb.trx.sign(hash);
+              let hash = lindaWeb.toHex(JSON.stringify(data), false);
+              let sig = await lindaWeb.lind.sign(hash);
               unSignTransaction = await Client.updateToken10({
                 content: JSON.stringify(data),
                 sig: sig
@@ -396,7 +396,7 @@ class SubmitInfo extends Component {
                 url: this.tokenState("url"),
                 totalSupply: this.tokenState("totalSupply"),
                 num: this.tokenState("tokenRatio"),
-                trxNum: this.tokenState("trxRatio"),
+                lindNum: this.tokenState("lindRatio"),
                 startTime: this.tokenState("startTime"),
                 endTime: this.tokenState("endTime"),
                 frozenSupply: this.tokenState("frozenSupply"),
@@ -426,12 +426,12 @@ class SubmitInfo extends Component {
         );
         break;
 
-      case "trc20":
+      case "lrc20":
         let data = {
           name: this.tokenState("name"),
           symbol: this.tokenState("abbreviation"),
           token_desc: this.tokenState("description"),
-          total_supply: this.tokenState("totalSupplyTRC20"),
+          total_supply: this.tokenState("totalSupplyLRC20"),
           decimals: this.tokenState("precision"),
           issuer_addr: this.tokenState("address"),
           icon_url: this.tokenState("updateLogoUrl"),
@@ -449,13 +449,13 @@ class SubmitInfo extends Component {
         };
 
         if (account.isLoggedIn) {
-          //TRONLINK Login  or PRIVATE_KEY Login
+          //LINDALINK Login  or PRIVATE_KEY Login
           if (
-            this.props.walletType.type === "ACCOUNT_TRONLINK" ||
+            this.props.walletType.type === "ACCOUNT_LINDALINK" ||
             this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"
           ) {
-            let hash = tronWeb.toHex(JSON.stringify(data), false);
-            let sig = await tronWeb.trx.sign(hash);
+            let hash = lindaWeb.toHex(JSON.stringify(data), false);
+            let sig = await lindaWeb.lind.sign(hash);
             let unSignTransaction = "";
 
             //Judge update Token or create Token
@@ -479,8 +479,8 @@ class SubmitInfo extends Component {
             }
           }
         } else if (this.props.walletType.type === "ACCOUNT_LEDGER") {
-          let hash = tronWebLedger.toHex(JSON.stringify(data), false);
-          let sig = await tronWebLedger.trx.sign(hash);
+          let hash = lindaWebLedger.toHex(JSON.stringify(data), false);
+          let sig = await lindaWebLedger.lind.sign(hash);
           let unSignTransaction = "";
           if (this.state.isUpdate) {
             unSignTransaction = await Client.updateToken20({
@@ -538,7 +538,7 @@ class SubmitInfo extends Component {
         contract_created_date,
         contract_code,
         token_amount,
-        trx_amount,
+        lind_amount,
         freeze_amount,
         freeze_date,
         freeze_type,
@@ -552,8 +552,8 @@ class SubmitInfo extends Component {
         contract_created_address
       }
     } = this.state;
-    const isTrc10 = type === "trc10";
-    const isTrc20 = type === "trc20";
+    const isLrc10 = type === "lrc10";
+    const isLrc20 = type === "lrc20";
     let startTime = participation_start_date
       ? participation_start_date.valueOf()
       : "";
@@ -611,7 +611,7 @@ class SubmitInfo extends Component {
           </Row>
           <Row type="flex" gutter={64}>
             <Col span={24} md={12}>
-              <label>{tu("TRC20_decimals")}</label>
+              <label>{tu("LRC20_decimals")}</label>
               <p className="border-dashed">{precision}</p>
             </Col>
             <Col span={24} md={12}>
@@ -622,7 +622,7 @@ class SubmitInfo extends Component {
           {isUpdate && (
             <Row type="flex" gutter={64}>
               <Col span={24} md={12}>
-                {/*<Col span={24} md={12} className={ isTrc20? 'd-block': 'd-none'}>*/}
+                {/*<Col span={24} md={12} className={ isLrc20? 'd-block': 'd-none'}>*/}
                 <label>{tu("token_logo")}</label>
                 <img
                   className="d-block mt-2"
@@ -635,12 +635,12 @@ class SubmitInfo extends Component {
             </Row>
           )}
         </section>
-        <section className={isTrc20 ? "d-block mt-4" : "d-none"}>
+        <section className={isLrc20 ? "d-block mt-4" : "d-none"}>
           <h4 className="mb-3">{tu("contract_info")}</h4>
           <hr />
           <Row type="flex" gutter={64}>
             <Col span={24} md={12}>
-              <label>{tu("trc20_token_info_Contract_Address")}</label>
+              <label>{tu("lrc20_token_info_Contract_Address")}</label>
               <p className="border-dashed">{contract_address}</p>
             </Col>
             <Col span={24} md={12}>
@@ -664,14 +664,14 @@ class SubmitInfo extends Component {
           {/*</Col>*/}
           {/*</Row>*/}
         </section>
-        <section className={isTrc10 ? "d-block mt-4" : "d-none"}>
+        <section className={isLrc10 ? "d-block mt-4" : "d-none"}>
           <h4 className="mb-3">{tu("price_info")}</h4>
           <hr />
           <Row type="flex" gutter={64}>
             <Col span={24} md={12}>
               <label>{tu("token_price")}</label>
               <p className="border-dashed">
-                {token_amount} {token_abbr} = {trx_amount} TRX
+                {token_amount} {token_abbr} = {lind_amount} LIND
               </p>
             </Col>
 
@@ -718,7 +718,7 @@ class SubmitInfo extends Component {
               <label>{tu("project_website")}</label>
               <p className="border-dashed">{website}</p>
             </Col>
-            {(isTrc20 || isUpdate) && (
+            {(isLrc20 || isUpdate) && (
               <Col span={24} md={12}>
                 <label>{tu("GitHub")}</label>
                 <p className="border-dashed">{github_url}</p>
@@ -728,12 +728,12 @@ class SubmitInfo extends Component {
           <Row
             type="flex"
             gutter={64}
-            className={isTrc20 || isUpdate ? "d-flex" : "d-none"}
+            className={isLrc20 || isUpdate ? "d-flex" : "d-none"}
           >
             <Col
               span={24}
               md={12}
-              className={isTrc20 || isUpdate ? "d-block" : "d-none"}
+              className={isLrc20 || isUpdate ? "d-block" : "d-none"}
             >
               <label>{tu("email")}</label>
               <p className="border-dashed">{email}</p>
@@ -743,7 +743,7 @@ class SubmitInfo extends Component {
               <p className="border-dashed">{white_paper}</p>
             </Col>
           </Row>
-          <Row type="flex" className={isTrc20 ? "d-flex mt-3" : "d-none"}>
+          <Row type="flex" className={isLrc20 ? "d-flex mt-3" : "d-none"}>
             <div className="d-md-flex mb-4">
               <label>{tu("already_add_social_link_")}</label>
               <div className="d-flex icon-list ml-2">
@@ -762,7 +762,7 @@ class SubmitInfo extends Component {
               </div>
             </div>
           </Row>
-          {(isTrc20 || isUpdate) && (
+          {(isLrc20 || isUpdate) && (
             <Row gutter={64} type="flex" justify="space-between">
               {iconList.map((item, index) => {
                 if (item.active) {
@@ -805,7 +805,7 @@ class SubmitInfo extends Component {
           </div>
         </section>
 
-        <section className={isTrc10 && !isUpdate ? "d-block mt-4" : "d-none"}>
+        <section className={isLrc10 && !isUpdate ? "d-block mt-4" : "d-none"}>
           <div className="form-check d-flex">
             <input
               type="checkbox"
@@ -829,7 +829,7 @@ class SubmitInfo extends Component {
             className="btn btn-default btn-lg"
             onClick={() => nextStep(1)}
           >
-            {tu("trc20_token_return")}
+            {tu("lrc20_token_return")}
           </button>
           {/* {// todo wangyan} */}
           <button

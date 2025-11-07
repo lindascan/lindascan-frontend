@@ -7,7 +7,7 @@ import { Steps, Table, Checkbox, Tag } from 'antd';
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Client} from "../../../services/api";
 import _,{upperFirst} from 'lodash'
-import {API_URL, ONE_TRX,IS_MAINNET,uuidv4} from "../../../constants";
+import {API_URL, ONE_LIND,IS_MAINNET,uuidv4} from "../../../constants";
 import xhr from "axios";
 const Step = Steps.Step;
 
@@ -99,14 +99,14 @@ export class SelectProposal extends Component {
         let {proposalsCreateList} = this.state;
         if(IS_MAINNET){
             let data  = await xhr.get(`${API_URL}/api/chainparameters?uuid=${uuidv4}&type=1`);
-            let tronParameters = data.data.tronParameters;
+            let lindaParameters = data.data.lindaParameters;
            
-            if(!tronParameters){
+            if(!lindaParameters){
                 return
             }
             // let EnergyLimitNew   = {key: "getTotalEnergyLimitNew", value: 100000000000};
-            // tronParameters.splice(19, 0, EnergyLimitNew);
-            tronParameters.map(item => {
+            // lindaParameters.splice(19, 0, EnergyLimitNew);
+            lindaParameters.map(item => {
                 switch (item['key']){
                     case "getMaintenanceTimeInterval":
                         item.name = 'propose_1';
@@ -180,7 +180,7 @@ export class SelectProposal extends Component {
                     //     item.name = 'propose_18';
                     //     item.id = '17';
                     //     break;
-                    case "getAllowTvmTransferTrc10":
+                    case "getAllowTvmTransferLrc10":
                         item.name = 'propose_19';
                         item.id = '18';
                         break;
@@ -260,18 +260,18 @@ export class SelectProposal extends Component {
                         break;                          
                 }
             });
-            let tronParametersNew = [];
-            tronParameters.map(item => {
+            let lindaParametersNew = [];
+            lindaParameters.map(item => {
                 if(item.name){
-                    tronParametersNew.push(item)
+                    lindaParametersNew.push(item)
                 }
             })
             this.setState({
-                dataSource: _(tronParametersNew).sortBy(tb => Number(tb.id)).value()
+                dataSource: _(lindaParametersNew).sortBy(tb => Number(tb.id)).value()
             })
         }else{
-            let { tronParameters } = await Client.getChainparameters();
-            if(!tronParameters){
+            let { lindaParameters } = await Client.getChainparameters();
+            if(!lindaParameters){
                 return
             }
 
@@ -286,7 +286,7 @@ export class SelectProposal extends Component {
                 'getPercentToPayWitness',
             ]
 
-            let sunsideparameters = tronParameters.filter(function(v){
+            let sunsideparameters = lindaParameters.filter(function(v){
                 return sunside.indexOf(v.key)!==-1
             })
             sunsideparameters.map(item => {
@@ -325,15 +325,15 @@ export class SelectProposal extends Component {
                         break;
                 }
             });
-            let tronParametersNew = [];
+            let lindaParametersNew = [];
             sunsideparameters.map(item => {
                 if(item.name){
-                    tronParametersNew.push(item)
+                    lindaParametersNew.push(item)
                 }
             })
 
             this.setState({
-                dataSource: tronParametersNew.slice(0,2)
+                dataSource: lindaParametersNew.slice(0,2)
             })
 
         }
@@ -356,12 +356,12 @@ export class SelectProposal extends Component {
     const {type} = this.props.state;
     if(!isLoggedInFn()) return;
     // if(!isApplySuperModalFn()) return;
-    // if(!issuedAsset && (type == 'trc10')){
-    //   this.setModal('trx_token_account_limit')
+    // if(!issuedAsset && (type == 'lrc10')){
+    //   this.setModal('lind_token_account_limit')
     //   return
     // }
     // if(wallet.balance < 1024*Math.pow(10,6)){
-    //   this.setModal('trx_token_fee_message')
+    //   this.setModal('lind_token_fee_message')
     //   return
     // }
     this.props.nextState(this.state)
@@ -388,7 +388,7 @@ export class SelectProposal extends Component {
     if (wallet !== null) {
       Client.getIssuedAsset(wallet.address).then(({token}) => {
         this.setState({issuedAsset: (token == undefined)})
-        // token !== undefined && this.props.nextState({type: 'trc20'})
+        // token !== undefined && this.props.nextState({type: 'lrc20'})
       });
     }
   };
@@ -450,25 +450,25 @@ export class SelectProposal extends Component {
                                     }</span></div>
                                 }
                                 {
-                                    record.key == 'getAccountUpgradeCost' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getAccountUpgradeCost' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
-                                    record.key == 'getCreateAccountFee' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getCreateAccountFee' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
                                     record.key == 'getTransactionFee' && <div><span>{text}</span> &nbsp;<span>Sun/byte</span></div>
                                 }
                                 {
-                                    record.key == 'getAssetIssueFee' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getAssetIssueFee' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
-                                    record.key == 'getWitnessPayPerBlock' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getWitnessPayPerBlock' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {
-                                    record.key == 'getWitnessStandbyAllowance' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>
+                                    record.key == 'getWitnessStandbyAllowance' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>
                                 }
                                 {/*{*/}
-                                    {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>*/}
+                                    {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>*/}
                                 {/*}*/}
                                 {/*{*/}
                                     {/*record.key == 'getCreateNewAccountBandwidthRate' && <div><span>{text}</span> &nbsp;<span>bandwith/byte</span></div>*/}
@@ -490,14 +490,14 @@ export class SelectProposal extends Component {
                                 {
                                     record.key == 'getEnergyFee' && <div>
                                         {
-                                            <span>{text / ONE_TRX} TRX</span>
+                                            <span>{text / ONE_LIND} LIND</span>
                                         }
                                     </div>
                                 }
                                 {
                                     record.key == 'getExchangeCreateFee' && <div>
                                         {
-                                            <span>{text / ONE_TRX} TRX</span>
+                                            <span>{text / ONE_LIND} LIND</span>
                                         }
                                     </div>
                                 }
@@ -541,7 +541,7 @@ export class SelectProposal extends Component {
                                     </div>
                                 }
                                 {
-                                    record.key == 'getAllowTvmTransferTrc10' && <div>
+                                    record.key == 'getAllowTvmTransferLrc10' && <div>
                                         {
                                             text? <span>{tu('propose_allowed')}</span>:
                                                 <span>{tu('propose_not_allowed')}</span>
@@ -594,13 +594,13 @@ export class SelectProposal extends Component {
                                 }
                                 {
                                     record.key == 'getUpdateAccountPermissionFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;
-                                        <span>TRX</span></div>
+                                        <span>{text / ONE_LIND}</span> &nbsp;
+                                        <span>LIND</span></div>
                                 }
                                 {
                                     record.key == 'getMultiSignFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;
-                                        <span>TRX</span></div>
+                                        <span>{text / ONE_LIND}</span> &nbsp;
+                                        <span>LIND</span></div>
                                 }
 
                                 {
@@ -629,7 +629,7 @@ export class SelectProposal extends Component {
                                 }
                                 {                       
                                     record.key == 'getShieldedTransactionFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                     </div>
                                 }
                                 {                       
@@ -649,7 +649,7 @@ export class SelectProposal extends Component {
                                 {
                                     record.key == 'getWitness127PayPerBlock' &&
                                         <div>
-                                            <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                            <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         </div>
                                 }
                                 {
@@ -668,7 +668,7 @@ export class SelectProposal extends Component {
                                 {
                                     record.key == 'getShieldedTransactionCreateAccountFee' &&
                                         <div>
-                                            <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                            <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         </div>
                                 }
                                 {

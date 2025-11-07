@@ -9,10 +9,10 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import TokenBalanceSelect from "../../common/TokenBalanceSelect";
 import JSONTree from 'react-json-tree'
 import SendMultiModal from "../../common/MultiModal/SendModal";
-import { transactionMultiResultManager,transactionResultManagerByLedger } from "../../../utils/tron"
+import { transactionMultiResultManager,transactionResultManagerByLedger } from "../../../utils/linda"
 import xhr from "axios";
 import MonacoEditor from "react-monaco-editor";
-import {withTronWeb} from "../../../utils/tronWeb";
+import {withLindaWeb} from "../../../utils/lindaWeb";
 import {
   API_URL,
   IS_MAINNET,
@@ -30,11 +30,11 @@ const { Panel } = Collapse;
     account: state.app.account,
   };
 })
-@withTronWeb
+@withLindaWeb
 class Code extends React.Component {
   constructor(props) {
     super(props);
-    // this.tronWeb = new tronWeb({
+    // this.lindaWeb = new lindaWeb({
     //   fullNode: 'https://api.trongrid.io',
     //   solidityNode: 'https://api.trongrid.io',
     //   eventServer: 'https://api.trongrid.io',
@@ -54,11 +54,11 @@ class Code extends React.Component {
   async componentDidMount() {
     let { contractItem, address, account } = this.props;
     let { contract } = this.state;
-    const { tronWeb, sunWeb } = this.props.account;
+    const { lindaWeb, sunWeb } = this.props.account;
     if (account.isLoggedIn) {
-      let addressHex = tronWeb.address.toHex(address);
-      const tron = IS_MAINNET ? tronWeb : sunWeb.sidechain
-      let initContract = await tron.contract([contractItem], addressHex);
+      let addressHex = lindaWeb.address.toHex(address);
+      const linda = IS_MAINNET ? lindaWeb : sunWeb.sidechain
+      let initContract = await linda.contract([contractItem], addressHex);
       this.setState(
         {
           contract: initContract
@@ -197,12 +197,12 @@ class Code extends React.Component {
    MultiSend =  async(permissionId, permissionTime, from) => {
         const { tokenId, totalValue, contract ,sendTokenDecimals } = this.state;
         let { contractItem, address, account, intl } = this.props;
-        const { tronWeb, sunWeb } = this.props.account;
-        let tron;
+        const { lindaWeb, sunWeb } = this.props.account;
+        let linda;
         if(this.props.wallet.type === "ACCOUNT_LEDGER") {
-           tron = IS_MAINNET ? this.props.tronWeb() : sunWeb.sidechain
+           linda = IS_MAINNET ? this.props.lindaWeb() : sunWeb.sidechain
         }else{
-           tron = IS_MAINNET ?  tronWeb : sunWeb.sidechain
+           linda = IS_MAINNET ?  lindaWeb : sunWeb.sidechain
         }
         
         let selectorTypeArr = [];
@@ -220,7 +220,7 @@ class Code extends React.Component {
                   selectorValueArr[i] = '';
               }
               if(selectorTypeArr[i] == 'address'){
-                  selectorValueArr[i] = tron.address.toHex(selectorValueArr[i]);
+                  selectorValueArr[i] = linda.address.toHex(selectorValueArr[i]);
               }
               selectorArr.push(
                     {type: selectorTypeArr[i], value: selectorValueArr[i]},
@@ -240,13 +240,13 @@ class Code extends React.Component {
                         tokenValue: this.Mul(totalValue,Math.pow(10, sendTokenDecimals))
                     };
                 }
-                let unSignTransaction = await tron.transactionBuilder.triggerSmartContract(
-                    tron.address.toHex(address),
+                let unSignTransaction = await linda.transactionBuilder.triggerSmartContract(
+                    linda.address.toHex(address),
                     function_selector,
                    // {'Permission_id':permissionId,...options},
                     {'permissionId': permissionId,...options},
                     selectorArr,
-                    tron.address.toHex(from),
+                    linda.address.toHex(from),
                 );
                 if (unSignTransaction.transaction !== undefined)
                     unSignTransaction = unSignTransaction.transaction;
@@ -254,8 +254,8 @@ class Code extends React.Component {
                 //get transaction parameter value to Hex
                 let HexStr = Client.getTriggerSmartContractHexStr(unSignTransaction.raw_data.contract[0].parameter.value);
                 //sign transaction
-                let SignTransaction = await transactionMultiResultManager(unSignTransaction, tron, permissionId,permissionTime,HexStr);
-                let { data } = await xhr.post("https://list.tronlink.org/api/wallet/multi/transaction", {
+                let SignTransaction = await transactionMultiResultManager(unSignTransaction, linda, permissionId,permissionTime,HexStr);
+                let { data } = await xhr.post("https://list.lindalink.org/api/wallet/multi/transaction", {
                     "address": account.address,
                     "transaction": SignTransaction,
                     "netType":"main_net",
@@ -292,7 +292,7 @@ class Code extends React.Component {
                         (res == ""
                             ? ""
                             : "Message: " +
-                            tron
+                            linda
                                 .toUtf8(res.substring(res.length - 64, res.length))
                                 .trim());
                     this.setState({
@@ -319,8 +319,8 @@ class Code extends React.Component {
   async Send() {
     const { tokenId, totalValue, contract, sendTokenDecimals } = this.state;
     const { contractItem, intl } = this.props;
-    const { tronWeb, sunWeb } = this.props.account;
-    const tron = IS_MAINNET ? tronWeb : sunWeb.sidechain
+    const { lindaWeb, sunWeb } = this.props.account;
+    const linda = IS_MAINNET ? lindaWeb : sunWeb.sidechain
     if (this.isLoggedIn()) {
 
       try {
@@ -348,7 +348,7 @@ class Code extends React.Component {
             (res == ""
               ? ""
               : "Message: " +
-              tron
+              linda
                   .toUtf8(res.substring(res.length - 64, res.length))
                   .trim());
           this.setState({
@@ -374,8 +374,8 @@ class Code extends React.Component {
   async ledgerSend(){
     const { tokenId, totalValue, contract ,sendTokenDecimals } = this.state;
     let { contractItem, address, account, intl } = this.props;
-    //const { tronWeb } = this.props.account;
-    const tronWeb = this.props.tronWeb();
+    //const { lindaWeb } = this.props.account;
+    const lindaWeb = this.props.lindaWeb();
     let selectorTypeArr = [];
     let selectorValueArr = this.submitValueFormat();
     let selectorArr = [];
@@ -391,7 +391,7 @@ class Code extends React.Component {
               selectorValueArr[i] = '';
           }
           if(selectorTypeArr[i] == 'address'){
-              selectorValueArr[i] = tronWeb.address.toHex(selectorValueArr[i]);
+              selectorValueArr[i] = lindaWeb.address.toHex(selectorValueArr[i]);
           }
           selectorArr.push(
                 {type: selectorTypeArr[i], value: selectorValueArr[i]},
@@ -411,12 +411,12 @@ class Code extends React.Component {
                     tokenValue: this.Mul(totalValue,Math.pow(10, sendTokenDecimals))
                 };
             }
-            let unSignTransaction = await tronWeb.transactionBuilder.triggerSmartContract(
-                tronWeb.address.toHex(address),
+            let unSignTransaction = await lindaWeb.transactionBuilder.triggerSmartContract(
+                lindaWeb.address.toHex(address),
                 function_selector,
                 {...options},
                 selectorArr,
-                tronWeb.address.toHex(account.address),
+                lindaWeb.address.toHex(account.address),
             );
             if (unSignTransaction.transaction !== undefined)
                 unSignTransaction = unSignTransaction.transaction;
@@ -429,7 +429,7 @@ class Code extends React.Component {
 
             
             //sign transaction
-            let { broadcast,signedTransaction }= await transactionResultManagerByLedger(unSignTransaction,tronWeb);
+            let { broadcast,signedTransaction }= await transactionResultManagerByLedger(unSignTransaction,lindaWeb);
             let retValue = false;
             if(!broadcast.result){
               retValue = false;
@@ -466,7 +466,7 @@ class Code extends React.Component {
                     (res == ""
                         ? ""
                         : "Message: " +
-                        tronWeb
+                        lindaWeb
                             .toUtf8(res.substring(res.length - 64, res.length))
                             .trim());
                 this.setState({
@@ -500,11 +500,11 @@ class Code extends React.Component {
   }
   getTxResult(txID) {
     let { contractItem, intl, address } = this.props;
-    const { tronWeb, sunWeb } = this.props.account;
-    const tron = IS_MAINNET ? tronWeb : sunWeb.sidechain
+    const { lindaWeb, sunWeb } = this.props.account;
+    const linda = IS_MAINNET ? lindaWeb : sunWeb.sidechain
     return new Promise((reslove, reject) => {
       let checkResult = async function(txID) {
-        const output = await tron.trx.getUnconfirmedTransactionInfo(txID);
+        const output = await linda.lind.getUnconfirmedTransactionInfo(txID);
         if (Object.keys(output).length <= 1 && !output.id) {
           return setTimeout(() => {
             checkResult(txID);
@@ -513,12 +513,12 @@ class Code extends React.Component {
 
         if (output.result && output.result == "FAILED") {
           return reject({
-            error: tron.toUtf8(output.resMessage),
+            error: linda.toUtf8(output.resMessage),
             transaction: txID,
             output
           });
         }
-        if (!tron.utils.hasProperty(output, "contractResult")) {
+        if (!linda.utils.hasProperty(output, "contractResult")) {
           return reject({
             error: "Failed to execute: " + JSON.stringify(output, null, 2),
             transaction: txID,
@@ -534,7 +534,7 @@ class Code extends React.Component {
           .map(({ name }) => name)
           .filter(name => !!name);
         const types = contractItem.outputs.map(({ type }) => type);
-        let decoded = tron.utils.abi.decodeParams(
+        let decoded = linda.utils.abi.decodeParams(
           names,
           types,
           "0x" + output.contractResult[0]
@@ -578,14 +578,14 @@ class Code extends React.Component {
     let { contractItem, index, currentTokens } = this.props;
     let contractList;
     if (contractItem.stateMutability == "Payable") {
-      // Run these functions with Trx or Token
+      // Run these functions with Lind or Token
       contractList = (
         <div>
           <div className="select-block">
             <div className="select-line">
               {/*<Select style={{ width: 240 }} */}
               {/*onChange={(e) => this.getChoiceItem(e)} */}
-              {/*placeholder="Select TRX or token to send">*/}
+              {/*placeholder="Select LIND or token to send">*/}
               {/*{*/}
               {/*currentTokens.map((val, key) => {*/}
               {/*return (*/}
@@ -622,7 +622,7 @@ class Code extends React.Component {
         </div>
       );
     } else if (contractItem.stateMutability == "Nonpayable") {
-      // Run these functions will consume Trx or Energy
+      // Run these functions will consume Lind or Energy
       contractList = (
         <div>
             <div className="d-flex">

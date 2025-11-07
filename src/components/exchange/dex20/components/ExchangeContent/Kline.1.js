@@ -5,10 +5,10 @@ import { widget } from "../../../../../lib/charting_library.min";
 import Datafeed from "./udf/index.js";
 import { connect } from "react-redux";
 import { tu, tv } from "../../../../../utils/i18n";
-import { TRXPrice } from "../../../../common/Price";
+import { LINDPrice } from "../../../../common/Price";
 import { Client20 } from "../../../../../services/api";
 import { change10lock } from "../../../../../actions/exchange";
-import { TokenTRC20Link } from "../../../../common/Links";
+import { TokenLRC20Link } from "../../../../common/Links";
 import { Icon } from "antd";
 
 class Kline extends React.Component {
@@ -295,13 +295,13 @@ class Kline extends React.Component {
 
   getTokenInfo() {
     const { selectData } = this.props;
-    Client20.gettokenInfo20().then(({ trc20_tokens }) => {
-      if (trc20_tokens) {
-        const newObj = trc20_tokens.filter(
+    Client20.gettokenInfo20().then(({ lrc20_tokens }) => {
+      if (lrc20_tokens) {
+        const newObj = lrc20_tokens.filter(
           o => o.name == selectData.first_token_id
         )[0];
         this.setState({ tokeninfoItem: newObj });
-        this.setState({ tokeninfo: trc20_tokens });
+        this.setState({ tokeninfo: lrc20_tokens });
       }
     });
   }
@@ -359,7 +359,7 @@ class Kline extends React.Component {
                 {tu("24H_VOL")}{" "}
                 <span className="ml-1">
                   {" "}
-                  <TRXPrice amount={selectData.svolume} />
+                  <LINDPrice amount={selectData.svolume} />
                 </span>
                 {/*<span className=" ml-2">{selectData.volume} {selectData.first_token_id}</span>*/}
                 {/*≈*/}
@@ -369,31 +369,31 @@ class Kline extends React.Component {
           {tokeninfoItem && detailShow && (
             <div className="kline_detail p-3">
               <p className="kline_detail__inr">
-                <b className="mr-2">{tu("trc20_token_info_Token_Info")}</b>
+                <b className="mr-2">{tu("lrc20_token_info_Token_Info")}</b>
                 {tokeninfoItem.token_desc}
               </p>
               <ul className="">
                 <li>
-                  <p className="title">{tu("trc20_token_info_Total_Name")}</p>
+                  <p className="title">{tu("lrc20_token_info_Total_Name")}</p>
                   <p className="value" style={{ textDecoration: "underline" }}>
-                    <TokenTRC20Link
+                    <TokenLRC20Link
                       name={tokeninfoItem.name}
                       address={tokeninfoItem.contract_address}
                     />
                   </p>
                 </li>
                 <li>
-                  <p className="title">{tu("trc20_token_info_Token_Symbol")}</p>
+                  <p className="title">{tu("lrc20_token_info_Token_Symbol")}</p>
                   <p className="value">{tokeninfoItem.symbol}</p>
                 </li>
                 <li>
                   <p className="title">
-                    {tu("trc20_token_info_Contract_Address")}
+                    {tu("lrc20_token_info_Contract_Address")}
                   </p>
                   <p className="value">{tokeninfoItem.contract_address}</p>
                 </li>
                 <li>
-                  <p className="title">{tu("trc20_token_info_Total_Supply")}</p>
+                  <p className="title">{tu("lrc20_token_info_Total_Supply")}</p>
                   <p className="value">
                     <FormattedNumber
                       value={
@@ -404,7 +404,7 @@ class Kline extends React.Component {
                   </p>
                 </li>
                 <li>
-                  <p className="title">{tu("trc20_token_info_Website")}</p>
+                  <p className="title">{tu("lrc20_token_info_Website")}</p>
                   <a href={tokeninfoItem.home_page} target="_bank">
                     {tokeninfoItem.home_page}
                   </a>

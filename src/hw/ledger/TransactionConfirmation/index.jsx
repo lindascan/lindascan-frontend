@@ -1,21 +1,21 @@
 import React, {Fragment} from "react";
-import {ONE_TRX} from "../../../constants";
+import {ONE_LIND} from "../../../constants";
 import {AddressLink} from "../../../components/common/Links";
 import Field from "./Field";
-import {Transaction} from "@tronscan/client/src/protocol/core/Tron_pb";
+import {Transaction} from "@lindascan/client/src/protocol/core/Linda_pb";
 import AccountName from "../../../components/common/AccountName";
-import {FormattedTRX} from "../../../utils/tron";
+import {FormattedLIND} from "../../../utils/linda";
 import rebuildList from "../../../utils/rebuildList";
 import {FormattedNumber} from 'react-intl';
 import {Truncate} from "../../../components/common/text";
-import TronWeb from "tronweb";
+import LindaWeb from "lindaweb";
 
 export default function Contract({ contract, extra }) {
   const contractParams = contract.parameter.value;
   let tokenInfo = '';
   let tokenList = [{"token_id":"","amount":""}];
   if(contract.type.toUpperCase() == "PARTICIPATEASSETISSUECONTRACT" || contract.type.toUpperCase() == "TRANSFERASSETCONTRACT"){
-      tokenList[0].token_id = TronWeb.toUtf8(contractParams.asset_name);
+      tokenList[0].token_id = LindaWeb.toUtf8(contractParams.asset_name);
       tokenList[0].amount = contractParams.amount;
       tokenInfo = rebuildList(tokenList, 'token_id', 'amount')[0];
   }
@@ -25,28 +25,28 @@ export default function Contract({ contract, extra }) {
       return (
         <Fragment>
           <div className="card-body">
-            <h5 className="card-title text-center">Send TRX</h5>
+            <h5 className="card-title text-center">Send LIND</h5>
           </div>
           <table className="table">
             <tbody>
               <Field label="From">
-                {TronWeb.address.fromHex(contractParams.owner_address)}
+                {LindaWeb.address.fromHex(contractParams.owner_address)}
               </Field>
               <Field label="To">
-                {TronWeb.address.fromHex(contractParams.to_address)}
+                {LindaWeb.address.fromHex(contractParams.to_address)}
               </Field>
               {/*<Field label="To Name">*/}
                 {/*<AccountName*/}
-                  {/*address={TronWeb.address.fromHex(contractParams.to_address)}*/}
+                  {/*address={LindaWeb.address.fromHex(contractParams.to_address)}*/}
                   {/*loading={() => <span>Loading...</span>}*/}
                 {/*/>*/}
               {/*</Field>*/}
               <Field label="Amount">
-                <FormattedTRX value={contractParams.amount / ONE_TRX}/> TRX
+                <FormattedLIND value={contractParams.amount / ONE_LIND}/> LIND
               </Field>
               {
                 (extra.note &&  <Field label="Note">
-                {TronWeb.toUtf8(extra.note)}
+                {LindaWeb.toUtf8(extra.note)}
                 </Field>)
               }
               {(extra && extra.hash && 
@@ -70,23 +70,23 @@ export default function Contract({ contract, extra }) {
           <table className="table">
             <tbody>
             <Field label="From">
-              {TronWeb.address.fromHex(contractParams.owner_address)}
+              {LindaWeb.address.fromHex(contractParams.owner_address)}
             </Field>
             <Field label="To">
-              {TronWeb.address.fromHex(contractParams.to_address)}
+              {LindaWeb.address.fromHex(contractParams.to_address)}
             </Field>
             {/*<Field label="To Name">*/}
               {/*<AccountName*/}
-                {/*address={TronWeb.address.fromHex(contractParams.to_address)}*/}
+                {/*address={LindaWeb.address.fromHex(contractParams.to_address)}*/}
                 {/*loading={() => <span>Loading...</span>} />*/}
             {/*</Field>*/}
             <Field label="Amount">
               <FormattedNumber maximumFractionDigits={tokenInfo.map_token_precision} minimunFractionDigits={tokenInfo.map_token_precision}
-                    value={tokenInfo.map_amount}/>&nbsp;{tokenInfo.map_token_name}&nbsp;<font size="-2">[{TronWeb.toUtf8(contractParams.asset_name)}]</font>
+                    value={tokenInfo.map_amount}/>&nbsp;{tokenInfo.map_token_name}&nbsp;<font size="-2">[{LindaWeb.toUtf8(contractParams.asset_name)}]</font>
             </Field>
             {
               (extra.note &&  <Field label="Note">
-              {TronWeb.toUtf8(extra.note)}
+              {LindaWeb.toUtf8(extra.note)}
               </Field>)
             }
             {(extra && extra.hash && 
@@ -110,7 +110,7 @@ export default function Contract({ contract, extra }) {
           </div>
           <table className="table">
             <tbody>
-              <Field label="URL">{TronWeb.toUtf8(contractParams.url)}</Field>
+              <Field label="URL">{LindaWeb.toUtf8(contractParams.url)}</Field>
               {(extra && extra.hash && 
                   <Field label="Hash">
                       <Truncate>
@@ -134,7 +134,7 @@ export default function Contract({ contract, extra }) {
             </p>
           </div>
           <table className="table">
-            <Field label="URL">{TronWeb.toUtf8(contractParams.url)}</Field>
+            <Field label="URL">{LindaWeb.toUtf8(contractParams.url)}</Field>
             {(extra && extra.hash && 
                  <Field label="Hash">
                     <Truncate>
@@ -155,7 +155,7 @@ export default function Contract({ contract, extra }) {
           <table className="table">
             <Field label="Token Name">{contractParams.name}</Field>
             <Field label="Total Supply">{contractParams.totalSupply}</Field>
-            <Field label="TRX Amount">{contractParams.trxNum}</Field>
+            <Field label="LIND Amount">{contractParams.lindNum}</Field>
             <Field label="Token Amount">{contractParams.num}</Field>
             <Field label="Start Time">{contractParams.startTime}</Field>
             <Field label="End Time">{contractParams.endTime}</Field>
@@ -181,7 +181,7 @@ export default function Contract({ contract, extra }) {
           <table className="table">
             {/*<Field label="Owner Address"><AddressLink address={contract.ownerAddress} /></Field>*/}
             <Field label="Token">{tokenInfo.map_token_name + "[ID:" +tokenInfo.map_token_id +"]"}</Field>
-            <Field label="Cost">{contractParams.amount / ONE_TRX} TRX</Field>
+            <Field label="Cost">{contractParams.amount / ONE_LIND} LIND</Field>
             {(extra && extra.hash && 
                  <Field label="Hash">
                     <Truncate>
@@ -202,7 +202,7 @@ export default function Contract({ contract, extra }) {
           </div>
           <table className="table">
             {/*<Field label="Owner Address"><AddressLink address={contract.ownerAddress} /></Field>*/}
-            <Field label="Name">{TronWeb.toUtf8(contractParams.account_name)}</Field>
+            <Field label="Name">{LindaWeb.toUtf8(contractParams.account_name)}</Field>
             {(extra && extra.hash && 
                   <Field label="Hash">
                       <Truncate>
@@ -221,9 +221,9 @@ export default function Contract({ contract, extra }) {
             <h5 className="card-title text-center">Freeze Coins</h5>
           </div>
           <table className="table">
-            <Field label="Owner Address"><AddressLink address={TronWeb.address.fromHex(contractParams.owner_address)} /></Field>
+            <Field label="Owner Address"><AddressLink address={LindaWeb.address.fromHex(contractParams.owner_address)} /></Field>
             <Field label="Frozen Amount">
-              <FormattedTRX value={contractParams.frozen_balance / ONE_TRX} />
+              <FormattedLIND value={contractParams.frozen_balance / ONE_LIND} />
             </Field>
             <Field label="Number of days frozen">{contractParams.frozen_duration}</Field>
             <Field label="Resource">{contractParams.resource=="ENERGY"?"Energy":"Bandwidth"}</Field>
@@ -292,7 +292,7 @@ export default function Contract({ contract, extra }) {
                 {
                   contractParams.votes.map(vote => (
                     <div className="text-right" key={vote.vote_address}>
-                      {TronWeb.address.fromHex(vote.vote_address)}: {vote.vote_count} Votes
+                      {LindaWeb.address.fromHex(vote.vote_address)}: {vote.vote_count} Votes
                     </div>
                   ))
                 }
@@ -316,7 +316,7 @@ export default function Contract({ contract, extra }) {
                   <h5 className="card-title text-center">Collect Reward</h5>
               </div>
               <table className="table">
-                  <Field label="Owner Address"><AddressLink address={TronWeb.address.fromHex(contractParams.owner_address)} /></Field>
+                  <Field label="Owner Address"><AddressLink address={LindaWeb.address.fromHex(contractParams.owner_address)} /></Field>
                   {(extra && extra.hash &&
                       <Field label="Hash">
                           <Truncate>
@@ -332,13 +332,13 @@ export default function Contract({ contract, extra }) {
       return (
         <Fragment>
           <div className="card-body">
-            <h5 className="card-title text-center">{extra.to?'Send TRC20':'Trigger Smart Contract'}</h5>
+            <h5 className="card-title text-center">{extra.to?'Send LRC20':'Trigger Smart Contract'}</h5>
           </div>
             {
                 extra.to !=''? <table className="table">
                     <tbody>
                     <Field label="From">
-                        {TronWeb.address.fromHex(contractParams.owner_address)}
+                        {LindaWeb.address.fromHex(contractParams.owner_address)}
                     </Field>
                     {
                       extra.to?<Field label="To">
@@ -351,7 +351,7 @@ export default function Contract({ contract, extra }) {
                         </Field>
                     )}
                     <Field label="Contract">
-                        {TronWeb.address.fromHex(contractParams.contract_address)}
+                        {LindaWeb.address.fromHex(contractParams.contract_address)}
                     </Field>
                     {(extra && extra.to_name &&
                         <Field label="To Name">
@@ -382,7 +382,7 @@ export default function Contract({ contract, extra }) {
                 </table> : <table className="table">
                     <tbody>
                         <Field label="Contract">
-                            {TronWeb.address.fromHex(contractParams.contract_address)}
+                            {LindaWeb.address.fromHex(contractParams.contract_address)}
                         </Field>
                         {(extra && extra.hash &&
                             <Field label="Hash">
@@ -417,11 +417,11 @@ export default function Contract({ contract, extra }) {
               
                 <Field label={extra.action==="Buy"?"Cost":"Amount"}>
                   <FormattedNumber maximumFractionDigits={extra.decimals2} minimunFractionDigits={extra.decimals2}  
-                  value={extra.action==="Buy"?contractParams.quant/ Math.pow(10, extra.decimals2):contractParams.quant/ Math.pow(10, extra.decimals1)}/>{extra.action==="Buy"?" TRX":""}
+                  value={extra.action==="Buy"?contractParams.quant/ Math.pow(10, extra.decimals2):contractParams.quant/ Math.pow(10, extra.decimals1)}/>{extra.action==="Buy"?" LIND":""}
                 </Field>
                 {/*<Field label="Expected">*/}
                   {/*<FormattedNumber maximumFractionDigits={extra.decimals1} minimunFractionDigits={extra.decimals1}*/}
-                  {/*value={contractParams.expected/Math.pow(10,extra.decimals1)}/>{extra.action==="Sell"?" TRX":""}*/}
+                  {/*value={contractParams.expected/Math.pow(10,extra.decimals1)}/>{extra.action==="Sell"?" LIND":""}*/}
                 {/*</Field>*/}
               {(extra && extra.hash && 
                     <Field label="Hash">
@@ -444,8 +444,8 @@ export default function Contract({ contract, extra }) {
             <table className="table">
               <tbody>
               <Field label="Pair">
-                {extra.token1}[{TronWeb.toUtf8(contractParams.first_token_id)}]&lt;
-                =&gt;{extra.token2}[{TronWeb.toUtf8(contractParams.second_token_id)}]
+                {extra.token1}[{LindaWeb.toUtf8(contractParams.first_token_id)}]&lt;
+                =&gt;{extra.token2}[{LindaWeb.toUtf8(contractParams.second_token_id)}]
               </Field>
               
               <Field label="Ratio">

@@ -15,8 +15,8 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { Button } from "antd";
 import NavigationPrompt from "react-router-navigation-prompt";
 import xhr from "axios";
-import { API_URL, ONE_TRX } from "../../../constants";
-import { TronLoader } from "../../common/loaders";
+import { API_URL, ONE_LIND } from "../../../constants";
+import { LindaLoader } from "../../common/loaders";
 import { Client } from "../../../services/api";
 import _ from "lodash";
 import WARNIMG from './../../../images/compiler/warning.png';
@@ -37,7 +37,7 @@ export class ProposalsCreate extends Component {
     super(props);
     this.state = {
       step: 0,
-      type: "trc20",
+      type: "lrc20",
       modal: null,
       isUpdate: false,
       leave_lock: false,
@@ -46,7 +46,7 @@ export class ProposalsCreate extends Component {
         res: "",
         errorInfo: ""
       },
-      isTronLink: 0,
+      isLindaLink: 0,
     };
   }
 
@@ -59,7 +59,7 @@ export class ProposalsCreate extends Component {
     }
     if (account.isLoggedIn) {
       this.setState({
-          isTronLink: Lockr.get("islogin"),
+          isLindaLink: Lockr.get("islogin"),
       });
   }
   }
@@ -157,7 +157,7 @@ export class ProposalsCreate extends Component {
     this.setState({
       modal: (
           <ApplyForDelegate
-              isTronLink={this.state.isTronLink}
+              isLindaLink={this.state.isLindaLink}
               privateKey={privateKey}
               onCancel={this.hideModal}
               onConfirm={() => {
@@ -230,7 +230,7 @@ export class ProposalsCreate extends Component {
         </div>
         {loading ? (
           <div className="card">
-            <TronLoader>{tu("loading_token")}</TronLoader>
+            <LindaLoader>{tu("loading_token")}</LindaLoader>
           </div>
         ) : (
           <div className="row">

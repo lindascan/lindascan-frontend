@@ -44,7 +44,7 @@ class Send extends React.Component {
               <div className="col-12 col-sm-8 col-lg-5">
                 <div className="card">
                   <div className="card-header text-center">
-                    {tu("Send TRX")}
+                    {tu("Send LIND")}
                   </div>
                   <div className="card-body">
                     <SendForm to={to}/>

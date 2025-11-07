@@ -10,7 +10,7 @@ import {Truncate} from "./text";
 import {withTimers} from "../../utils/timing";
 import SmartTable from "./SmartTable.js"
 import {upperFirst} from "lodash";
-import {TronLoader} from "./loaders";
+import {LindaLoader} from "./loaders";
 import TotalInfo from "./TableTotal";
 import DateRange from "./DateRange";
 import _ from "lodash";
@@ -66,7 +66,7 @@ class Transfers extends React.Component {
             pageSize: pageSize,
         }
     );
-    let {list, total, rangeTotal} = await Client.getTRC20tfs({
+    let {list, total, rangeTotal} = await Client.getLRC20tfs({
         limit: pageSize,
         start: (page - 1) * pageSize,
         address: filter.address,
@@ -209,10 +209,10 @@ class Transfers extends React.Component {
 
     return (
         <div className="token_black table_pos">
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
           <div className="d-flex justify-content-between" style={{left: 'auto'}}>
             {total ?<TotalInfo total={total} rangeTotal={rangeTotal} typeText="transactions_unit" divClass="table_pos_info_addr"/> :""}
-            <DateRange onDateOk={(start,end) => this.onDateOk(start,end)} dateClass={total?"date-range-box-trc20":"date-range-box-trc20-nodata"}/>
+            <DateRange onDateOk={(start,end) => this.onDateOk(start,end)} dateClass={total?"date-range-box-lrc20":"date-range-box-lrc20-nodata"}/>
           </div>
           {
             (!loading && transfers.length === 0)?

@@ -1,9 +1,9 @@
 import Lockr from "lockr";
 import uuidv4w from "uuid/v4";
 /**
- * 1000000 sun = 1 TRX
+ * 1000000 sun = 1 LIND
  */
-export const ONE_TRX = 1000000;
+export const ONE_LIND = 1000000;
 
 export const IS_TESTNET = process.env.NET === "testnet";
 export const IS_DESKTOP = process.env.DESKTOP === "true";
@@ -50,7 +50,7 @@ export const BLOCK_REWARD = 32;
 export const SR_MAX_COUNT = 27;
 export const WITNESS_CREATE_COST = 9999;
 export const CIRCULATING_SUPPLY = 100000000000;
-export const ASSET_ISSUE_COST = 1024 * ONE_TRX;
+export const ASSET_ISSUE_COST = 1024 * ONE_LIND;
 
 export const PUBLIC_URL = process.env.PUBLIC_URL || window.location.origin;
 //export const API_URL = process.env.API_URL;
@@ -78,7 +78,7 @@ export const MARKET_HTTP_URL = "https://poloniex.org";
 export const ACCOUNT_PRIVATE_KEY = "ACCOUNT_PRIVATE_KEY";
 export const ACCOUNT_ADDRESS = "ACCOUNT_ADDRESS";
 export const ACCOUNT_LEDGER = "ACCOUNT_LEDGER";
-export const ACCOUNT_TRONLINK = "ACCOUNT_TRONLINK";
+export const ACCOUNT_LINDALINK = "ACCOUNT_LINDALINK";
 
 /**
  * USDJ = 1 USD
@@ -102,9 +102,9 @@ export const FILE_MAX_NUM = 10;
 
 // currency type
 export const CURRENCYTYPE = {
-  TRX: "TRX",
-  TRX10: "TRX10",
-  TRX20: "TRX20",
+  LIND: "LIND",
+  LRC10: "LRC10",
+  LRC20: "LRC20",
 };
 
 // mapping energy
@@ -117,10 +117,10 @@ export const WITHDRAWFEE = 10;
 export const DEPOSITFEE = 0;
 // retryFee
 export const RETRYFEE = 0;
-// deposi min trx
-export const TRXDEPOSITMIN = 10;
-// withdraw min trx
-export const TRXWITHDRAWMIN = 10;
+// deposi min lind
+export const LINDDEPOSITMIN = 10;
+// withdraw min lind
+export const LINDWITHDRAWMIN = 10;
 // deposi min trc
 export const TRCDEPOSITMIN = 1;
 // withdraw min trc
@@ -192,8 +192,8 @@ export const TORNSOCKET = {
 
 // token type
 export const TOKENTYPE = {
-  TOKEN10: "trc10",
-  TOKEN20: "trc20",
+  TOKEN10: "lrc10",
+  TOKEN20: "lrc20",
 };
 
 // market basic page

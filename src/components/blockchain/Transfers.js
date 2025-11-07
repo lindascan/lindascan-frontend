@@ -10,11 +10,11 @@ import {getQueryParams} from "../../utils/url";
 import {Truncate} from "../common/text";
 import {upperFirst} from "lodash";
 import SmartTable from "../common/SmartTable.js"
-import {TronLoader} from "../common/loaders";
+import {LindaLoader} from "../common/loaders";
 import TotalInfo from "../common/TableTotal";
 import DateRange from "../common/DateRange";
-//import {TRXPrice} from "../common/Price";
-//import {ONE_TRX} from "../../constants";
+//import {LINDPrice} from "../common/Price";
+//import {ONE_LIND} from "../../constants";
 import {DatePicker} from 'antd';
 import moment from 'moment';
 //import xhr from "axios/index";
@@ -262,7 +262,7 @@ class Transfers extends React.Component {
 
     return (
         <main className="container header-overlap pb-3 token_black">
-          {loading && <div className="loading-style"><TronLoader/></div>}
+          {loading && <div className="loading-style"><LindaLoader/></div>}
           <div className="row">
             <div className="col-md-12 table_pos">
               {total ?<TotalInfo total={total} rangeTotal={rangeTotal} isQuestionMark={false}  typeText="transfers_unit"/>:""}

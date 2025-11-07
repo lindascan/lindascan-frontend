@@ -3,7 +3,7 @@ import {injectIntl} from "react-intl";
 import React from "react";
 import {Modal, ModalBody, ModalHeader} from "reactstrap";
 import {tu, t,option_t} from "../../utils/i18n";
-import {ONE_TRX} from "../../constants";
+import {ONE_LIND} from "../../constants";
 import {reloadWallet} from "../../actions/wallet";
 import _ from "lodash";
 
@@ -45,7 +45,7 @@ class CreateTxnPairModal extends React.PureComponent {
         const secTokenBalances = this.props.currentWallet.balance/1000000;
         if ( secondTokenBalance > secTokenBalances) {
             return [false, tu("creat_valid")]
-        }else if(secondTokenBalance < this.props.dealPairTrxLimit){
+        }else if(secondTokenBalance < this.props.dealPairLindLimit){
             return [false, tu("create_deal_pair_input_tip")]
         }
         if(!/^([1-9][0-9]+|[1-9])$/.test(secondTokenBalance)){
@@ -63,7 +63,7 @@ class CreateTxnPairModal extends React.PureComponent {
         let {onCreate,currentWallet} = this.props;
         let {firstTokenId, secondTokenId, firstTokenBalance, secondTokenBalance,firstTokenPrecision} = this.state;
         let firstTokenBalanceNum =  Math.ceil(parseFloat(firstTokenBalance) * Math.pow(10,firstTokenPrecision))
-        let secondTokenBalanceNum = (parseFloat(secondTokenBalance)) * ONE_TRX;
+        let secondTokenBalanceNum = (parseFloat(secondTokenBalance)) * ONE_LIND;
         onCreate && onCreate(firstTokenId,secondTokenId,firstTokenBalanceNum,secondTokenBalanceNum);
         this.setState({disabled: true});
     };
@@ -78,7 +78,7 @@ class CreateTxnPairModal extends React.PureComponent {
         let {allowExchange} = this.state;
         let secTokenIdArr =  _.filter(allowExchange,{"map_token_id":value});
         let firstTokenBalances =  _.find(currentWallet.tokenBalances,{"map_token_id":value});
-        let secTokenBalances =  _.find(currentWallet.tokenBalances,{"map_token_name":"TRX"});
+        let secTokenBalances =  _.find(currentWallet.tokenBalances,{"map_token_name":"LIND"});
         this.setState({
             firstTokenId: value,
             secondTokenId:"_",
@@ -109,7 +109,7 @@ class CreateTxnPairModal extends React.PureComponent {
         // let allowExchange =   _.filter(currentWallet.allowExchange, function(o){
         //     let block = true
         //     currentWallet.exchanges.forEach(item => {
-        //         if((o.first_token_id == (item.first_token_id == "_"?"TRX":item.first_token_id)) && o.second_token_id == (item.second_token_id == "_"?"TRX":item.second_token_id)){
+        //         if((o.first_token_id == (item.first_token_id == "_"?"LIND":item.first_token_id)) && o.second_token_id == (item.second_token_id == "_"?"LIND":item.second_token_id)){
         //             block = false
         //         }
         //     })
@@ -213,7 +213,7 @@ class CreateTxnPairModal extends React.PureComponent {
                                     //         <option key={index} value={token.second_token_id}>{token.second_token_id}</option>
                                     //     )
                                     // })
-                                    <option value="TRX">TRX</option>
+                                    <option value="LIND">LIND</option>
                                 }
                             </select>
                         </div>
@@ -239,10 +239,10 @@ class CreateTxnPairModal extends React.PureComponent {
                         </div>
                     </div>
                     {
-                        this.state.firstTokenId && this.state.firstTokenBalance && this.state.secondTokenBalance >= this.props.dealPairTrxLimit?
+                        this.state.firstTokenId && this.state.firstTokenBalance && this.state.secondTokenBalance >= this.props.dealPairLindLimit?
                             <div className="row mt-4">
                                 <div className="col-md-12">
-                                    {tu('publish_price')}:<span>{this.state.firstTokenId}/TRX ≈ {(this.state.secondTokenBalance/this.state.firstTokenBalance).toFixed(6)}</span>
+                                    {tu('publish_price')}:<span>{this.state.firstTokenId}/LIND ≈ {(this.state.secondTokenBalance/this.state.firstTokenBalance).toFixed(6)}</span>
                                 </div>
                             </div>
                             :

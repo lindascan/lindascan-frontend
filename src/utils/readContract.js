@@ -31,18 +31,18 @@ export function formatInput(inputValue, inputType) {
   }
 }
 
-export function getTronExplorer() {
-  if (!window.tronWeb) {
+export function getLindaExplorer() {
+  if (!window.lindaWeb) {
     return "";
   }
-  return window.tronWeb.eventServer.host.indexOf("shasta") > 0 ? "https://shasta.tronscan.org/#" : "https://tronscan.org/#";
+  return window.lindaWeb.eventServer.host.indexOf("shasta") > 0 ? "https://shasta.lindascan.org/#" : "https://lindascan.org/#";
 }
 
 export function getCurrentNet() {
-  if (!window.tronWeb) {
+  if (!window.lindaWeb) {
     return "";
   }
-  return window.tronWeb.eventServer.host.indexOf("shasta") > 0 ? "testnet" : "mainnet";
+  return window.lindaWeb.eventServer.host.indexOf("shasta") > 0 ? "testnet" : "mainnet";
 }
 
 export function formatOutput(value, type) {
@@ -53,7 +53,7 @@ export function formatOutput(value, type) {
     })
   }
   if (type == "address") {
-    return window.tronWeb.address.fromHex(value);
+    return window.lindaWeb.address.fromHex(value);
   } else if (type.indexOf("uint") > -1) {
     return Number(value.toString()).toLocaleString();
   } else if (type.indexOf("byte") > -1 || type == "string") {

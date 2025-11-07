@@ -7,7 +7,7 @@ import {
   injectIntl
 } from "react-intl";
 import { toUpper } from "lodash";
-import { TokenLink, TokenTRC20Link, AddressLink } from "../../common/Links";
+import { TokenLink, TokenLRC20Link, AddressLink } from "../../common/Links";
 import { SwitchToken } from "../../common/Switch";
 import { Truncate } from "../../common/text";
 import SmartTable from "../../common/SmartTable.js";
@@ -18,15 +18,15 @@ import {
   CONTRACT_ADDRESS_WIN,
   CONTRACT_ADDRESS_GGC
 } from "../../../constants";
-import { TRXPrice } from "../../common/Price";
+import { LINDPrice } from "../../common/Price";
 import { Table, Menu, Dropdown, Button, Radio } from "antd";
-import { ONE_TRX } from "../../../constants";
+import { ONE_LIND } from "../../../constants";
 import { recoverAddress } from "ethers/utils";
 import { QuestionMark } from "../../common/QuestionMark";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { Client, AccountApi } from "../../../services/api";
 import { API_URL } from "../../../constants";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 
 class FreezeDetail extends Component {
   constructor(props) {
@@ -203,7 +203,7 @@ class FreezeDetail extends Component {
       {
         title:
           upperFirst(intl.formatMessage({ id: "account_freeze_amount" })) +
-          "(TRX)",
+          "(LIND)",
         dataIndex: "frozenBalance",
         key: "frozenBalance",
         align: "left",
@@ -211,7 +211,7 @@ class FreezeDetail extends Component {
         render: (text, record, index) => {
           return (
             <span>
-              <FormattedNumber value={text / ONE_TRX} />
+              <FormattedNumber value={text / ONE_LIND} />
             </span>
           );
         }
@@ -247,7 +247,7 @@ class FreezeDetail extends Component {
         <div className="token_black table_pos">
           {loading && (
             <div className="loading-style">
-              <TronLoader />
+              <LindaLoader />
             </div>
           )}
           {votes && votes.length == 0 && resourceType == "0" ? (

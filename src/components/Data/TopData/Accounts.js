@@ -26,20 +26,20 @@ class Accounts extends React.Component {
     const tpUnit = "TP";
     const txnUnit = "Txns";
     this.state = {
-      trxUnit: "TRX",
+      lindUnit: "LIND",
       usdUnit: "USD",
       tpUnit: "TP",
       txnUnit: "Txns",
       types: {
         1: {
-          title: "data_account_send_Trx",
+          title: "data_account_send_Lind",
           tableTitle: ["data_range", "data_account", "data_number", "data_per"],
           isUSD: true,
           key: "amount",
           data: []
         },
         2: {
-          title: "data_account_send_Trx_items",
+          title: "data_account_send_Lind_items",
           tableTitle: ["data_range", "data_account", "data_items", "data_per"],
           isUSD: false,
           unit: txnUnit,
@@ -47,14 +47,14 @@ class Accounts extends React.Component {
           data: []
         },
         3: {
-          title: "data_account_receive_Trx",
+          title: "data_account_receive_Lind",
           tableTitle: ["data_range", "data_account", "data_number", "data_per"],
           isUSD: true,
           key: "amount",
           data: []
         },
         4: {
-          title: "data_account_receive_Trx_items",
+          title: "data_account_receive_Lind_items",
           tableTitle: ["data_range", "data_account", "data_items", "data_per"],
           isUSD: false,
           unit: txnUnit,
@@ -158,7 +158,7 @@ class Accounts extends React.Component {
   }
 
   renderDataTable(data, title, isUsd, type, typeIndex, unit) {
-    const { trxUnit, usdUnit } = this.state;
+    const { lindUnit, usdUnit } = this.state;
     const { intl, priceUSD } = this.props;
     const titles = title;
     let lastData = this.setTotal(data, type);
@@ -221,7 +221,7 @@ class Accounts extends React.Component {
                 value={record[type] || 0}
                 maximumFractionDigits={isUsd ? 6 : 0}
               ></FormattedNumber>{" "}
-              {isUsd && trxUnit}
+              {isUsd && lindUnit}
               {unit}
               <br />
               {isUsd && (

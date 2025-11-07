@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { tu } from '../../utils/i18n';
 import { Modal, Form, Input } from 'antd';
 import PropTypes from 'prop-types';
-import { CURRENCYTYPE, FEELIMIT, ONE_TRX, TRXWITHDRAWMIN, TRCWITHDRAWMIN } from './../../constants';
+import { CURRENCYTYPE, FEELIMIT, ONE_LIND, LINDWITHDRAWMIN, TRCWITHDRAWMIN } from './../../constants';
 import { injectIntl } from 'react-intl';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { mul, division, add } from './../../utils/calculation';
@@ -27,7 +27,7 @@ class SignModal extends Component {
             isShowModal: true,
             feeError: '',
             ENERGYMIN:10000,
-            TRXBALANCEMIN:11,
+            LINDBALANCEMIN:11,
         };
     }
 
@@ -35,15 +35,15 @@ class SignModal extends Component {
      * show result
      */
     openModal = data => {
-        const { option: { energyRemaining, trxBalanceRemaining }} = this.props;
-        let { ENERGYMIN, TRXBALANCEMIN }  = this.state;
+        const { option: { energyRemaining, lindBalanceRemaining }} = this.props;
+        let { ENERGYMIN, LINDBALANCEMIN }  = this.state;
         const isSuccess = !!data;
         this.setState({
             isShowModal: false,
             modal: (
                 <SweetAlert
                     type={isSuccess ? 'success' : 'error'}
-                    confirmBtnText={tu('trc20_confirm')}
+                    confirmBtnText={tu('lrc20_confirm')}
                     confirmBtnBsStyle="danger"
                     title={isSuccess ? tu('sign_success') : tu('sign_error')}
                     onConfirm={this.hideModal}
@@ -53,7 +53,7 @@ class SignModal extends Component {
                         <div className="mt-3 mb-2 text-left" style={{ color: '#666' }}>
                             {
 
-                                !isSuccess && energyRemaining < ENERGYMIN && trxBalanceRemaining < TRXBALANCEMIN && <span  className="text-center d-block" style={{color: 'black'}}>{tu('notrx_noenergy')}</span>
+                                !isSuccess && energyRemaining < ENERGYMIN && lindBalanceRemaining < LINDBALANCEMIN && <span  className="text-center d-block" style={{color: 'black'}}>{tu('nolind_noenergy')}</span>
                             }
                         </div>
                     </div>
@@ -89,19 +89,19 @@ class SignModal extends Component {
         validateFields(async(err, values) => {
             if (!err && !errorMess && isSubmit) {
                 try {
-                    const fee = mul(withdrawFee, ONE_TRX,FEELIMIT);
+                    const fee = mul(withdrawFee, ONE_LIND,FEELIMIT);
                     const num = mul(numValue,  Math.pow(10, Number(precision)));
                     console.log(fee,num)
                     let data;
-                    // trc10
-                    if (CURRENCYTYPE.TRX10 === type) {
-                        data = await sunWeb.withdrawTrc10(id, num, fee, FEELIMIT);
-                    } else if (CURRENCYTYPE.TRX20 === type) {
-                        // trc20
-                        data = await sunWeb.withdrawTrc20(num, fee, FEELIMIT, address);
-                    } else if (CURRENCYTYPE.TRX === type) {
-                        // trx
-                        data = await sunWeb.withdrawTrx(num, fee, FEELIMIT);
+                    // lrc10
+                    if (CURRENCYTYPE.LRC10 === type) {
+                        data = await sunWeb.withdrawLrc10(id, num, fee, FEELIMIT);
+                    } else if (CURRENCYTYPE.LRC20 === type) {
+                        // lrc20
+                        data = await sunWeb.withdrawLrc20(num, fee, FEELIMIT, address);
+                    } else if (CURRENCYTYPE.LIND === type) {
+                        // lind
+                        data = await sunWeb.withdrawLind(num, fee, FEELIMIT);
                     }
                     this.openModal(data);
                     this.setState({ isDisabled: false });
@@ -140,7 +140,7 @@ class SignModal extends Component {
             }
 
             // min value
-            const minAmount = type === CURRENCYTYPE.TRX ? TRXWITHDRAWMIN : division(TRCWITHDRAWMIN, Math.pow(10, Number(precision)));
+            const minAmount = type === CURRENCYTYPE.LIND ? LINDWITHDRAWMIN : division(TRCWITHDRAWMIN, Math.pow(10, Number(precision)));
             if (Number(numValue) < minAmount) {
                 errorMess = `${intl.formatMessage({id: 'pledge_num_min_error'})}${minAmount}${currency}`;
             }
@@ -165,8 +165,8 @@ class SignModal extends Component {
         const { numValue } = this.state;
         
         const num = Number(numValue);
-        // trc10
-        if (CURRENCYTYPE.TRX === type) {
+        // lrc10
+        if (CURRENCYTYPE.LIND === type) {
             if (balance < add(num, withdrawFee)) {
                 this.setState({
                     feeError: `${intl.formatMessage({id: 'lack_of_balance'})}`
@@ -229,7 +229,7 @@ class SignModal extends Component {
             <p className="mt-5">
                {
                 withdrawFee === 0 ?null:
-                <span>{tu('sign_text')}{withdrawFee} TRX</span>
+                <span>{tu('sign_text')}{withdrawFee} LIND</span>
                }
             </p>
         );

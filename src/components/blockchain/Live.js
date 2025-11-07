@@ -3,15 +3,15 @@ import React from "react";
 import {connect} from "react-redux";
 import {channel} from "../../services/api";
 import {FormattedNumber} from "react-intl";
-import {ONE_TRX} from "../../constants";
-import {TronLoader} from "../common/loaders";
+import {ONE_LIND} from "../../constants";
+import {LindaLoader} from "../common/loaders";
 import {AddressLink, TokenLink} from "../common/Links";
 import {tu, t} from "../../utils/i18n";
 import {Checkbox, Row, Col} from 'antd';
 
 const MESSAGE_LIMIT = 30;
 
-function Trxrow({valdata, icon, children, ...props}) {
+function Lindrow({valdata, icon, children, ...props}) {
 
   return (
       <li className="list-group-item p-1">
@@ -84,10 +84,10 @@ class Live extends React.Component {
 
   listen = () => {
     // this.listener = channel("/blockchain");
-    // this.listener.on("transfer", trx => {
+    // this.listener.on("transfer", lind => {
     //   this.addEvent({
     //     type: "transfer",
-    //     ...trx,
+    //     ...lind,
     //   });
     // });
     // this.listener.on("vote", event => {
@@ -134,7 +134,7 @@ class Live extends React.Component {
     switch (event.type) {
       case "transfer":
         return (
-            <Trxrow key={event.id} icon="fa-exchange-alt">
+            <Lindrow key={event.id} icon="fa-exchange-alt">
               <div className="row">
                 <div className="col-xs-10 col-sm-5">
                   <h5 className="card-title text-left">
@@ -152,11 +152,11 @@ class Live extends React.Component {
                 <div className="col-xs-10 col-sm-5">
                   <div>{tu("asset")}{': '}
                     {
-                      event.tokenName === 'TRX' ?
+                      event.tokenName === 'LIND' ?
                           <b><FormattedNumber
                               maximumFractionDigits={7}
                               minimunFractionDigits={7}
-                              value={event.amount / ONE_TRX}/></b> :
+                              value={event.amount / ONE_LIND}/></b> :
                           <b><FormattedNumber
                               maximumFractionDigits={7}
                               minimunFractionDigits={7}
@@ -171,13 +171,13 @@ class Live extends React.Component {
                   </div>
                 </div>
               </div>
-            </Trxrow>
+            </Lindrow>
         );
 
       case "vote":
         return (
 
-            <Trxrow key={event.id} icon="fa-bullhorn">
+            <Lindrow key={event.id} icon="fa-bullhorn">
               <div className="row">
                 <div className="col-xs-8 col-sm-5">
                   <h5 className="card-title text-left">
@@ -203,13 +203,13 @@ class Live extends React.Component {
                                                                         truncate={false}/></span>
                 </div>
               </div>
-            </Trxrow>
+            </Lindrow>
         );
 
       case "asset-participate":
         return (
 
-            <Trxrow key={event.id} icon="fa-arrow-right">
+            <Lindrow key={event.id} icon="fa-arrow-right">
               <div className="row">
                 <div className="col-xs-8 col-sm-5">
                   <h5 className="card-title text-left">
@@ -233,12 +233,12 @@ class Live extends React.Component {
                   {tu("bought")}{': '}{event.amount} {event.name}
                 </div>
               </div>
-            </Trxrow>
+            </Lindrow>
         );
 
       case "asset-create":
         return (
-            <Trxrow key={event.id} icon="fa-plus-circle">
+            <Lindrow key={event.id} icon="fa-plus-circle">
               <div className="row">
                 <div className="col-xs-8 col-sm-5">
                   <h5 className="card-title text-left">
@@ -257,12 +257,12 @@ class Live extends React.Component {
                     name={event.name}/>
                 </div>
               </div>
-            </Trxrow>
+            </Lindrow>
         );
 
       case "witness-create":
         return (
-            <Trxrow key={event.id} icon="fa-user">
+            <Lindrow key={event.id} icon="fa-user">
               <div className="row">
                 <div className="col-xs-8 col-sm-5">
                   <h5 className="card-title text-left">
@@ -278,7 +278,7 @@ class Live extends React.Component {
                                truncate={false}/>{' '}{t("applied_for_super_representative")}
                 </div>
               </div>
-            </Trxrow>
+            </Lindrow>
         );
     }
 
@@ -330,9 +330,9 @@ class Live extends React.Component {
               {
                 events.length === 0 ?
                     <div className="card">
-                      <TronLoader>
+                      <LindaLoader>
                         {tu("waiting_for_transactions")}
-                      </TronLoader>
+                      </LindaLoader>
                     </div> :
                     <div className="card">
                       <ul className="list-group list-group-flush">

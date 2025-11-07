@@ -1,6 +1,6 @@
 import React from "react";
 import {FormattedDate, FormattedNumber, FormattedRelative, FormattedTime, injectIntl} from "react-intl";
-import {ONE_TRX} from "../../../constants";
+import {ONE_LIND} from "../../../constants";
 import {tu} from "../../../utils/i18n";
 import {AddressLink, ExternalLink} from "../../common/Links";
 import {withTimers} from "../../../utils/timing";

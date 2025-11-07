@@ -16,7 +16,7 @@ import {
 import { AddressLink, BlockNumberLink } from "../../common/Links";
 import { CopyText } from "../../common/Copy";
 import { QuestionMark } from "../../common/QuestionMark";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import Transactions from "../../common/Transactions";
 import { Truncate } from "../../common/text";
 import Transfers from "../../common/Transfers";
@@ -40,14 +40,14 @@ class Block extends React.Component {
           icon: "fa fa-exchange-alt",
           path: "",
           label: <span>{tu("transactions")}</span>,
-          cmp: () => <TronLoader />
+          cmp: () => <LindaLoader />
         },
         transfers: {
           id: "transfers",
           icon: "fa fa-handshake",
           path: "/transfers",
           label: <span>{tu("transfers")}</span>,
-          cmp: () => <TronLoader />
+          cmp: () => <LindaLoader />
         }
       },
       confirmedNum: 0
@@ -120,7 +120,7 @@ class Block extends React.Component {
     this.setState({
       loading: false,
       block,
-      totalTransactions: block.nrOfTrx,
+      totalTransactions: block.nrOfLind,
       tabs: {
         transactions: {
           id: "transactions",
@@ -164,9 +164,9 @@ class Block extends React.Component {
       <main className="container header-overlap">
         {loading ? (
           <div className="card">
-            <TronLoader>
+            <LindaLoader>
               {tu("loading_block")} {block.number}
-            </TronLoader>
+            </LindaLoader>
           </div>
         ) : (
           <div className="row">

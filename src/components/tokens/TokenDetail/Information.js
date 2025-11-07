@@ -3,7 +3,7 @@ import { tu, t } from "../../../utils/i18n";
 import { FormattedDate, FormattedNumber, FormattedTime } from "react-intl";
 import { AddressLink, ExternalLink, HrefLink } from "../../common/Links";
 import { SocialMedia } from "../../common/SocialMedia";
-import { TRXPrice } from "../../common/Price";
+import { LINDPrice } from "../../common/Price";
 import { Link } from "react-router-dom";
 import { toLower } from "lodash";
 import { cloneDeep } from "lodash";
@@ -62,13 +62,13 @@ export function Information({
            ? token.totalSupply / Math.pow(10, token.precision)
            : token.totalSupply;
          let totalSupplyUsd = token["market_info"]
-           ? (token["market_info"].priceInTrx * totalSupply * priceUSD).toFixed(
+           ? (token["market_info"].priceInLind * totalSupply * priceUSD).toFixed(
                0
              )
            : 0;
          let currentTotalSupplyUsd = token["market_info"]
            ? (
-               token["market_info"].priceInTrx *
+               token["market_info"].priceInLind *
                currentTotal *
                priceUSD
              ).toFixed(0)
@@ -127,12 +127,12 @@ export function Information({
                <div className="d-flex">
                  {token["market_info"] ? (
                    <div>
-                     {token["market_info"].sShortName == "TRX" ? (
+                     {token["market_info"].sShortName == "LIND" ? (
                        <div className="d-flex price-info">
                          {token.priceToUsd.toFixed(6)} USD&nbsp;
-                         <span className="token-price-trx ">
+                         <span className="token-price-lind ">
                            {" "}
-                           ≈ {token["market_info"].priceInTrx}{" "}
+                           ≈ {token["market_info"].priceInLind}{" "}
                            {token["market_info"].sShortName}
                          </span>
                          <span
@@ -158,7 +158,7 @@ export function Information({
                            )}
                          </span>
                          <Link
-                           to={`/exchange/trc20?id=${token["market_info"].pairId}`}
+                           to={`/exchange/lrc20?id=${token["market_info"].pairId}`}
                            target="_blank"
                            className="btn btn-danger btn-sm ml-3"
                            style={{ height: "1.2rem", lineHeight: "0.6rem",textTransform:"capitalize" }}
@@ -224,11 +224,11 @@ export function Information({
              content: <div></div>
            },
            {
-             name: "trc20_token_id",
+             name: "lrc20_token_id",
              content: <span>{token.id}</span>
            },
            {
-             name: "TRC20_decimals",
+             name: "LRC20_decimals",
              content: (
                <span>
                  {token.precision == 0 || token.precision
@@ -341,7 +341,7 @@ export function Information({
              content: <span>{token.id}</span>
            },
            {
-             name: "TRC20_decimals",
+             name: "LRC20_decimals",
              content: (
                <span>
                  {token.precision == 0 || token.precision

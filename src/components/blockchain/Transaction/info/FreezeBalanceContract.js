@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 import { tu } from "../../../../utils/i18n";
 import Field from "../../../tools/TransactionViewer/Field";
 import { AddressLink } from "../../../common/Links";
-import { TRXPrice } from "../../../common/Price";
-import { ONE_TRX } from "../../../../constants";
+import { LINDPrice } from "../../../common/Price";
+import { ONE_LIND } from "../../../../constants";
 import { TransationTitle } from "./common/Title";
 import BandwidthUsage from "./common/BandwidthUsage";
 import SignList from "./common/SignList";
@@ -106,13 +106,13 @@ class FreezeBalanceContract extends React.Component {
               </Field>
 
               <Field label="transaction_freeze_num">
-                {contract["frozen_balance"] / ONE_TRX} TRX
+                {contract["frozen_balance"] / ONE_LIND} LIND
               </Field>
               <Field label="frozen_days">
                 {contract["frozen_duration"] || 0} {tu("day")}{activeLanguage == 'en' && contract["frozen_duration"]>1 && 's'}
               </Field>
               <Field label="transaction_get_resourse">
-                {tu("tron_power")} &{" "}
+                {tu("linda_power")} &{" "}
                 {contract["resource"] ? tu(`energy`) : tu(`bandwidth`)}
               </Field>
               {JSON.stringify(contract.cost) != "{}" && (

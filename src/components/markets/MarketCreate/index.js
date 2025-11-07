@@ -240,8 +240,8 @@ export class MarketCreate extends Component {
             publicSaleTargetAmount, publicSaleStartAndEndDate, publicSaleDisPlan, totalAmountOfFundsRaised,
             initialCirculatingSupply, teamOverview, howDidYourTeamMeet, teamMembersBased, teamMemberFullTime,
             teamLockUpPlan,technicalOverview, topGithubRep, socialCommunityOverview, competitorOverview,
-            DappRadarOrDappReviewRanking, productUsage, roadmap, marketingPlan, keyBusDevAndPart, linkToAllTronWallet,
-            relationshipWithAnyTronSR, whichExchangesTradedOn, yourAvg24HVolume, theTop3ReasonsYouShouldBeListed,
+            DappRadarOrDappReviewRanking, productUsage, roadmap, marketingPlan, keyBusDevAndPart, linkToAllLindaWallet,
+            relationshipWithAnyLindaSR, whichExchangesTradedOn, yourAvg24HVolume, theTop3ReasonsYouShouldBeListed,
             citeYourSources, top3Things, youSupportYourCoinProjectTime, productDemoLink, allYourProductsLink,
             circulatingSupply, top5HoldersOfYourToken } = params;
 
@@ -298,8 +298,8 @@ export class MarketCreate extends Component {
 
         const otherInformation = {
             keyBusDevAndPart,
-            linkToAllTronWallet,
-            relationshipWithAnyTronSR,
+            linkToAllLindaWallet,
+            relationshipWithAnyLindaSR,
             whichExchangesTradedOn,
             yourAvg24HVolume,
             theTop3ReasonsYouShouldBeListed,

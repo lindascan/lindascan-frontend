@@ -3,7 +3,7 @@ import {t, tu} from "../../../../utils/i18n";
 import {FormattedNumber} from "react-intl";
 import 'moment/min/locales';
 import NumericInput from '../../../common/NumericInput';
-import {TRXPrice} from "../../../common/Price";
+import {LINDPrice} from "../../../common/Price";
 import {
   Form, Row, Col, DatePicker, Icon, Switch
 } from 'antd';
@@ -13,49 +13,49 @@ export class PriceInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token_trx_order: true,
+      token_lind_order: true,
       ...this.props.state
     };
   }
 
   render() {
     const { getFieldDecorator, getFieldsValue } = this.props.form;
-    const { token_trx_order } = this.state;
-    const { isTrc10, isUpdate } =  this.props.state;
+    const { token_lind_order } = this.state;
+    const { isLrc10, isUpdate } =  this.props.state;
 
     let first = {}
     let last = {}
     let abbrAmount = 0
     const {token_abbr, 
-      trx_amount, 
+      lind_amount, 
       token_amount, 
       freeze_amount,
       participation_type,
-      freeze_type} = getFieldsValue(['token_abbr', 'trx_amount', 'token_amount', 'freeze_amount', 'participation_type', 'freeze_type'])
+      freeze_type} = getFieldsValue(['token_abbr', 'lind_amount', 'token_amount', 'freeze_amount', 'participation_type', 'freeze_type'])
 
-    if(token_trx_order){
+    if(token_lind_order){
       first = {
         abbr: token_abbr,
         name: 'token_amount'
       }
       last = {
-        abbr: 'TRX',
-        name: 'trx_amount'
+        abbr: 'LIND',
+        name: 'lind_amount'
       }
-      abbrAmount = parseInt((trx_amount / token_amount)*100) / 100
+      abbrAmount = parseInt((lind_amount / token_amount)*100) / 100
     }else{
       first = {
-        abbr: 'TRX',
-        name: 'trx_amount'
+        abbr: 'LIND',
+        name: 'lind_amount'
       }
       last = {
         abbr: token_abbr,
         name: 'token_amount'
       }
-      abbrAmount = parseInt((token_amount / trx_amount)*100) / 100
+      abbrAmount = parseInt((token_amount / lind_amount)*100) / 100
     }
     return (
-      <div className={ isTrc10? 'd-block': 'd-none'}>
+      <div className={ isLrc10? 'd-block': 'd-none'}>
               <h4 className="mb-3">{tu('price_info')}</h4>
               <hr/>
               <Row gutter={24} type="flex" justify="space-between" className="px-2">
@@ -65,25 +65,25 @@ export class PriceInfo extends Component {
 
                       <Form.Item  className="d-flex align-items-center">
                         {getFieldDecorator(first.name, {
-                          rules: [{ required: isTrc10, message: tu('enter_the_amount'), whitespace: true}]
+                          rules: [{ required: isLrc10, message: tu('enter_the_amount'), whitespace: true}]
                         })(
                           <NumericInput style={{width: '200px'}} className="mr-2" disabled={isUpdate}/>
                         )}
                         {first.abbr}
                         </Form.Item>
                         
-                      <Icon type="swap" className="mx-2 fix_form ordericon" onClick={() => this.setState({token_trx_order: !token_trx_order})}/>
+                      <Icon type="swap" className="mx-2 fix_form ordericon" onClick={() => this.setState({token_lind_order: !token_lind_order})}/>
 
                       <Form.Item  className="d-flex align-items-center mr-4">
                         {getFieldDecorator(last.name, { 
-                          rules: [{ required: isTrc10, message: tu('enter_the_amount'), whitespace: true}]
+                          rules: [{ required: isLrc10, message: tu('enter_the_amount'), whitespace: true}]
                         })(
                           <NumericInput style={{width: '200px'}} className="mr-2" disabled={isUpdate}/>
                         )}
                         {last.abbr}
                         </Form.Item>
                         <span className={isNaN(abbrAmount)? 'd-none': ''} style={{color: '#9e9e9e'}}>(1 {first.abbr} = {`${abbrAmount} ${last.abbr}`})</span>
-                        <span className="mr-3">TRX{tu('trc20_last_price')}: <TRXPrice amount={1} currency="USD"/></span>
+                        <span className="mr-3">LIND{tu('lrc20_last_price')}: <LINDPrice amount={1} currency="USD"/></span>
                     </div>
                  </Form.Item>
                 </Col>

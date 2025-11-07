@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { tu } from '../../utils/i18n';
 import { Modal, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
-import { CURRENCYTYPE, FEELIMIT, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, ONE_TRX } from './../../constants';
+import { CURRENCYTYPE, FEELIMIT, CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC, ONE_LIND } from './../../constants';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { mul, division } from './../../utils/calculation';
 import rebuildList from "./../../utils/rebuildList";
 import rebuildToken20List from "./../../utils/rebuildToken20List";
 import { NameWithId } from '../common/names';
-import { AddressLink, TokenTRC20Link } from "../common/Links";
-import {TRXPrice} from "../common/Price";
+import { AddressLink, TokenLRC20Link } from "../common/Links";
+import {LINDPrice} from "../common/Price";
 import {FormattedDate, FormattedNumber, FormattedRelative, FormattedTime, injectIntl} from "react-intl";
-import {Client, tronWeb} from "../../services/api";
+import {Client, lindaWeb} from "../../services/api";
 import Utils from '../../utils/contractUtils';
 
 const { Option } = Select;
@@ -63,29 +63,29 @@ class SignDetailsModal extends Component {
         validateFields(async(err, values) => {
             if (!err && !errorMess) {
                 try {
-                    const fee = mul(depositFee, ONE_TRX);
+                    const fee = mul(depositFee, ONE_LIND);
                     const num = mul(numValue, Math.pow(10, Number(precision)));
                     const sideChain = values.sidechain;
                     const list = sideChain && sideChain.split('-');
                     sunWeb.setChainId(list[0]);
                     sunWeb.setSideGatewayAddress(list[1]);
-                    // trc10
-                    if (CURRENCYTYPE.TRX10 === type) {
+                    // lrc10
+                    if (CURRENCYTYPE.LRC10 === type) {
                         // todo wangyan
-                        const txid = await sunWeb.depositTrc10(id, num, fee, FEELIMIT);
+                        const txid = await sunWeb.depositLrc10(id, num, fee, FEELIMIT);
                         this.openModal(txid);
-                    } else if (CURRENCYTYPE.TRX20 === type) {
-                        const approveData = await sunWeb.approveTrc20(num, FEELIMIT, address);
+                    } else if (CURRENCYTYPE.LRC20 === type) {
+                        const approveData = await sunWeb.approveLrc20(num, FEELIMIT, address);
                         if (approveData) {
                             // todo wangyan
-                            // trc20
-                            const data = await sunWeb.depositTrc20(num, fee, FEELIMIT, address);
+                            // lrc20
+                            const data = await sunWeb.depositLrc20(num, fee, FEELIMIT, address);
                             this.openModal(data);
                         } else {
                             this.openModal();
                         }
-                    } else if (CURRENCYTYPE.TRX === type) {
-                        const data = await sunWeb.depositTrx(num, fee, FEELIMIT);
+                    } else if (CURRENCYTYPE.LIND === type) {
+                        const data = await sunWeb.depositLind(num, fee, FEELIMIT);
                         this.openModal(data);
                     }
                     this.setState({ isDisabled: false });
@@ -115,15 +115,15 @@ class SignDetailsModal extends Component {
     };
 
     /**
-     * get trc20 sideChains
+     * get lrc20 sideChains
      */
     getSideChains = () => {
-        const { option: { trx20MappingAddress } } = this.props;
-        trx20MappingAddress.map(v => {
+        const { option: { lrc20MappingAddress } } = this.props;
+        lrc20MappingAddress.map(v => {
             v.name = v.chainName;
             v.sidechain_gateway = v.sidechainGateway;
         });
-        return trx20MappingAddress;
+        return lrc20MappingAddress;
     }
 
     getParameterValue = async () =>{
@@ -134,7 +134,7 @@ class SignDetailsModal extends Component {
         let parameter = details.contractData;
         let function_selector = details.functionSelector;
         let contract_address = details.contractData.contract_address;
-        let smartcontract = await account.tronWeb.trx.getContract(contract_address);
+        let smartcontract = await account.lindaWeb.lind.getContract(contract_address);
         let abi = smartcontract.abi.entrys;
         const args = Utils.decodeParams(parameterValue.data.substring(8),abi,function_selector);
         this.setState({
@@ -150,7 +150,7 @@ class SignDetailsModal extends Component {
         const defaultImg = require("../../images/logo_default.png");
         let TokenIDList = [];
         let TokencontractList = [];
-        let tokenIdData,trc20tokenBalances;
+        let tokenIdData,lrc20tokenBalances;
         TokenIDList.push(details.contractData)
         if(TokenIDList){
             tokenIdData  = rebuildList(TokenIDList,'asset_name','amount')[0]
@@ -164,7 +164,7 @@ class SignDetailsModal extends Component {
                     "balance":args[1].value
                 }
             )
-           trc20tokenBalances  = rebuildToken20List(TokencontractList, 'contract_address', 'balance')[0];
+           lrc20tokenBalances  = rebuildToken20List(TokencontractList, 'contract_address', 'balance')[0];
         }
 
 
@@ -181,7 +181,7 @@ class SignDetailsModal extends Component {
                 </div>
                 <div className="form-group">
                     <label>{tu("amount")}</label>
-                    <span><TRXPrice amount={details.contractData.amount/ ONE_TRX}/></span>
+                    <span><LINDPrice amount={details.contractData.amount/ ONE_LIND}/></span>
                 </div>
             </Fragment>
         );
@@ -229,13 +229,13 @@ class SignDetailsModal extends Component {
                         </div>
                         <div className="form-group">
                             <label>{tu("amount")}</label>
-                            <span>{trc20tokenBalances.map_amount}</span>
+                            <span>{lrc20tokenBalances.map_amount}</span>
                         </div>
                         <div className="form-group">
                             <label>{tu("token")}</label>
                             <span>
                                 <div className="flex1">
-                                        {trc20tokenBalances["contract_address"] == CONTRACT_ADDRESS_USDT || trc20tokenBalances["contract_address"] == CONTRACT_ADDRESS_WIN || trc20tokenBalances["contract_address"] == CONTRACT_ADDRESS_GGC ? (
+                                        {lrc20tokenBalances["contract_address"] == CONTRACT_ADDRESS_USDT || lrc20tokenBalances["contract_address"] == CONTRACT_ADDRESS_WIN || lrc20tokenBalances["contract_address"] == CONTRACT_ADDRESS_GGC ? (
                                             <b
                                                 className="token-img-top"
                                                 style={{ marginRight: 5 }}
@@ -244,12 +244,12 @@ class SignDetailsModal extends Component {
                                                     width={20}
                                                     height={20}
                                                     src={
-                                                        trc20tokenBalances[
+                                                        lrc20tokenBalances[
                                                             "map_amount_logo"
                                                             ]
                                                     }
                                                     alt={
-                                                        trc20tokenBalances[
+                                                        lrc20tokenBalances[
                                                             "map_token_name"
                                                             ]
                                                     }
@@ -271,12 +271,12 @@ class SignDetailsModal extends Component {
                                                 width={20}
                                                 height={20}
                                                 src={
-                                                    trc20tokenBalances[
+                                                    lrc20tokenBalances[
                                                         "map_amount_logo"
                                                         ]
                                                 }
                                                 alt={
-                                                    trc20tokenBalances["map_token_name"]
+                                                    lrc20tokenBalances["map_token_name"]
                                                 }
                                                 style={{ marginRight: 5 }}
                                                 onError={e => {
@@ -285,19 +285,19 @@ class SignDetailsModal extends Component {
                                                 }}
                                             />
                                         )}
-                                    <TokenTRC20Link
+                                    <TokenLRC20Link
                                         name={
-                                            trc20tokenBalances["map_token_name"]
+                                            lrc20tokenBalances["map_token_name"]
                                         }
                                         address={
-                                            trc20tokenBalances[
+                                            lrc20tokenBalances[
                                                 "contract_address"
                                                 ]
                                         }
                                         namePlus={
-                                            trc20tokenBalances["map_token_name"] +
+                                            lrc20tokenBalances["map_token_name"] +
                                             " (" +
-                                            trc20tokenBalances[
+                                            lrc20tokenBalances[
                                                 "map_token_name_abbr"
                                                 ] +
                                             ")"

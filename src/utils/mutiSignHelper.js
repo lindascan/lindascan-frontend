@@ -1,4 +1,4 @@
-import { byteArray2hexStr } from "@tronscan/client/src/utils/bytes";
+import { byteArray2hexStr } from "@lindascan/client/src/utils/bytes";
 export function getOperationsHexStrByContractIdArr(contractIdArr) {
     contractIdArr.sort(function(a,b){return a-b});
     let list = (contractIdArr.slice(0).slice(0));
@@ -49,20 +49,20 @@ export function getContractIdByHex(strHex) {
 function getAllContractTypes() {
     return {
         0: 'Account Create',
-        1: 'TRX Transfer',
-        2: 'TRC10 Transfer',
+        1: 'LIND Transfer',
+        2: 'LRC10 Transfer',
         // 3: 'VoteAssetContract',
         4: 'Vote',
         5: 'Representatives Create',
-        6: 'TRC10 Issue',
+        6: 'LRC10 Issue',
         8: 'Representatives Info Update',
-        9: 'TRC10 Issue Participate',
+        9: 'LRC10 Issue Participate',
         10: 'Account Name Update',
-        11: 'TRX Freeze',
-        12: 'TRX Unfreeze',
+        11: 'LIND Freeze',
+        12: 'LIND Unfreeze',
         13: 'Reward Withdraw',
-        14: 'TRC10 Unfreeze',
-        15: 'TRC10 Parameters Update',
+        14: 'LRC10 Unfreeze',
+        15: 'LRC10 Parameters Update',
         16: 'Proposal Create',
         17: 'Proposal Approve',
         18: 'Proposal Cancel',
@@ -72,7 +72,7 @@ function getAllContractTypes() {
         // BuyStorageBytesContract = 22,
         // SellStorageContract = 23,
         30: 'Smart Contract Create',
-        31: 'Smart Contract Trigger (TRC20 Transfer)',
+        31: 'Smart Contract Trigger (LRC20 Transfer)',
         // 32: 'GetContract',
         33: 'Contract Setting Update',
         41: 'Bancor Exchange Create',
@@ -90,9 +90,9 @@ export function getContractTypesByGroup() {
         {
             key: 'Balance',
             value: [
-                { name: 'TransferContract', value: 1,alias:'TRX Transfer'},
-                { name: 'FreezeBalanceContract', value: 11,alias:'TRX Freeze' },
-                { name: 'UnfreezeBalanceContract', value: 12,alias:'TRX Unfreeze' }
+                { name: 'TransferContract', value: 1,alias:'LIND Transfer'},
+                { name: 'FreezeBalanceContract', value: 11,alias:'LIND Freeze' },
+                { name: 'UnfreezeBalanceContract', value: 12,alias:'LIND Unfreeze' }
             ]
         },
         {
@@ -104,19 +104,19 @@ export function getContractTypesByGroup() {
             ]
         },
         {
-            key: 'TRC10',
+            key: 'LRC10',
             value: [
-                { name: 'TransferAssetContract', value: 2,alias:'TRC10 Transfer' },
-                { name: 'ParticipateAssetIssueContract', value: 9,alias:'TRC10 Issue Participate' },
-                { name: 'AssetIssueContract', value: 6 ,alias:'TRC10 Issue'},
-                { name: 'UnfreezeAssetContract', value: 14,alias:'TRC10 Unfreeze' },
-                { name: 'UpdateAssetContract', value: 15,alias:'TRC10 Parameters Update' }
+                { name: 'TransferAssetContract', value: 2,alias:'LRC10 Transfer' },
+                { name: 'ParticipateAssetIssueContract', value: 9,alias:'LRC10 Issue Participate' },
+                { name: 'AssetIssueContract', value: 6 ,alias:'LRC10 Issue'},
+                { name: 'UnfreezeAssetContract', value: 14,alias:'LRC10 Unfreeze' },
+                { name: 'UpdateAssetContract', value: 15,alias:'LRC10 Parameters Update' }
             ]
         },
         {
             key: 'SmartContract',
             value: [
-                { name: 'TriggerSmartContract', value: 31,alias:'Smart Contract Trigger (TRC20 Transfer)' },
+                { name: 'TriggerSmartContract', value: 31,alias:'Smart Contract Trigger (LRC20 Transfer)' },
                 { name: 'CreateSmartContract', value: 30,alias:'Smart Contract Create' },
                 { name: 'UpdateSettingContract', value: 33,alias:'Contract Setting Update' },
                 { name: 'UpdateEnergyLimitContract', value: 45 ,alias:'Contract Energy Limit Update'},

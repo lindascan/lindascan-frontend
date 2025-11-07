@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { tu } from '../../utils/i18n';
 import { Modal, Form, Input, Select } from 'antd';
 import PropTypes from 'prop-types';
-import { CURRENCYTYPE, FEELIMIT, TRXDEPOSITMIN, TRCDEPOSITMIN, ONE_TRX } from './../../constants';
+import { CURRENCYTYPE, FEELIMIT, LINDDEPOSITMIN, TRCDEPOSITMIN, ONE_LIND } from './../../constants';
 import { injectIntl } from 'react-intl';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { mul, division } from './../../utils/calculation';
@@ -39,7 +39,7 @@ class PledgeModal extends Component {
             modal: (
                 <SweetAlert
                     type={isSuccess ? 'success' : 'error'}
-                    confirmBtnText={tu('trc20_confirm')}
+                    confirmBtnText={tu('lrc20_confirm')}
                     confirmBtnBsStyle="danger"
                     title={isSuccess ? tu('pledge_success') : tu('pledge_error')}
                     onConfirm={this.hideModal}
@@ -77,29 +77,29 @@ class PledgeModal extends Component {
         validateFields(async(err, values) => {
             if (!err && !errorMess) {
                 try {
-                    const fee = mul(depositFee, ONE_TRX);
+                    const fee = mul(depositFee, ONE_LIND);
                     const num = mul(numValue, Math.pow(10, Number(precision)));
                     const sideChain = values.sidechain;
                     const list = sideChain && sideChain.split('-');
                     sunWeb.setChainId(list[0]);
                     sunWeb.setSideGatewayAddress(list[1]);
-                    // trc10
-                    if (CURRENCYTYPE.TRX10 === type) {
+                    // lrc10
+                    if (CURRENCYTYPE.LRC10 === type) {
                         // todo wangyan
-                        const txid = await sunWeb.depositTrc10(id, num, fee, FEELIMIT);
+                        const txid = await sunWeb.depositLrc10(id, num, fee, FEELIMIT);
                         this.openModal(txid);
-                    } else if (CURRENCYTYPE.TRX20 === type) {
-                        const approveData = await sunWeb.approveTrc20(num, FEELIMIT, address);
+                    } else if (CURRENCYTYPE.LRC20 === type) {
+                        const approveData = await sunWeb.approveLrc20(num, FEELIMIT, address);
                         if (approveData) {
                             // todo wangyan
-                            // trc20
-                            const data = await sunWeb.depositTrc20(num, fee, FEELIMIT, address);
+                            // lrc20
+                            const data = await sunWeb.depositLrc20(num, fee, FEELIMIT, address);
                             this.openModal(data);
                         } else {
                             this.openModal();
                         }
-                    } else if (CURRENCYTYPE.TRX === type) {
-                        const data = await sunWeb.depositTrx(num, fee, FEELIMIT);
+                    } else if (CURRENCYTYPE.LIND === type) {
+                        const data = await sunWeb.depositLind(num, fee, FEELIMIT);
                         this.openModal(data);
                     }
                     this.setState({ isDisabled: false });
@@ -121,15 +121,15 @@ class PledgeModal extends Component {
     };
 
     /**
-     * get trc20 sideChains
+     * get lrc20 sideChains
      */
     getSideChains = () => {
-        const { option: { trx20MappingAddress } } = this.props;
-        trx20MappingAddress.map(v => {
+        const { option: { lrc20MappingAddress } } = this.props;
+        lrc20MappingAddress.map(v => {
             v.name = v.chainName;
             v.sidechain_gateway = v.sidechainGateway;
         });
-        return trx20MappingAddress;
+        return lrc20MappingAddress;
     }
 
     /**
@@ -149,7 +149,7 @@ class PledgeModal extends Component {
             }
 
             // min value
-            const minAmount = type === CURRENCYTYPE.TRX ? TRXDEPOSITMIN : division(TRCDEPOSITMIN, Math.pow(10, Number(precision)));
+            const minAmount = type === CURRENCYTYPE.LIND ? LINDDEPOSITMIN : division(TRCDEPOSITMIN, Math.pow(10, Number(precision)));
             if (Number(numValue) < minAmount) {
                 errorMess = `${intl.formatMessage({id: 'pledge_num_min_error'})}${minAmount}${currency}`;
             }
@@ -171,7 +171,7 @@ class PledgeModal extends Component {
         const { option: { currency, balance, type }, sideChains } = this.props;
         const { isDisabled, modal, isShowModal, numValue, errorMess } = this.state;
 
-        const sideChainList = type === CURRENCYTYPE.TRX20 ? this.getSideChains() : sideChains;
+        const sideChainList = type === CURRENCYTYPE.LRC20 ? this.getSideChains() : sideChains;
         const isHasSideChainsData = sideChainList && sideChainList.length > 0;
 
         // currencyItem
@@ -219,7 +219,7 @@ class PledgeModal extends Component {
 
         // pledgeTextItem
         // const pledgeTextItem = (
-        //     <p className="mt-2">{tu('pledge_text')}{depositFee}trx</p>
+        //     <p className="mt-2">{tu('pledge_text')}{depositFee}lind</p>
         // );
 
         return (

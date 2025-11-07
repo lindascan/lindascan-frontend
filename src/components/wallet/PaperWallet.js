@@ -4,7 +4,7 @@ import React from "react";
 
 export default function PaperWallet({address, privateKey, addressQRCode, privateKeyQRCode}) {
 
-  const tronLogo = require("../../images/tron-banner-1.png");
+  const lindaLogo = require("../../images/linda-banner-1.png");
   // var mnemonic = bip39.entropyToMnemonic(privateKey);
 
 
@@ -16,7 +16,7 @@ export default function PaperWallet({address, privateKey, addressQRCode, private
             <img src={addressQRCode} style={styles.qr}/>
           </div>
           <div className="col">
-            <img src={tronLogo} style={styles.logo}/>
+            <img src={lindaLogo} style={styles.logo}/>
           </div>
           <div className="col text-center">
             <div className="font-weight-bold">Private Key</div>

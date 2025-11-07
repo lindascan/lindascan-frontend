@@ -10,8 +10,8 @@ import ActiveEdit from '../PermissionEdit/active'
 import { isEqual, cloneDeep } from 'lodash'
 import { reloadWallet } from "../../../actions/wallet";
 import { deepCopy } from "ethers/utils";
-import { transactionMultiResultManager } from '../../../utils/tron'
-import { buildAccountPermissionUpdateContract } from '@tronscan/client/src/utils/transactionBuilder'
+import { transactionMultiResultManager } from '../../../utils/linda'
+import { buildAccountPermissionUpdateContract } from '@lindascan/client/src/utils/transactionBuilder'
 import { postMutiSignTransaction } from '../../../services/apiMutiSign'
 import { injectIntl } from "react-intl";
 import { tu } from '../../../utils/i18n'
@@ -33,25 +33,25 @@ import {QuestionMark} from "../../common/QuestionMark";
 export default class MyPermission extends React.Component {
     constructor(props) {
         super(props);
-        const { wallet, tronWeb, account} = this.props;
+        const { wallet, lindaWeb, account} = this.props;
         const { ownerPermission, activePermissions, witnessPermission } = wallet.current;
         if(ownerPermission){
             ownerPermission.type = 0;
             ownerPermission.keys.forEach(item=>{
-                item.address = tronWeb.address.toHex(item.address);
+                item.address = lindaWeb.address.toHex(item.address);
             })
         }
         if(witnessPermission){
             witnessPermission.type = 1;
             witnessPermission.keys.forEach(item=>{
-                item.address = tronWeb.address.toHex(item.address);
+                item.address = lindaWeb.address.toHex(item.address);
             })
         }
         if(activePermissions){
             activePermissions.forEach(item=>{
                 item.type = 2;
                 item.keys.forEach(itemKey=>{
-                    itemKey.address = tronWeb.address.toHex(itemKey.address);
+                    itemKey.address = lindaWeb.address.toHex(itemKey.address);
                 })
             })
         }
@@ -71,7 +71,7 @@ export default class MyPermission extends React.Component {
         }
     }
     async initState(wallet) {
-        const {tronWeb} = this.props;
+        const {lindaWeb} = this.props;
         let { ownerPermission, activePermissions, witnessPermission } = wallet.current;
         if(wallet.current.representative.enabled===false){
             witnessPermission = null;
@@ -79,20 +79,20 @@ export default class MyPermission extends React.Component {
         if(ownerPermission){
             ownerPermission.type = 0;
             ownerPermission.keys.forEach(item=>{
-                item.address = tronWeb.address.toHex(item.address);
+                item.address = lindaWeb.address.toHex(item.address);
             })
         }
         if(witnessPermission){
             witnessPermission.type = 1;
             witnessPermission.keys.forEach(item=>{
-                item.address = tronWeb.address.toHex(item.address);
+                item.address = lindaWeb.address.toHex(item.address);
             })
         }
         if(activePermissions){
             activePermissions.forEach(item=>{
                 item.type = 2;
                 item.keys.forEach(itemKey=>{
-                    itemKey.address = tronWeb.address.toHex(itemKey.address);
+                    itemKey.address = lindaWeb.address.toHex(itemKey.address);
                 })
             })
         }
@@ -137,7 +137,7 @@ export default class MyPermission extends React.Component {
     async saveControlAddress() {
         //
         let isValid = false;
-        const { tronWeb } = this.props;
+        const { lindaWeb } = this.props;
         const curControlAddress = this.state.curControlAddress
         const { wallet, intl } = this.props;
         if (curControlAddress === wallet.current.address) {
@@ -147,7 +147,7 @@ export default class MyPermission extends React.Component {
             })
         } else {
 
-            isValid = tronWeb.isAddress(curControlAddress);
+            isValid = lindaWeb.isAddress(curControlAddress);
             if (!isValid) {
                 this.warningAlert(intl.formatMessage({
                     id: "signature_invalid_Address"
@@ -156,7 +156,7 @@ export default class MyPermission extends React.Component {
             }
             //
             try {
-                const contractInstance = await tronWeb.contract().at(curControlAddress)
+                const contractInstance = await lindaWeb.contract().at(curControlAddress)
                 this.warningAlert(intl.formatMessage({
                     id: "signature_no_set"
                 }))
@@ -176,7 +176,7 @@ export default class MyPermission extends React.Component {
                 return;
             }
             //
-            const res = await tronWeb.trx.getAccount(curControlAddress);
+            const res = await lindaWeb.lind.getAccount(curControlAddress);
             const notInContralAddress = intl.formatMessage({
                 id: "signature_notInContralAddress"
             })
@@ -186,7 +186,7 @@ export default class MyPermission extends React.Component {
                 // 
                 const { keys } = owner_permission;
                 const isInKeys = keys.some(item => {
-                    return tronWeb.address.fromHex(item.address) == wallet.current.address
+                    return lindaWeb.address.fromHex(item.address) == wallet.current.address
                 })
                 // 
                 if (!isInKeys) {
@@ -206,14 +206,14 @@ export default class MyPermission extends React.Component {
                         active_permission.forEach(item => {
                             item.type = 2;
                             item.keys.forEach(keyItem => {
-                                keyItem.address = tronWeb.address.toHex(keyItem.address);
+                                keyItem.address = lindaWeb.address.toHex(keyItem.address);
                             })
                         })
                     }
                     if(witness_permission){
                         witness_permission.type = 1;
                         witness_permission.keys.forEach(keyItem => {
-                            keyItem.address = tronWeb.address.toHex(keyItem.address);
+                            keyItem.address = lindaWeb.address.toHex(keyItem.address);
                         })
                     }
                     this.setState({
@@ -240,11 +240,11 @@ export default class MyPermission extends React.Component {
         })
     }
     changeOwnerPermission(changedOwnerPermission) {
-        const {tronWeb} = this.props;
+        const {lindaWeb} = this.props;
         if(changedOwnerPermission){
             changedOwnerPermission.type = 0;
             changedOwnerPermission.keys.forEach(item=>{
-                item.address = tronWeb.address.toHex(item.address);
+                item.address = lindaWeb.address.toHex(item.address);
             })
         }
         this.setState({
@@ -268,17 +268,17 @@ export default class MyPermission extends React.Component {
         return isEqualOwner && isEqualActive && isEqualWitness;
     }
     async ifContractAddress(address) {
-        const { tronWeb } = this.props;
+        const { lindaWeb } = this.props;
         let isValid = false;
         try {
-            const contractInstance = await tronWeb.contract().at(tronWeb.address.fromHex(address)).catch()
+            const contractInstance = await lindaWeb.contract().at(lindaWeb.address.fromHex(address)).catch()
         } catch (e) {
             isValid = true;
         }
         return isValid;
     }
     async validKeys(keysItem, keysArr) {
-        const { tronWeb, intl } = this.props;
+        const { lindaWeb, intl } = this.props;
         const item = keysItem;
         if (!item.address.trim()) {
             this.warningAlert(intl.formatMessage({
@@ -286,13 +286,13 @@ export default class MyPermission extends React.Component {
             }))
             return false;
         }
-        if (!tronWeb.isAddress(item.address)) {
+        if (!lindaWeb.isAddress(item.address)) {
             this.warningAlert(intl.formatMessage({
                 id: "signature_invalid_Address"
             }))
             return false;
         }
-        if (!await this.ifContractAddress(tronWeb.address.fromHex(item.address))) {
+        if (!await this.ifContractAddress(lindaWeb.address.fromHex(item.address))) {
             this.warningAlert(intl.formatMessage({
                 id: "signature_no_set"
             }))
@@ -312,15 +312,15 @@ export default class MyPermission extends React.Component {
             return false;
         }
         if (item.address.length !== 42) {
-            item.address = tronWeb.address.toHex(item.address);
+            item.address = lindaWeb.address.toHex(item.address);
         }
         return true;
     }
     findIsSameKey(itemKey, arr) {
         let count = 0;
-        const { tronWeb } = this.props;
+        const { lindaWeb } = this.props;
         arr.forEach(item => {
-            if (tronWeb.address.fromHex(item.address) === tronWeb.address.fromHex(itemKey.address)) {
+            if (lindaWeb.address.fromHex(item.address) === lindaWeb.address.fromHex(itemKey.address)) {
                 count++;
             }
         })
@@ -379,17 +379,17 @@ export default class MyPermission extends React.Component {
             this.hideModal();
             this.savePermission()
 
-        }, null, <div className='confirm-content-text'>{tu('signature_set_spend_trx')}<span className='trx'>100TRX</span>{tu('signature_submit_change')}</div>)
+        }, null, <div className='confirm-content-text'>{tu('signature_set_spend_lind')}<span className='lind'>100LIND</span>{tu('signature_submit_change')}</div>)
     }
 
     //点击保存
     async savePermission() {
-        const { reloadWallet, intl, tronWeb } = this.props;
-        // let tronWeb;
+        const { reloadWallet, intl, lindaWeb } = this.props;
+        // let lindaWeb;
         // if(walletType.type === "ACCOUNT_LEDGER"){
-        //     tronWeb = this.props.tronWeb();
+        //     lindaWeb = this.props.lindaWeb();
         // }else{
-        //     tronWeb = this.props.account.tronWeb;
+        //     lindaWeb = this.props.account.lindaWeb;
         // }
         const { changedOwnerPermission, changedActivePermission, changedWihnessPermission, curLoginAddress, curControlAddress } = this.state;
         if(!changedOwnerPermission){
@@ -422,7 +422,7 @@ export default class MyPermission extends React.Component {
         let validAllOwnerKeys = false;
         for (let item of changedOwnerPermission.keys) {
             if (!await this.validKeys(item, changedOwnerPermission.keys)) {
-                // item.address = tronWeb.address.toHex(item.address);
+                // item.address = lindaWeb.address.toHex(item.address);
                 validAllOwnerKeys = false
                 break;
             }
@@ -493,12 +493,12 @@ export default class MyPermission extends React.Component {
         const UnmodifiedOwnerPermission = ownerPermission;
         const UnmodifiedOwnerPermissionKeys = UnmodifiedOwnerPermission.keys;
         
-        if (curControlAddress === curLoginAddress && UnmodifiedOwnerPermissionKeys.length < 2&&UnmodifiedOwnerPermissionKeys[0].address === tronWeb.address.toHex(curLoginAddress)) {
+        if (curControlAddress === curLoginAddress && UnmodifiedOwnerPermissionKeys.length < 2&&UnmodifiedOwnerPermissionKeys[0].address === lindaWeb.address.toHex(curLoginAddress)) {
             //Sign
             
-            const updateTransaction = await tronWeb.transactionBuilder.updateAccountPermissions(tronWeb.address.toHex(curLoginAddress), changedOwnerPermission, changedWihnessPermission, changedActivePermission);
-            const signedTransaction = await tronWeb.trx.sign(updateTransaction);
-            const res = await tronWeb.trx.broadcast(signedTransaction).catch(e => {
+            const updateTransaction = await lindaWeb.transactionBuilder.updateAccountPermissions(lindaWeb.address.toHex(curLoginAddress), changedOwnerPermission, changedWihnessPermission, changedActivePermission);
+            const signedTransaction = await lindaWeb.lind.sign(updateTransaction);
+            const res = await lindaWeb.lind.broadcast(signedTransaction).catch(e => {
                 this.setState({
                     modal: (
                         <SweetAlert warning onConfirm={this.hideModal}>
@@ -533,12 +533,12 @@ export default class MyPermission extends React.Component {
             }
         } else {
             //multi Sign
-            const updateTransaction = await tronWeb.transactionBuilder.updateAccountPermissions(tronWeb.address.toHex(curControlAddress), changedOwnerPermission, changedWihnessPermission, changedActivePermission);
+            const updateTransaction = await lindaWeb.transactionBuilder.updateAccountPermissions(lindaWeb.address.toHex(curControlAddress), changedOwnerPermission, changedWihnessPermission, changedActivePermission);
 
-            //const signedTransaction = await tronWeb.trx.multiSign(updateTransaction,tronWeb.defaultPrivateKey,0);
+            //const signedTransaction = await lindaWeb.lind.multiSign(updateTransaction,lindaWeb.defaultPrivateKey,0);
             const value = updateTransaction.raw_data.contract[0].parameter.value;
             const hexStr = buildAccountPermissionUpdateContract(value);
-            const signedTransaction = await transactionMultiResultManager(updateTransaction, tronWeb, 0, 24, hexStr)
+            const signedTransaction = await transactionMultiResultManager(updateTransaction, lindaWeb, 0, 24, hexStr)
 ;
             if(!signedTransaction){
                 this.setState({
@@ -575,7 +575,7 @@ export default class MyPermission extends React.Component {
     }
     render() {
         const { isEditOperateUser, isEditContent, curControlAddress, modal, modalAlert, curLoginAddress, ownerPermission, activePermissions, witnessPermission } = this.state;
-        const { wallet, tronWeb,walletType } = this.props;
+        const { wallet, lindaWeb,walletType } = this.props;
         let permissionOrigin = null;
         if (curControlAddress === curLoginAddress) {
             permissionOrigin = wallet.current;
@@ -610,12 +610,12 @@ export default class MyPermission extends React.Component {
                 </div>
                 {modalAlert}
                 {/* view status */}
-                {ownerPermission && !isEditContent && <OwnerRead ownerPermission={ownerPermission} tronWeb={tronWeb} />}
-                {/* {witnessPermission && !isEditContent && <WitnessRead witnessPermission={witnessPermission} witnessNodeAddress={witnessAddressIfIs} tronWeb={tronWeb} />} */}
-                {activePermissions && !isEditContent && <ActiveRead activePermissions={activePermissions} tronWeb={tronWeb}/>}
+                {ownerPermission && !isEditContent && <OwnerRead ownerPermission={ownerPermission} lindaWeb={lindaWeb} />}
+                {/* {witnessPermission && !isEditContent && <WitnessRead witnessPermission={witnessPermission} witnessNodeAddress={witnessAddressIfIs} lindaWeb={lindaWeb} />} */}
+                {activePermissions && !isEditContent && <ActiveRead activePermissions={activePermissions} lindaWeb={lindaWeb}/>}
                 {/* edit status */}
-                {ownerPermission && isEditContent && <OwnerEdit ownerPermission={ownerPermission} tronWeb={tronWeb} changeOwnerPermission={this.changeOwnerPermission.bind(this)} />}
-                {activePermissions && isEditContent && <ActiveEdit activePermissions={activePermissions} tronWeb={tronWeb} walletType={walletType} changeActivePermission={this.changeActivePermission.bind(this)} />}
+                {ownerPermission && isEditContent && <OwnerEdit ownerPermission={ownerPermission} lindaWeb={lindaWeb} changeOwnerPermission={this.changeOwnerPermission.bind(this)} />}
+                {activePermissions && isEditContent && <ActiveEdit activePermissions={activePermissions} lindaWeb={lindaWeb} walletType={walletType} changeActivePermission={this.changeActivePermission.bind(this)} />}
 
             </main>)
     }

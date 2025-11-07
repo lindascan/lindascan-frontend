@@ -1,12 +1,12 @@
 import React from "react";
 import xhr from "axios/index";
 import {Client} from "../../../services/api";
-import {ONE_TRX} from "../../../constants";
+import {ONE_LIND} from "../../../constants";
 import {connect} from "react-redux";
 import {FormattedNumber, injectIntl} from "react-intl";
 import {filter, includes} from "lodash";
-import {tronAddresses} from "../../../utils/tron";
-import {TronLoader} from "../../common/loaders";
+import {lindaAddresses} from "../../../utils/linda";
+import {LindaLoader} from "../../common/loaders";
 import PieReact from "../../common/PieChart";
 import LineReact from "../../common/LineChart";
 import {BigNumber} from 'bignumber.js'
@@ -41,7 +41,7 @@ import {
 
 import {
     RepresentativesRingPieReact,
-    SupplyTypesTRXPieChart,
+    SupplyTypesLINDPieChart,
 } from "../../common/RingPieChart";
 
 import {loadPriceData} from "../../../actions/markets";
@@ -113,9 +113,9 @@ class Statistics extends React.Component {
         switch (chartName){
             case 'supply':
 
-                this.loadTotalTRXSupply();
+                this.loadTotalLINDSupply();
                 setInterval(() => {
-                    this.loadTotalTRXSupply();
+                    this.loadTotalLINDSupply();
                 }, 60000);
                 break;
             case 'pieChart':
@@ -175,31 +175,31 @@ class Statistics extends React.Component {
         //     limit: 35,
         //     sort: '-balance',
         // });
-        let accountData = await xhr.get("https://assistapi.tronscan.org/api/account?limit=35&sort=-balance");
+        let accountData = await xhr.get("https://assistapi.lindascan.org/api/account?limit=35&sort=-balance");
         let accounts = accountData.data;
         this.setState({
-            accounts: filter(accounts, account => !includes(tronAddresses, account.address))
+            accounts: filter(accounts, account => !includes(lindaAddresses, account.address))
                 .slice(0, 10)
                 .map(account => ({
                     name: account.address,
-                    value: account.balance / ONE_TRX,
+                    value: account.balance / ONE_LIND,
                 }))
         });
     }
-    loadTotalTRXSupply = async() =>{
+    loadTotalLINDSupply = async() =>{
         let {intl} = this.props;
         const {funds} = await Client.getFundsSupply();
 
         let supplyTypesChartData = [
             {value: funds.turnOver, name: 'circulating_supply', selected: true,sliced: true},
-            {value: funds.fundTrx, name: 'total_frozen', selected: false,sliced: false},
+            {value: funds.fundLind, name: 'total_frozen', selected: false,sliced: false},
         ]
         // cmc change api
         let btcURL =  encodeURI(
-            `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=BTC`
+            `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=BTC`
         );
         let usdURL = encodeURI(
-            `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=TRX&convert=USD`
+            `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=LIND&convert=USD`
         );
         var { data: {data:dataBTC} } = await xhr.post(
             `${API_URL}/api/system/proxy`,
@@ -216,14 +216,14 @@ class Statistics extends React.Component {
 
         let priceUSD,marketCapitalization
         if(dataUSD){
-            priceUSD = (parseFloat(dataUSD.TRX.quote.USD.price)*1000).toFixed(2);  
-            marketCapitalization = (dataUSD.TRX.quote.USD.price*(funds.totalTurnOver)).toFixed(2);
+            priceUSD = (parseFloat(dataUSD.LIND.quote.USD.price)*1000).toFixed(2);  
+            marketCapitalization = (dataUSD.LIND.quote.USD.price*(funds.totalTurnOver)).toFixed(2);
         }else{
             priceUSD = 0
         }
         let priceBTC;
         if(dataBTC){
-            let  x = new BigNumber(dataBTC.TRX.quote.BTC.price); 
+            let  x = new BigNumber(dataBTC.LIND.quote.BTC.price); 
             priceBTC = x.multipliedBy(1000).toFixed(5);
         }else{
             priceBTC = 0
@@ -240,7 +240,7 @@ class Statistics extends React.Component {
             priceUSD:priceUSD,
             priceBTC:priceBTC,
             marketCapitalization:marketCapitalization,
-            foundationFreeze:intl.formatNumber(funds.fundTrx),
+            foundationFreeze:intl.formatNumber(funds.fundLind),
             circulatingNum:intl.formatNumber(funds.turnOver)
         });
     }
@@ -270,9 +270,9 @@ class Statistics extends React.Component {
 
     async loadVolume(){
         let {intl} = this.props;
-        let TRXURL = encodeURI(`https://graphs2.coinmarketcap.com/currencies/tron/`)
+        let LINDURL = encodeURI(`https://graphs2.coinmarketcap.com/currencies/linda/`)
         let volumeData = await xhr.get(
-            `${API_URL}/api/system/proxy?url=${TRXURL}`
+            `${API_URL}/api/system/proxy?url=${LINDURL}`
         );
     
         let volumeUSD = volumeData.data.market_cap_by_available_supply
@@ -315,7 +315,7 @@ class Statistics extends React.Component {
         let birthday = new Date("2017/10/10");
         let timerBirthday = birthday.getTime();
         let dayNum = Math.floor((timerToday - timerBirthday) / 1000 / 3600 / 24);
-        let {data} = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=TRX&tsym=USD&limit=" + dayNum);
+        let {data} = await xhr.get("https://min-api.cryptocompare.com/data/histoday?fsym=LIND&tsym=USD&limit=" + dayNum);
         let priceStatsTemp = data['Data'];
         this.setState({
             priceStats: priceStatsTemp
@@ -562,8 +562,8 @@ class Statistics extends React.Component {
         txOverviewStats.map((item, index) => {
             item.newTransactionSeen_num = item.newTransactionSeen?item.newTransactionSeen:0;
             item.triggers_num = item.newTrigger?item.newTrigger:0;
-            item.trx_transfer_num = item.trx_transfer?item.trx_transfer:0;
-            item.trc10_transfer_num = item.trc10_transfer?item.trc10_transfer:0;
+            item.lind_transfer_num = item.lind_transfer?item.lind_transfer:0;
+            item.lrc10_transfer_num = item.lrc10_transfer?item.lrc10_transfer:0;
             item.freeze_transaction_num = item.freeze_transaction?item.freeze_transaction:0;
             item.vote_transaction_num = item.vote_transaction?item.vote_transaction:0;
             item.other_transaction_num = item.other_transaction?item.other_transaction:0;
@@ -608,7 +608,7 @@ class Statistics extends React.Component {
     }
     
 
-    // 获取TRON日能量消耗图表
+    // 获取LINDA日能量消耗图表
     async loadEnergyConsumeData() {
         let {data} = await xhr.get(API_URL + "/api/energystatistic");
         data.data.pop()
@@ -630,7 +630,7 @@ class Statistics extends React.Component {
         });
     }
 
-    // TRON日合约调用图表
+    // LINDA日合约调用图表
     async loadContractInvocation() {
         // 次数
         let {data } = await xhr.get(API_URL + "/api/triggerstatistic");
@@ -692,7 +692,7 @@ class Statistics extends React.Component {
             item.name = item.name || '-'
             totle_used_energy += item.total_energy
             freezingEnergy += Number(item.energy)
-            burningEnergy += Number(item.trx)
+            burningEnergy += Number(item.lind)
             userBurningEnergy += Number(item.contract_supplied)
         })
 
@@ -895,8 +895,8 @@ class Statistics extends React.Component {
                   </span>
                 );
               },
-            dataIndex: 'trx',
-            key: 'trx',
+            dataIndex: 'lind',
+            key: 'lind',
             width: '12%',
             render: (text, record, index) => {
               return <span style={{width:''}}><FormattedNumber value={text}/></span>
@@ -1159,7 +1159,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     txOverviewStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReactHighChartTx source='singleChart' style={{height: chartHeight}}
                                                               data={txOverviewStats} intl={intl}/>
                                 }
@@ -1171,7 +1171,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     txOverviewStatsType === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineTxOverviewStatsType source='singleChart' style={{height: chartHeight}}
                                                               data={txOverviewStatsType} intl={intl}/>
                                 }
@@ -1183,7 +1183,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                   txOverviewStatsFull === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReactHighChartTotalTxns source='singleChart' style={{height: chartHeight}}
                                                                      data={txOverviewStatsFull} intl={intl}/>
                                 }
@@ -1194,7 +1194,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     addressesStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReactHighChartAdd source='singleChart' style={{height: chartHeight}} data={addressesStats} intl={intl}/>
                                 }
                             </div>
@@ -1204,7 +1204,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     blockSizeStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <BarReactHighChartBlockSize source='singleChart' style={{height: chartHeight}}
                                                                     data={blockSizeStats}
                                                                     intl={intl}/>
@@ -1216,7 +1216,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     blockchainSizeStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReactHighChartBlockchainSize source='singleChart' style={{height: chartHeight}}
                                                                           data={blockchainSizeStats} intl={intl}/>
                                 }
@@ -1227,7 +1227,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     priceStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReactHighChartPrice source='singleChart' style={{height: chartHeight}}
                                                                  data={priceStats} intl={intl}/>
                                 }
@@ -1238,7 +1238,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     accounts === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <PieReact style={{height: chartHeight}} data={accounts}/>
                                 }
                             </div>
@@ -1248,9 +1248,9 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     transactionValueStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReact message={{
-                                            id: 'trx_transferred_past_hour',
+                                            id: 'lind_transferred_past_hour',
                                             href: 'transactionValueStats'
                                         }}
                                                    style={{height: chartHeight}} data={transactionValueStats}
@@ -1264,7 +1264,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     transactionStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReact
                                             message={{id: 'transactions_past_hour', href: 'transactionStats'}}
                                             style={{height: chartHeight}} data={transactionStats}
@@ -1278,7 +1278,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     blockStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReact message={{id: 'average_blocksize', href: 'blockStats'}}
                                                    style={{height: chartHeight}} data={blockStats}
                                                    keysData={['timestamp', 'value']}
@@ -1291,7 +1291,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     volumeStats === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <LineReactHighChartVolumeUsd style={{height: chartHeight}}
                                                                      data={volumeStats}
                                                                      intl={intl}/>
@@ -1303,7 +1303,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     energyConsumeData === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <EnergyConsumeChart source='singleChart'
                                                                      style={{height: chartHeight}}
                                                                      data={energyConsumeData}
@@ -1317,7 +1317,7 @@ class Statistics extends React.Component {
                             <div style={{height: chartHeight}}>
                                 {
                                     ContractInvocation === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <ContractInvocationChart source='singleChart'
                                                                      style={{height: chartHeight}}
                                                                      data={ContractInvocation}
@@ -1331,7 +1331,7 @@ class Statistics extends React.Component {
                             match.params.chartName === 'EnergyConsumeDistribution' &&
                             <div>
                             {
-                                EnergyConsumeDistribution === null ? <TronLoader/> :
+                                EnergyConsumeDistribution === null ? <LindaLoader/> :
                                 <div>
                                     <div className="d-md-flex justify-content-between pb-3">
                                         <DatePicker 
@@ -1391,7 +1391,7 @@ class Statistics extends React.Component {
                             match.params.chartName === 'ContractInvocationDistribution' &&
                             <div>
                             {
-                                ContractInvocationDistribution === null ? <TronLoader/> :
+                                ContractInvocationDistribution === null ? <LindaLoader/> :
                                 <div>
                                     <div className="d-md-flex justify-content-between pb-3">
                                         <DatePicker 
@@ -1440,7 +1440,7 @@ class Statistics extends React.Component {
                            match.params.chartName === 'OverallFreezingRate' &&
                            <div>
                            {
-                               OverallFreezingRate === null ? <TronLoader/> :
+                               OverallFreezingRate === null ? <LindaLoader/> :
                                <div>
                                    
                                
@@ -1477,7 +1477,7 @@ class Statistics extends React.Component {
                             <div>
                                 {
                                     pieChart === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <RepresentativesRingPieReact source='singleChart'
                                                                      message={{id: 'produce_distribution'}}
                                                                      intl={intl}
@@ -1493,7 +1493,7 @@ class Statistics extends React.Component {
                             <div>
                                 {
                                     supplyTypesChart === null ?
-                                        <TronLoader/> :
+                                        <LindaLoader/> :
                                         <div className="row" style={{fontSize : 12,marginRight:0}}>
                                           <div className="col-md-5">
                                             <div className="table-responsive">
@@ -1502,7 +1502,7 @@ class Statistics extends React.Component {
                                                 <tr>
                                                   <th style={{border:0}}>
                                                     <i className="fa fa-puzzle-piece" ></i>
-                                                    <span style={{marginTop:2}}>{tu('TRX_distribution_overview')}</span>
+                                                    <span style={{marginTop:2}}>{tu('LIND_distribution_overview')}</span>
                                                   </th>
                                                 </tr>
                                                 </thead>
@@ -1512,42 +1512,42 @@ class Statistics extends React.Component {
                                                       {tu('genesis')}:
                                                   </td>
                                                   <td>
-                                                      {genesisNum} TRX
+                                                      {genesisNum} LIND
                                                   </td>
                                                 </tr>
                                                 <tr>
                                                   <td>+  {tu('block_produce_rewards')}:
                                                   </td>
                                                   <td>
-                                                      {blockProduceRewardsNum} TRX
+                                                      {blockProduceRewardsNum} LIND
                                                   </td>
                                                 </tr>
                                                 <tr>
-                                                  <td>+ {tu('charts_total_TRX_supply_vote')}:
+                                                  <td>+ {tu('charts_total_LIND_supply_vote')}:
                                                   </td>
                                                   <td>
-                                                      {nodeRewardsNum} TRX
+                                                      {nodeRewardsNum} LIND
                                                   </td>
                                                 </tr>
                                                 <tr>
                                                   <td>- {tu('independence_day_burned')}:
                                                   </td>
                                                   <td>
-                                                      {independenceDayBurned} TRX
+                                                      {independenceDayBurned} LIND
                                                   </td>
                                                 </tr>
                                                 <tr>
                                                   <td>- {tu('fee_burned')}:
                                                   </td>
                                                   <td>
-                                                      {feeBurnedNum} TRX
+                                                      {feeBurnedNum} LIND
                                                   </td>
                                                 </tr>
                                                 <tr>
                                                   <td>= <b>{tu('current_total_supply')}:</b><br/>
                                                   </td>
                                                   <td>
-                                                    <b>{intl.formatNumber(currentTotalSupply)} TRX</b>
+                                                    <b>{intl.formatNumber(currentTotalSupply)} LIND</b>
                                                   </td>
                                                 </tr>
                                                 <tr>
@@ -1555,14 +1555,14 @@ class Statistics extends React.Component {
                                                     <Link to="/data/foundation" style={{color:'red',}}>{tu("total_frozen")}</Link>
                                                   </td>
                                                   <td>
-                                                      {foundationFreeze} TRX
+                                                      {foundationFreeze} LIND
                                                   </td>
                                                 </tr>
                                                 <tr>
                                                   <td>{tu('circulating_supply')}:
                                                   </td>
                                                   <td>
-                                                      {circulatingNum} TRX
+                                                      {circulatingNum} LIND
                                                   </td>
                                                 </tr>
                                                 </tbody>
@@ -1573,7 +1573,7 @@ class Statistics extends React.Component {
                                               <table className="table" style={{marginBottom:0}}>
                                                 <thead>
                                                 <tr>
-                                                  <th style={{border:0}}><br/><i className="fa fa-coins" ></i> {tu('price_per_1000_trx')}</th>
+                                                  <th style={{border:0}}><br/><i className="fa fa-coins" ></i> {tu('price_per_1000_lind')}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody><tr>
@@ -1604,7 +1604,7 @@ class Statistics extends React.Component {
                                                                 <span className="counter">
                                                                     <CountUp start={0} end={currentTotalSupply} duration={2}  separator="," decimals={2} />
                                                                 </span>
-                                                <h4>{tu('total_TRX_supply')}</h4>
+                                                <h4>{tu('total_LIND_supply')}</h4>
                                               </div>
                                               <div className="counters col-md-6 col-sm-6">
                                                                 <span className="counter">
@@ -1615,7 +1615,7 @@ class Statistics extends React.Component {
                                             </div>
                                             <div className="card">
                                               <div className="card-body" style={{height: 400}}>
-                                                <SupplyTypesTRXPieChart
+                                                <SupplyTypesLINDPieChart
                                                     message={{id: 'breakdown_supply_types'}}
                                                     intl={intl}
                                                     data={supplyTypesChart}

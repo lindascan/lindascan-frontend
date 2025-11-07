@@ -6,12 +6,12 @@ import { delay } from "../../utils/promises";
 import { PulseLoader } from "react-spinners";
 import { loginWithLedger } from "../../actions/app";
 import { tu, t } from "../../utils/i18n";
-import { withTronWeb } from "../../utils/tronWeb";
+import { withLindaWeb } from "../../utils/lindaWeb";
 import xhr from "axios/index";
-import { API_URL, ONE_TRX} from "../../constants";
+import { API_URL, ONE_LIND} from "../../constants";
 import Lockr from "lockr";
 import { Radio } from 'antd';
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import { FormattedNumber } from "react-intl";
 
 function addressFormat(addr) {
@@ -69,7 +69,7 @@ function addressFormat(addr) {
         const address = await this.ledger.getAddress(path).catch(e => console.log('e=======',e));
         const valid =  await this.ledger.isActivedAddress(address);
         if(valid){
-           balance = await this.ledger.getAddressTRXBalances(address);
+           balance = await this.ledger.getAddressLINDBalances(address);
         }
        
         accounts.push({
@@ -122,13 +122,13 @@ function addressFormat(addr) {
     let { address, pathIndex} = this.state;
     let { history, onClose } = this.props;
     
-    const tronWebLedger = this.props.tronWeb();
+    const lindaWebLedger = this.props.lindaWeb();
     const defaultAddress = {
-      hex: tronWebLedger.address.toHex(address),
+      hex: lindaWebLedger.address.toHex(address),
       base58: address
     };
-    tronWebLedger.defaultAddress = defaultAddress;
-    this.props.loginWithLedger(address, tronWebLedger, pathIndex);    
+    lindaWebLedger.defaultAddress = defaultAddress;
+    this.props.loginWithLedger(address, lindaWebLedger, pathIndex);    
     history.push("/account");
     window.gtag("event", "Ledger", {
       event_category: "Login",
@@ -176,7 +176,7 @@ function addressFormat(addr) {
               { <div>
                   <a
                     target="_blank"
-                    href="https://support.tronscan.org/hc/en-us/articles/360025936472-LEDGER-GUIDE"
+                    href="https://support.lindascan.org/hc/en-us/articles/360025936472-LEDGER-GUIDE"
                   >
                   {tu("ledger_click_help")}>
                   </a>
@@ -191,7 +191,7 @@ function addressFormat(addr) {
               {loading && (
                 <div className="mt-4">
                   <div className="text-muted">
-                    { verifyAddress? tu("open_tron_app_on_verify_address"):tu("open_tron_app_on_ledger")}
+                    { verifyAddress? tu("open_linda_app_on_verify_address"):tu("open_linda_app_on_ledger")}
                   </div>
                   <div className="my-3">
                     <PulseLoader
@@ -247,7 +247,7 @@ function addressFormat(addr) {
                             </div> 
                           </td>
                           <td>
-                            <FormattedNumber value={item.balance / ONE_TRX}  maximumFractionDigits={6}/> TRX
+                            <FormattedNumber value={item.balance / ONE_LIND}  maximumFractionDigits={6}/> LIND
                           </td>
                           {/* <td className="text-right">
                             {
@@ -283,16 +283,16 @@ function addressFormat(addr) {
         ) : (
           <div className="text-center pt-5 mx-5">
             <img
-              src={require("./ledger-tronlink.png")}
+              src={require("./ledger-lindalink.png")}
               style={{ height: 65 }}
             />
             {loading && (
               <div className="mt-4">
                 <h5>
-                  {tu("ledger_tronlink")}
+                  {tu("ledger_lindalink")}
                 </h5>
                 <div className="text-muted">
-                  { verifyAddress? tu("open_tron_app_on_verify_address"):tu("open_tron_app_on_ledger")}
+                  { verifyAddress? tu("open_linda_app_on_verify_address"):tu("open_linda_app_on_ledger")}
                 </div>
                 <div className="my-3">
                   <PulseLoader
@@ -348,7 +348,7 @@ function addressFormat(addr) {
                             </div> 
                           </td>
                           <td>
-                            <FormattedNumber value={item.balance / ONE_TRX}  maximumFractionDigits={6}/> TRX
+                            <FormattedNumber value={item.balance / ONE_LIND}  maximumFractionDigits={6}/> LIND
                           </td>
                           {/* <td className="text-right">
                             {
@@ -388,4 +388,4 @@ function addressFormat(addr) {
 
 export default connect(null, { 
     loginWithLedger
-  })(withRouter(withTronWeb(LedgerAccess)))
+  })(withRouter(withLindaWeb(LedgerAccess)))

@@ -7,7 +7,7 @@ function getOperationDom(operations) {
     operations = getContractTypesByHex(operations);
     if (operations.length) {
         return (<div className="permission-child-item">
-            <div className="permission-label">{tu('trc20_cur_order_header_action')}:</div>
+            <div className="permission-label">{tu('lrc20_cur_order_header_action')}:</div>
             <div className="permission-text">
                 <ul className='permission-operations'>
                     {operations.map((item, index) => (

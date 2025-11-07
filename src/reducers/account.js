@@ -15,7 +15,7 @@ import _ from "lodash";
 
 const initialState = {
   tokens: [],
-  trxBalance: 0,
+  lindBalance: 0,
   totalTransactions: 0,
   recentTransactions: [],
   frozen: {
@@ -39,25 +39,25 @@ export function accountReducer(state = initialState, action) {
     }
 
     case SET_TOKEN_BALANCES: {
-      let { map_amount: trxBalance = 0 } =
+      let { map_amount: lindBalance = 0 } =
         find(action.tokens, tb => tb.name.toUpperCase() === "_") || {};
       let tokenList = _(action.tokens)
         .sortBy(tb => toUpper(tb.map_token_name))
         .sortBy(tb => -tb.map_amount)
         .value();
-      let trxObj = _.remove(
+      let lindObj = _.remove(
         tokenList,
-        o => toUpper(o.map_token_name) == "TRX"
+        o => toUpper(o.map_token_name) == "LIND"
       )[0];
 
-      trxObj && tokenList.unshift(trxObj);
-      let token20List = _(action.trc20token)
+      lindObj && tokenList.unshift(lindObj);
+      let token20List = _(action.lrc20token)
         .filter(tb => tb.balance > 0)
         .sortBy(tb => -tb.token20_balance)
         .value();
       return {
         ...state,
-        trxBalance,
+        lindBalance,
         tokens20: token20List,
         tokens: tokenList,
         frozen: {

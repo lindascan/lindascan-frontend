@@ -1,8 +1,8 @@
-import AppTrx from '@ledgerhq/hw-app-trx';
+import AppLind from '@ledgerhq/hw-app-lind';
 import Transport from "@ledgerhq/hw-transport-u2f";
 import xhr from "axios/index";
-import {decode58Check, isAddressValid} from "@tronscan/client/src/utils/crypto";
-import { byteArray2hexStr } from "@tronscan/client/src/utils/bytes";
+import {decode58Check, isAddressValid} from "@lindascan/client/src/utils/crypto";
+import { byteArray2hexStr } from "@lindascan/client/src/utils/bytes";
 import { SUNWEBCONFIG } from "../../constants"
 import { Client } from "../../services/api";
 export default class LedgerBridge {
@@ -28,7 +28,7 @@ export default class LedgerBridge {
     return true
   } 
 
-  getAddressTRXBalances = async(addressStr) => {
+  getAddressLINDBalances = async(addressStr) => {
     let address = await Client.getAddress(addressStr);
     let sentDelegateBandwidth = 0;
     if (address.delegated && address.delegated.sentDelegatedBandwidth) {
@@ -88,8 +88,8 @@ export default class LedgerBridge {
       const transport = await Transport.create();
       try {
         let path = this.getPathForIndex(index);
-        const trx = new AppTrx(transport);
-        let {address} = await trx.getAddress(path, confirm);
+        const lind = new AppLind(transport);
+        let {address} = await lind.getAddress(path, confirm);
         resolve({
           address,
           connected: true,
@@ -108,8 +108,8 @@ export default class LedgerBridge {
     return new Promise(async (resolve, reject) => {
       const transport = await Transport.create();
       try {
-        const trx = new AppTrx(transport);
-        let {address} = await trx.getAddress(path);
+        const lind = new AppLind(transport);
+        let {address} = await lind.getAddress(path);
         resolve(address);
       } catch(e) {
         reject(e);
@@ -123,8 +123,8 @@ export default class LedgerBridge {
       const transport = await Transport.create();
       try {
         let path = this.getPathForIndex(pathIndex);
-        const trx = new AppTrx(transport);
-        const response = await trx.signTransaction(
+        const lind = new AppLind(transport);
+        const response = await lind.signTransaction(
           path,
           transaction.hex,
           transaction.info

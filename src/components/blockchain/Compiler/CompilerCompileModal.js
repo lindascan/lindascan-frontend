@@ -18,27 +18,27 @@ export default class CompilerModal extends React.PureComponent {
             resources: [
                 {
                     label:"0.4.25_Odyssey_v3.2.3",
-                    value:"tron-0.4.25_Odyssey_v3.2.3"
+                    value:"linda-0.4.25_Odyssey_v3.2.3"
                 },
                 {
                     label:"0.5.8_Odyssey_v3.6.0",
-                    value:"tron-0.5.8_Odyssey_v3.6.0"
+                    value:"linda-0.5.8_Odyssey_v3.6.0"
                 },
                 {
                     label:"0.5.4_Odyssey_v3.6.0",
-                    value:"tron-0.5.4_Odyssey_v3.6.0"
+                    value:"linda-0.5.4_Odyssey_v3.6.0"
                 },
                 {
-                    label:"tron-0.4.24",
-                    value:"tron-0.4.24"
+                    label:"linda-0.4.24",
+                    value:"linda-0.4.24"
                 },
                 {
                     label:"0.5.9_Odyssey_v3.6.5",
-                    value:"tron-0.5.9_Odyssey_v3.6.5"
+                    value:"linda-0.5.9_Odyssey_v3.6.5"
                 },
                 {
                     label:"0.5.10_Odyssey_v3.6.6",
-                    value:"tron-0.5.10_Odyssey_v3.6.6"
+                    value:"linda-0.5.10_Odyssey_v3.6.6"
                 },
             ],
             runs:[
@@ -51,7 +51,7 @@ export default class CompilerModal extends React.PureComponent {
                     value:"200",
                 }
             ],
-            selectedResource:'tron-0.4.25_Odyssey_v3.2.3',
+            selectedResource:'linda-0.4.25_Odyssey_v3.2.3',
             hideSmallCurrency: true,
             optimizer:'1',
             selectedRuns:"0",
@@ -103,7 +103,7 @@ export default class CompilerModal extends React.PureComponent {
 
     render() {
         let {resources, selectedResource, hideSmallCurrency, runs, selectedRuns} = this.state;
-        let {trxBalance, frozenTrx, intl} = this.props;
+        let {lindBalance, frozenLind, intl} = this.props;
         return (
             <Modal isOpen={true} fade={false} className="modal-dialog-centered _freezeContent">
                 <ModalHeader className="text-center _freezeHeader" toggle={this.hideModal}>

@@ -19,14 +19,14 @@ export const TokensRoutes = [
         component: TokenOverviewAsync,
         routes: [
             // {
-            //   label: "overview_TRC20",
-            //   path: "/tokens/trc20",
+            //   label: "overview_LRC20",
+            //   path: "/tokens/lrc20",
             //   icon: "fas fa-table",
-            //   component: TokenTRC20ListAsync
+            //   component: TokenLRC20ListAsync
             // },
             // "-",
             // {
-            //   label: "overview_TRC10",
+            //   label: "overview_LRC10",
             //   path: "/tokens/list",
             //   icon: "fa fa-list",
             //   component: TokenListAsync

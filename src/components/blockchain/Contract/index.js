@@ -8,11 +8,11 @@ import { tu } from "../../../utils/i18n";
 import {
   AddressLink,
   TransactionHashLink,
-  TokenTRC20Link
+  TokenLRC20Link
 } from "../../common/Links";
-import { TRXPrice } from "../../common/Price";
-import { ONE_TRX } from "../../../constants";
-import { TronLoader } from "../../common/loaders";
+import { LINDPrice } from "../../common/Price";
+import { ONE_LIND } from "../../../constants";
+import { LindaLoader } from "../../common/loaders";
 import Transactions from "../../common/Transactions";
 import Txs from "./Txs";
 import Code from "./Code";
@@ -21,7 +21,7 @@ import Events from "./Events";
 import Transfers from "./Transfers";
 import Energy from "./Energy";
 import Call from "./Call";
-import TRXChart from "./TrxCharts";
+import LINDChart from "./LindCharts";
 import { upperFirst } from "lodash";
 import { Truncate } from "../../common/text";
 import xhr from "axios/index";
@@ -85,9 +85,9 @@ class SmartContract extends React.Component {
 
     let contract = await Client.getContractOverview(id);
 
-    let result = await xhr.get(API_URL + "/api/token_trc20?contract=" + id);
+    let result = await xhr.get(API_URL + "/api/token_lrc20?contract=" + id);
     let token20 =
-      result.data.trc20_tokens.length > 0 ? result.data.trc20_tokens[0] : "";
+      result.data.lrc20_tokens.length > 0 ? result.data.lrc20_tokens[0] : "";
     if (token20) {
       this.setState(prevProps => ({
         loading: false,
@@ -122,7 +122,7 @@ class SmartContract extends React.Component {
           Transfers: {
             id: "Transfers",
             path: "/transfers",
-            label: <span>{tu("TRC20_transfers")}</span>,
+            label: <span>{tu("LRC20_transfers")}</span>,
             cmp: () => <Transfers filter={{ token: id }} token={token20} />
           },
           voters: {
@@ -163,11 +163,11 @@ class SmartContract extends React.Component {
             label: <span>{tu("call")}</span>,
             cmp: () => <Call filter={{ address: id }} />
           },
-          trx_chart: {
-            id: "trx_chart",
-            path: "/trx-balances-chart",
+          lind_chart: {
+            id: "lind_chart",
+            path: "/lind-balances-chart",
             label: <span>{tu("address_balance")}</span>,
-            cmp: () => <TRXChart filter={{ address: id }} />
+            cmp: () => <LINDChart filter={{ address: id }} />
           }
         }
       }));
@@ -200,7 +200,7 @@ class SmartContract extends React.Component {
           // Transfers: {
           //     id: "Transfers",
           //     path: "/transfers",
-          //     label: <span>{tu('TRC20_transfers')}</span>,
+          //     label: <span>{tu('LRC20_transfers')}</span>,
           //     cmp: () => <Transfers filter={{token: id}} token={token20}/>,
           // },
           token_balances: {
@@ -248,11 +248,11 @@ class SmartContract extends React.Component {
             label: <span>{tu("call")}</span>,
             cmp: () => <Call filter={{ address: id }} />
           },
-          trx_chart: {
-            id: "trx_chart",
-            path: "/trx-balances-chart",
+          lind_chart: {
+            id: "lind_chart",
+            path: "/lind-balances-chart",
             label: <span>{tu("address_balance")}</span>,
-            cmp: () => <TRXChart filter={{ address: id }} />
+            cmp: () => <LINDChart filter={{ address: id }} />
           }
         }
       }));
@@ -300,17 +300,17 @@ class SmartContract extends React.Component {
         Math.pow(10, tokenInfo.map_token_precision || 6);
       
       if (contract.call_value) {
-        let trxValue = contract.call_value / 1000000
-        contractValue = `${trxValue} TRX ${value} ${tokenInfo.map_token_name}`;
+        let lindValue = contract.call_value / 1000000
+        contractValue = `${lindValue} LIND ${value} ${tokenInfo.map_token_name}`;
       } else {
         contractValue = `${value} ${tokenInfo.map_token_name}`;
       }
     } else {
       if (contract.call_value) {
-        let trxValue = contract.call_value / 1000000
-        contractValue = `${trxValue} TRX`;
+        let lindValue = contract.call_value / 1000000
+        contractValue = `${lindValue} LIND`;
       } else {
-        contractValue = "0 TRX";
+        contractValue = "0 LIND";
       }
     }
 
@@ -349,9 +349,9 @@ class SmartContract extends React.Component {
           <div className="col-md-12 ">
             {loading ? (
               <div className="card">
-                <TronLoader>
+                <LindaLoader>
                   {tu("loading_address")} {contract.address}
-                </TronLoader>
+                </LindaLoader>
               </div>
             ) : (
               <Fragment>
@@ -390,40 +390,40 @@ class SmartContract extends React.Component {
                               :{" "}
                             </p>
                             <div>
-                              <TRXPrice
+                              <LINDPrice
                                 amount={
                                   contract.balance
-                                    ? parseInt(contract.balance) / ONE_TRX
+                                    ? parseInt(contract.balance) / ONE_LIND
                                     : 0
                                 }
                                 showPopup={false}
-                                currency="TRX"
+                                currency="LIND"
                               />
                               {contract.balance > 0 && (
                                 <p>
                                   ≈{" "}
-                                  <TRXPrice
+                                  <LINDPrice
                                     amount={
                                       contract.balance
-                                        ? parseInt(contract.balance) / ONE_TRX
+                                        ? parseInt(contract.balance) / ONE_LIND
                                         : 0
                                     }
                                     currency="USD"
                                     showPopup={false}
                                   />
                                   &nbsp;(@&nbsp;USD&nbsp;
-                                  <TRXPrice
+                                  <LINDPrice
                                     amount={1}
                                     currency="USD"
                                     showPopup={false}
                                     showCurreny={false}
                                   />
-                                  /TRX)
+                                  /LIND)
                                 </p>
                               )}
                             </div>
                           </li>
-                          {/* <li><p>{tu('trx_value')}: </p><TRXPrice amount={1} currency="USD" source="home"/></li> */}
+                          {/* <li><p>{tu('lind_value')}: </p><LINDPrice amount={1} currency="USD" source="home"/></li> */}
                           <li>
                             <p>
                               {upperFirst(
@@ -431,8 +431,8 @@ class SmartContract extends React.Component {
                               )}
                               :{" "}
                             </p>
-                            <p className="contract_trx_count">
-                              {contract.trxCount}
+                            <p className="contract_lind_count">
+                              {contract.lindCount}
                               {/* <Tooltip
                                 placement="top"
                                 title={intl.formatMessage({
@@ -482,7 +482,7 @@ class SmartContract extends React.Component {
                                   }}
                                 />
                               )}
-                              <TokenTRC20Link
+                              <TokenLRC20Link
                                 name={token20.name}
                                 address={token20.contract_address}
                                 namePlus={

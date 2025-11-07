@@ -6,8 +6,8 @@ import { upperFirst } from "lodash";
 import { FormattedNumber, injectIntl } from "react-intl";
 import { Tooltip, Table, Switch } from "antd";
 import { QuestionMark } from "../common/QuestionMark.js";
-import { ONE_TRX, IS_MAINNET, WARNING_VERSIONS } from "../../constants";
-import { TronLoader } from "../common/loaders";
+import { ONE_LIND, IS_MAINNET, WARNING_VERSIONS } from "../../constants";
+import { LindaLoader } from "../common/loaders";
 import { Empty } from 'antd';
 import { reverse } from "dns";
 class ExchangeQuotes extends React.Component {
@@ -116,8 +116,8 @@ class ExchangeQuotes extends React.Component {
       },
       {
         title: upperFirst(intl.formatMessage({ id: "token_exchange_price" })),
-        dataIndex: "trc20token",
-        key: "trc20token",
+        dataIndex: "lrc20token",
+        key: "lrc20token",
         align: "left",
         className: "ant_table",
         render: (text, record, index) => {
@@ -204,8 +204,8 @@ class ExchangeQuotes extends React.Component {
       },
       {
         title: upperFirst(intl.formatMessage({ id: "contract_token_name" })),
-        dataIndex: "trc20token",
-        key: "trc20token",
+        dataIndex: "lrc20token",
+        key: "lrc20token",
         align: "left",
         className: "ant_table",
         render: (text, record, index) => {
@@ -252,15 +252,15 @@ class ExchangeQuotes extends React.Component {
       <div className="exchange-quotes-wrap">
         {loading ? 
           <div className="loading-style" style={{ marginTop: "-20px" }}>
-            <TronLoader />
+            <LindaLoader />
           </div> : 
           (coinId ? <coingecko-coin-market-ticker-list-widget coin-id={coinId} currency="usd" locale="en"></coingecko-coin-market-ticker-list-widget> : 
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={tu('trc20_no_data')} />)}
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={tu('lrc20_no_data')} />)}
       </div>
       // <Fragment >
       //   {loading && (
       //     <div className="loading-style" style={{ marginTop: "-20px" }}>
-      //       <TronLoader />
+      //       <LindaLoader />
       //     </div>
       //   )}
       //   <div className="bg-white exchange-quotes-wrap">

@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {Client} from "../../../services/api";
-import {AddressLink, TransactionHashLink, TokenTRC20Link} from "../../common/Links";
+import {AddressLink, TransactionHashLink, TokenLRC20Link} from "../../common/Links";
 import {tu, t} from "../../../utils/i18n";
 // import TimeAgo from "react-timeago";
 import moment from 'moment';
@@ -9,7 +9,7 @@ import {withTimers} from "../../../utils/timing";
 import {FormattedNumber, injectIntl} from "react-intl";
 import SmartTable from "../../common/SmartTable.js"
 import {upperFirst} from "lodash";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import TotalInfo from "../../common/TableTotal";
 // import DateRange from "../../common/DateRange";
 import DateSelect from "../../common/newDateSelect";
@@ -64,7 +64,7 @@ class Transfers extends React.Component {
             }
         );
 
-        let {list, total, rangeTotal} = await Client.getTokenTRC20Transfers({
+        let {list, total, rangeTotal} = await Client.getTokenLRC20Transfers({
             limit: pageSize,
             start: (page - 1) * pageSize,
             contract_address: filter.token,
@@ -240,7 +240,7 @@ class Transfers extends React.Component {
                     {/*<FormattedNumber value={parseFloat(record.quant) / (Math.pow(10,token.decimals))}/>*/}
                         <span>{ FormatNumberByDecimals(record.quant , token.decimals) }</span>
                     &nbsp;&nbsp;
-                    <TokenTRC20Link name={token.symbol} address={token.contract_address} />
+                    <TokenLRC20Link name={token.symbol} address={token.contract_address} />
                 </span>
 
                 },
@@ -278,7 +278,7 @@ class Transfers extends React.Component {
 
         return (
             <Fragment>
-                {loading && <div className="loading-style" style={{marginTop: '-20px'}}><TronLoader/></div>}
+                {loading && <div className="loading-style" style={{marginTop: '-20px'}}><LindaLoader/></div>}
                 <div className="row transfers">
                     <div className="col-md-12 table_pos">
                         <div className="d-flex justify-content-between pl-3 pr-3 pt-3 pb-3">

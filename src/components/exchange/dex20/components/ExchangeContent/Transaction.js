@@ -7,7 +7,7 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { tu } from "../../../../../utils/i18n";
 import { connect } from "react-redux";
 import { injectIntl } from "react-intl";
-import { ONE_TRX } from "../../../../../constants";
+import { ONE_LIND } from "../../../../../constants";
 import { find } from "lodash";
 
 import NumericInput from "./NumericInput";
@@ -65,16 +65,16 @@ class Transaction extends Component {
       (err, values) => {
         if (!err) {
           let token_id =
-            exchangeData.second_token_id == "TRX"
+            exchangeData.second_token_id == "LIND"
               ? "_"
               : exchangeData.second_token_id;
           let quant =
-            exchangeData.second_token_id == "TRX"
-              ? values.second_quant_buy * ONE_TRX
+            exchangeData.second_token_id == "LIND"
+              ? values.second_quant_buy * ONE_LIND
               : values.second_quant_buy;
           let expected =
-            exchangeData.first_token_id == "TRX"
-              ? values.first_quant_buy * ONE_TRX
+            exchangeData.first_token_id == "LIND"
+              ? values.first_quant_buy * ONE_LIND
               : values.first_quant_buy;
 
           this.exchangeTransaction(
@@ -97,16 +97,16 @@ class Transaction extends Component {
       (err, values) => {
         if (!err) {
           let token_id =
-            exchangeData.first_token_id == "TRX"
+            exchangeData.first_token_id == "LIND"
               ? "_"
               : exchangeData.first_token_id;
           let quant =
-            exchangeData.first_token_id == "TRX"
-              ? parseFloat(values.first_quant_sell) * ONE_TRX
+            exchangeData.first_token_id == "LIND"
+              ? parseFloat(values.first_quant_sell) * ONE_LIND
               : parseFloat(values.first_quant_sell);
           let expected =
-            exchangeData.second_token_id == "TRX"
-              ? values.second_quant_sell * ONE_TRX
+            exchangeData.second_token_id == "LIND"
+              ? values.second_quant_sell * ONE_LIND
               : values.second_quant_sell;
 
           this.exchangeTransaction(
@@ -156,7 +156,7 @@ class Transaction extends Component {
       });
       // await Client.exchange({
       //   creatorAddress: currentWallet.address,
-      //   trx_hash: transaction.hash,
+      //   lind_hash: transaction.hash,
       //   exchangeID: exchangeData.exchange_id,
       //   first_token_id: exchangeData.first_token_id,
       //   first_token_quant: values.first_quant_buy
@@ -213,7 +213,7 @@ class Transaction extends Component {
     let { exchangeData } = this.props;
     this.props.form.setFieldsValue({
       second_quant_buy:
-        exchangeData.second_token_id == "TRX"
+        exchangeData.second_token_id == "LIND"
           ? parseFloat(value * 1.01 * exchangeData.price).toFixed(6)
           : value * exchangeData.price * 1.01
     });
@@ -223,7 +223,7 @@ class Transaction extends Component {
     let { exchangeData } = this.props;
     this.props.form.setFieldsValue({
       second_quant_sell:
-        exchangeData.second_token_id == "TRX"
+        exchangeData.second_token_id == "LIND"
           ? parseFloat(value * 0.99 * exchangeData.price).toFixed(6)
           : value * exchangeData.price * 0.99
     });

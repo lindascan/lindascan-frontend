@@ -4,11 +4,11 @@ import React, { Fragment } from "react";
 import { injectIntl } from "react-intl";
 import { tu } from "../../../utils/i18n";
 import { Client } from "../../../services/api";
-import { isAddressValid } from "@tronscan/client/src/utils/crypto";
+import { isAddressValid } from "@lindascan/client/src/utils/crypto";
 import { reloadWallet } from "../../../actions/wallet";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { login } from "../../../actions/app";
-import { withTronWeb } from "../../../utils/tronWeb";
+import { withLindaWeb } from "../../../utils/lindaWeb";
 import { ADDRESS_TAG_ICON } from "../../../constants";
 import SweetAlert from "react-bootstrap-sweetalert";
 import ApiClientAccount from "../../../services/accountApi";
@@ -25,7 +25,7 @@ function setTagIcon(tag) {
     name && <img src={require(`../../../images/address/tag/${name}.svg`)} />
   );
 }
-@withTronWeb
+@withLindaWeb
 class TagForm extends React.Component {
   constructor(props) {
     super(props);
@@ -193,7 +193,7 @@ class TagForm extends React.Component {
     return (
       <div className="send-form tag-form">
         {modal}
-        {isLoading && <TronLoader />}
+        {isLoading && <LindaLoader />}
         <div className="form-group">
           <label>
             <span style={{ color: "#C23631" }}>*</span>

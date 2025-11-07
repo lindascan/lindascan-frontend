@@ -2,16 +2,16 @@ import React from "react";
 import {tu} from "../../../utils/i18n";
 import {FormattedNumber, injectIntl} from "react-intl";
 import {toUpper} from "lodash";
-import {TokenLink, TokenTRC20Link, AddressLink} from "../../common/Links";
+import {TokenLink, TokenLRC20Link, AddressLink} from "../../common/Links";
 import {SwitchToken} from "../../common/Switch";
 import { Truncate } from "../../common/text";
 import SmartTable from "../../common/SmartTable.js"
 import {upperFirst} from "lodash";
 import _ from "lodash";
 import { CONTRACT_ADDRESS_USDT, CONTRACT_ADDRESS_WIN, CONTRACT_ADDRESS_GGC } from "../../../constants";
-import {TRXPrice} from "../../common/Price";
+import {LINDPrice} from "../../common/Price";
 import {Table, Menu, Dropdown,Tooltip,Icon} from 'antd'
-import { ONE_TRX } from "../../../constants";
+import { ONE_LIND } from "../../../constants";
 import { recoverAddress } from "ethers/utils";
 
 
@@ -23,7 +23,7 @@ class TokenBalances extends React.Component {
             hideSmallCurrency:false,
             balances:[],
             emptyState: props.emptyState,
-            tokenTRC10:true,
+            tokenLRC10:true,
             pagination: {
                 showQuickJumper: true,
                 position: "bottom",
@@ -46,14 +46,14 @@ class TokenBalances extends React.Component {
     load =  (page = 1, pageSize = 20) => {
         let {hideSmallCurrency, filterType} = this.state;
         let {tokenBalances} = this.props;
-        tokenBalances = _(tokenBalances).sortBy(tb => -tb.TRXBalance).value()
-        let tokenHasTRXValue =  _(tokenBalances).filter(tb => tb.TRXBalance > 0).sortBy(tb => -tb.TRXBalance).value();
-        let tokenNotTRXValue =  _(tokenBalances).filter(tb => tb.TRXBalance <= 0).sortBy(tb => toUpper(tb.map_token_name)).value();
-        let tokens = tokenHasTRXValue.concat(tokenNotTRXValue);
+        tokenBalances = _(tokenBalances).sortBy(tb => -tb.LINDBalance).value()
+        let tokenHasLINDValue =  _(tokenBalances).filter(tb => tb.LINDBalance > 0).sortBy(tb => -tb.LINDBalance).value();
+        let tokenNotLINDValue =  _(tokenBalances).filter(tb => tb.LINDBalance <= 0).sortBy(tb => toUpper(tb.map_token_name)).value();
+        let tokens = tokenHasLINDValue.concat(tokenNotLINDValue);
         
         if(hideSmallCurrency){
             tokens = _(tokens)
-                .filter(tb => (tb.TRXBalance).toString() >= 10)
+                .filter(tb => (tb.LINDBalance).toString() >= 10)
                 .value();
 
         }
@@ -112,11 +112,11 @@ class TokenBalances extends React.Component {
                             <Menu.Item  key="ALL" className={`${filterType == 'ALL' && 'active'}`}>
                                 <div>{tu('all')}</div>
                             </Menu.Item>
-                            <Menu.Item key="TRC10" className={`${filterType == 'TRC10' && 'active'}`}>
-                                <div>TRC10</div>
+                            <Menu.Item key="LRC10" className={`${filterType == 'LRC10' && 'active'}`}>
+                                <div>LRC10</div>
                             </Menu.Item>
-                            <Menu.Item key="TRC20" className={`${filterType == 'TRC20' && 'active'}`}>
-                                <div>TRC20</div>
+                            <Menu.Item key="LRC20" className={`${filterType == 'LRC20' && 'active'}`}>
+                                <div>LRC20</div>
                             </Menu.Item>
                         </Menu>)
         const droplist = (
@@ -147,8 +147,8 @@ class TokenBalances extends React.Component {
                                     <i style={{width: 10, height: 10, bottom: -5}}></i>
                                 </b>
                                     {
-                                        record.tokenType == 'TRC20'?
-                                        <TokenTRC20Link name={record.map_token_id} address={record.contract_address} namePlus={record.map_token_name + ' (' + record.map_token_name_abbr + ')'}/>
+                                        record.tokenType == 'LRC20'?
+                                        <TokenLRC20Link name={record.map_token_id} address={record.contract_address} namePlus={record.map_token_name + ' (' + record.map_token_name_abbr + ')'}/>
                                         :
                                         <TokenLink id={record.map_token_id} name={record.map_token_name+' ('+record.map_token_name_abbr+")"} address={record.address}/>
 
@@ -161,8 +161,8 @@ class TokenBalances extends React.Component {
                           e.target.src = defaultImg;
                         }}/>
                                 {
-                                    record.tokenType == 'TRC20'?
-                                        <TokenTRC20Link name={record.map_token_id} address={record.contract_address} namePlus={record.map_token_name + ' (' + record.map_token_name_abbr + ')'}/>
+                                    record.tokenType == 'LRC20'?
+                                        <TokenLRC20Link name={record.map_token_id} address={record.contract_address} namePlus={record.map_token_name + ' (' + record.map_token_name_abbr + ')'}/>
                                         :
                                         <TokenLink id={record.map_token_id} name={record.map_token_name+' ('+record.map_token_name_abbr+")"} address={record.address}/>
 
@@ -195,7 +195,7 @@ class TokenBalances extends React.Component {
                 render: (text, record, index) => {
                     return <div>
                         {
-                            record.tokenType == 'TRC20' ? 
+                            record.tokenType == 'LRC20' ? 
                                 <span className="d-flex">
                                     <Tooltip
                                         placement="top"
@@ -222,7 +222,7 @@ class TokenBalances extends React.Component {
                 }
             },
             // {
-            //     title: upperFirst(intl.formatMessage({id: 'TRC20_decimals'})),
+            //     title: upperFirst(intl.formatMessage({id: 'LRC20_decimals'})),
             //     dataIndex: 'map_token_precision',
             //     key: 'map_token_precision',
             //     align: 'left',
@@ -247,9 +247,9 @@ class TokenBalances extends React.Component {
                             {' '}
                            {/* &nbsp;{record.map_token_name_abbr} */}
                         </span>
-                        {record.map_token_name==='TRX' ? 
+                        {record.map_token_name==='LIND' ? 
                             (<span>
-                                ({tu("address_tron_power_remaining")}:{" "}
+                                ({tu("address_linda_power_remaining")}:{" "}
                                 <FormattedNumber value={record.available_amount}  maximumFractionDigits={Number(record.map_token_precision)}/>)
                             </span>)
                             : ''
@@ -258,10 +258,10 @@ class TokenBalances extends React.Component {
                 }
             },
             {
-                title: upperFirst(intl.formatMessage({id: 'price'}))+'(TRX)',
-                dataIndex: 'priceInTrx',
-                key: 'priceInTrx',
-                sorter: (a, b) => a.priceInTrx - b.priceInTrx,
+                title: upperFirst(intl.formatMessage({id: 'price'}))+'(LIND)',
+                dataIndex: 'priceInLind',
+                key: 'priceInLind',
+                sorter: (a, b) => a.priceInLind - b.priceInLind,
                 align: 'left',
                 className: 'ant_table',
                 render: (text, record, index) => {
@@ -274,20 +274,20 @@ class TokenBalances extends React.Component {
                 }
             },
             {
-                title:  upperFirst(intl.formatMessage({id: 'address_balance_token_price_TRX'})),
-                dataIndex: 'TRXBalance',
-                key: 'TRXBalance',
-                sorter: (a, b) => a.TRXBalance_toThousands - b.TRXBalance_toThousands,
+                title:  upperFirst(intl.formatMessage({id: 'address_balance_token_price_LIND'})),
+                dataIndex: 'LINDBalance',
+                key: 'LINDBalance',
+                sorter: (a, b) => a.LINDBalance_toThousands - b.LINDBalance_toThousands,
                 align: 'left',
                 className: 'ant_table',
                 render: (text, record, index) => {
                     return (<span>
-                        {record.TRXBalance? <div>
+                        {record.LINDBalance? <div>
                             <div>
-                                {record.TRXBalance_toThousands} TRX
+                                {record.LINDBalance_toThousands} LIND
                             </div>
                             <div className="small" style={{color: '#999'}}>
-                                ≈<TRXPrice amount={record.TRXBalance}
+                                ≈<LINDPrice amount={record.LINDBalance}
                                           currency="USD"
                                           showPopup={false}/>
                             </div>
@@ -302,7 +302,7 @@ class TokenBalances extends React.Component {
         return column;
     }
 
-    customizedColumnTRC20 = () => {
+    customizedColumnLRC20 = () => {
         let {intl} = this.props;
         let column = [
             {
@@ -315,9 +315,9 @@ class TokenBalances extends React.Component {
                 render: (text, record, index) => {
                     return (
                         record.contract_address == CONTRACT_ADDRESS_USDT || record.contract_address == CONTRACT_ADDRESS_WIN || record.contract_address == CONTRACT_ADDRESS_GGC ?<div className="map-token-top">
-                            <TokenTRC20Link name={record.name} address={record.contract_address} namePlus={record.name + ' (' + record.symbol + ')'}/>
+                            <TokenLRC20Link name={record.name} address={record.contract_address} namePlus={record.name + ' (' + record.symbol + ')'}/>
                             <i></i>
-                        </div>: <TokenTRC20Link name={record.name} address={record.contract_address} namePlus={record.name + ' (' + record.symbol + ')'}/>
+                        </div>: <TokenLRC20Link name={record.name} address={record.contract_address} namePlus={record.name + ' (' + record.symbol + ')'}/>
                     )
                 }
             },
@@ -336,12 +336,12 @@ class TokenBalances extends React.Component {
         return column;
     }
 
-    handleTRC10Token = () => {
-        this.setState({tokenTRC10: true});
+    handleLRC10Token = () => {
+        this.setState({tokenLRC10: true});
     }
 
-    handleTRC20Token = () => {
-        this.setState({tokenTRC10: false});
+    handleLRC20Token = () => {
+        this.setState({tokenLRC10: false});
     }
 
     handleTableChange = (pagination, filters, sorter) => {
@@ -361,13 +361,13 @@ class TokenBalances extends React.Component {
 
     render() {
 
-        let {page, total, pageSize, loading, balances, TRC20balances, emptyState: EmptyState = null, tokenTRC10, pagination, filterType} = this.state;
+        let {page, total, pageSize, loading, balances, LRC20balances, emptyState: EmptyState = null, tokenLRC10, pagination, filterType} = this.state;
         let column = this.customizedColumn();
-        let columnTRC20 = this.customizedColumnTRC20();
+        let columnLRC20 = this.customizedColumnLRC20();
         let {intl} = this.props;
         let tableInfo = intl.formatMessage({id: 'view_total'}) + ' ' + balances.length + ' ' + intl.formatMessage({id: 'token_unit'})
         let locale  = {emptyText: intl.formatMessage({id: 'no_tokens_found'})}
-        // if (Object.keys(balances).length === 0 || (Object.keys(balances).length === 1 && balances[0].name === "TRX")) {
+        // if (Object.keys(balances).length === 0 || (Object.keys(balances).length === 1 && balances[0].name === "LIND")) {
         //     if (!EmptyState) {
         //         return (
         //             <div className="text-center p-3 no-data">
@@ -389,19 +389,19 @@ class TokenBalances extends React.Component {
                 </div>
                 {/*<div className={"account-token-tab address-token-tab " + (balances.length ? '' : "address-token-tab-mobile")}>*/}
                     {/*<a href="javascript:;"*/}
-                       {/*className={"btn btn-default btn-sm" + (tokenTRC10 ? ' active' : '')}*/}
-                       {/*onClick={this.handleTRC10Token}>*/}
-                        {/*{tu("TRC10_token")}*/}
+                       {/*className={"btn btn-default btn-sm" + (tokenLRC10 ? ' active' : '')}*/}
+                       {/*onClick={this.handleLRC10Token}>*/}
+                        {/*{tu("LRC10_token")}*/}
                     {/*</a>*/}
                     {/*<a href="javascript:;"*/}
-                       {/*className={"btn btn-default btn-sm ml-2" + (tokenTRC10 ? '' : ' active')}*/}
-                       {/*onClick={this.handleTRC20Token}>*/}
-                        {/*{tu("TRC20_token")}*/}
+                       {/*className={"btn btn-default btn-sm ml-2" + (tokenLRC10 ? '' : ' active')}*/}
+                       {/*onClick={this.handleLRC20Token}>*/}
+                        {/*{tu("LRC20_token")}*/}
                     {/*</a>*/}
                 {/*</div>*/}
                 <div>
                     {
-                       // Object.keys(balances).length === 0 || (Object.keys(balances).length === 1 && balances[0].map_token_name === "TRX")?
+                       // Object.keys(balances).length === 0 || (Object.keys(balances).length === 1 && balances[0].map_token_name === "LIND")?
                         Object.keys(balances).length === 0 && filterType == 'ALL'?
                             <div className="text-center p-3 no-data">
                                 {tu("no_tokens_found")}

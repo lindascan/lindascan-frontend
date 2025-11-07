@@ -12,7 +12,7 @@ import {
 } from "react-intl";
 import { BlockNumberLink } from "../../common/Links";
 import { CopyText } from "../../common/Copy";
-import { TronLoader } from "../../common/loaders";
+import { LindaLoader } from "../../common/loaders";
 import { Truncate } from "../../common/text";
 // import Contract from "../../tools/TransactionViewer/Contract";
 import { ContractTypes } from "../../../utils/protocol";
@@ -44,7 +44,7 @@ class Transaction extends React.Component {
           icon: "fa fa-exchange-alt",
           path: "",
           label: <span>{tu("contracts")}</span>,
-          cmp: () => <TronLoader />
+          cmp: () => <LindaLoader />
         }
       },
       resMessage: "",
@@ -189,7 +189,7 @@ class Transaction extends React.Component {
       <main className="container header-overlap transaction-new">
         {loading ? (
           <div className="card">
-            <TronLoader>{tu("loading_transaction")}</TronLoader>
+            <LindaLoader>{tu("loading_transaction")}</LindaLoader>
           </div>
         ) : (
           <div className="row">

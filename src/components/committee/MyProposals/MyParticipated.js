@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import {tu,t} from "../../../utils/i18n";
 import { Client, proposalApi } from "../../../services/api";
 import {FormattedDate, FormattedTime, injectIntl} from "react-intl";
-import {TronLoader} from "../../common/loaders";
+import {LindaLoader} from "../../common/loaders";
 import {AddressLink} from "../../common/Links";
 import {QuestionMark} from "../../common/QuestionMark";
-import {ONE_TRX,IS_MAINNET} from "../../../constants";
+import {ONE_LIND,IS_MAINNET} from "../../../constants";
 import {NavLink, Route, Switch} from "react-router-dom";
 import {upperFirst} from 'lodash'
 import {Link} from "react-router-dom";
 import { Table } from "antd";
 import SweetAlert from 'react-bootstrap-sweetalert';
-import {transactionResultManager, transactionResultManagerSun} from "../../../utils/tron";
-import {withTronWeb} from "../../../utils/tronWeb";
+import {transactionResultManager, transactionResultManagerSun} from "../../../utils/linda";
+import {withLindaWeb} from "../../../utils/lindaWeb";
 
-@withTronWeb
+@withLindaWeb
 class MyParticipated extends React.Component {
     constructor() {
         super();
@@ -85,7 +85,7 @@ class MyParticipated extends React.Component {
             'getAllowSameTokenName',
             'getAllowDelegateResource',
             'getTotalEnergyLimit',
-            'getAllowTvmTransferTrc10',
+            'getAllowTvmTransferLrc10',
             'getTotalEnergyLimitNew',
             'getAllowMultiSign',
             // 'getTotalEnergyCurrentLimit',
@@ -222,8 +222,8 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_2'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -231,8 +231,8 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_3'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -249,8 +249,8 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_5'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -259,8 +259,8 @@ class MyParticipated extends React.Component {
                                                 <div>
                                                     <span>{ intl.formatMessage({id: 'propose_6'})}</span>
                                                     <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                    <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                    <span>TRX</span>
+                                                    <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                    <span>LIND</span>
                                                 </div>
                                             </div>
                                         }
@@ -269,16 +269,16 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_7'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span></div>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span></div>
                                         }
                                         {
                                             item.proposalKey == 'getCreateNewAccountFeeInSystemContract' &&
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_8'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span></div>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span></div>
                                         }
                                         {
                                             item.proposalKey == 'getCreateNewAccountBandwidthRate' &&
@@ -307,7 +307,7 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_12'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX} TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND} LIND</span>
                                             </div>
                                         }
                                         {
@@ -315,7 +315,7 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_13'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX} TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND} LIND</span>
                                             </div>
                                         }
                                         {
@@ -368,7 +368,7 @@ class MyParticipated extends React.Component {
                                             </div>
                                         }
                                         {
-                                            item.proposalKey == 'getAllowTvmTransferTrc10' &&
+                                            item.proposalKey == 'getAllowTvmTransferLrc10' &&
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_19'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
@@ -441,8 +441,8 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_25'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -450,8 +450,8 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_26'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
 
@@ -493,8 +493,8 @@ class MyParticipated extends React.Component {
                                             <div>
                                                 <span>{ intl.formatMessage({id: 'propose_28_1'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -522,8 +522,8 @@ class MyParticipated extends React.Component {
                                             <div className="mt-1">
                                                 <span>{ intl.formatMessage({id: 'propose_31'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
 
                                         }
@@ -551,8 +551,8 @@ class MyParticipated extends React.Component {
                                             <div className="mt-1">
                                                 <span>{ intl.formatMessage({id: 'propose_34'})}</span>
                                                 <span>{ intl.formatMessage({id: 'proposal_to'})}</span>
-                                                <span>{ item.proposalVal / ONE_TRX}</span> &nbsp;
-                                                <span>TRX</span>
+                                                <span>{ item.proposalVal / ONE_LIND}</span> &nbsp;
+                                                <span>LIND</span>
                                             </div>
                                         }
                                         {
@@ -820,18 +820,18 @@ class MyParticipated extends React.Component {
 
     async getResult(id, v){
         let res;
-        let {isTronLink} = this.state;
+        let {isLindaLink} = this.state;
         let {account} = this.props;
         if(IS_MAINNET){
-            let tronWeb;
+            let lindaWeb;
             if (this.props.walletType.type === "ACCOUNT_LEDGER"){
-                tronWeb = this.props.tronWeb();
-            }else if(this.props.walletType.type === "ACCOUNT_TRONLINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"){
-                tronWeb = account.tronWeb;
+                lindaWeb = this.props.lindaWeb();
+            }else if(this.props.walletType.type === "ACCOUNT_LINDALINK" || this.props.walletType.type === "ACCOUNT_PRIVATE_KEY"){
+                lindaWeb = account.lindaWeb;
             }
 
-            const unSignTransaction = await tronWeb.transactionBuilder.voteProposal(id, v , account.address, 1).catch(e=> console.log(e));
-            const {result} = await transactionResultManager(unSignTransaction, tronWeb);
+            const unSignTransaction = await lindaWeb.transactionBuilder.voteProposal(id, v , account.address, 1).catch(e=> console.log(e));
+            const {result} = await transactionResultManager(unSignTransaction, lindaWeb);
 
             res = result;
         }else{
@@ -850,7 +850,7 @@ class MyParticipated extends React.Component {
         return (
             <div className="">
                 {modal}
-                {loading && <div className="loading-style"><TronLoader/></div>}
+                {loading && <div className="loading-style"><LindaLoader/></div>}
                 {!loading&&
                     (total > 0 ? <Table
                         bordered={true}
@@ -865,9 +865,9 @@ class MyParticipated extends React.Component {
                         onChange={this.handleTableChange}
                     /> :
                     <div className="my-proposals-empty">
-                      <img src={require('../../../images/proposals/tron-empty.svg')} alt=""/>
+                      <img src={require('../../../images/proposals/linda-empty.svg')} alt=""/>
                       <div>
-                        {t('trc20_no_data')},
+                        {t('lrc20_no_data')},
                         {t('proposal_go')}
                         <Link to="/proposalscreate">{t('proposal_create')}</Link>
                         {t('proposal_or')}

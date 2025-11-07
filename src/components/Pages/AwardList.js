@@ -5,10 +5,10 @@ import { tu } from "../../utils/i18n";
 import { FormattedNumber, injectIntl } from "react-intl";
 import { upperFirst, trim } from "lodash";
 import { AddressLink } from "../common/Links";
-import { CIRCULATING_SUPPLY, ONE_TRX } from "../../constants";
-import { TRXPrice } from "../common/Price";
+import { CIRCULATING_SUPPLY, ONE_LIND } from "../../constants";
+import { LINDPrice } from "../common/Price";
 //import SmartTable from "../common/SmartTable.js";
-import { TronLoader } from "../common/loaders";
+import { LindaLoader } from "../common/loaders";
 //import { QuestionMark } from "../common/QuestionMark";
 //import xhr from "axios/index";
 import { Client } from "../../services/api";
@@ -40,7 +40,7 @@ class AwardList extends Component {
             dappName:'Lottery',
             website:'tronlott.me',
             websiteHref:'http://tronlott.me',
-            Introduction:'TRON-Lottery is the first lottery game on sunnetwork. It is based on smart contracts and is completely fair. It also supports mining, dividends and other operations. Welcome to play.',
+            Introduction:'LINDA-Lottery is the first lottery game on sunnetwork. It is based on smart contracts and is completely fair. It also supports mining, dividends and other operations. Welcome to play.',
             bonus:'5000',
         },
         {
@@ -55,16 +55,16 @@ class AwardList extends Component {
         {
             id:4,
             awards: 'Second Prize',
-            dappName:'TRONSix',
+            dappName:'LINDASix',
             website:'tronsix.com',
             websiteHref:'http://tronsix.com',
-            Introduction:"TRONSix is a dice game that we run on the TRON sidechain. The underlying layer is based on the TRON VM's smart contract. Fair, open source, and fair.",
+            Introduction:"LINDASix is a dice game that we run on the LINDA sidechain. The underlying layer is based on the LINDA VM's smart contract. Fair, open source, and fair.",
             bonus:'3000',
         },
         {
             id:5,
             awards: 'Second Prize',
-            dappName:'Tron-Racer',
+            dappName:'Linda-Racer',
             website:'arinatycoon.com/tron-racer',
             websiteHref:'http://arinatycoon.com/tron-racer',
             Introduction:'-',
@@ -111,10 +111,10 @@ class AwardList extends Component {
         {
             id:8,
             awards: 'Second Prize',
-            dappName:'TRON Win',
+            dappName:'LINDA Win',
             website:'tronwin.cc',
             websiteHref:'http://tronwin.cc',
-            Introduction:"TRONWin wants to become the BIGGEST and BEST online gambling platform on TRON.  We've developed lots of DApps on different blockchain before. Mine is our first try, lots of more is coming. Have fun!",
+            Introduction:"LINDAWin wants to become the BIGGEST and BEST online gambling platform on LINDA.  We've developed lots of DApps on different blockchain before. Mine is our first try, lots of more is coming. Have fun!",
             bonus:'3000',
         },
         {
@@ -150,7 +150,7 @@ class AwardList extends Component {
             dappName:'Poker',
             website:'tronpk.com',
             websiteHref:'http://tronpk.com',
-            Introduction:'TRON Poker is a decentralized, fair, transparent, and open game platform based on blockchain technology.It has launched a variety of blockchain games based on TRON smart contracts worldwide. The platform uses blockchain technology to provide completely fair game rules, automated revenue distribution, complete protection of player privacy, and all traceable transaction records.',
+            Introduction:'LINDA Poker is a decentralized, fair, transparent, and open game platform based on blockchain technology.It has launched a variety of blockchain games based on LINDA smart contracts worldwide. The platform uses blockchain technology to provide completely fair game rules, automated revenue distribution, complete protection of player privacy, and all traceable transaction records.',
             bonus:'1000',
         },
         {
@@ -177,7 +177,7 @@ class AwardList extends Component {
             dappName:'OneDice',
             website:'51bf.me',
             websiteHref:'http://51bf.me',
-            Introduction:'OneDice wants to become the BIGGEST and BEST online gambling platform on #TRX blockchain.',
+            Introduction:'OneDice wants to become the BIGGEST and BEST online gambling platform on #LIND blockchain.',
             bonus:'1000',
         },
         {
@@ -196,7 +196,7 @@ class AwardList extends Component {
             dappName:'Energy',
             website:'abet.fun',
             websiteHref:'https://abet.fun',
-            Introduction:'Energy is a Tron smart contract for placing bets on our provably-fair dice game using TRX with no deposits or sign-ups.',
+            Introduction:'Energy is a Linda smart contract for placing bets on our provably-fair dice game using LIND with no deposits or sign-ups.',
             bonus:'1000',
         },
         {
@@ -221,9 +221,9 @@ class AwardList extends Component {
             id:20,
             awards: 'Third Prize',
             dappName:'betNow!',
-            website:'trxbet.cc',
-            websiteHref:'http://trxbet.cc',
-            Introduction:'BetNow is completely developed based on TRON smart contract, fair and open and safe. A series of gameplay such as mining dividends will be launched in the future.',
+            website:'lindbet.cc',
+            websiteHref:'http://lindbet.cc',
+            Introduction:'BetNow is completely developed based on LINDA smart contract, fair and open and safe. A series of gameplay such as mining dividends will be launched in the future.',
             bonus:'1000',
         },
         {
@@ -250,7 +250,7 @@ class AwardList extends Component {
             dappName:'pangu',
             website:'pangu.trade',
             websiteHref:'http://pangu.trade',
-            Introduction:'Decentralized exchange based on TRON & SUN DAppChain',
+            Introduction:'Decentralized exchange based on LINDA & SUN DAppChain',
             bonus:'250',
         },
         {
@@ -268,7 +268,7 @@ class AwardList extends Component {
             dappName:'G Connect',
             website:'gconnect.io',
             websiteHref:'http://gconnect.io',
-            Introduction:'Payment solutions for gaming industry. First solution is donation service for gamers based on TRON Network. Second is cryptocurrency wallet for iOS & Android.',
+            Introduction:'Payment solutions for gaming industry. First solution is donation service for gamers based on LINDA Network. Second is cryptocurrency wallet for iOS & Android.',
             bonus:'250',
         },
       ],
@@ -441,7 +441,7 @@ class AwardList extends Component {
         {modal}
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         <div className="row">
@@ -485,13 +485,13 @@ class AwardList extends Component {
                 bordered={true}
                 // rowClassName={(record, index) => {
                 //   if (record.index < 6) {
-                //     return "trc20-star-ad";
+                //     return "lrc20-star-ad";
                 //   }
                 // }}
               />
             </div>
             {/* {total ? (
-              <p className="developers_tip_bottom">{tu("developers_niTron")}</p>
+              <p className="developers_tip_bottom">{tu("developers_niLinda")}</p>
             ) : (
               ""
             )} */}

@@ -10,10 +10,10 @@ import Paging from "./Paging";
 import { Client } from "../../services/api";
 import { AddressLink, ExternalLink } from "./Links";
 import { tu, t } from "../../utils/i18n";
-import { ONE_TRX } from "../../constants";
+import { ONE_LIND } from "../../constants";
 import SmartTable from "./SmartTable.js";
 import { upperFirst } from "lodash";
-import { TronLoader } from "./loaders";
+import { LindaLoader } from "./loaders";
 import { withTimers } from "../../utils/timing";
 import qs from "qs";
 import { API_URL } from "../../constants";
@@ -319,7 +319,7 @@ class Votes extends React.Component {
       <div className="token_black table_pos vote-wrap">
         {loading && (
           <div className="loading-style">
-            <TronLoader />
+            <LindaLoader />
           </div>
         )}
         {total ? (

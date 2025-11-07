@@ -8,10 +8,10 @@ import { Steps, Table, Checkbox,Input } from 'antd';
 import SweetAlert from "react-bootstrap-sweetalert";
 import {Client} from "../../../services/api";
 import _,{upperFirst} from 'lodash'
-import {ONE_TRX,IS_MAINNET} from "../../../constants";
-import {transactionResultManager} from "../../../utils/tron";
-import { TronLoader } from "../../common/loaders";
-import {withTronWeb} from "../../../utils/tronWeb";
+import {ONE_LIND,IS_MAINNET} from "../../../constants";
+import {transactionResultManager} from "../../../utils/linda";
+import { LindaLoader } from "../../common/loaders";
+import {withLindaWeb} from "../../../utils/lindaWeb";
 const Step = Steps.Step;
 
 
@@ -23,7 +23,7 @@ const Step = Steps.Step;
   })
 )
 
-@withTronWeb
+@withLindaWeb
 export class SubmitProposal extends Component {
 
   constructor(props) {
@@ -80,12 +80,12 @@ export class SubmitProposal extends Component {
     const {type} = this.props.state;
     if(!isLoggedInFn()) return;
     // if( isUpdate  && !isAuthorFn(author)) return;
-    // if(!issuedAsset && (type == 'trc10')){
-    //   this.setModal('trx_token_account_limit')
+    // if(!issuedAsset && (type == 'lrc10')){
+    //   this.setModal('lind_token_account_limit')
     //   return
     // }
     // if(wallet.balance < 1024*Math.pow(10,6)){
-    //   this.setModal('trx_token_fee_message')
+    //   this.setModal('lind_token_fee_message')
     //   return
     // }
     nextStep(4)
@@ -111,7 +111,7 @@ export class SubmitProposal extends Component {
     if (wallet !== null) {
       Client.getIssuedAsset(wallet.address).then(({token}) => {
         this.setState({issuedAsset: (token == undefined)})
-        // token !== undefined && this.props.nextState({type: 'trc20'})
+        // token !== undefined && this.props.nextState({type: 'lrc20'})
       });
     }
   };
@@ -152,7 +152,7 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getAccountUpgradeCost' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -160,7 +160,7 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getCreateAccountFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -176,7 +176,7 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getAssetIssueFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -184,7 +184,7 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getWitnessPayPerBlock' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -192,14 +192,14 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getWitnessStandbyAllowance' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
                                     </div>
                                 }
                                 {/*{*/}
-                                    {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span></div>*/}
+                                    {/*record.key == 'getCreateNewAccountFeeInSystemContract' && <div><span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span></div>*/}
                                 {/*}*/}
                                 {/*{*/}
                                     {/*record.key == 'getCreateNewAccountBandwidthRate' && <div><span>{text}</span> &nbsp;<span>bandwith/byte</span></div>*/}
@@ -227,7 +227,7 @@ export class SubmitProposal extends Component {
                                 {
                                     record.key == 'getEnergyFee' && <div>
                                         {
-                                            <span>{text / ONE_TRX} TRX</span>
+                                            <span>{text / ONE_LIND} LIND</span>
                                         }
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
@@ -237,7 +237,7 @@ export class SubmitProposal extends Component {
                                 {
                                     record.key == 'getExchangeCreateFee' && <div>
                                         {
-                                            <span>{text / ONE_TRX} TRX</span>
+                                            <span>{text / ONE_LIND} LIND</span>
                                         }
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
@@ -299,7 +299,7 @@ export class SubmitProposal extends Component {
                                     </div>
                                 }
                                 {
-                                    record.key == 'getAllowTvmTransferTrc10' && <div>
+                                    record.key == 'getAllowTvmTransferLrc10' && <div>
                                         {
                                             Number(text)? <span>{tu('propose_allowed')}</span>:
                                                 <span>{tu('propose_not_allowed')}</span>
@@ -373,8 +373,8 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getUpdateAccountPermissionFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;
-                                        <span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;
+                                        <span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -382,8 +382,8 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getMultiSignFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;
-                                        <span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;
+                                        <span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -425,7 +425,7 @@ export class SubmitProposal extends Component {
                                 }
                                 {                       
                                     record.key == 'getShieldedTransactionFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                             record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -453,7 +453,7 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getWitness127PayPerBlock' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                         record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -480,7 +480,7 @@ export class SubmitProposal extends Component {
                                 }
                                 {
                                     record.key == 'getShieldedTransactionCreateAccountFee' && <div>
-                                        <span>{text / ONE_TRX}</span> &nbsp;<span>TRX</span>
+                                        <span>{text / ONE_LIND}</span> &nbsp;<span>LIND</span>
                                         {
                                         record.same && <span className="proposal-value-same ml-1">({tu('proposal_value_same')})</span>
                                         }
@@ -634,29 +634,29 @@ export class SubmitProposal extends Component {
           title={intl.formatMessage({ id: "in_progress" })}
           //style={{marginLeft: '-240px', marginTop: '-195px', width: '450px', height: '300px'}}
         >
-          <TronLoader />
+          <LindaLoader />
         </SweetAlert>
       ),
       loading: true
     });
     let proposalsCreateListNew  = [];
-    let res, tronWeb;
+    let res, lindaWeb;
     proposalsCreateList.map((item,index)=>{
       proposalsCreateListNew.push({"key": Number(item.key), "value":parseFloat(item.newValue)})
     })
     if(this.props.walletType.type === "ACCOUNT_LEDGER"){
-        tronWeb = this.props.tronWeb();
+        lindaWeb = this.props.lindaWeb();
     }else{
-        tronWeb = account.tronWeb;
+        lindaWeb = account.lindaWeb;
     }
     
-    const unSignTransaction = await tronWeb.transactionBuilder.createProposal(proposalsCreateListNew,tronWeb.address.toHex(account.address),1).catch(res=>console.log(res))
+    const unSignTransaction = await lindaWeb.transactionBuilder.createProposal(proposalsCreateListNew,lindaWeb.address.toHex(account.address),1).catch(res=>console.log(res))
   
   
     if (!unSignTransaction && unSignTransaction != "") {
       res = false;
     } else {
-      const {result} = await transactionResultManager(unSignTransaction, tronWeb).catch(res=>console.log('res',res));
+      const {result} = await transactionResultManager(unSignTransaction, lindaWeb).catch(res=>console.log('res',res));
       res = result;
     }
     this.setState({

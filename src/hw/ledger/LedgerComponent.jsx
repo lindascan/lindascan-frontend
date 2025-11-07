@@ -1,6 +1,6 @@
 import React from "react";
 import Transport from "@ledgerhq/hw-transport-u2f";
-import AppTrx from '@ledgerhq/hw-app-trx';
+import AppLind from '@ledgerhq/hw-app-lind';
 
 export class LedgerComponent extends React.Component {
 
@@ -28,8 +28,8 @@ export class LedgerComponent extends React.Component {
     return new Promise(async (resolve, reject) => {
       const transport = await Transport.create();
       try {
-        const trx = new AppTrx(transport);
-        let address = await trx.getAddress(this.path);
+        const lind = new AppLind(transport);
+        let address = await lind.getAddress(this.path);
         resolve(address.address);
       } catch(e) {
         reject(e);

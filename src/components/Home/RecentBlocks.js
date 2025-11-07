@@ -3,12 +3,12 @@ import {tu} from "../../utils/i18n";
 import {FormattedNumber, injectIntl} from "react-intl";
 import {loadBlocks} from "../../actions/blockchain";
 import {connect} from "react-redux";
-//import {TronLoader} from "../common/loaders";
+//import {LindaLoader} from "../common/loaders";
 import {AddressLink} from "../common/Links";
 // import TimeAgo from "react-timeago";
 //import moment from 'moment';
 import {Link} from "react-router-dom";
-import {TRXPrice} from "../common/Price";
+import {LINDPrice} from "../common/Price";
 import {withTimers} from "../../utils/timing";
 import {IS_MAINNET} from "../../constants";
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -52,7 +52,7 @@ class RecentBlocks extends Component {
     // if (blocks.length === 0) {
     //   return (
     //       <div className="text-center d-flex justify-content-center">
-    //         <TronLoader/>
+    //         <LindaLoader/>
     //       </div>
     //   );
     // }
@@ -60,7 +60,7 @@ class RecentBlocks extends Component {
     return (
         <div className="card" style={styles.card}>
           {/* test */}
-          <div className="card-header bg-tron-light d-flex">
+          <div className="card-header bg-linda-light d-flex">
             <i className="fa fa-cubes mr-3 fa_width_20 color-grey-100"></i>
             <h5 className="m-0 lh-175 color-grey-100 confirmed_block_tip">
               {tu("blocks")}
@@ -85,9 +85,9 @@ class RecentBlocks extends Component {
                           <div className="media-body mb-0 d-flex" style={{paddingTop: 1}}>
                             <div className="text-left">
                               <div className="d-flex justify-content-between align-times-center">
-                                <Link className="mr-1 d-flex justify-content-start color-tron-100 pt-1 list-item-word"
+                                <Link className="mr-1 d-flex justify-content-start color-linda-100 pt-1 list-item-word"
                                       to={`/block/${block.number}`}>
-                                  <i className="fa fa-cube mr-2 mt-1 fa_width color-tron-100"
+                                  <i className="fa fa-cube mr-2 mt-1 fa_width color-linda-100"
                                     style={{fontSize: '1rem'}}></i>
                                   #{block.number}
                                 </Link>
@@ -96,23 +96,23 @@ class RecentBlocks extends Component {
                                 </div>
                               </div>
                               <div>
-                                <i className="fas fa-exchange-alt mr-2 color-tron-100"/>
-                                <Link className="color-tron-100"
+                                <i className="fas fa-exchange-alt mr-2 color-linda-100"/>
+                                <Link className="color-linda-100"
                                       to={`/blockchain/transactions?block=${block.number}`}>
-                                  <FormattedNumber value={block.nrOfTrx}/>{' '}
+                                  <FormattedNumber value={block.nrOfLind}/>{' '}
                                   {tu("transactions")}
                                 </Link>
                               </div>
                               <div className="text-gray-dark break-word d-flex list-item-word small">
                                 <span className="mr-2 color-grey-300">{tu("produced_by")}:</span>
                                 <AddressLink address={block.witnessAddress} truncate={false}>
-                                  <span className="color-tron-100">{block.witnessName?block.witnessName:block.witnessAddress}</span>
+                                  <span className="color-linda-100">{block.witnessName?block.witnessName:block.witnessAddress}</span>
                                 </AddressLink>
                               </div>
                                 {
                                     IS_MAINNET && <div className="text-gray-dark break-word color-grey-200 list-item-word"
                                       style={styles.nowrap}>
-                                    <span className="small color-grey-300 d-inline-block">{tu("block_reward")}:</span> <TRXPrice amount={16}/>
+                                    <span className="small color-grey-300 d-inline-block">{tu("block_reward")}:</span> <LINDPrice amount={16}/>
                                   </div>
                                 }
 
@@ -131,9 +131,9 @@ class RecentBlocks extends Component {
                         <div className="media-body mb-0 d-flex" style={{ paddingTop: 1 }}>
                           <div className="text-left">
                             <div className="d-flex justify-content-between align-times-center">
-                              <Link className="mr-1 d-flex justify-content-start color-tron-100 pt-1 list-item-word"
+                              <Link className="mr-1 d-flex justify-content-start color-linda-100 pt-1 list-item-word"
                                 to=''>
-                                <i className="fa fa-cube mr-2 mt-1 fa_width color-tron-100"
+                                <i className="fa fa-cube mr-2 mt-1 fa_width color-linda-100"
                                   style={{ fontSize: '1rem' }}></i>
                                 # --
                               </Link>
@@ -144,8 +144,8 @@ class RecentBlocks extends Component {
                               </div>
                             </div>
                             <div>
-                              <i className="fas fa-exchange-alt mr-2 color-tron-100" />
-                              <Link className="color-tron-100"
+                              <i className="fas fa-exchange-alt mr-2 color-linda-100" />
+                              <Link className="color-linda-100"
                                 to=''>
                                 --
                                 {tu("transactions")}
@@ -154,7 +154,7 @@ class RecentBlocks extends Component {
                             <div className="text-gray-dark break-word d-flex list-item-word small">
                               <span className="mr-2 color-grey-300">{tu("produced_by")}:</span>
                               {/* <AddressLink address={block.witnessAddress} truncate={false}> */}
-                                <span className="color-tron-100">--</span>
+                                <span className="color-linda-100">--</span>
                               {/* </AddressLink> */}
                             </div>
                             {
@@ -185,24 +185,24 @@ class RecentBlocks extends Component {
                         <div key={block.number} className="d-flex flex-column">
                           <div className="media-body mb-0 d-flex" style={{paddingTop: 1}}>
                             <div className="text-left">
-                              <Link className="mr-1 d-flex justify-content-start color-tron-100 pt-1 list-item-word"
+                              <Link className="mr-1 d-flex justify-content-start color-linda-100 pt-1 list-item-word"
                                     to={`/block/${block.number}`}>
-                                <i className="fa fa-cube mr-2 mt-1 fa_width color-tron-100"
+                                <i className="fa fa-cube mr-2 mt-1 fa_width color-linda-100"
                                   style={{fontSize: '1rem'}}></i>
                                 #{block.number}
                               </Link>
                               <div>
-                                <i className="fas fa-exchange-alt mr-2 color-tron-100"/>
-                                <Link className="color-tron-100"
+                                <i className="fas fa-exchange-alt mr-2 color-linda-100"/>
+                                <Link className="color-linda-100"
                                       to={`/blockchain/transactions?block=${block.number}`}>
-                                  <FormattedNumber value={block.nrOfTrx}/>{' '}
+                                  <FormattedNumber value={block.nrOfLind}/>{' '}
                                   {tu("transactions")}
                                 </Link>
                               </div>
                               <div className="text-gray-dark break-word d-flex list-item-word">
                                 <span className="mr-2 color-grey-300">{tu("produced_by")}:</span>
                                 <AddressLink address={block.witnessAddress} truncate={false}>
-                                  <span className="color-tron-100">{block.witnessName?block.witnessName:block.witnessAddress}</span>
+                                  <span className="color-linda-100">{block.witnessName?block.witnessName:block.witnessAddress}</span>
                                 </AddressLink>
                               </div>
 
@@ -210,7 +210,7 @@ class RecentBlocks extends Component {
                             <div className="ml-auto text-right d-flex flex-column pt-2">
                               {
                                 IS_MAINNET &&  <div className="text-gray-dark break-word color-grey-200 list-item-word"
-                                      style={styles.nowrap}><span className="d-inline-block">{tu("block_reward")}:</span> <TRXPrice amount={16}/>
+                                      style={styles.nowrap}><span className="d-inline-block">{tu("block_reward")}:</span> <LINDPrice amount={16}/>
                                 </div>
                               }
 
@@ -228,21 +228,21 @@ class RecentBlocks extends Component {
                       <div key={i} className="d-flex flex-column">
                         <div className="media-body mb-0 d-flex" style={{ paddingTop: 1 }}>
                           <div className="text-left">
-                                <Link className="mr-1 d-flex justify-content-start color-tron-100 pt-1 list-item-word" to=''>
-                              <i className="fa fa-cube mr-2 mt-1 fa_width color-tron-100"
+                                <Link className="mr-1 d-flex justify-content-start color-linda-100 pt-1 list-item-word" to=''>
+                              <i className="fa fa-cube mr-2 mt-1 fa_width color-linda-100"
                                 style={{ fontSize: '1rem' }}></i>
                               # --
                               </Link>
                             <div>
-                              <i className="fas fa-exchange-alt mr-2 color-tron-100" />
-                              <Link className="color-tron-100" to=''>
+                              <i className="fas fa-exchange-alt mr-2 color-linda-100" />
+                              <Link className="color-linda-100" to=''>
                                 -- {tu("transactions")}
                               </Link>
                             </div>
                             <div className="text-gray-dark break-word d-flex list-item-word">
                               <span className="mr-2 color-grey-300">{tu("produced_by")}:</span>
                               {/* <AddressLink address={} truncate={false}> */}
-                              <span className="color-tron-100">--</span>
+                              <span className="color-linda-100">--</span>
                               {/* </AddressLink> */}
                             </div>
 
