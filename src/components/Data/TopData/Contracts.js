@@ -27,7 +27,7 @@ class Contracts extends React.Component {
     this.state = {
       lindUnit: "LIND",
       usdUnit: "USD",
-      tpUnit: "TP",
+      lpUnit: "LP",
       txnUnit: "Txns",
       types: {
         11: {

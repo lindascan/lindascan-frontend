@@ -23,12 +23,12 @@ import { Link } from "react-router-dom";
 class Accounts extends React.Component {
   constructor() {
     super();
-    const tpUnit = "TP";
+    const lpUnit = "LP";
     const txnUnit = "Txns";
     this.state = {
       lindUnit: "LIND",
       usdUnit: "USD",
-      tpUnit: "TP",
+      lpUnit: "LP",
       txnUnit: "Txns",
       types: {
         1: {
@@ -73,7 +73,7 @@ class Accounts extends React.Component {
           title: "data_account_vote",
           tableTitle: ["data_range", "data_account", "data_piao", "data_per"],
           isUSD: false,
-          unit: tpUnit,
+          unit: lpUnit,
           key: "votes",
           data: [],
           isRealTime: true

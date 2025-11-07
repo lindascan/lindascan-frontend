@@ -1876,7 +1876,7 @@ export const messages = {
     "account_ad": "LINDAdice 玩游戏得dice币，抵押dice币每日得LIND分红",
     "bandwidth_tip": "在波场，除查询之外的任何交易都需要消耗带宽,系统每天给每个激活账户赠送5000带宽,用户可以通过冻结lind获得带宽。",
     "energy_tip": "在波场，智能合约的创建和调用都需要消耗能量，用户可以通过冻结lind获得能量。",
-    "power_tip": "投票权(TP)用来给LINDA SR投票,用户可以通过冻结LIND来获得投票权。",
+    "power_tip": "投票权(LP)用来给LINDA SR投票,用户可以通过冻结LIND来获得投票权。",
     "token_precision": "通证精度",
     "token_precision_message_0": "根据需要设置通证的精度，精度范围是0-6",
     "check_my_token": "查看我发行的通证",

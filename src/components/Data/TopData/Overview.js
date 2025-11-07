@@ -171,7 +171,7 @@ class Overview extends React.Component {
                     <FormattedNumber
                       value={data.whole_vote || 0}
                     ></FormattedNumber>{" "}
-                    TP
+                    LP
                   </div>
                 </div>
               </div>

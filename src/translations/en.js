@@ -2079,7 +2079,7 @@ export const messages = {
   energy_tip:
     "On LINDA, the creation and triggering of smart contracts consume Energy. Users can gain Energy through freezing LIND.",
   power_tip:
-    "LINDA Power (TP) is used for voting for LINDA SRs. Users can gain TP through freezing LIND.",
+    "LINDA Power (LP) is used for voting for LINDA SRs. Users can gain LP through freezing LIND.",
   token_precision: "Token Precision",
   token_precision_message_0:
     "Set the precision of the token as required, the range is 0-6",

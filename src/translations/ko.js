@@ -1841,7 +1841,7 @@ export const messages = {
   "account_ad": "LINDAdice ,게임하면  dice 코인을 얻을수 있으며 , dice코인을 보유시 LIND 배당금을 얻을수 있습니다.",
   "bandwidth_tip": "LINDA에서는 모든 거래에서 대역폭이 소모되지만 시스템은 매일 5,000개의 대역폭을 활성화된 각 계정에 부여합니다. 사용자는 LIND를 동결하여 대역폭을 확보할수 있습니다.",
   "energy_tip": "LINDA에서는 스마트 컨트랙트 생성하고 실행하면 애너지가 소비됩니다, 사용자는 LIND 동결을 통해 애너지를 얻을수 있습니다.",
-  "power_tip": "투표권(TP)은 LINDA SR 투표에 사용되며,사용자은 LIND 동결을 통해 투표권을 얻을수 있습니다.",
+  "power_tip": "투표권(LP)은 LINDA SR 투표에 사용되며,사용자은 LIND 동결을 통해 투표권을 얻을수 있습니다.",
   "token_precision": "토큰 정밀도",
   "token_precision_message_0": "필요에 따라 토큰의 정밀도를 설정합니다. 범위는 0-6입니다.",
   "check_my_token": "내가 발행한 토큰 살펴 보기",

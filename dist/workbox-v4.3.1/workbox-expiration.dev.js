@@ -139,7 +139,7 @@ this.workbox.expiration = (function (exports, DBWrapper_mjs, deleteDatabase_mjs,
               if (minTimestamp && result.timestamp < minTimestamp || maxCount && entriesNotDeletedCount >= maxCount) {
                 // TODO(philipwalton): we should be able to delete the
                 // entry right here, but doing so causes an iteration
-                // bug in Safari stable (fixed in TP). Instead we can
+                // bug in Safari stable (fixed in LP). Instead we can
                 // store the keys of the entries to delete, and then
                 // delete the separate transactions.
                 // https://github.com/GoogleChrome/workbox/issues/1978

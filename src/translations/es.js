@@ -1856,7 +1856,7 @@ export const messages = {
   "account_ad": "Gana Tokens de Dice jugando a LINDADice. Guarda tokens de Dice para ganar dividendos LIND todos los días",
   "bandwidth_tip": "En LINDA, el ancho de banda se consumirán con cualquier transacción, pero el sistema le dará a cada cuenta activada todos los días 5.000 de ancho de banda. Los usuarios pueden ganar ancho de banda congelando LIND.",
   "energy_tip": "En LINDA, la creación y activación de contratos inteligentes consumen energía. Los usuarios pueden ganar energía mediante la congelación de LIND.",
-  "power_tip": "LINDA Power (TP) se utiliza para votar por los SR de LINDA. Los usuarios pueden obtener TP mediante la congelación de LIND.",
+  "power_tip": "LINDA Power (LP) se utiliza para votar por los SR de LINDA. Los usuarios pueden obtener LP mediante la congelación de LIND.",
   "token_precision": "Precisión del Token",
   "token_precision_message_0": "Ajuste la precisión del token según sea necesario, el rango es 0-6",
   "check_my_token": "Comprueba mi Token",

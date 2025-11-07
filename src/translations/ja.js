@@ -1842,7 +1842,7 @@ export const messages = {
   "account_ad": "LINDAdiceをプレイしてdiceトークンを獲得しよう！さらにdiceトークンを抵当にし、LINDの配当を得られます！",
   "bandwidth_tip": "LINDAでは、検索以外すべての操作が帯域幅を必要とします，毎日システムが各有効アカウントに5000帯域幅を無料で提供します，ユーザーはLINDを凍結することで帯域幅を得られます。",
   "energy_tip": "LINDAでは、スマートコントラクトの作成と実行がEnergyを必要とします，ユーザーはLINDを凍結することでEnergyを得られます。",
-  "power_tip": "LINDA Power（TP）はSRへの投票に使います，ユーザーはLINDを凍結することでLINDA Powerを得られます。",
+  "power_tip": "LINDA Power（LP）はSRへの投票に使います，ユーザーはLINDを凍結することでLINDA Powerを得られます。",
   "token_precision": "トークンプレシジョン",
   "token_precision_message_0": "必要に応じてトークンの精度を設定します。範囲は0〜6です",
   "check_my_token": "私のトークンをチェック",
