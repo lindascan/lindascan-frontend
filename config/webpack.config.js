@@ -314,11 +314,11 @@ module.exports = function(webpackEnv) {
       //name: false,
       cacheGroups: {
 
-        // tronweb:{ 
-        //   name:'tronweb', 
+        // lindaweb:{ 
+        //   name:'lindaweb', 
         //   chunks:'all', 
         //   priority:11, 
-        //   test:/(tronweb|sunweb)/, //  
+        //   test:/(lindaweb|sunweb)/, //  
         //   minChunks:1 //  
         // },
         // vendors1: {
@@ -345,7 +345,7 @@ module.exports = function(webpackEnv) {
         domloadsh: {
           name: 'domloadsh',
           chunks: 'all',
-          test: /[\\/]node_modules[\\/](react-dom|lodash|google-protobuf|@tronscan|@ant-design|ethers)[\\/]/,
+          test: /[\\/]node_modules[\\/](react-dom|lodash|google-protobuf|@lindascan|@ant-design|ethers)[\\/]/,
           priority: 10,
           minChunks:1
         },

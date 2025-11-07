@@ -721,11 +721,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "b52bf5ab73df4c8f531e",
-    "url": "/static/js/TRONRating.0d9eb084.chunk.js"
+    "url": "/static/js/LINDARating.0d9eb084.chunk.js"
   },
   {
     "revision": "1edb1b705d68934a1a4cba101776cc25",
-    "url": "/static/js/TRONRating.0d9eb084.chunk.js.gz"
+    "url": "/static/js/LINDARating.0d9eb084.chunk.js.gz"
   },
   {
     "revision": "85ed955fab57671c2231",
@@ -769,11 +769,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "c6c6dd107fd469434a46",
-    "url": "/static/js/TokenListTRC20.7a3bef90.chunk.js"
+    "url": "/static/js/TokenListLRC20.7a3bef90.chunk.js"
   },
   {
     "revision": "8582fe5dfdcdfc5f4bcce6ad059c8c9e",
-    "url": "/static/js/TokenListTRC20.7a3bef90.chunk.js.gz"
+    "url": "/static/js/TokenListLRC20.7a3bef90.chunk.js.gz"
   },
   {
     "revision": "9de771c09e2470270316",
@@ -829,11 +829,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "010ed27277335a86605f",
-    "url": "/static/js/TronConvertTool.756e0b23.chunk.js"
+    "url": "/static/js/LindaConvertTool.756e0b23.chunk.js"
   },
   {
     "revision": "347b90ef5edabfca3fd128d4287088b3",
-    "url": "/static/js/TronConvertTool.756e0b23.chunk.js.gz"
+    "url": "/static/js/LindaConvertTool.756e0b23.chunk.js.gz"
   },
   {
     "revision": "3d686cafea242c58b705",
@@ -965,7 +965,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "6915923a22961d50368c60a6cb6e2aea",
-    "url": "/static/media/body_backgound_tronblue_transparent.6915923a.png"
+    "url": "/static/media/body_backgound_lindablue_transparent.6915923a.png"
   },
   {
     "revision": "be8e7e20ad432e6e833a08afcc13e849",
@@ -1105,27 +1105,27 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "a9a72332e697649ca75d2c734bad4299",
-    "url": "/static/media/tron-empty.a9a72332.svg"
+    "url": "/static/media/linda-empty.a9a72332.svg"
   },
   {
     "revision": "ab85404110fba10d4177d6675a5d75b2",
-    "url": "/static/media/tron-logo-inverted-testnet.ab854041.png"
+    "url": "/static/media/linda-logo-inverted-testnet.ab854041.png"
   },
   {
     "revision": "e91d6569ad187847175bc6a16a6326d6",
-    "url": "/static/media/tron-logo-sunnet.e91d6569.png"
+    "url": "/static/media/linda-logo-sunnet.e91d6569.png"
   },
   {
     "revision": "07f20e95b0f4a0baa698a0089ff040e7",
-    "url": "/static/media/tron-logo-testnet.07f20e95.png"
+    "url": "/static/media/linda-logo-testnet.07f20e95.png"
   },
   {
     "revision": "0e84ee80e3cd9d9880c012a1fac12b11",
-    "url": "/static/media/tron-logo.0e84ee80.jpg"
+    "url": "/static/media/linda-logo.0e84ee80.jpg"
   },
   {
     "revision": "c24a410847594eddf3a43e9675f559ef",
-    "url": "/static/media/tronscan_wechat.c24a4108.png"
+    "url": "/static/media/lindascan_wechat.c24a4108.png"
   },
   {
     "revision": "7fe38ebce95afd4a42135e109e3102fb",

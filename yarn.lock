@@ -1237,9 +1237,9 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-5.9.0.tgz#ff6c7a5f733b5857dc93145e9cca3916e62d9e9c"
   integrity sha512-KqPcEezSeuLtc+T0gKKx9l+DndsIHp9qt9GtDDfGMkSNRE2z3vt8MzoWcA7QXGJYfYDzPICeMzk/CB+Lv0LgCA==
 
-"@ledgerhq/hw-app-trx@^5.13.0":
+"@ledgerhq/hw-app-lind@^5.13.0":
   version "5.13.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-trx/-/hw-app-trx-5.13.0.tgz#e284fe1505b0f2fe48c7075d2847647944f6ff5e"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-lind/-/hw-app-lind-5.13.0.tgz#e284fe1505b0f2fe48c7075d2847647944f6ff5e"
   integrity sha512-F8oDxO4D20ZYPgTyabVPQgnUPeGnndjO2YEqQCFz4C62lKHkOSXllBe2BmFDYrer0qKUWQd0wRiNQjXXYl7J1g==
   dependencies:
     "@ledgerhq/errors" "^5.13.0"
@@ -1399,9 +1399,9 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
-"@tronscan/client@^0.2.66":
+"@lindascan/client@^0.2.66":
   version "0.2.66"
-  resolved "https://registry.yarnpkg.com/@tronscan/client/-/client-0.2.66.tgz#3cd669217560c5f4a12e94b8dd0d9a4efa7287e9"
+  resolved "https://registry.yarnpkg.com/@lindascan/client/-/client-0.2.66.tgz#3cd669217560c5f4a12e94b8dd0d9a4efa7287e9"
   integrity sha512-TiaKUv0phZu+3pnTBKRa3qu1gou9LKBUKzCCd5kQ49/GQFtJti2eRu9rPrXcTZqqD5fbhaY4DgfJSv+dQLSibg==
   dependencies:
     axios "^0.18.0"
@@ -3340,9 +3340,9 @@ browser-resolve@^1.11.3:
   dependencies:
     resolve "1.1.7"
 
-browser-solc-tron@^1.0.5:
+browser-solc-linda@^1.0.5:
   version "1.0.5"
-  resolved "https://registry.yarnpkg.com/browser-solc-tron/-/browser-solc-tron-1.0.5.tgz#67b70ccd20b7a0a6de756807d7abf03b6ec69d0f"
+  resolved "https://registry.yarnpkg.com/browser-solc-linda/-/browser-solc-linda-1.0.5.tgz#67b70ccd20b7a0a6de756807d7abf03b6ec69d0f"
   integrity sha512-1x281LTlo4C8BSrWI6ll0MiU3pdT66aZ/zCo7WNRJhcnJupG3TqR17z69c2i53V1EPnxtldVb24RaipmqjkAnw==
 
 browser-stdout@1.3.1:
@@ -14201,17 +14201,17 @@ trim@0.0.1:
   resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
   integrity sha1-WFhUf2spB1fulczMZm+1AITEYN0=
 
-tronstation@^1.0.1:
+lindastation@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/tronstation/-/tronstation-1.0.1.tgz#b33224cdef5f1c7560763b185f132d9ac35ad3f3"
+  resolved "https://registry.yarnpkg.com/lindastation/-/lindastation-1.0.1.tgz#b33224cdef5f1c7560763b185f132d9ac35ad3f3"
   integrity sha512-iuHjDHw/63ID5pj2PESeGLl7n7IAG6yunupKfOA2l5ekaWhZo6RSscmdwSIqBEdnXFh7Jmd2HJIzowyMFt+/zQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     babel-runtime "^6.26.0"
 
-tronweb@^2.10.1:
+lindaweb@^2.10.1:
   version "2.10.1"
-  resolved "https://registry.yarnpkg.com/tronweb/-/tronweb-2.10.1.tgz#f30354d3bcc99b6e7bcbec5ea7635c781b1a50df"
+  resolved "https://registry.yarnpkg.com/lindaweb/-/lindaweb-2.10.1.tgz#f30354d3bcc99b6e7bcbec5ea7635c781b1a50df"
   integrity sha512-FAXmpZa6oidvy6HssbF1WnnGaqiJuJXGx7UmccgurTt1IRyySQzaIz+m3gXhhtIzJx9hFYgBQgzbFp6fglFw/w==
   dependencies:
     "@babel/runtime" "^7.0.0"

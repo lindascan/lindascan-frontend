@@ -1,19 +1,19 @@
 <h1 align="center">
   <br>
-  <img width="40%" src="https://raw.githubusercontent.com/tron-explorer/docs/master/images/tron-banner.png">
+  <img width="40%" src="https://raw.githubusercontent.com/lindascan/lindascan-api/57456b8e1f1af2b4c900923430fc24033f8c16e4/public/images/Linda-Banner.png">
   <br>
-  Tronscan Frontend
+  Lindascan Frontend
   <br>
 </h1>
 
 <h4 align="center">
-  React.js Frontend for <a href="https://tronscan.org">Tronscan.org</a>
+  React.js Frontend for <a href="https://lindascan.org">Lindascan.org</a>
 </h4>
 
 <p align="center">
   <a href="#requirements">Requirements</a> •
   <a href="#installation">Running</a> •
-  <a href="https://tronscan.org">tronscan.org</a>
+  <a href="https://lindascan.org">lindascan.org</a>
 </p>
 
 ## Features
@@ -33,7 +33,7 @@
 * Poloni DEX
 * DApp Recommend
 * Vote for SR
-* TRON Committee
+* LINDA Committee
 * Token List
 * Contract Deploy& Verify
 * DAppChain
@@ -54,7 +54,7 @@
 
 ## Configuring API URL
 
-By default the Explorer will connect to https://api.tronscan.org for its data. 
+By default the Explorer will connect to https://api.lindascan.org for its data. 
 
 When developing locally the url can be changed by defining the `API_URL` environment variable
 
