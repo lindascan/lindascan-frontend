@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Primary Gradient -->
+    <linearGradient id="lindaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E86AB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00D4AA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E86AB;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Crystal Highlight Gradient -->
+    <linearGradient id="crystalHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.2" />
+    </linearGradient>
+    
+    <!-- Glow Effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Star Glow -->
+    <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Metallic Shine -->
+    <linearGradient id="metallicShine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8E8E8;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.1" />
+    </linearGradient>
+
+    <!-- Banner Background Gradient -->
+    <linearGradient id="bannerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a5276;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2E86AB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a5276;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Banner Background -->
+  <rect width="1200" height="400" fill="url(#bannerGradient)" />
+  
+  <!-- Extended Constellation Network Across Banner -->
+  <g opacity="0.7">
+    <!-- Left Side Constellation -->
+    <g transform="translate(200, 200)" opacity="0.8">
+      <g filter="url(#starGlow)">
+        <circle cx="0" cy="0" r="5" fill="#00F0FF" />
+        <circle cx="80" cy="-40" r="4" fill="#00F0FF" />
+        <circle cx="-60" cy="50" r="4" fill="#00F0FF" />
+        <circle cx="100" cy="60" r="3" fill="#00F0FF" />
+        <circle cx="-80" cy="-30" r="3" fill="#00F0FF" />
+      </g>
+      <g stroke="#00F0FF" stroke-width="1.5" stroke-opacity="0.5">
+        <path d="M 0,0 L 80,-40 L 100,60" fill="none" />
+        <path d="M 0,0 L -60,50 L -80,-30" fill="none" />
+      </g>
+    </g>
+
+    <!-- Right Side Constellation -->
+    <g transform="translate(1000, 200)" opacity="0.8">
+      <g filter="url(#starGlow)">
+        <circle cx="0" cy="0" r="5" fill="#00F0FF" />
+        <circle cx="-80" cy="-40" r="4" fill="#00F0FF" />
+        <circle cx="60" cy="50" r="4" fill="#00F0FF" />
+        <circle cx="-100" cy="60" r="3" fill="#00F0FF" />
+        <circle cx="80" cy="-30" r="3" fill="#00F0FF" />
+      </g>
+      <g stroke="#00F0FF" stroke-width="1.5" stroke-opacity="0.5">
+        <path d="M 0,0 L -80,-40 L -100,60" fill="none" />
+        <path d="M 0,0 L 60,50 L 80,-30" fill="none" />
+      </g>
+    </g>
+
+    <!-- Central Main Constellation -->
+    <g opacity="0.8">
+      <g filter="url(#starGlow)">
+        <circle cx="400" cy="200" r="7" fill="#00F0FF" />
+        <circle cx="600" cy="200" r="7" fill="#00F0FF" />
+        <circle cx="500" cy="100" r="5" fill="#00F0FF" />
+        <circle cx="500" cy="300" r="5" fill="#00F0FF" />
+        <circle cx="450" cy="150" r="4" fill="#00F0FF" />
+        <circle cx="550" cy="150" r="4" fill="#00F0FF" />
+        <circle cx="450" cy="250" r="4" fill="#00F0FF" />
+        <circle cx="550" cy="250" r="4" fill="#00F0FF" />
+      </g>
+
+      <g stroke="#00F0FF" stroke-width="2" stroke-opacity="0.5">
+        <path d="M 400,200 L 600,200 L 500,300 L 400,200" fill="none" />
+        <path d="M 500,100 L 450,150 L 400,200" fill="none" />
+        <path d="M 500,100 L 550,150 L 600,200" fill="none" />
+        <path d="M 500,300 L 450,250 L 400,200" fill="none" />
+        <path d="M 500,300 L 550,250 L 600,200" fill="none" />
+        <path d="M 450,150 L 550,250" fill="none" />
+        <path d="M 550,150 L 450,250" fill="none" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Main Logo Container -->
+  <g transform="translate(300, 100) scale(0.6)">
+    <!-- Background Circle -->
+    <circle cx="250" cy="250" r="240" fill="url(#lindaGradient)" filter="url(#glow)" />
+    
+    <!-- Main Crystal L Structure -->
+    <g transform="translate(250, 250)">
+      <path d="M -200,200 L 150,200 L 150,-50 L 50,-50 L 50,-200 L -200,-200 Z" 
+            fill="url(#lindaGradient)" stroke="#E8E8E8" stroke-width="8" />
+      
+      <path d="M -150,150 L 100,150 L 100,0 L 0,0 L 0,-150 L -150,-150 Z" 
+            fill="url(#crystalHighlight)" fill-opacity="0.4" />
+      
+      <path d="M -100,100 L 50,100 L 50,-50 L -50,-50 L -50,-100 L -100,-100 Z" 
+            fill="url(#metallicShine)" fill-opacity="0.3" />
+      
+      <!-- Crystal Edge Highlights -->
+      <path d="M -200,200 L 150,200" stroke="#FFFFFF" stroke-width="4" stroke-opacity="0.8" />
+      <path d="M 150,200 L 150,-50" stroke="#FFFFFF" stroke-width="4" stroke-opacity="0.8" />
+      <path d="M 50,-50 L 50,-200" stroke="#FFFFFF" stroke-width="4" stroke-opacity="0.8" />
+      <path d="M -200,-200 L 50,-200" stroke="#FFFFFF" stroke-width="4" stroke-opacity="0.8" />
+      <path d="M -200,200 L -200,-200" stroke="#FFFFFF" stroke-width="4" stroke-opacity="0.8" />
+      
+      <!-- Diagonal Crystal Cut Lines -->
+      <path d="M -200,200 L 50,-50" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3" />
+      <path d="M 150,200 L 50,-50" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3" />
+      <path d="M 150,-50 L -200,-200" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3" />
+      <path d="M 50,-200 L -200,-200" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.3" />
+    </g>
+
+    <!-- Outer Ring -->
+    <circle cx="250" cy="250" r="240" fill="none" stroke="url(#metallicShine)" stroke-width="12" />
+  </g>
+
+  <!-- Banner Text -->
+  <g transform="translate(650, 150)">
+    <!-- Main LINDA Text -->
+    <text x="0" y="0" text-anchor="start" font-family="Arial, sans-serif" 
+          font-size="80" font-weight="bold" letter-spacing="8" 
+          fill="url(#metallicShine)" filter="url(#glow)">
+      LINDA
+    </text>
+    
+    <!-- Tagline -->
+    <text x="0" y="100" text-anchor="start" font-family="Arial, sans-serif" 
+          font-size="36" font-weight="normal" letter-spacing="2" 
+          fill="#FFFFFF" opacity="0.2">
+      Blockchain Protocol
+    </text>
+    
+    <!-- Features -->
+    <g transform="translate(0, 160)" font-family="Arial, sans-serif" font-size="24" fill="#E8E8E8" opacity="0.2">
+      <text x="0" y="0">• Linear Scaling</text>
+      <text x="0" y="30">• Lucid Transparency</text>
+      <text x="0" y="60">• P2P Network</text>
+    </g>
+  </g>
+
+  <!-- Bottom Border -->
+  <rect x="0" y="395" width="1200" height="5" fill="url(#metallicShine)" opacity="0.7" />
+
+  <!-- Subtle Shine Overlay -->
+  <rect width="1200" height="400" fill="url(#crystalHighlight)" fill-opacity="0.05" />
+</svg>
+

@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="40%" src="https://raw.githubusercontent.com/lindascan/lindascan-api/57456b8e1f1af2b4c900923430fc24033f8c16e4/public/images/Linda-Banner.png">
+  <img width="40%" src="https://raw.githubusercontent.com/tron-explorer/docs/master/images/tron-banner.png">
   <br>
   Lindascan Frontend
   <br>
