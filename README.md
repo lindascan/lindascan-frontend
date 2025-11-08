@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width="5%" src="https://raw.githubusercontent.com/lindascan/lindascan-frontend/refs/heads/master/src/images/LindaBanner.svg">
+  <img width="50%" src="https://raw.githubusercontent.com/lindascan/lindascan-frontend/refs/heads/master/src/images/LindaBanner.svg">
   <br>
   Lindascan Frontend
   <br>
