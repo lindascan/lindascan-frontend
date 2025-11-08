@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Primary Gradient -->
+    <linearGradient id="lindaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E86AB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00D4AA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E86AB;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Crystal Highlight Gradient -->
+    <linearGradient id="crystalHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.2" />
+    </linearGradient>
+    
+    <!-- Metallic Shine -->
+    <linearGradient id="metallicShine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8E8E8;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="500" cy="500" r="480" fill="url(#lindaGradient)" />
+  
+  <!-- Main Crystal L Structure - Simplified for icon -->
+  <g transform="translate(500, 500)">
+    <!-- Base L Shape - Outer Crystal -->
+    <path d="M -200,200 L 150,200 L 150,-50 L 50,-50 L 50,-200 L -200,-200 Z" 
+          fill="url(#lindaGradient)" stroke="#E8E8E8" stroke-width="10" />
+    
+    <!-- Inner Crystal Facet 1 -->
+    <path d="M -150,150 L 100,150 L 100,0 L 0,0 L 0,-150 L -150,-150 Z" 
+          fill="url(#crystalHighlight)" fill-opacity="0.5" />
+    
+    <!-- Crystal Edge Highlights (simplified) -->
+    <path d="M -200,200 L 150,200" stroke="#FFFFFF" stroke-width="6" stroke-opacity="0.9" />
+    <path d="M 150,200 L 150,-50" stroke="#FFFFFF" stroke-width="6" stroke-opacity="0.9" />
+    <path d="M 50,-50 L 50,-200" stroke="#FFFFFF" stroke-width="6" stroke-opacity="0.9" />
+  </g>
+
+  <!-- Outer Ring - Thicker for icon visibility -->
+  <circle cx="500" cy="500" r="480" fill="none" stroke="url(#metallicShine)" stroke-width="20" />
+</svg>

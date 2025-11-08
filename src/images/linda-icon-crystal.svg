@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lindaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E86AB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00D4AA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E86AB;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Crystal L Only - No background -->
+  <g transform="translate(500, 500) scale(1.2)">
+    <path d="M -200,200 L 150,200 L 150,-50 L 50,-50 L 50,-200 L -200,-200 Z" 
+          fill="url(#lindaGradient)" stroke="#FFFFFF" stroke-width="15" />
+  </g>
+</svg>
