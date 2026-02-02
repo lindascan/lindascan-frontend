@@ -209,13 +209,13 @@ class Contracts extends React.Component {
         render: (text, record, index) => {
           return text ? (
             <span className="">
-              {record.contract == "TWjkoz18Y48SgWoxEeGG11ezCCzee8wo1A"
+              {record.contract == "LfzW58wETzFYn9SUpWbqkt2cVdccXsNHeW"
                 ? "JustGame"
                 : text}
             </span>
           ) : (
             <span>
-              {record.contract == "TWjkoz18Y48SgWoxEeGG11ezCCzee8wo1A"
+              {record.contract == "LfzW58wETzFYn9SUpWbqkt2cVdccXsNHeW"
                 ? "JustGame"
                 : "--"}
             </span>

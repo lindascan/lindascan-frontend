@@ -29,8 +29,8 @@ class Contractinter extends React.Component {
                     "block": 1014113,
                     "timestamp": 1532938269000,
                     "txType":"call",
-                    "transferFromAddress": "TLRE3FWW68ARygPNaGHQ3tD6ut4czPJyQ9",
-                    "transferToAddress": "TH5mDzehcYDaGCKdfbbkPCAWfPQSsuBAdH",
+                    "transferFromAddress": "LVfyJQSc24HY5K1uA8cyokajDJgasBoVkv",
+                    "transferToAddress": "LSLWV9aoYULgMpxAFTwL94Y8xp2QosGwuz",
                     "amount": 10,
                     "tokenName": "BitPound",
                     "confirmed": false
@@ -41,8 +41,8 @@ class Contractinter extends React.Component {
                     "block": 1014113,
                     "timestamp": 1532938269000,
                     "txType":"call",
-                    "transferFromAddress": "TLRE3FWW68ARygPNaGHQ3tD6ut4czPJyQ9",
-                    "transferToAddress": "TH5mDzehcYDaGCKdfbbkPCAWfPQSsuBAdH",
+                    "transferFromAddress": "LVfyJQSc24HY5K1uA8cyokajDJgasBoVkv",
+                    "transferToAddress": "LSLWV9aoYULgMpxAFTwL94Y8xp2QosGwuz",
                     "amount": 10,
                     "tokenName": "BitPound",
                     "confirmed": false
@@ -53,8 +53,8 @@ class Contractinter extends React.Component {
                     "block": 1014113,
                     "timestamp": 1532938269000,
                     "txType":"call",
-                    "transferFromAddress": "TLRE3FWW68ARygPNaGHQ3tD6ut4czPJyQ9",
-                    "transferToAddress": "TH5mDzehcYDaGCKdfbbkPCAWfPQSsuBAdH",
+                    "transferFromAddress": "LVfyJQSc24HY5K1uA8cyokajDJgasBoVkv",
+                    "transferToAddress": "LSLWV9aoYULgMpxAFTwL94Y8xp2QosGwuz",
                     "amount": 10,
                     "tokenName": "BitPound",
                     "confirmed": false
@@ -65,8 +65,8 @@ class Contractinter extends React.Component {
                     "block": 1014115,
                     "timestamp": 1532938269000,
                     "txType":"call",
-                    "transferFromAddress": "TLRE3FWW68ARygPNaGHQ3tD6ut4czPJyQ9",
-                    "transferToAddress": "TH5mDzehcYDaGCKdfbbkPCAWfPQSsuBAdH",
+                    "transferFromAddress": "LVfyJQSc24HY5K1uA8cyokajDJgasBoVkv",
+                    "transferToAddress": "LSLWV9aoYULgMpxAFTwL94Y8xp2QosGwuz",
                     "amount": 10,
                     "tokenName": "BitPound",
                     "confirmed": false

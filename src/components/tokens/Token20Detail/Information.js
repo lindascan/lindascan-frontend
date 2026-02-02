@@ -68,12 +68,12 @@ export function Information({ token: tokens, priceUSD,intl }) {
     ? (token["market_info"].priceInLind * currentTotal * priceUSD).toFixed(0)
     : 0;
   // if wink
-  if (token.contract_address === "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7") {
+  if (token.contract_address === "LVpmvFRVm9oXKikSayNgcyxvRrCw3JAbZa") {
     currentTotal = token.winkTotalSupply.totalTurnOver || 0;
     currentTotalSupplyUsd = parseInt(token.winkTotalSupply.marketValue) || 0;
   }
   // if jst
-  if (token.contract_address === "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9") {
+  if (token.contract_address === "LMW5bEa41VRjRR9SEjsYTss2F9xTeHFDym") {
     currentTotal = Number(token.jstTotalSupply.totalTurnOver) > 0 ? Number(token.jstTotalSupply.totalTurnOver).toFixed(token.decimals) : '0';
     currentTotalSupplyUsd = parseInt(token.jstTotalSupply.marketValue) || 0;
   }

@@ -3,10 +3,10 @@ import { cloneDeep } from 'lodash'
 import React from "react";
 
 export const lindaAddresses = [
-  '27d3byPxZXKQWfXX7sJvemJJuv5M65F3vjS',
-  '27fXgQ46DcjEsZ444tjZPKULcxiUfDrDjqj',
-  '27SWXcHuQgFf9uv49FknBBBYBaH3DUk4JPx',
-  '27WtBq2KoSy5v8VnVZBZHHJcDuWNiSgjbE3',
+  '282PCxWFrEVsPUxfCtjFyFRahYac2jJu1PA',
+  '284sHPAPWKuhkNVC9v9thobcQbDjbymQztn',
+  '27qr8bQChPS82jMCEHB7VfJoyCnJAC9FFso',
+  '27vDnp8d6A9YnwvvaabtbmRt1Y1dfAthgSa',
 ];
 
 export async function transactionResultManager(transaction, lindaWeb) {

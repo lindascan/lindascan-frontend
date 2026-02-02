@@ -169,7 +169,7 @@ class StatsCharts extends React.Component {
     let blockHeight = blocks[0] ? blocks[0].number : 0;
     let nodeRewardsNum = blockHeight * 16;
     let blockProduceRewardsNum = blockHeight * 32;
-    let address = await Client.getAddress('TLsV52sRDL79HXGGm9yzwKibb6BeruhUzy');
+    let address = await Client.getAddress('LW8ELBoX9GEFP9toM2KahC6DtWochN4VJx');
     let startFeeBurnedNum = Math.abs(-9223372036854.775808)
     let feeBurnedNum = (startFeeBurnedNum - Math.abs(address.balance / ONE_LIND)).toFixed(2);
     let genesisNum = 100000000000;

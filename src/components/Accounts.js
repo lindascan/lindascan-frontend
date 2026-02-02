@@ -38,8 +38,8 @@ class Accounts extends Component {
       total: 0,
       exchangeFlag: [
         {name: 'binance', addressList: {
-          Cold: ['TMuA6YqfCeX8EhbfYEg5y7S4DqzSJireY9', 'TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb'],
-          Hot: ['TAUN6FwrnwwmaEqYcckffC7wYmbaS6cBiX']}
+          Cold: ['LX9uMhmm8aeELLEC871fiyogXGcQB3AZiw', 'Lfson1VFsiFAkiaYHS2up5fZ3Xf6i2D6Le'],
+          Hot: ['LKj7MQsxit4sfsU5CV6FR4VZrCDYG3mBjP']}
         }
       ],
       pagination: {

@@ -567,7 +567,7 @@ class Sell extends Component {
       //   //   if (info.log && info.log.length > 0) {
       //   //     let c_id;
       //   //     for (let i = 0; i < info.log.length; i++) {
-      //   //       const _addr = lindaWeb.address.fromHex("41" + info.log[i].address);
+      //   //       const _addr = lindaWeb.address.fromHex("30" + info.log[i].address);
       //   //       if (
       //   //         _addr === "TSMbPm5mUsaTDSEjHCd55ZJaib3Ysvjyc5" ||
       //   //         _addr === "THnCkTX1GfDArAuyzzv2nGpDt4vChm8t2e"
@@ -641,7 +641,7 @@ class Sell extends Component {
     // let _b = 0;
 
     // if (account.address && exchangeData.fTokenAddr) {
-    //   if (exchangeData.fTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+    //   if (exchangeData.fTokenAddr === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
     //     _b =
     //       (await lindaWebOBJ.lind.getUnconfirmedBalance(this.address)) /
     //       Math.pow(10, exchangeData.fPrecision);
@@ -677,11 +677,11 @@ class Sell extends Component {
 
     let _b = 0;
     if (account.address && exchangeData.fTokenAddr) {
-      if (exchangeData.fTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+      if (exchangeData.fTokenAddr === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
         _b =
           (await lindaWebOBJ.lind.getUnconfirmedBalance(account.address)) /
           Math.pow(10, exchangeData.fPrecision);
-        if (exchangeData.fTokenAddr !== "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+        if (exchangeData.fTokenAddr !== "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
           _b = empty;
           return;
         }
@@ -702,7 +702,7 @@ class Sell extends Component {
           });
         }
 
-        if (exchangeData.fTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+        if (exchangeData.fTokenAddr === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
           _b = empty;
           return;
         }

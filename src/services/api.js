@@ -108,7 +108,7 @@ class ApiClient20 {
   }
 
   async getTokenInfoItem(contract, type) {
-    // https://apilist.tronscan.org/api/token_lrc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t
+    // https://apilist.tronscan.org/api/token_lrc20?contract=LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS
     let params = {};
     let url = `${API_URL}/api/token_lrc20`;
     switch (type) {

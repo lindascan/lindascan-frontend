@@ -211,7 +211,7 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/tokens/overview?start=0&limi
 # 23
 **/api/token_lrc20**
 Desc: List a single lrc20 token's detail
-Demo: curl -X Get  https://apilist.tronscan.org/api/token_lrc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1
+Demo: curl -X Get  https://apilist.tronscan.org/api/token_lrc20?contract=LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS&showAll=1
 @param contract: token address
 @return: a single lrc20 token's detail;
 
@@ -297,7 +297,7 @@ Demo: curl -X Get  https://apilist.tronscan.org/api/exchanges/listall
 # 34
 **/api/exchange/transaction**
 Desc: List a single the exchange pair's transaction records
-Demo: curl -X Get  https://apilist.tronscan.org/api/exchange/transaction?sort=-timestamp&start=0&limit=15&exchangeID=9&address=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&start_timestamp=1529856000000&end_timestamp=1569490226162
+Demo: curl -X Get  https://apilist.tronscan.org/api/exchange/transaction?sort=-timestamp&start=0&limit=15&exchangeID=9&address=LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS&start_timestamp=1529856000000&end_timestamp=1569490226162
 @param sort: define the sequence of the records return;
 @param limit: page size for pagination;
 @param start: query index for pagination;

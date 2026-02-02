@@ -53,7 +53,7 @@ class Footer extends Component {
        
       ],
       modal: null,
-      donateAddress: "TTzPiwbBedv7E8p4FkyPyeqq4RVoqRL3TW"
+      donateAddress: "LdF8z6XHaa3DKmSaqdJyjXDTMr7mfusu1b"
     };
   }
 

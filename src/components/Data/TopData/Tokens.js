@@ -95,7 +95,7 @@ class Tokens extends React.Component {
     xhr
       .get(
         API_URL +
-          "/api/token_lrc20?contract=TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&showAll=1"
+          "/api/token_lrc20?contract=LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS&showAll=1"
       )
       .then(res => {
         let lrc20_tokens = res.data.lrc20_tokens || [];
@@ -238,7 +238,7 @@ class Tokens extends React.Component {
             <span className="">
               {isUsd ? (
                 <span>
-                  {record.token_id == "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t" ? (
+                  {record.token_id == "LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS" ? (
                     <span>
                       <FormattedNumber
                         value={record.priceInLind / UsdToLind}

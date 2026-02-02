@@ -575,7 +575,7 @@ class Buy extends Component {
 
     // let _b = 0;
     // if (account.address && exchangeData.sTokenAddr) {
-    //   if (exchangeData.sTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+    //   if (exchangeData.sTokenAddr === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
     //     _b =
     //       (await lindaWeb.lind.getUnconfirmedBalance(account.address)) /
     //       Math.pow(10, exchangeData.sPrecision);
@@ -596,11 +596,11 @@ class Buy extends Component {
     // }
     let _b = 0;
     if (account.address && exchangeData.sTokenAddr) {
-      if (exchangeData.sTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+      if (exchangeData.sTokenAddr === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
         _b =
           (await lindaWeb.lind.getUnconfirmedBalance(account.address)) /
           Math.pow(10, exchangeData.sPrecision);
-        if (exchangeData.sTokenAddr !== "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+        if (exchangeData.sTokenAddr !== "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
           _b = empty;
           return;
         }
@@ -611,7 +611,7 @@ class Buy extends Component {
           _precision: exchangeData.sPrecision,
           lindaWeb: lindaWeb
         });
-        if (exchangeData.sTokenAddr === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+        if (exchangeData.sTokenAddr === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
           _b = empty;
           return;
         }

@@ -253,7 +253,7 @@ class TokenList extends Component {
                 <h5>
                   {record.isTop &&
                   record.contractAddress ==
-                    "TNYNLRkqq956bQc2buvoLbaLgh25RkJMiN" ? (
+                    "LXo7bagwm5CCh3EZBnGP6Twxz7e3FCr4xD" ? (
                     <a href="javascript:;">
                       {record.name + " (" + record.abbr + ")"}
                     </a>
@@ -294,7 +294,7 @@ class TokenList extends Component {
           return (
             text ? (<div className="d-flex flex-column">
               <span>{(text*priceUSD).toFixed(6)}{' USD'}</span>
-              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="lind-price">{text.toFixed(6)}{' LIND'}</span> : ''}
+              {text && record.contractAddress != 'LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS' ? <span className="lind-price">{text.toFixed(6)}{' LIND'}</span> : ''}
             </div>) : (
               <div>
               {
@@ -343,7 +343,7 @@ class TokenList extends Component {
           return (
             text ? (<div className="d-flex flex-column">
               <span><FormattedNumber value={text*priceUSD} maximumFractionDigits={2}/>{' USD'}</span>
-              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="lind-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' LIND'}</span> : ''}
+              {text && record.contractAddress != 'LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS' ? <span className="lind-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' LIND'}</span> : ''}
             </div>) : '-'
           )
         }
@@ -370,7 +370,7 @@ class TokenList extends Component {
           return (
             text ? (<div className="d-flex flex-column">
               <span><FormattedNumber value={text*priceUSD} maximumFractionDigits={2}/>{' USD'}</span>
-              {text && record.contractAddress != 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' ? <span className="lind-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' LIND'}</span> : ''}
+              {text && record.contractAddress != 'LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS' ? <span className="lind-price"><FormattedNumber value={text} maximumFractionDigits={2}/>{' LIND'}</span> : ''}
             
             </div>) : "-"
           )
@@ -521,7 +521,7 @@ class TokenList extends Component {
                           <h5>
                             {record.isTop &&
                             record.contractAddress ==
-                              "TNYNLRkqq956bQc2buvoLbaLgh25RkJMiN" ? (
+                              "LXo7bagwm5CCh3EZBnGP6Twxz7e3FCr4xD" ? (
                               <a href="javascript:;">
                                 {record.name + " (" + record.abbr + ")"}
                               </a>
@@ -705,7 +705,7 @@ class TokenList extends Component {
                   }}
                   onRow={(record) => {
                     return {onClick: (event) => {
-                      if(record.isTop &&  record.contractAddress == "TNYNLRkqq956bQc2buvoLbaLgh25RkJMiN"){
+                      if(record.isTop &&  record.contractAddress == "LXo7bagwm5CCh3EZBnGP6Twxz7e3FCr4xD"){
                         window.open(url)
                       }
                     }}}}

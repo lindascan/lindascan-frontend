@@ -21,7 +21,7 @@ export class LINDBurned extends React.PureComponent {
     }
 
     async loadBurnedNum() {
-        let address = await Client.getAddress('TLsV52sRDL79HXGGm9yzwKibb6BeruhUzy');
+        let address = await Client.getAddress('LW8ELBoX9GEFP9toM2KahC6DtWochN4VJx');
         let feeBurnedNum = (Math.abs(this.state.startFeeBurnedNum) - Math.abs(address.balance / ONE_LIND)).toFixed(0);
         let burnedNumTotal = Number(feeBurnedNum) + this.state.independenceDayBurned;
         this.setState((state) => ({

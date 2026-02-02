@@ -540,7 +540,7 @@ class Code extends React.Component {
           "0x" + output.contractResult[0]
         );
         if (decoded.length === 1) decoded = decoded[0];
-        if(address == 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t' && contractItem.name ==  "transfer"){
+        if(address == 'LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS' && contractItem.name ==  "transfer"){
             return reslove(!decoded);
         }
         return reslove(decoded);

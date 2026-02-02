@@ -86,14 +86,14 @@ export const ACCOUNT_LINDALINK = "ACCOUNT_LINDALINK";
 export const ONE_USDJ = 1;
 export const ONE_JST = 0.003;
 export const TOKEN_ID_BTT = "1002000";
-export const CONTRACT_ADDRESS_USDT = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
-export const CONTRACT_ADDRESS_WIN = "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7";
-export const CONTRACT_ADDRESS_GGC = "TB95FFYRJMLY6mWZqv4JUMqAqsHF4JCXga";
-export const CONTRACT_ADDRESS_USDJ_TESTNET = "TCkkpmnY38nsXAtideWzHTybvbMozzXUot";
-export const CONTRACT_ADDRESS_JED_TESTNET = "TTpozmSKuK5jbigUXtQn6fdxh6ivwKtGo5";
-export const CONTRACT_ADDRESS_USDJ = "TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT";
-export const CONTRACT_ADDRESS_JED = "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9";
-export const CONTRACT_ADDRESS_JST = "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9";
+export const CONTRACT_ADDRESS_USDT = "LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS";
+export const CONTRACT_ADDRESS_WIN = "LVpmvFRVm9oXKikSayNgcyxvRrCw3JAbZa";
+export const CONTRACT_ADDRESS_GGC = "LLPpWQUXEHTeCQ96RnPtEECo9HuD1BuihY";
+export const CONTRACT_ADDRESS_USDJ_TESTNET = "LN1W5vidy4uycoXFDWra3LMEE1ymvuAcUd";
+export const CONTRACT_ADDRESS_JED_TESTNET = "Ld5ZFvNRqFCqhMK17kkMrY1azXLtoYL4JK";
+export const CONTRACT_ADDRESS_USDJ = "LXBzYhTSEWYaVH8cdtMAbPhgrfcMN7jZko";
+export const CONTRACT_ADDRESS_JED = "LMW5bEa41VRjRR9SEjsYTss2F9xTeHFDym";
+export const CONTRACT_ADDRESS_JST = "LMW5bEa41VRjRR9SEjsYTss2F9xTeHFDym";
 
 
 // Deployment to compile
@@ -148,9 +148,9 @@ export const SUNWEBCONFIG = {
   SUNFULLNODE: "https://sun.tronex.io",
   SUNSOLIDITYNODE: "https://sun.tronex.io",
   SUNEVENTSERVER: "https://sun.tronex.io",
-  MAINNET: "TL9q7aDAHYbW5KdPCwk8oJR3bCDhRwegFf",
-  SIDECHAIN: "TGKotco6YoULzbYisTBuP6DWXDjEgJSpYz",
-  SIDEID: "41E209E4DE650F0150788E8EC5CAFA240A23EB8EB7",
+  MAINNET: "LVQaNj9GDUicAxFunp5iZAnftcqfS8bLji",
+  SIDECHAIN: "LRaZ9mjCUjbT6EBFTKXV8xb8peMCb87k1N",
+  SIDEID: "30E209E4DE650F0150788E8EC5CAFA240A23EB8EB7",
 
   // for shasta
   // MAINFULLNODE: 'http://47.252.84.158:8070',
@@ -159,9 +159,9 @@ export const SUNWEBCONFIG = {
   // SUNFULLNODE: 'http://47.252.85.90:8070',
   // SUNSOLIDITYNODE: 'http://47.252.85.90:8071',
   // SUNEVENTSERVER: 'http://47.252.87.129:8070',
-  // MAINNET: 'TTskLhrM19keG57PK51s65yEUvgw3GvSbr',
-  // SIDECHAIN: 'TRDepx5KoQ8oNbFVZ5sogwUxtdYmATDRgX',
-  // SIDEID: '413AF23F37DA0D48234FDD43D89931E98E1144481B',
+  // MAINNET: 'Ld8VbrnSw5skMhjutwMSqxLrnMJu3SwGoD',
+  // SIDECHAIN: 'LaUQ671RjLFuUDt28xDPSorbC4Aj2FUKp2',
+  // SIDEID: '303AF23F37DA0D48234FDD43D89931E98E1144481B',
 
   
 
@@ -175,8 +175,8 @@ export const SUNWEBCONFIG = {
   // SUNEVENTSERVER: "https://suntest.tronex.io",
 
   // MAINNET: "TWaPZru6PR5VjgT4sJrrZ481Zgp3iJ8Rfo",
-  // SIDECHAIN: "TGKotco6YoULzbYisTBuP6DWXDjEgJSpYz",
-  // SIDEID: "41E209E4DE650F0150788E8EC5CAFA240A23EB8EB7"
+  // SIDECHAIN: "LRaZ9mjCUjbT6EBFTKXV8xb8peMCb87k1N",
+  // SIDEID: "30E209E4DE650F0150788E8EC5CAFA240A23EB8EB7"
 };
 
 //Socket config
@@ -229,9 +229,9 @@ export const FROMID = 1;
 export const URLREGEXP = /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\\/~+#]*[\w\-@?^=%&\\/~+#])?$/;
 
 export const ADDRESS_SIZE = 34;
-export const ADDRESS_PREFIX = "41";
-export const ADDRESS_PREFIX_BYTE = 0x41;
-export const ADDRESS_PREFIX_REGEX = /^(41)/;
+export const ADDRESS_PREFIX = "30";
+export const ADDRESS_PREFIX_BYTE = 0x30;
+export const ADDRESS_PREFIX_REGEX = /^(30)/;
 
 // contract
 export const CONTRACT_LICENSES = [

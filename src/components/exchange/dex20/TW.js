@@ -1,16 +1,16 @@
 class ApiTW {
   constructor() {
     // **** online
-    this.contractAddress = "TSMbPm5mUsaTDSEjHCd55ZJaib3Ysvjyc5";
-    this.contractAddress10 = "THnCkTX1GfDArAuyzzv2nGpDt4vChm8t2e";
-    this.contractAddrUsdt20 = "TEpC1DGvDdfrDf83JZDUzdNZydeHz9w21H"; //'TWe4z3uRvUoG9VBgoC8iSgHRtvxa9MJJPv'
-    this.contractAddrUsdt10 = "TCXvoCbb2ejaYHBRKKjtnkTCp8DFKTrLTj";
+    this.contractAddress = "LbcLev1sQohZK4sFs4xeqRgD21fWpvLvgy";
+    this.contractAddress10 = "LT2x1cT7CbLGwoYWasFcY9BrBVYAZjpTV8";
+    this.contractAddrUsdt20 = "LQ4wGND29ZnxKHkZtRZ4kVkCH4GFv3dDha"; //'LftpFCqXrQvNF7pDP4UJCYf4CMaY27ekHM'
+    this.contractAddrUsdt10 = "LMng4MXgxargduowuC5UYcpq7YqDH6WPpz";
 
     // **** test
-    // this.contractAddress = "TVpJQDbuuSwykezHDxGSK6wNhMUK1tXHzm";
-    // this.contractAddress10 = "TVx9uwGT5ggZuv9mthofj9Vw6otYtZ1TNn";
-    // this.contractAddrUsdt20 = "TRxMaG7CwSfZdfho9KXtayDJUQEvvoCeKo"; //'TWe4z3uRvUoG9VBgoC8iSgHRtvxa9MJJPv'
-    // this.contractAddrUsdt10 = "TJyrPWWP3sit856yTCJrd3cg2Uo82aZ7JN";
+    // this.contractAddress = "LbcLev1sQohZK4sFs4xeqRgD21fWpvLvgy";
+    // this.contractAddress10 = "LT2x1cT7CbLGwoYWasFcY9BrBVYAZjpTV8";
+    // this.contractAddrUsdt20 = "LQ4wGND29ZnxKHkZtRZ4kVkCH4GFv3dDha"; //'LftpFCqXrQvNF7pDP4UJCYf4CMaY27ekHM'
+    // this.contractAddrUsdt10 = "LMng4MXgxargduowuC5UYcpq7YqDH6WPpz";
   }
 
   /**
@@ -114,7 +114,7 @@ class ApiTW {
     } else if (_pairType === 2) {
       let allowAmount = false;
       let callValue;
-      if (_tokenB === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+      if (_tokenB === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
         allowAmount = true;
         callValue = Math.round(_amountB);
       } else {
@@ -162,8 +162,8 @@ class ApiTW {
     // let allowAmount = false;
     // let callValue = 0;
 
-    // if (_tokenB === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
-    //   // _tokenB = '410000000000000000000000000000000000000000'
+    // if (_tokenB === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
+    //   // _tokenB = '300000000000000000000000000000000000000000'
     //   allowAmount = true;
     //   callValue = Math.round(_amountB);
     // } else {
@@ -242,7 +242,7 @@ class ApiTW {
         _tokenA,
         // Math.round(_amountA),
         Math.round(
-          _tokenA == "TUL5yxRKeSWvceLZ3BSU5iNJcQmNxkWayh"
+          _tokenA == "LdaqF7MRaNe2iGy5d3n3qajvuqPLrYWxfo"
             ? _amountA + 100000
             : _amountA
         ),
@@ -262,7 +262,7 @@ class ApiTW {
     } else if (_pairType === 3) {
       let allowAmount = false;
       let callValue = 0;
-      if (_tokenA === "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb") {
+      if (_tokenA === "LKDxGDJq5fF4FohAB8zJH24mDDNHDNtqsE") {
         allowAmount = true;
         callValue = Math.round(_amountA);
       } else {

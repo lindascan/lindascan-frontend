@@ -34,7 +34,7 @@ class TokenList extends Component {
       total: 0,
       filter: {},
       page: 1,
-      contractAddress: "TB2SqC48afC9FX36bPQQHatoKo5m79JXKL"
+      contractAddress: "LLHC6LzEWbKFM9fdBFjz3TGRdDhj7N8yE7"
     };
 
     let nameQuery = trim(getQueryParam(props.location, "search"));

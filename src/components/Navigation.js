@@ -516,8 +516,8 @@ class Navigation extends React.Component {
       {desc: 'Token-LRC10', value: "IGG 1000029"},
       {desc: 'Token-LRC20', value: "IGG 1000029"},
       {desc: 'Block', value: "1000029"},
-      {desc: 'Address', value: "TVethjgashn8t4cwKWfGA3VvSgMwVmHKNM"},
-      {desc: 'Contract', value: "TVethjgashn8t4cwKWfGA3VvSgMwVmHKNM"},
+      {desc: 'Address', value: "LeudxtcgoduEyhFTuNzquusYk6yuM73iRr"},
+      {desc: 'Contract', value: "LeudxtcgoduEyhFTuNzquusYk6yuM73iRr"},
       {desc: 'TxHash', value: "9073aca5dfacd63c8e61f6174c98ab3f350bc9365df6ffc3bc7a70a252711d6f"}
     ];*/
     this.setState({searchResults: results});
