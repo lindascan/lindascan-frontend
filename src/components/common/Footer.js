@@ -115,7 +115,7 @@ class Footer extends Component {
                         <i className="fab fa-weixin mr-1"></i>WeChat
                         <div className="code_wrap">
                           <img
-                            src={require("../../images/footer/tronscan_wechat.png")}
+                            src={require("../../images/footer/lindascan_wechat.png")}
                           />
                         </div>
                       </a>
@@ -443,7 +443,7 @@ class Footer extends Component {
                                   <i className={`${item.icon} mr-3`}></i>
                                   <div className="code_wrap">
                                     <img
-                                      src={require("../../images/footer/tronscan_wechat.png")}
+                                      src={require("../../images/footer/lindascan_wechat.png")}
                                     />
                                   </div>
                                 </a>
