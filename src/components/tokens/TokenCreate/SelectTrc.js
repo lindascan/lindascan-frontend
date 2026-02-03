@@ -101,8 +101,8 @@ export class TokenCreate extends Component {
     let {type} = this.props.state
     const { locale } = this.props.intl
     const url = locale == 'zh'?
-    'https://support.tronscan.org/hc/zh-cn/articles/360027103591-%E4%BB%80%E4%B9%88%E6%98%AFLRC10%E5%92%8CLRC20%E9%80%9A%E8%AF%81':
-    'https://support.tronscan.org/hc/en-us/articles/360027103751-What-s-the-differences-between-LRC10-and-LRC20-Tokens-';
+    'https://support.lindascan.org/hc/zh-cn/articles/360027103591-%E4%BB%80%E4%B9%88%E6%98%AFLRC10%E5%92%8CLRC20%E9%80%9A%E8%AF%81':
+    'https://support.lindascan.org/hc/en-us/articles/360027103751-What-s-the-differences-between-LRC10-and-LRC20-Tokens-';
     return (
         <main className="text-center">
           {this.state.modalSelect}

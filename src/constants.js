@@ -13,10 +13,10 @@ NEWMAINNET: "https://tronscan.io",
   NEWSUNNET: "https://dappchain.tronscan.io",
   // MAINNET: "http://18.217.215.94:65",
   // SUNNET: "http://18.217.215.94:66",
-  // MAINNET: "https://debug.tronscan.org",
-  // SUNNET: "https://debugdappchain.tronscan.org",
-  MAINNET: "https://tronscan.org",
-  SUNNET: "https://dappchain.tronscan.org",
+  // MAINNET: "https://debug.lindascan.org",
+  // SUNNET: "https://debugdappchain.lindascan.org",
+  MAINNET: "https://lindascan.org",
+  SUNNET: "https://dappchain.lindascan.org",
 };
 
 export const TOKENINFO_UPDATE = "TOKENINFO_UPDATE";
@@ -29,7 +29,7 @@ let NODEAPI;
 if (NODE_ENV == "development") {
   MAINNET = Lockr.get("NET") === "mainnet" || !Lockr.get("NET");
   SUNNET = Lockr.get("NET") === "sunnet";
-  // NODEAPI = "https://tronexapi.tronscan.org";
+  // NODEAPI = "https://tronexapi.lindascan.org";
   // NODEAPI = "http://18.222.181.154:9017"
   NODEAPI = process.env.API_URL;
 } else {
@@ -61,16 +61,16 @@ export const PUBLIC_URL = process.env.PUBLIC_URL || window.location.origin;
 // export const API_URL_SUNNET = "http://52.15.68.74:8898";
 
 
-export const API_URL_SUNNET = "https://dappchainapi.tronscan.org";
+export const API_URL_SUNNET = "https://dappchainapi.lindascan.org";
 // export const API_URL_SUNNET =  "http://3.15.181.169:9000"  //dappchain tronex
-// export const API_URL_SUNNET = "https://debugdappchainapilist.tronscan.org";
+// export const API_URL_SUNNET = "https://debugdappchainapilist.lindascan.org";
 
 export const API_URL = IS_SUNNET ? API_URL_SUNNET : process.env.API_URL;
 export const CONTRACT_MAINNET_API_URL = process.env.API_URL;
 export const CONTRACT_NODE_API = API_URL;
 // export const CONTRACT_NODE_API = API_URL;
 //Token issued
-export const MARKET_API_URL = "https://platform.tron.network";
+export const MARKET_API_URL = "https://platform.lindacoin.org";
 
 //poloniex.org
 export const MARKET_HTTP_URL = "https://poloniex.org";
@@ -137,17 +137,17 @@ export const TRADINGMAP = {
 // SunWeb config
 export const SUNWEBCONFIG = {
   // for main
-  MAINFULLNODE: "https://api.trongrid.io",
-  MAINSOLIDITYNODE: "https://api.trongrid.io",
-  MAINEVENTSERVER: "https://api.trongrid.io",
+  MAINFULLNODE: "https://api.lindagrid.lindacoin.org",
+  MAINSOLIDITYNODE: "https://api.lindagrid.lindacoin.org",
+  MAINEVENTSERVER: "https://api.lindagrid.lindacoin.org",
 
   // MAINFULLNODE: "https://api.nileex.io",
   // MAINSOLIDITYNODE: "https://api.nileex.io",
   // MAINEVENTSERVER: "https://event.nileex.io",
 
-  SUNFULLNODE: "https://sun.tronex.io",
-  SUNSOLIDITYNODE: "https://sun.tronex.io",
-  SUNEVENTSERVER: "https://sun.tronex.io",
+  SUNFULLNODE: "https://sun.lindaex.lindacoin.org",
+  SUNSOLIDITYNODE: "https://sun.lindaex.lindacoin.org",
+  SUNEVENTSERVER: "https://sun.lindaex.lindacoin.org",
   MAINNET: "LVQaNj9GDUicAxFunp5iZAnftcqfS8bLji",
   SIDECHAIN: "LRaZ9mjCUjbT6EBFTKXV8xb8peMCb87k1N",
   SIDEID: "30E209E4DE650F0150788E8EC5CAFA240A23EB8EB7",
@@ -166,13 +166,13 @@ export const SUNWEBCONFIG = {
   
 
   // for tronex
-  // MAINFULLNODE: "https://testhttpapi.tronex.io",
-  // MAINSOLIDITYNODE: "https://testhttpapi.tronex.io",
-  // MAINEVENTSERVER: "https://testapi.tronex.io",
+  // MAINFULLNODE: "https://testhttpapi.lindaex.lindacoin.org",
+  // MAINSOLIDITYNODE: "https://testhttpapi.lindaex.lindacoin.org",
+  // MAINEVENTSERVER: "https://testapi.lindaex.lindacoin.org",
 
-  // SUNFULLNODE: "https://suntest.tronex.io",
-  // SUNSOLIDITYNODE: "https://suntest.tronex.io",
-  // SUNEVENTSERVER: "https://suntest.tronex.io",
+  // SUNFULLNODE: "https://suntest.lindaex.lindacoin.org",
+  // SUNSOLIDITYNODE: "https://suntest.lindaex.lindacoin.org",
+  // SUNEVENTSERVER: "https://suntest.lindaex.lindacoin.org",
 
   // MAINNET: "TWaPZru6PR5VjgT4sJrrZ481Zgp3iJ8Rfo",
   // SIDECHAIN: "LRaZ9mjCUjbT6EBFTKXV8xb8peMCb87k1N",
@@ -181,8 +181,8 @@ export const SUNWEBCONFIG = {
 
 //Socket config
 export const TORNSOCKET = {
-  WSSURLMAIN: "wss://apilist.tronscan.org/api/tronsocket",
-  WSSURLSUN: "wss://dappchainapi.tronscan.org/api/tronsocket",
+  WSSURLMAIN: "wss://apilist.lindascan.org/api/tronsocket",
+  WSSURLSUN: "wss://dappchainapi.lindascan.org/api/tronsocket",
 };
 
 // export const TORNSOCKET = {

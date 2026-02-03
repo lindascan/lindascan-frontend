@@ -3,7 +3,7 @@ import xhr from "axios/index";
 class ApiClientAddress {
   constructor() {
     this.apiUrl = {
-      tronex:"https://httpapi.tronex.io"
+      tronex:"https://httpapi.lindaex.lindacoin.org"
     };
   }
 

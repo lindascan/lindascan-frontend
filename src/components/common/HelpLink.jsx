@@ -50,7 +50,7 @@ class HelpLinkCont extends Component {
               </li>
              <li className="help commonLi">
                 <a
-                  href={ activeLanguage == "zh"?'https://support.tronscan.org/hc/zh-cn/requests/new':'https://support.tronscan.org/hc/en-us/requests/new'}
+                  href={ activeLanguage == "zh"?'https://support.lindascan.org/hc/zh-cn/requests/new':'https://support.lindascan.org/hc/en-us/requests/new'}
                   target="_blank"
                 >
                   <span className="img"></span>
@@ -82,7 +82,7 @@ class HelpLinkCont extends Component {
               </li>
              <li className="help commonLi">
                 <a
-                  href="https://support.tronscan.org/hc/zh-cn/requests/new"
+                  href="https://support.lindascan.org/hc/zh-cn/requests/new"
                   target="_blank"
                 >
                   <span className="img"></span>

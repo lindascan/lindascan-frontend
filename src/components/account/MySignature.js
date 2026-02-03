@@ -258,7 +258,7 @@ class MySignature extends React.Component {
       }  
       //xhr multi-sign transaction api
       let { data } = await xhr.post(
-        "https://list.tronlink.org/api/wallet/multi/transaction",
+        "https://list.lindalink.lindacoin.org/api/wallet/multi/transaction",
         {
           address: wallet.address,
           transaction: SignTransaction,

@@ -9,4 +9,4 @@ Disallow: /
 User-agent: baiduspider
 Disallow: /
 
-Sitemap: https://tronscan.org/sitemap.xml
+Sitemap: https://lindascan.org/sitemap.xml

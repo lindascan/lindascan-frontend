@@ -17,7 +17,7 @@ export const MoreRoutes = [
             [
                 "Documentation",
                 {
-                    url: "https://tron.network/static/doc/white_paper_v_2_0.pdf",
+                    url: "https://lindacoin.org/static/doc/white_paper_v_2_0.pdf",
                     // icon: "fa fa-globe",
                     label: "what_is_linda"
                 },
@@ -119,7 +119,7 @@ export const MoreRoutes = [
                 "Other",
 
                 {
-                    url: "https://www.trongrid.io/shasta",
+                    url: "https://www.lindagrid.lindacoin.org/shasta",
                     // icon: "fa fa-recycle",
                     label: "link_test_fauct",
                     sidechain: false
@@ -141,8 +141,8 @@ export const MoreRoutes = [
                     path: "/more/list_lind",
                     label: "list_lind",
                     // icon: "fa fa-plus",
-                    enurl: "https://tron.network/exchangesList?lng=en",
-                    zhurl: "https://tron.network/exchangesList?lng=zh",
+                    enurl: "https://lindacoin.org/exchangesList?lng=en",
+                    zhurl: "https://lindacoin.org/exchangesList?lng=zh",
                     linkHref: true
                 },
                 {
@@ -176,8 +176,8 @@ export const MoreRoutes = [
     //       path: "/more/list_lind",
     //       label: "list_lind",
     //       icon: "fa fa-plus",
-    //       enurl: "https://tron.network/exchangesList?lng=en",
-    //       zhurl: "https://tron.network/exchangesList?lng=zh",
+    //       enurl: "https://lindacoin.org/exchangesList?lng=en",
+    //       zhurl: "https://lindacoin.org/exchangesList?lng=zh",
     //       linkHref: true
     //     }
     //   ]
@@ -200,8 +200,8 @@ export const MoreRoutes = [
     //             path: "/more/list_lind",
     //             label: "list_lind",
     //             icon: "fa fa-plus",
-    //             enurl: "https://tron.network/exchangesList?lng=en",
-    //             zhurl: "https://tron.network/exchangesList?lng=zh",
+    //             enurl: "https://lindacoin.org/exchangesList?lng=en",
+    //             zhurl: "https://lindacoin.org/exchangesList?lng=zh",
     //             linkHref: true
     //         }
     //     ]

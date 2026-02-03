@@ -41,7 +41,7 @@ export default class Faq extends Component {
                     </li>
                     <li>
                       Or try an alternative wallet, recommended wallets can be found on <HrefLink
-                        href="https://tron.network/wallet?lng=en">https://tron.network/wallet</HrefLink>
+                        href="https://lindacoin.org/wallet?lng=en">https://lindacoin.org/wallet</HrefLink>
                       <ul>
                         <li>
                           Winner of the LINDA Android Wallet contest. <HrefLink

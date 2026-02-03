@@ -50,12 +50,12 @@ export const ToolsRoutes = [
                 label: "desktop_explorer"
             },
             {
-                url: "https://explorer.shasta.trongrid.io",
+                url: "https://explorer.shasta.lindagrid.lindacoin.org",
                 icon: "fa fa-link",
                 label: "link_test_server"
             },
             {
-                url: "https://www.trongrid.io/shasta",
+                url: "https://www.lindagrid.lindacoin.org/shasta",
                 icon: "fa fa-recycle",
                 label: "link_test_fauct"
             }

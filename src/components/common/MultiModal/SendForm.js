@@ -130,7 +130,7 @@ class SendForm extends React.Component {
                 // xhr.defaults.headers.common["MainChain"] = 'MainChain';
 
                 //xhr multi-sign transaction api
-                let { data } = await xhr.post("https://list.tronlink.org/api/wallet/multi/transaction", {
+                let { data } = await xhr.post("https://list.lindalink.lindacoin.org/api/wallet/multi/transaction", {
                     "address": wallet.address,
                     "transaction": SignTransaction,
                     "netType":"main_net"
@@ -285,7 +285,7 @@ class SendForm extends React.Component {
             //sign transaction
             let SignTransaction = await transactionMultiResultManager(unSignTransaction, lindaWeb, permissionId,permissionTime,HexStr);
 
-            let { data } = await xhr.post("https://list.tronlink.org/api/wallet/multi/transaction", {
+            let { data } = await xhr.post("https://list.lindalink.lindacoin.org/api/wallet/multi/transaction", {
               "address": wallet.address,
               "transaction": SignTransaction,
               "netType":"main_net"

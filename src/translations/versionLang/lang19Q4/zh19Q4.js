@@ -12,7 +12,7 @@
     #                                                                                #
     ##################################################################################
     #                                                                                #
-    #         Template for translating the tronscan.org website                      #
+    #         Template for translating the lindascan.org website                      #
     #         Version: 2019 Q4                                                       #
     #         Update Date: 12.2019                                                   #
     #         Language:                                                              #

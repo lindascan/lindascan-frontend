@@ -66,7 +66,7 @@ class ApiClientToken {
       value: id,
       visible: true
     }
-    let res = await xhr.get('https://api.trongrid.io/wallet/gettransactioninfobyid', {params:param});
+    let res = await xhr.get('https://api.lindagrid.lindacoin.org/wallet/gettransactioninfobyid', {params:param});
     return res && res.data
   }
   async getTransaction(id){
@@ -74,7 +74,7 @@ class ApiClientToken {
       value: id,
       visible: true
     }
-    let res = await xhr.get('https://api.trongrid.io/wallet/gettransactionbyid', {params:param});
+    let res = await xhr.get('https://api.lindagrid.lindacoin.org/wallet/gettransactionbyid', {params:param});
     return res && res.data
   }
 

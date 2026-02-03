@@ -35,9 +35,9 @@ class Code extends React.Component {
   constructor(props) {
     super(props);
     // this.lindaWeb = new lindaWeb({
-    //   fullNode: 'https://api.trongrid.io',
-    //   solidityNode: 'https://api.trongrid.io',
-    //   eventServer: 'https://api.trongrid.io',
+    //   fullNode: 'https://api.lindagrid.lindacoin.org',
+    //   solidityNode: 'https://api.lindagrid.lindacoin.org',
+    //   eventServer: 'https://api.lindagrid.lindacoin.org',
     // })
     this.state = {
       result: "",

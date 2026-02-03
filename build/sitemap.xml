@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://tronscan.org/</loc>
+        <loc>https://lindascan.org/</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/blockchain/nodes</loc>
+        <loc>https://lindascan.org/#/blockchain/nodes</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/blockchain/blocks</loc>
+        <loc>https://lindascan.org/#/blockchain/blocks</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/blockchain/transactions</loc>
+        <loc>https://lindascan.org/#/blockchain/transactions</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/blockchain/transfers</loc>
+        <loc>https://lindascan.org/#/blockchain/transfers</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/blockchain/accounts</loc>
+        <loc>https://lindascan.org/#/blockchain/accounts</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/blockchain/stats</loc>
+        <loc>https://lindascan.org/#/blockchain/stats</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/blockchain/foundation</loc>
+        <loc>https://lindascan.org/#/blockchain/foundation</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/contracts/contracts</loc>
+        <loc>https://lindascan.org/#/contracts/contracts</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/contracts/contract-triggers</loc>
+        <loc>https://lindascan.org/#/contracts/contract-triggers</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/contracts/contract-compiler</loc>
+        <loc>https://lindascan.org/#/contracts/contract-compiler</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/tokens/list</loc>
+        <loc>https://lindascan.org/#/tokens/list</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/tokens/view</loc>
+        <loc>https://lindascan.org/#/tokens/view</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/tokens/create/Type</loc>
+        <loc>https://lindascan.org/#/tokens/create/Type</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/sr/representatives</loc>
+        <loc>https://lindascan.org/#/sr/representatives</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/sr/votes</loc>
+        <loc>https://lindascan.org/#/sr/votes</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/sr/committee</loc>
+        <loc>https://lindascan.org/#/sr/committee</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/tools/transaction-viewer</loc>
+        <loc>https://lindascan.org/#/tools/transaction-viewer</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/help/ledger</loc>
+        <loc>https://lindascan.org/#/help/ledger</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
     <url>
-        <loc>https://tronscan.org/#/account</loc>
+        <loc>https://lindascan.org/#/account</loc>
         <lastmod>2019-08-06</lastmod>
     </url>
 </urlset>

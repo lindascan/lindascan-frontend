@@ -739,20 +739,20 @@ export const routes = [
       [
         "sun_network_relevant_information",
         {
-          url: "https://tron.network/sunnetwork/#/",
+          url: "https://lindacoin.org/sunnetwork/#/",
           // icon: "fa fa-globe",
           icon: false,
           label: "sun_network_project_introduction"
         },
         {
-          url: "https://tron.network/sunnetwork/doc/guide/",
+          url: "https://lindacoin.org/sunnetwork/doc/guide/",
           // icon: "fa fa-book",
           icon: false,
           label: "sun_network_development_document"
         }
         // {
         //   url:
-        //     "https://support.tronscan.org/hc/en-us/articles/360035944072-SUN-Network-Developer-Challenge-Starts",
+        //     "https://support.lindascan.org/hc/en-us/articles/360035944072-SUN-Network-Developer-Challenge-Starts",
         //   // icon: "fas fa-award",
         //   icon: false,
         //   label: "developer_challenge"
@@ -878,13 +878,13 @@ export const routes = [
         label: "desktop_explorer"
       },
       {
-        url: "https://explorer.shasta.trongrid.io",
+        url: "https://explorer.shasta.lindagrid.lindacoin.org",
         // icon: "fa fa-link",
         icon: false,
         label: "link_test_server"
       },
       {
-        url: "https://www.trongrid.io/shasta",
+        url: "https://www.lindagrid.lindacoin.org/shasta",
         // icon: "fa fa-recycle",
         icon: false,
         label: "link_test_fauct"
@@ -977,7 +977,7 @@ export const routes = [
       [
         "index_page_menu_more_dev_resources",
         {
-          url: "https://tron.network/static/doc/white_paper_v_2_0.pdf",
+          url: "https://lindacoin.org/static/doc/white_paper_v_2_0.pdf",
           icon: false,
           label: "what_is_linda"
         },
@@ -1069,13 +1069,13 @@ export const routes = [
       [
         "index_page_nav_more_service",
         // {
-        //   url: "https://shasta.tronscan.org",
+        //   url: "https://shasta.lindascan.org",
         //   icon: "fa fa-link",
         //   label: "link_test_server",
         //   sidechain: false
         // },
         // {
-        //   url: "https://www.trongrid.io/shasta",
+        //   url: "https://www.lindagrid.lindacoin.org/shasta",
         //   icon: "fa fa-recycle",
         //   label: "link_test_fauct",
         //   sidechain: false
@@ -1097,8 +1097,8 @@ export const routes = [
           path: "/more/list_lind",
           label: "list_lind",
           icon: false,
-          enurl: "https://tron.network/exchangesList?lng=en",
-          zhurl: "https://tron.network/exchangesList?lng=zh",
+          enurl: "https://lindacoin.org/exchangesList?lng=en",
+          zhurl: "https://lindacoin.org/exchangesList?lng=zh",
           linkHref: true
         },
         {

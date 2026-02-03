@@ -147,7 +147,7 @@ class Footer extends Component {
                       </HrefLink>
                     </li>
                     <li>
-                      <HrefLink href="https://developers.tron.network/">
+                      <HrefLink href="https://developers.lindacoin.org/">
                         Developer Hub
                       </HrefLink>
                     </li>
@@ -157,13 +157,13 @@ class Footer extends Component {
                   <h5>{tu("LINDA_ecosystem")}</h5>
                   <ul className="list-unstyled">
                     <li>
-                      <HrefLink href="https://tron.network">
+                      <HrefLink href="https://lindacoin.org">
                         {" "}
                         {tu("footer_linda_network")}
                       </HrefLink>
                     </li>
                     <li>
-                      <HrefLink href="https://www.tronlink.org">
+                      <HrefLink href="https://lindalink.lindacoin.org">
                         {" "}
                         {tu("wallet")}
                       </HrefLink>
@@ -192,7 +192,7 @@ class Footer extends Component {
                       </Link>
                     </li>
                     {/* <li>
-                    <HrefLink href={activeLanguage == 'zh'?"https://support.tronscan.org/hc/zh-cn/requests/new":"https://support.tronscan.org/hc/en-us/requests/new"}>
+                    <HrefLink href={activeLanguage == 'zh'?"https://support.lindascan.org/hc/zh-cn/requests/new":"https://support.lindascan.org/hc/en-us/requests/new"}>
                       {tu('contact_us')}
                     </HrefLink>
                   </li> */}
@@ -232,7 +232,7 @@ class Footer extends Component {
               {/*</HrefLink>*/}
               {/*</li>*/}
               {/*<li className="list-inline-item">*/}
-              {/*<HrefLink href="mailto:feedback@tronscan.org" target="_blank">*/}
+              {/*<HrefLink href="mailto:feedback@lindascan.org" target="_blank">*/}
               {/*<i className="fa fa-envelope" />*/}
               {/*</HrefLink>*/}
               {/*</li>*/}
@@ -289,7 +289,7 @@ class Footer extends Component {
                     </div>
 
                     <div className="text mr-3 text-cnter mobileCopyright">
-                      Copyright© 2017-2020 tronscan.org
+                      Copyright© 2017-2020 lindascan.org
                     </div>
                   </div>
                 </div>
@@ -305,12 +305,12 @@ class Footer extends Component {
 
                       <ul className="list-unstyled quick-links">
                         <li className="p-2">
-                          <HrefLink href="https://tron.network">
+                          <HrefLink href="https://lindacoin.org">
                             {tu("footer_linda_network")}
                           </HrefLink>
                         </li>
                         <li className="p-2">
-                          <HrefLink href="https://www.tronlink.org">
+                          <HrefLink href="https://lindalink.lindacoin.org">
                             {" "}
                             {tu("wallet")}
                           </HrefLink>
@@ -354,7 +354,7 @@ class Footer extends Component {
                           </HrefLink>
                         </li>
                         <li className="p-2">
-                          <HrefLink href="https://developers.tron.network/">
+                          <HrefLink href="https://developers.lindacoin.org/">
                             Developer Hub
                           </HrefLink>
                         </li>
@@ -370,7 +370,7 @@ class Footer extends Component {
                           </Link>
                         </li>
                         {/* <li className="p-2">
-                      <HrefLink href={activeLanguage == 'zh'?"https://support.tronscan.org/hc/zh-cn/requests/new":"https://support.tronscan.org/hc/en-us/requests/new"}>
+                      <HrefLink href={activeLanguage == 'zh'?"https://support.lindascan.org/hc/zh-cn/requests/new":"https://support.lindascan.org/hc/en-us/requests/new"}>
                           {tu('contact_us')}
                       </HrefLink>
                     </li> */}
@@ -466,7 +466,7 @@ class Footer extends Component {
                   <div className="col-xs-6 col-sm-6 col-md-6 text-center">
                     <div className="d-flex">
                       <span className="text mr-3">
-                        Copyright© 2017-2020 tronscan.org
+                        Copyright© 2017-2020 lindascan.org
                       </span>
                     </div>
                   </div>

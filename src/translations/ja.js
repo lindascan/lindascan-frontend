@@ -24,7 +24,7 @@ export const messages = {
   #                                                                                #
   ##################################################################################
   #                                                                                #
-  #         Template for translating the tronscan.org website                      #
+  #         Template for translating the lindascan.org website                      #
   #         Version: 1.6-13082018                                                  #
   #         Update Date: 06.12.2018                                                #
   #         Language: japanese 日语                                                      #

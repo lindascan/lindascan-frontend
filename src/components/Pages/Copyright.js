@@ -64,7 +64,7 @@ export default class Faq extends Component {
                     301 Howard St., Suite 2000<br/>
                     San Francisco, California 94105<br/>
                     Attention: LINDA Copyright Agent<br/>
-                    <a style={{textDecoration: 'underline'}}>copyright@tron.network</a>
+                    <a style={{textDecoration: 'underline'}}>copyright@lindacoin.org</a>
                   </p>
 
                   <p>

@@ -1,10 +1,10 @@
 
 let config = {
     curEnv:'production',
-    networkUrl : `https://api.trongrid.io`,
+    networkUrl : `https://api.lindagrid.lindacoin.org`,
     api:{
         mutiSign:{
-            apiPostMutiSignedTansaction:'https://list.tronlink.org/api/wallet/multi/transaction'
+            apiPostMutiSignedTansaction:'https://list.lindalink.lindacoin.org/api/wallet/multi/transaction'
         }
     }
 }

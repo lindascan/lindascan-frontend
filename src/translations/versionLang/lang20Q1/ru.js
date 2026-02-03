@@ -12,7 +12,7 @@
     #                                                                                #
     ##################################################################################
     #                                                                                #
-    #         Template for translating the tronscan.org website                      #
+    #         Template for translating the lindascan.org website                      #
     #         Version: 2020 Q1                                                       #
     #         Update Date: 01-03.2020                                                #
     #         Language:  Russian 俄语                                                 #

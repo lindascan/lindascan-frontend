@@ -51,7 +51,7 @@ class LindaConvertTool extends Component {
                      style={{width: '100%', height: '100%', minHeight: '750px', paddingTop: '15px', border: 0}}>
                   <iframe id="convertTool" title="LindaConvertTool"
                           style={{width: '100%', height: '100%', minHeight: '750px', paddingTop: '15px', border: 0}}
-                          src="https://tronscan.org/LindaConvertTool/"></iframe>
+                          src="https://lindascan.org/LindaConvertTool/"></iframe>
                 </div>
               }
             </div>

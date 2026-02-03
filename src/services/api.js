@@ -4,7 +4,7 @@ import LindaWeb from "lindaweb";
 import xhr from "axios/index";
 import { API_URL,API_URL_SUNNET } from "../constants.js";
 import { setLoginWithAddress } from "../actions/app.js";
-const ServerNode = "https://api.trongrid.io";
+const ServerNode = "https://api.lindagrid.lindacoin.org";
 const HttpProvider = LindaWeb.providers.HttpProvider; // This provider is optional, you can just use a url for the nodes instead
 const fullNode = new HttpProvider(ServerNode); // Full node http endpoint
 const solidityNode = new HttpProvider(ServerNode); // Solidity node http endpoint
@@ -19,7 +19,7 @@ export function buildClient(account) {
 
 export function channel(path, options) {
   // return io(process.env.API_URL + path, options);
-  return io("https://wlcyapi.tronscan.org/socket.io" + path, options);
+  return io("https://wlcyapi.lindascan.org/socket.io" + path, options);
   //return io('http://172.16.20.207:20110/socket.io' + path, options);
 }
 
@@ -73,7 +73,7 @@ class ApiClient20 {
   }
   async getExchangeCalc(query) {
     let { data } = await xhr.get(
-      `https://wlcyapi.tronscan.org/api/exchange/calc`,
+      `https://wlcyapi.lindascan.org/api/exchange/calc`,
       {
         params: query
       }
@@ -108,7 +108,7 @@ class ApiClient20 {
   }
 
   async getTokenInfoItem(contract, type) {
-    // https://apilist.tronscan.org/api/token_lrc20?contract=LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS
+    // https://apilist.lindascan.org/api/token_lrc20?contract=LaN7YzfkFM5NYqLfQzu7pghm7K4xezNxiS
     let params = {};
     let url = `${API_URL}/api/token_lrc20`;
     switch (type) {
